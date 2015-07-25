@@ -55,6 +55,12 @@ set autoread                    " Auto reload
 set nobackup                    " No backup file
 set noswapfile                  " No swap file
 
+" Undo
+set undodir=~/.vim/undo       
+set undofile
+set undolevels = 1000           " Maximum # changes
+set undoreload = 10000          " Maximum # lines to save for undo on a buffer reload
+
 " Line Numbers
 set rnu                         " Relative line numbers
 set nu                          " Line numbers
