@@ -4,16 +4,23 @@ alias df="df -Tha --total"
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+alias whois="whois -h whois-servers.net"
 
 # Processes
 alias ps="ps auxf"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
 # History
-alias hg="history | grep"
+alias hig="history | grep"
 
 # Enhanced  top
 alias top="htop"
 
 # Find matching files
 alias lsg='ll | grep'
+
+# Map function
+alias map="xargs -n1"
+
+# Reload shell
+alias reload="exec $SHELL -l"

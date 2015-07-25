@@ -1,14 +1,31 @@
+[core]
+ 	editor = vim
 [user]
 	email = info@jonasdevlieghere.com
 	name = JDevlieghere
 [push]
 	default = simple
+[grep]
+	extendRegexp = true
+	lineNumber = true
 [color]
 	ui = auto
+	branch = auto
+	diff = auto
+	status = auto
 [alias]
-	st = status
 	aa = add -A
-    	ci = commit -v
-    	ca = commit -vam
-    	di = diff
-    	noff = merge --no-ff
+	ca = commit -vam
+	ci = commit -v
+	df = diff --color-words --word-diff-regex=.
+	di = diff
+	lg = log -p
+	noff = merge --no-ff
+	st = status
+	
+    	
+    	
+    	
+    	
+	
+	

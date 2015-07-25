@@ -63,14 +63,6 @@ installFonts() {
 info "Checking for updates"
 runCommand "Update repository" "git pull"
 
-info "Installing software"
-runCommand "Install Oh My Zsh" "curl -s -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh"
-runCommand "Install zsh syntax highlighting" "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/zsh-syntax-highlighting"
-runCommand "Install Vundle" "git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
-
-info "Installing fonts"
-installFonts
-
 info "Linking files"
 link ".aliases"
 link ".exports"
@@ -80,6 +72,14 @@ link ".vim"
 link ".vimrc"
 link ".xmonad"
 link ".zshrc"
+
+info "Installing software"
+runCommand "Install Oh My Zsh" "curl -s -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh"
+runCommand "Install zsh syntax highlighting" "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/zsh-syntax-highlighting"
+runCommand "Install Vundle" "git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+
+info "Installing fonts"
+installFonts
 
 info "See $LOG for a detailed log"
 echo -e "\n"
