@@ -38,3 +38,9 @@ source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.aliases
 source ~/.exports
 source ~/.functions
+
+# Configuration not part of the repository
+if [[ -a ~/.localrc ]]
+then
+      source ~/.localrc
+fi
