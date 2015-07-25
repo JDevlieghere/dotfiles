@@ -1,0 +1,14 @@
+[user]
+	email = info@jonasdevlieghere.com
+	name = JDevlieghere
+[push]
+	default = simple
+[color]
+	ui = auto
+[alias]
+	st = status
+	aa = add -A
+    	ci = commit -v
+    	ca = commit -vam
+    	di = diff
+    	noff = merge --no-ff
