@@ -55,9 +55,7 @@ set nobackup                    " No backup file
 set noswapfile                  " No swap file
 
 " Line Numbers
-if version >= 703
-  set rnu                       " Relative line numbers
-endif
+set rnu                         " Relative line numbers
 set nu                          " Line numbers
 
 " Scrolling
@@ -103,13 +101,6 @@ set nolist                      " Disable line breaks
 " Completion Menu
 set completeopt=longest,menuone
 
-" Return to last edit position
-autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
-
-
 " Spell Checking
 set spelllang=en_us             " Default language
 set complete+=kspell            " Word completion
@@ -152,7 +143,6 @@ nmap Q gqap
 map <silent> <C-Tab> :bnext<CR>
 map <silent> <S-Tab> :bprevious<CR>
 map <silent> <F4>    :b#<bar>bd#<CR>
-set viminfo^=%
 
 " Windows
 nmap <silent> <A-Up>    :wincmd k<CR>
@@ -211,9 +201,6 @@ let g:ycm_server_keep_logfiles = 1
 let g:ycm_min_num_of_chars_for_completion = 2
 let g:ycm_min_num_identifier_candidate_chars = 0
 let g:ycm_auto_trigger = 1
-
-" Supertab
-let g:SuperTabContextTextOmniPrecedence = ['&completefunc', '&omnifunc']
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
