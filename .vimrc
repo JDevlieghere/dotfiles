@@ -16,6 +16,7 @@ Plugin 'justinmk/vim-sneak'
 Plugin 'kien/ctrlp.vim'
 Plugin 'lukerandall/haskellmode-vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'marijnh/tern_for_vim'
 Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'mbbill/undotree'
@@ -115,13 +116,12 @@ if has("gui_running")
     set lines=999 columns=999
     let g:solarized_termtrans=1
     let g:solarized_termcolors=256
-
     if has("gui_gtk2")
-        set guifont=Source\ Code\ Pro:h12,Inconsolata:h12
+        set guifont=Source\ Code\ Pro\ for\ Powerline:h12,Source\ Code\ Pro:h12
     elseif has("gui_macvim")
-        set guifont=Source\ Code\ Pro:h14,Menlo\ Regular:h14
+        set guifont=Source\ Code\ Pro\ for\ Powerline:h14,Source\ Code\ Pro:h14
     elseif has("gui_win32")
-        set guifont=Source\ Code\ Pro:h11,Consolas:h11
+        set guifont=Source\ Code\ Pro\ for\ Powerline:h12,Source\ Code\ Pro:h12
     endif
 endif
 
@@ -203,10 +203,9 @@ let g:ycm_min_num_identifier_candidate_chars = 0
 let g:ycm_auto_trigger = 1
 
 " Airline
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_left_sep=''       " Hide left separator
-let g:airline_right_sep=''      " Hide right separator
 
 " LaTeX
 let g:Tex_DefaultTargetFormat = 'pdf'
