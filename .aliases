@@ -10,7 +10,7 @@ alias ps="ps auxf"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
 # History
-alias hg="history | grep"
+alias hig="history | grep"
 
 # Enhanced  top
 alias top="htop"
