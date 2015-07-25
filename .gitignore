@@ -1,2 +1,12 @@
+# Vim
 .vim/bundle/*
+.vim/undo/*
+
+# Python
 *.pyc
+
+# OS
+Thumbs.db
+._*
+.Spotlight-V100
+.Trashes
