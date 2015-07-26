@@ -84,6 +84,7 @@ set softtabstop=4               " Columns a tab inserts in insert mode
 set shiftwidth=4                " Columns inserted with the reindent operations
 set shiftround                  " Always indent by multiple of shiftwidth
 set expandtab                   " Always use spaces instead of tabs
+map <F6> mzgg=G`z               " Fix indentation
 
 " Spaces
 set nojoinspaces                " Only one space
