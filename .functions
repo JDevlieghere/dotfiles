@@ -48,3 +48,8 @@ man() {
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
 }
+
+# Grep source files
+function csearch(){
+    grep --include=\*.{c,h,cpp,hpp} --color=auto  -rnw ./ -e "$@"
+}
