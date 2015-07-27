@@ -209,6 +209,8 @@ let g:ycm_server_keep_logfiles = 1
 let g:ycm_min_num_of_chars_for_completion = 2
 let g:ycm_min_num_identifier_candidate_chars = 0
 let g:ycm_auto_trigger = 1
+nnoremap <F12> :YcmForceCompileAndDiagnostics<CR>
+
 
 " Airline
 let g:airline_powerline_fonts = 1
