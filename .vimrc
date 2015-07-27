@@ -8,7 +8,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Common Plugins
-Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'ervandew/supertab'
 Plugin 'godlygeek/tabular'
