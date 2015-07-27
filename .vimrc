@@ -50,6 +50,7 @@ set showcmd                     " Show current command
 set encoding=utf-8              " UTF-8 encoding
 set ruler                       " Show ruler
 set autoread                    " Auto reload
+set ttyfast                     " Fast terminal
 
 " Temp Files
 set nobackup                    " No backup file
