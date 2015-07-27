@@ -12,6 +12,7 @@ BASE_FLAGS = [
     '-Wno-long-long',
     '-Wno-variadic-macros',
     '-fexceptions',
+    '-ferror-limit=1000',
     '-DNDEBUG',
     '-std=c++98',
     '-xc++',
