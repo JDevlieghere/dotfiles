@@ -48,3 +48,8 @@ man() {
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
 }
+
+# Find files and open in Vim
+vifi() {
+    vim $(find . -name "$1")
+}
