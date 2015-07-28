@@ -58,3 +58,8 @@ function csearch(){
 function hgshow(){
     hg log -r "$@" -p
 }
+
+# Find files and open in Vim
+vifi() {
+    vim $(find . -name "$1")
+}
