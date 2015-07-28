@@ -180,7 +180,7 @@ let g:ctrlp_root_markers = ['Makefile']
 let g:ctrlp_use_caching = 1
 
 " Ctags
-set tags=./tags,tags;$HOME
+set tags=.tags;
 
 " Undotree
 nnoremap <F5> :UndotreeToggle<CR>
