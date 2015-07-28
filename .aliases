@@ -22,5 +22,8 @@ alias lsg='ll | grep'
 # Map function
 alias map="xargs -n1"
 
+# Ctags
+alias mkctags="ctags -R -f .tags --extra=+f"
+
 # Reload shell
 alias reload="exec $SHELL -l"
