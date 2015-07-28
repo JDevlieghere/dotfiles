@@ -9,6 +9,7 @@ Plugin 'gmarik/Vundle.vim'
 
 " Common Plugins
 Plugin 'bling/vim-airline'
+Plugin 'Chiel92/vim-autoformat'
 Plugin 'ervandew/supertab'
 Plugin 'godlygeek/tabular'
 Plugin 'justinmk/vim-sneak'
@@ -84,7 +85,9 @@ set softtabstop=4               " Columns a tab inserts in insert mode
 set shiftwidth=4                " Columns inserted with the reindent operations
 set shiftround                  " Always indent by multiple of shiftwidth
 set expandtab                   " Always use spaces instead of tabs
-map <F6> mzgg=G`z               " Fix indentation
+
+" Autoformat
+noremap <F6> :Autoformat<CR>
 
 " Spaces
 set nojoinspaces                " Only one space
