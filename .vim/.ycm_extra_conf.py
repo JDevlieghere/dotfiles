@@ -16,6 +16,7 @@ BASE_FLAGS = [
     '-DNDEBUG',
     '-std=c++98',
     '-xc++',
+    '-I/usr/lib/'
     '-I/usr/include/'
 ]
 
