@@ -8,10 +8,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Common Plugins
-Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'Chiel92/vim-autoformat'
-Plugin 'ervandew/supertab'
 Plugin 'godlygeek/tabular'
 Plugin 'justinmk/vim-sneak'
 Plugin 'kien/ctrlp.vim'
@@ -51,6 +49,7 @@ set showcmd                     " Show current command
 set encoding=utf-8              " UTF-8 encoding
 set ruler                       " Show ruler
 set autoread                    " Auto reload
+set ttyfast                     " Fast terminal
 
 " Temp Files
 set nobackup                    " No backup file
@@ -183,7 +182,7 @@ let g:ctrlp_root_markers = ['Makefile']
 let g:ctrlp_use_caching = 1
 
 " Ctags
-set tags=./tags,tags;$HOME
+set tags=.tags;
 
 " Undotree
 nnoremap <F5> :UndotreeToggle<CR>
@@ -192,7 +191,6 @@ nnoremap <F5> :UndotreeToggle<CR>
 nnoremap <F8> :TagbarToggle<CR>
 let g:tagbar_right = 1
 let g:tagbar_width = 35
-let g:tagbar_autofocus = 1
 autocmd FileType * nested :call tagbar#autoopen(0)
 
 " NERDTree
@@ -205,12 +203,15 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 nnoremap <F10> :NERDTreeToggle<CR>
 nnoremap <F9> :NERDTreeFind<CR>
 
-" You Complete Me
+" YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_max_diagnostics_to_display = 1000
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_min_num_of_chars_for_completion = 2
 let g:ycm_min_num_identifier_candidate_chars = 0
 let g:ycm_auto_trigger = 1
+nnoremap <F12> :YcmForceCompileAndDiagnostics<CR>
+nnoremap <C-LeftMouse> :YcmCompleter GoTo<CR>
 
 " Airline
 let g:airline_powerline_fonts = 1

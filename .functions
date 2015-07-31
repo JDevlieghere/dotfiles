@@ -49,6 +49,16 @@ man() {
     man "$@"
 }
 
+# Grep source files
+function csearch(){
+    grep --include=\*.{c,h,cpp,hpp} --color=auto  -rnw ./ -e "$@"
+}
+
+# Git show equivalent for Mercurial
+function hgshow(){
+    hg log -r "$@" -p
+}
+
 # Find files and open in Vim
 vifi() {
     vim $(find . -name "$1")
