@@ -191,7 +191,6 @@ nnoremap <F5> :UndotreeToggle<CR>
 nnoremap <F8> :TagbarToggle<CR>
 let g:tagbar_right = 1
 let g:tagbar_width = 35
-let g:tagbar_autofocus = 1
 autocmd FileType * nested :call tagbar#autoopen(0)
 
 " NERDTree
