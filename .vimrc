@@ -178,7 +178,7 @@ let g:syntastic_check_on_wq = 1
 let g:syntastic_cpp_checkers = ['cppcheck']
 
 " CTRL-P
-let g:ctrlp_root_markers = ['Makefile']
+let g:ctrlp_max_files = 0
 let g:ctrlp_use_caching = 1
 
 " Ctags
