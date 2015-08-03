@@ -51,7 +51,7 @@ man() {
 
 # Grep source files
 function csearch(){
-    grep --include=\*.{c,h,cpp,hpp} --color=auto  -rnw ./ -e "$@"
+    grep --include=\*.{c,h,cpp,hpp} --color=auto  -rn ./ -e "$@"
 }
 
 # Git show equivalent for Mercurial
