@@ -26,9 +26,6 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-fireplace'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-latex/vim-latex'
 
@@ -79,6 +76,7 @@ set smartcase                   " Unless search contains uppercase letter
 set showmatch                   " Show matching bracket
 
 " Indentation
+set smarttab                    " Better tabs
 set smartindent                 " Inserts new level of indentation
 set autoindent                  " Copy indentation from previous line
 set tabstop=4                   " Columns a tab counts for
@@ -87,8 +85,9 @@ set shiftwidth=4                " Columns inserted with the reindent operations
 set shiftround                  " Always indent by multiple of shiftwidth
 set expandtab                   " Always use spaces instead of tabs
 
-" Autoformat
-noremap <F6> :Autoformat<CR>
+" Key sequence timeout
+set ttimeout                    " Emable time out
+set ttimeoutlen=100             " Set timeout time to 100 ms
 
 " Spaces
 set nojoinspaces                " Only one space
