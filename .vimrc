@@ -7,7 +7,7 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-" Common Plugins
+" Common Pluginsq
 Plugin 'bling/vim-airline'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'derekwyatt/vim-fswitch'
@@ -20,6 +20,7 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'mbbill/undotree'
+Plugin 'moll/vim-bbye'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/nerdcommenter'
@@ -152,7 +153,7 @@ nmap Q gqap
 " Buffers
 map <silent> <C-Tab> :bnext<CR>
 map <silent> <S-Tab> :bprevious<CR>
-map <silent> <F4>    :b#<bar>bd#<CR>
+map <silent> <F4>    :Bdelete<CR>
 
 " Windows
 nmap <silent> <A-Up>    :wincmd k<CR>
