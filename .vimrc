@@ -10,6 +10,7 @@ Plugin 'gmarik/Vundle.vim'
 " Common Plugins
 Plugin 'bling/vim-airline'
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'derekwyatt/vim-fswitch'
 Plugin 'godlygeek/tabular'
 Plugin 'justinmk/vim-sneak'
 Plugin 'kien/ctrlp.vim'
