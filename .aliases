@@ -1,3 +1,6 @@
+# Better ls
+alias ll="ls -lha"
+
 # Human-readable disk usage
 alias df="df -Tha --total"
 
