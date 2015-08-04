@@ -5,9 +5,10 @@ filetype off                    " Required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+" Let Vundle manage itself
 Plugin 'gmarik/Vundle.vim'
 
-" Common Pluginsq
+" Plugins
 Plugin 'bling/vim-airline'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'derekwyatt/vim-fswitch'
@@ -36,7 +37,7 @@ if has("unix")
     endif
 endif
 
-" Color Plugins
+" Color Schemes
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
 
@@ -57,12 +58,12 @@ set noswapfile                  " No swap file
 " Undo
 set undodir=~/.vim/undo
 set undofile
-set undolevels=1000           " Maximum # changes
-set undoreload=10000          " Maximum # lines to save for undo on a buffer reload
+set undolevels=1000             " Maximum # changes
+set undoreload=10000            " Maximum # lines to save for undo on a buffer reload
 
 " Line Numbers
+set nu                          " Show line numbers
 set rnu                         " Relative line numbers
-set nu                          " Line numbers
 
 " Scrolling
 set scrolloff=5                 " Keep at least 5 lines above/below
@@ -90,7 +91,7 @@ set ttimeout                    " Emable time out
 set ttimeoutlen=100             " Set timeout time to 100 ms
 
 " Spaces
-set nojoinspaces                " Only one space
+set nojoinspaces                " Only one space when joining lines
 
 " Mouse
 set mousehide                   " Hide mouse when typing
@@ -99,14 +100,13 @@ set mouse=nicr                  " No visual selection from using mouse
 " Colors & Syntax
 set t_Co=256                    " Enable 256 colors
 syntax enable                   " Enable syntax highlighting
-set background=dark             " Set background color
+set background=dark             " Dark background color
 colorscheme solarized           " Set color scheme
 highlight clear SignColumn      " Sing column same background as line numbers
 
-
 " Wrapping
 set nowrap                      " No wrapping
-set linebreak                   " Only wrap at certain characters
+set linebreak                   " When wrapping, only at certain characters
 set textwidth=0                 " Turn off physical line wrapping
 set wrapmargin=0                " Turn off physical line wrapping
 set nolist                      " Disable line breaks
@@ -125,7 +125,7 @@ autocmd FileType gitcommit setlocal spell
 
 " GUI
 if has("gui_running")
-    set lines=999 columns=999
+    set lines=999 columns=999   
     let g:solarized_termtrans=1
     let g:solarized_termcolors=256
     if has("gui_gtk2")
@@ -147,23 +147,23 @@ nmap  <Down>   <NOP>
 nmap  <Left>   <NOP>
 nmap  <Right>  <NOP>
 
-" Shortcuts
+" Wrapping Shortcuts
 vmap Q gq
 nmap Q gqap
 
-" Buffers
+" Buffers Navigation
 map <silent> <C-Tab> :bnext<CR>
 map <silent> <S-Tab> :bprevious<CR>
 map <silent> <F4>    :Bdelete<CR>
 
-" Windows
+" Window Navigation
 nmap <silent> <A-Up>    :wincmd k<CR>
 nmap <silent> <A-Down>  :wincmd j<CR>
 nmap <silent> <A-Left>  :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
 nnoremap <silent> <F3>  <C-w>q
 
-" Copy/Paste
+" Enable Copy/Paste
 vmap <C-c> "+yi
 vmap <C-x> "+c
 vmap <C-v> c<ESC>"+p
@@ -181,11 +181,11 @@ let g:syntastic_check_on_wq = 1
 let g:syntastic_cpp_checkers = ['cppcheck']
 
 " CTRL-P
-let g:ctrlp_max_files = 0
-let g:ctrlp_use_caching = 1
+let g:ctrlp_max_files = 0       " Index all files
+let g:ctrlp_use_caching = 1     " Cache index
 
 " Ctags
-set tags=.tags;
+set tags=.tags;                 " Find .tags recursively
 
 " Undotree
 nnoremap <F5> :UndotreeToggle<CR>
@@ -253,11 +253,6 @@ let g:gist_update_on_write = 2  " Only :w! updates a gist
 
 " Remove Trailing Whitespace
 autocmd BufWritePre * :%s/\s\+$//e
-
-" Haskellmode
-let g:haddock_browser="chrome"
-if has("win32")
-endif
 
 " Watch $MYVIMRC
 augroup reload_myvimrc
