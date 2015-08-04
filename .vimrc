@@ -195,6 +195,17 @@ let g:tagbar_right = 1
 let g:tagbar_width = 35
 autocmd FileType * nested :call tagbar#autoopen(0)
 
+" FSwitch
+nmap <silent> <Leader>of :FSHere<cr>
+nmap <silent> <Leader>ol :FSRight<cr>
+nmap <silent> <Leader>oL :FSSplitRight<cr>
+nmap <silent> <Leader>oh :FSLeft<cr>
+nmap <silent> <Leader>oH :FSSplitLeft<cr>
+nmap <silent> <Leader>ok :FSAbove<cr>
+nmap <silent> <Leader>oK :FSSplitAbove<cr>
+nmap <silent> <Leader>oj :FSBelow<cr>
+nmap <silent> <Leader>oJ :FSSplitBelow<cr>
+
 " NERDTree
 let NERDTreeWinPos = "left"
 let NERDTreeWinSize = 35
