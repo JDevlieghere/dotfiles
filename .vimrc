@@ -213,9 +213,12 @@ let NERDTreeWinSize = 35
 let NERDTreeIgnore = ['\.job$', '^CVS$', '\.orig', '\~$']
 let g:NERDTreeDirArrows = 0
 let g:NERDTreeStatusline = "%f"
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 nnoremap <F10> :NERDTreeToggle<CR>
-nnoremap <F9> :NERDTreeFind<CR>
+" Open NERDTree when no files are specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Close vim if NERDTree is the only window left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
