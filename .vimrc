@@ -93,6 +93,9 @@ set ttimeoutlen=100             " Set timeout time to 100 ms
 " Spaces
 set nojoinspaces                " Only one space when joining lines
 
+" Backspace
+set backspace=indent,eol,start
+
 " Mouse
 set mousehide                   " Hide mouse when typing
 set mouse=nicr                  " No visual selection from using mouse
