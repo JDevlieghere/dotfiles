@@ -40,7 +40,6 @@ endif
 " Color Schemes
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'nanotech/jellybeans.vim'
-Plugin 'tomasr/molokai'
 
 call vundle#end()               " Required
 filetype plugin indent on       " Required
