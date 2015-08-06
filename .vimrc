@@ -47,6 +47,7 @@ filetype plugin indent on       " Required
 
 set hidden                      " Hide buffers
 set showcmd                     " Show current command
+set showmode                    " Show current mode
 set encoding=utf-8              " UTF-8 encoding
 set ruler                       " Show ruler
 set autoread                    " Auto reload
@@ -114,15 +115,22 @@ set nowrap                      " No wrapping
 set linebreak                   " When wrapping, only at certain characters
 set textwidth=0                 " Turn off physical line wrapping
 set wrapmargin=0                " Turn off physical line wrapping
-set nolist                      " Disable line breaks
+
+" Invisible Characters
+set nolist                      " Hide by default
+set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 
 " Completion Menu
 set completeopt=longest,menuone
 
+" Paste Toggle
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+
 " Spell Checking
 set spelllang=en_us             " Default language
 set complete+=kspell            " Word completion
-nnoremap <silent> <F2> :set spell!<CR>
+nnoremap <silent> <F7> :set spell!<CR>
 
 autocmd BufRead,BufNewFile *.md  setlocal spell
 autocmd BufRead,BufNewFile *.tex setlocal spell
