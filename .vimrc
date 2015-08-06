@@ -102,6 +102,8 @@ set mouse=nicr                  " No visual selection from using mouse
 
 " Colors & Syntax
 set t_Co=256                    " Enable 256 colors
+let g:solarized_termtrans=1     " Support transparent terminal emulators
+let g:solarized_termcolors=256  " Enable 256 colors
 syntax enable                   " Enable syntax highlighting
 set background=dark             " Dark background color
 colorscheme solarized           " Set color scheme
@@ -129,8 +131,6 @@ autocmd FileType gitcommit setlocal spell
 " GUI
 if has("gui_running")
     set lines=999 columns=999   
-    let g:solarized_termtrans=1
-    let g:solarized_termcolors=256
     if has("gui_gtk2")
         set guifont=Source\ Code\ Pro\ for\ Powerline:h12,Source\ Code\ Pro:h12
     elseif has("gui_macvim")
