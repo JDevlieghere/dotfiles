@@ -101,9 +101,8 @@ set mousehide                   " Hide mouse when typing
 set mouse=nicr                  " No visual selection from using mouse
 
 " Colors & Syntax
-set t_Co=256                    " Enable 256 colors
+set t_Co=256                    " Force 256 colors
 let g:solarized_termtrans=1     " Support transparent terminal emulators
-let g:solarized_termcolors=256  " Enable 256 colors
 syntax enable                   " Enable syntax highlighting
 set background=dark             " Dark background color
 colorscheme solarized           " Set color scheme
