@@ -116,8 +116,9 @@ set textwidth=0                 " Turn off physical line wrapping
 set wrapmargin=0                " Turn off physical line wrapping
 
 " Invisible Characters
+nmap <leader>l :set list!<CR>
 set nolist                      " Hide by default
-set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+set listchars=tab:▸\ ,trail:-,extends:>,precedes:<,nbsp:⎵,eol:¬
 
 " Completion Menu
 set completeopt=longest,menuone
