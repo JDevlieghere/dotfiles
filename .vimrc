@@ -57,10 +57,10 @@ set nobackup                    " No backup file
 set noswapfile                  " No swap file
 
 " Undo
-set undodir=~/.vim/undo
-set undofile
-set undolevels=1000             " Maximum # changes
-set undoreload=10000            " Maximum # lines to save for undo on a buffer reload
+set undofile                    " Persistent undo
+set undodir=~/.vim/undo         " Location to store undo history
+set undolevels=1000             " Maximum number of changes
+set undoreload=10000            " Maximum number of lines to save for undo on a buffer reload
 
 " Line Numbers
 set nu                          " Show line numbers
@@ -87,15 +87,16 @@ set shiftwidth=4                " Columns inserted with the reindent operations
 set shiftround                  " Always indent by multiple of shiftwidth
 set expandtab                   " Always use spaces instead of tabs
 
+" Joining
+set nojoinspaces                " Only one space when joining lines
+set formatoptions+=j            " Delete comment character when joining commented lines
+
 " Key sequence timeout
 set ttimeout                    " Emable time out
 set ttimeoutlen=100             " Set timeout time to 100 ms
 
-" Spaces
-set nojoinspaces                " Only one space when joining lines
-
 " Backspace
-set backspace=indent,eol,start
+set backspace=indent,eol,start  " Delete over line breaks
 
 " Mouse
 set mousehide                   " Hide mouse when typing
@@ -116,12 +117,13 @@ set textwidth=0                 " Turn off physical line wrapping
 set wrapmargin=0                " Turn off physical line wrapping
 
 " Invisible Characters
-nmap <leader>l :set list!<CR>
+nmap <leader>l :set list!<CR>   " Toggle hidden characters
 set nolist                      " Hide by default
 set listchars=tab:▸\ ,trail:-,extends:>,precedes:<,nbsp:⎵,eol:¬
 
 " Completion Menu
-set completeopt=longest,menuone
+set completeopt=longest,menuone " Inserts the longest common text and
+                                " show menu even with only one item
 
 " Paste Toggle
 nnoremap <F2> :set invpaste paste?<CR>
@@ -131,7 +133,6 @@ set pastetoggle=<F2>
 set spelllang=en_us             " Default language
 set complete+=kspell            " Word completion
 nnoremap <silent> <F7> :set spell!<CR>
-
 autocmd BufRead,BufNewFile *.md  setlocal spell
 autocmd BufRead,BufNewFile *.tex setlocal spell
 autocmd FileType gitcommit setlocal spell
@@ -184,7 +185,6 @@ imap <C-v> <ESC>"+pa
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -209,14 +209,10 @@ autocmd FileType * nested :call tagbar#autoopen(0)
 
 " FSwitch
 nmap <silent> <Leader>of :FSHere<cr>
-nmap <silent> <Leader>ol :FSRight<cr>
 nmap <silent> <Leader>oL :FSSplitRight<cr>
-nmap <silent> <Leader>oh :FSLeft<cr>
 nmap <silent> <Leader>oH :FSSplitLeft<cr>
-nmap <silent> <Leader>ok :FSAbove<cr>
 nmap <silent> <Leader>oK :FSSplitAbove<cr>
 nmap <silent> <Leader>oj :FSBelow<cr>
-nmap <silent> <Leader>oJ :FSSplitBelow<cr>
 
 " NERDTree
 let NERDTreeWinPos = "left"
