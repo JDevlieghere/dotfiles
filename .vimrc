@@ -220,6 +220,7 @@ let NERDTreeWinSize = 35
 let NERDTreeIgnore = ['\.job$', '^CVS$', '\.orig', '\~$']
 let g:NERDTreeDirArrows = 0
 let g:NERDTreeStatusline = "%f"
+nnoremap <F9> :NERDTreeFind<CR>
 nnoremap <F10> :NERDTreeToggle<CR>
 " Open NERDTree when no files are specified
 autocmd StdinReadPre * let s:std_in=1
