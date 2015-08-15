@@ -102,6 +102,10 @@ set backspace=indent,eol,start  " Delete over line breaks
 set mousehide                   " Hide mouse when typing
 set mouse=nicr                  " No visual selection from using mouse
 
+" Typos
+cnoreabbrev W w                 " Make :W equivalent to :w
+cnoreabbrev Q q                 " Make :Q equivalent to :q
+
 " Colors & Syntax
 set t_Co=256                    " Force 256 colors
 let g:solarized_termtrans=1     " Support transparent terminal emulators
