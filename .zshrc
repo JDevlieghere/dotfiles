@@ -40,8 +40,9 @@ source ~/.exports
 source ~/.functions
 
 # Start SSH Agent
-if type keychain >/dev/null; then
-      eval 'keychain --eval id_rsa'
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+      eval 'ssh-agent -s'
+      ssh-add
 fi
 
 # Configuration not part of the repository
