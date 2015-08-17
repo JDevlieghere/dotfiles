@@ -39,6 +39,11 @@ source ~/.aliases
 source ~/.exports
 source ~/.functions
 
+# Start SSH Agent
+if type keychain >/dev/null; then
+      eval 'keychain --eval id_rsa'
+fi
+
 # Configuration not part of the repository
 if [[ -a ~/.localrc ]]
 then
