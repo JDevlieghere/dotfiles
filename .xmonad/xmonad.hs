@@ -59,8 +59,8 @@ myManageHook = composeAll
     , className =? "Steam"          --> doFloat
     , className =? "Gimp"           --> doFloat
     , className =? "VirtualBox"     --> doShift "4:vm"
-    , className =? "Vlc"            --> doshift "5:media"
-    , className =? "MPlayer"        --> doshift "5:media"
+    , className =? "Vlc"            --> doShift "5:media"
+    , className =? "MPlayer"        --> doShift "5:media"
     , className =? "stalonetray"    --> doIgnore
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
 
