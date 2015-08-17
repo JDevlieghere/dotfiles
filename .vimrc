@@ -163,6 +163,9 @@ nmap  <Down>   <NOP>
 nmap  <Left>   <NOP>
 nmap  <Right>  <NOP>
 
+" Treat underscore as a word boundary
+set iskeyword-=_
+
 " Wrapping Shortcuts
 vmap Q gq
 nmap Q gqap
