@@ -33,3 +33,6 @@ alias reload="exec $SHELL -l"
 
 # Build source
 alias bld="./configure --prefix=$HOME/usr && make && make install"
+
+# Support 256 colors in tmux
+alias tmux="TERM=screen-256color-bce tmux"
