@@ -13,3 +13,9 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export LESSCHARSET=utf-8
+
+# Local libraries
+export PATH=$PATH:~/usr/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/usr/lib
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:~/usr/include
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:~/usr/include
