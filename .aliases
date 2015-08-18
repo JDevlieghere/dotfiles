@@ -27,3 +27,6 @@ alias mkctags="ctags -R -f .tags --extra=+f"
 
 # Reload shell
 alias reload="exec $SHELL -l"
+
+# Build source
+alias bld="./configure --prefix=$HOME/usr && make && make install"
