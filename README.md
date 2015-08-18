@@ -2,7 +2,7 @@
 
 This is my dotfile repository. There are many like it, but this one is mine.
 
-Although I tried to make everything as self-explanatory as possible, sometimes it's better to have information centralized. This is what this README is for.  
+Although I tried to make everything as self-explanatory as possible, sometimes it's better to have information centralized. That's what this README is for.  
 
  - [Installation](#installation) 
  - [Vim](#vim) 
