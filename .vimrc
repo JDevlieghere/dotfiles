@@ -143,7 +143,7 @@ autocmd FileType gitcommit setlocal spell
 
 " GUI
 if has("gui_running")
-    set lines=999 columns=999   
+    set lines=999 columns=999
     if has("gui_gtk2")
         set guifont=Source\ Code\ Pro\ for\ Powerline:h12,Source\ Code\ Pro:h12
     elseif has("gui_macvim")
