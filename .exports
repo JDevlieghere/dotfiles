@@ -15,7 +15,9 @@ export LANGUAGE=en_US.UTF-8
 export LESSCHARSET=utf-8
 
 # Local libraries
-export PATH=$PATH:~/usr/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/usr/lib
-export C_INCLUDE_PATH=$C_INCLUDE_PATH:~/usr/include
-export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:~/usr/include
+export PATH=$PATH:$HOME/usr/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib
+export LD_LIBRARY_PRELOAD=LD_LIBRARY_PRELOAD:$HOME/usr/lib
+export LD_RUN_PATH=$LD_RUN_PATH:$HOME/usr/lib
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/usr/include
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/usr/include

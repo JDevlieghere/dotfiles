@@ -22,10 +22,5 @@
 	lg = log -p
 	noff = merge --no-ff
 	st = status
-	
-    	
-    	
-    	
-    	
-	
-	
+[credential]
+	helper = cache --timeout=3600

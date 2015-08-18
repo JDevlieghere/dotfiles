@@ -58,10 +58,9 @@ myManageHook = composeAll
     , className =? "Galculator"     --> doFloat
     , className =? "Steam"          --> doFloat
     , className =? "Gimp"           --> doFloat
-    , resource  =? "gpicview"       --> doFloat
-    , className =? "MPlayer"        --> doFloat
     , className =? "VirtualBox"     --> doShift "4:vm"
-    , className =? "Xchat"          --> doShift "5:media"
+    , className =? "Vlc"            --> doShift "5:media"
+    , className =? "MPlayer"        --> doShift "5:media"
     , className =? "stalonetray"    --> doIgnore
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
 
@@ -77,7 +76,7 @@ myManageHook = composeAll
 -- which denotes layout choice.
 --
 myLayout = avoidStruts (
-    spacing 1 $ Tall 1 (3/100) (1/2) |||
+    spacing 0 $ Tall 1 (3/100) (1/2) |||
     Mirror (Tall 1 (3/100) (1/2)) |||
     tabbed shrinkText tabConfig |||
     Full |||
@@ -89,8 +88,9 @@ myLayout = avoidStruts (
 -- Colors and borders
 -- Currently based on the ir_black theme.
 --
-myNormalBorderColor  = "#7c7c7c"
-myFocusedBorderColor = "#ffb6b0"
+--
+myNormalBorderColor  = "#CCCCCC"
+myFocusedBorderColor = "#FFFFFF"
 
 -- Colors for text and backgrounds of each tab when in "Tabbed" layout.
 tabConfig = defaultTheme {
@@ -139,10 +139,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- Use this to launch programs without a key binding.
   , ((modMask, xK_p),
      spawn "dmenu_run")
-     
+
   -- Launch sublime
   , ((modMask, xK_s),
-     spawn "subl")     
+     spawn "subl")
 
   -- Take a screenshot.
   , ((modMask .|. shiftMask, xK_p),
@@ -299,7 +299,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 ------------------------------------------------------------------------
 -- Startup hook
 -- Perform an arbitrary action each time xmonad starts or is restarted
--- with mod-q.  
+-- with mod-q.
 --
 myStartupHook = do
     spawn "feh --bg-fill ~/Pictures/wallpaper.png"

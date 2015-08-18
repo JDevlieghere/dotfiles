@@ -39,6 +39,13 @@ source ~/.aliases
 source ~/.exports
 source ~/.functions
 
+# Start SSH Agent
+if [ -z "$SSH_AUTH_SOCK" ] ;
+then
+  eval `ssh-agent -s`
+  ssh-add
+fi
+
 # Configuration not part of the repository
 if [[ -a ~/.localrc ]]
 then
