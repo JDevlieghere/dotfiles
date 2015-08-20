@@ -8,6 +8,10 @@ Although I tried to make everything as self-explanatory as possible, sometimes i
  - [Vim](#vim) 
  - [Xmonad](#xmonad)
 
+## Screenshot
+
+![Screenshot](http://i.imgur.com/Hf0jbYL.png)
+
 ## Installation
 
 With `git` and `curl` installed, run the command below from the home directory.
