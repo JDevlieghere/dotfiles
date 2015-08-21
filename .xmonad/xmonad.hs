@@ -91,10 +91,10 @@ myNormalBorderColor  = "#CCCCCC"
 myFocusedBorderColor = "#FFFFFF"
 
 -- Color of current window title in xmobar.
-xmobarTitleColor = "#FFB6B0"
+xmobarTitleColor = "#b58900"
 
 -- Color of current workspace in xmobar.
-xmobarCurrentWorkspaceColor = "#CEFFAC"
+xmobarCurrentWorkspaceColor = "#859900"
 
 -- Width of the window border in pixels.
 myBorderWidth = 0
