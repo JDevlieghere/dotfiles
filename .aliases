@@ -31,8 +31,12 @@ alias mkctags="ctags -R -f .tags --extra=+f"
 # Reload shell
 alias reload="exec $SHELL -l"
 
-# Build source
-alias bld="./configure --prefix=$HOME/usr && make && make install"
+# Build from source
+alias bld="./configure && make && make install"
+alias localbld="./configure --prefix=$HOME/usr && make && make install"
 
 # Support 256 colors in tmux
 alias tmux="TERM=screen-256color-bce tmux"
+
+# Lock gnome from terminal
+alias glock="gnome-screensaver-command -l"
