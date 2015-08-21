@@ -76,9 +76,8 @@ myManageHook = composeAll
 -- which denotes layout choice.
 --
 myLayout = avoidStruts (
-    spacing 0 $ Tall 1 (3/100) (1/2) |||
+    spacing 20 $ Tall 1 (3/100) (1/2) |||
     Mirror (Tall 1 (3/100) (1/2)) |||
-    tabbed shrinkText tabConfig |||
     Full |||
     spiral (6/7)) |||
     noBorders (fullscreenFull Full)
@@ -88,19 +87,8 @@ myLayout = avoidStruts (
 -- Colors and borders
 -- Currently based on the ir_black theme.
 --
---
 myNormalBorderColor  = "#CCCCCC"
 myFocusedBorderColor = "#FFFFFF"
-
--- Colors for text and backgrounds of each tab when in "Tabbed" layout.
-tabConfig = defaultTheme {
-    activeBorderColor = "#7C7C7C",
-    activeTextColor = "#CEFFAC",
-    activeColor = "#000000",
-    inactiveBorderColor = "#7C7C7C",
-    inactiveTextColor = "#EEEEEE",
-    inactiveColor = "#000000"
-}
 
 -- Color of current window title in xmobar.
 xmobarTitleColor = "#FFB6B0"
@@ -109,7 +97,7 @@ xmobarTitleColor = "#FFB6B0"
 xmobarCurrentWorkspaceColor = "#CEFFAC"
 
 -- Width of the window border in pixels.
-myBorderWidth = 1
+myBorderWidth = 0
 
 
 ------------------------------------------------------------------------
