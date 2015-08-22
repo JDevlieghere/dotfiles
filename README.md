@@ -2,7 +2,8 @@
 
 This is my dotfile repository. There are many like it, but this one is mine.
 
-Although I tried to make everything as self-explanatory as possible, sometimes it's better to have information centralized. That's what this README is for.
+Although I tried to make everything as self-explanatory as possible, sometimes
+it's better to have information centralized. That's what this README is for.
 
  - [Installation](#installation)
  - [Vim](#vim)
@@ -18,7 +19,7 @@ With `git` and `curl` installed, run the command below from the home directory.
 This will clone the dotfiles repository and run the bootstrap script.
 
 ```
-git clone https://github.com/JDevlieghere/dotfiles.git ~/dotfiles && source ~/dotfiles/bootstrap.sh
+git clone https://github.com/JDevlieghere/dotfiles.git ~/dotfiles && cd ~/dotfiles  &&  sourc ./bootstrap.sh
 ```
 
 ## Vim
@@ -49,4 +50,4 @@ then reads the compile flags from the respective file.
 When I got started with xmonad I came across [Vic Fryzel's
 configuration](https://github.com/vicfryzel/xmonad-config) which I grew fond of
 over time. It is still largely the same, except for the solarized dark theming
-and a few functional changes here and there.
+and a few functional improvements here and there.
