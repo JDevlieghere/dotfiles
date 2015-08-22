@@ -123,8 +123,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask .|. controlMask, xK_l),
      spawn "gnome-screensaver-command -l")
 
-  -- Launch dmenu via yeganesh.
-  -- Use this to launch programs without a key binding.
+  -- Launch dmenu
   , ((modMask, xK_p),
      spawn "dmenu_run $DMENU_OPTIONS")
 
