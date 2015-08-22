@@ -17,7 +17,7 @@ HIST_STAMPS="yyyy-mm-dd"
 plugins=(git zsh-syntax-highlighting)
 
 # User configuration
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/texbin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/texbin:$HOME/bin"
 
 source $ZSH/oh-my-zsh.sh
 

@@ -13,7 +13,7 @@ Config {
     lowerOnStart = True,
     commands = [
         Run Weather "KPAO" ["-t","<tempC>°C <skyCondition>","-L","64","-H","77","-n","#859900","-h","#dc322f","-l","#268bd2"] 36000,
-        Run Com "/home/jdevlieghere/bin/volume.sh" [] "volume" 10,
+        Run Com "volume" [] "volume" 10,
         Run MultiCpu ["-t","Cpu: <total0> <total1> <total2> <total3>","-L","30","-H","60","-h","#dc322f","-l","#859900","-n","#b58900","-w","3"] 10,
         Run Memory ["-t","Mem: <usedratio>%","-H","8192","-L","4096","-h","#dc322f","-l","#859900","-n","#b58900"] 10,
         Run Swap ["-t","Swap: <usedratio>%","-H","1024","-L","512","-h","#dc322f","-l","#859900","-n","#b58900"] 10,

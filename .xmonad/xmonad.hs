@@ -127,13 +127,16 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask, xK_p),
      spawn "dmenu_run $DMENU_OPTIONS")
 
-  -- Launch sublime
-  , ((modMask, xK_s),
-     spawn "subl")
-
-  -- Take a screenshot.
+  -- Take a screenshot in select mode.
+  -- After pressing this key binding, click a window, or draw a rectangle with
+  -- the mouse.
   , ((modMask .|. shiftMask, xK_p),
-     spawn "scrot")
+     spawn "select-screenshot")
+
+  -- Take full screenshot in multi-head mode.
+  -- That is, take a screenshot of everything you see.
+  , ((modMask .|. controlMask .|. shiftMask, xK_p),
+     spawn "screenshot")
 
   -- Fetch a single use password.
   , ((modMask .|. shiftMask, xK_o),
