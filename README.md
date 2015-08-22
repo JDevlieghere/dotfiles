@@ -9,9 +9,15 @@ it's better to have information centralized. That's what this README is for.
  - [Vim](#vim)
  - [Xmonad](#xmonad)
 
-## Screenshot
+## Screenshots
 
-![Screenshot](http://i.imgur.com/Hf0jbYL.png)
+### Xmobar
+
+![xmobar solarized dark](http://i.imgur.com/QJNDGLY.png)
+
+### Vim
+
+![vim solarized dark](http://i.imgur.com/Hf0jbYL.png)
 
 ## Installation
 
