@@ -11,15 +11,11 @@ it's better to have information centralized. That's what this README is for.
 
 ## Screenshots
 
-### Xmonad
-
 ![xmonad solarized dark](http://i.imgur.com/yYW8VRb.png)
-
-### Vim
 
 ![vim solarized dark](http://i.imgur.com/Hf0jbYL.png)
 
-## Requirements and Dependencies
+## Requirements & Dependencies
 
 Except for `git` and `curl` which are used in the installation script, not all packages listed below are required. It is a matter of which part of my configuration you are interested in. 
 
