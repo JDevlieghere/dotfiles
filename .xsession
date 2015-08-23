@@ -12,6 +12,9 @@ google-chrome &
 # Start sound server
 pulseaudio --start &
 
+# Start compton
+compton --config ~/.compton.conf &
+
 # Start xmonad WM
 xmonad
 
