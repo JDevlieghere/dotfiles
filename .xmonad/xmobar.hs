@@ -12,7 +12,7 @@ Config {
     position = Static { xpos = 1920, ypos = 0, width = 1920, height = 25 },
     lowerOnStart = True,
     commands = [
-        Run Weather "KPAO" ["-t","<tempC>°C <skyCondition>","-L","64","-H","77","-n","#859900","-h","#dc322f","-l","#268bd2"] 36000,
+        Run Weather "EBBR" ["-t","<tempC>°C <skyCondition>","-L","64","-H","77","-n","#859900","-h","#dc322f","-l","#268bd2"] 36000,
         Run Com "volume" [] "volume" 10,
         Run MultiCpu ["-t","Cpu: <total0> <total1> <total2> <total3>","-L","30","-H","60","-h","#dc322f","-l","#859900","-n","#b58900","-w","3"] 10,
         Run Memory ["-t","Mem: <usedratio>%","-H","8192","-L","4096","-h","#dc322f","-l","#859900","-n","#b58900"] 10,
@@ -23,5 +23,5 @@ Config {
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = " %StdinReader% }{ %multicpu%   %memory%   %swap%   %eth0%   %volume%   %date%   %KPAO% "
+    template = " %StdinReader% }{ %multicpu%   %memory%   %swap%   %eth0%   %volume%   %date%   %EBBR% "
 }
