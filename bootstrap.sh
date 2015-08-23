@@ -73,6 +73,7 @@ link ".vimrc"
 link ".xmonad"
 link ".zshrc"
 link ".tmux.conf"
+link "bin"
 
 info "Installing software"
 runCommand "Install Oh My Zsh" "curl -s -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh"

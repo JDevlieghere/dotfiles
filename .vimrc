@@ -246,6 +246,7 @@ nnoremap <F12> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <C-LeftMouse> :YcmCompleter GoTo<CR>
 
 " Airline
+set laststatus=2                " Alwasy display statusline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'

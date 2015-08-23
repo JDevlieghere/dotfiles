@@ -76,9 +76,8 @@ myManageHook = composeAll
 -- which denotes layout choice.
 --
 myLayout = avoidStruts (
-    spacing 0 $ Tall 1 (3/100) (1/2) |||
+    spacing 20 $ Tall 1 (3/100) (1/2) |||
     Mirror (Tall 1 (3/100) (1/2)) |||
-    tabbed shrinkText tabConfig |||
     Full |||
     spiral (6/7)) |||
     noBorders (fullscreenFull Full)
@@ -88,28 +87,17 @@ myLayout = avoidStruts (
 -- Colors and borders
 -- Currently based on the ir_black theme.
 --
---
 myNormalBorderColor  = "#CCCCCC"
 myFocusedBorderColor = "#FFFFFF"
 
--- Colors for text and backgrounds of each tab when in "Tabbed" layout.
-tabConfig = defaultTheme {
-    activeBorderColor = "#7C7C7C",
-    activeTextColor = "#CEFFAC",
-    activeColor = "#000000",
-    inactiveBorderColor = "#7C7C7C",
-    inactiveTextColor = "#EEEEEE",
-    inactiveColor = "#000000"
-}
-
 -- Color of current window title in xmobar.
-xmobarTitleColor = "#FFB6B0"
+xmobarTitleColor = "#b58900"
 
 -- Color of current workspace in xmobar.
-xmobarCurrentWorkspaceColor = "#CEFFAC"
+xmobarCurrentWorkspaceColor = "#859900"
 
 -- Width of the window border in pixels.
-myBorderWidth = 1
+myBorderWidth = 0
 
 
 ------------------------------------------------------------------------
@@ -133,20 +121,22 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   -- Lock the screen using xscreensaver.
   , ((modMask .|. controlMask, xK_l),
-     spawn "xscreensaver-command -lock")
+     spawn "gnome-screensaver-command -l")
 
-  -- Launch dmenu via yeganesh.
-  -- Use this to launch programs without a key binding.
+  -- Launch dmenu
   , ((modMask, xK_p),
-     spawn "dmenu_run")
+     spawn "dmenu_run $DMENU_OPTIONS")
 
-  -- Launch sublime
-  , ((modMask, xK_s),
-     spawn "subl")
-
-  -- Take a screenshot.
+  -- Take a screenshot in select mode.
+  -- After pressing this key binding, click a window, or draw a rectangle with
+  -- the mouse.
   , ((modMask .|. shiftMask, xK_p),
-     spawn "scrot")
+     spawn "select-screenshot")
+
+  -- Take full screenshot in multi-head mode.
+  -- That is, take a screenshot of everything you see.
+  , ((modMask .|. controlMask .|. shiftMask, xK_p),
+     spawn "screenshot")
 
   -- Fetch a single use password.
   , ((modMask .|. shiftMask, xK_o),

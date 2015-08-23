@@ -5,6 +5,9 @@
 # Python
 *.pyc
 
+# Logs
+*.log
+
 # OS
 Thumbs.db
 ._*
