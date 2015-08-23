@@ -5,24 +5,29 @@ This is my dotfile repository. There are many like it, but this one is mine.
 Although I tried to make everything as self-explanatory as possible, sometimes
 it's better to have information centralized. That's what this README is for.
 
+ - [Requirements & Dependencies](#requirements--dependencies)
  - [Installation](#installation)
  - [Vim](#vim)
  - [Xmonad](#xmonad)
 
 ## Screenshots
 
-### Xmobar
-
-![xmobar solarized dark](http://i.imgur.com/QJNDGLY.png)
-
-### Vim
+![xmonad solarized dark](http://i.imgur.com/yYW8VRb.png)
 
 ![vim solarized dark](http://i.imgur.com/Hf0jbYL.png)
 
+## Requirements & Dependencies
+
+Except for `git` and `curl` which are used in the installation script, not all packages listed below are required. It is a matter of which part of my configuration you are interested in. 
+
+```
+amixer compton curl dmenu exuberant-ctags git scrot tmux vim xmobar xmonad
+```
+
 ## Installation
 
-With `git` and `curl` installed, run the command below from the home directory.
-This will clone the dotfiles repository and run the bootstrap script.
+
+Run the command below from the home directory. It will clone the dotfiles repository and run the bootstrap script.
 
 ```
 git clone https://github.com/JDevlieghere/dotfiles.git ~/dotfiles && cd ~/dotfiles  &&  sourc ./bootstrap.sh
