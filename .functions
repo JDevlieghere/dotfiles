@@ -63,3 +63,8 @@ function hgshow(){
 vifi() {
     vim $(find . -name "$1")
 }
+
+# Run in background
+nh() {
+    nohup $@ > /dev/null 2>&1 &
+}
