@@ -64,7 +64,7 @@ set undoreload=10000            " Maximum number of lines to save for undo on a 
 
 " Line Numbers
 set nu                          " Show line numbers
-set rnu                         " Relative line numbers
+"set rnu                        " Relative line numbers
 
 " Scrolling
 set scrolloff=5                 " Keep at least 5 lines above/below
