@@ -240,10 +240,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_max_diagnostics_to_display = 1000
-let g:ycm_server_keep_logfiles = 1
-let g:ycm_min_num_of_chars_for_completion = 2
+let g:ycm_min_num_of_chars_for_completion = 0
 let g:ycm_min_num_identifier_candidate_chars = 0
 let g:ycm_auto_trigger = 1
+let g:ycm_register_as_syntastic_checker = 0
 nnoremap <F12> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <C-LeftMouse> :YcmCompleter GoTo<CR>
 
