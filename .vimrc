@@ -10,8 +10,9 @@ Plugin 'gmarik/Vundle.vim'
 
 " Plugins
 Plugin 'bling/vim-airline'
-Plugin 'Chiel92/vim-autoformat'
+Plugin 'chiel92/vim-autoformat'
 Plugin 'derekwyatt/vim-fswitch'
+Plugin 'felikz/ctrlp-py-matcher'
 Plugin 'godlygeek/tabular'
 Plugin 'justinmk/vim-sneak'
 Plugin 'kien/ctrlp.vim'
@@ -201,6 +202,7 @@ let g:syntastic_cpp_checkers = ['cppcheck']
 " CTRL-P
 let g:ctrlp_max_files = 0       " Index all files
 let g:ctrlp_use_caching = 1     " Cache index
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " Ctags
 set tags=.tags;                 " Find .tags recursively
