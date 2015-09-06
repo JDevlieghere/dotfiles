@@ -104,8 +104,8 @@ set mousehide                   " Hide mouse when typing
 set mouse=nicr                  " No visual selection from using mouse
 
 " Typos
-cnoreabbrev W w                 " Make :W equivalent to :w
-cnoreabbrev Q q                 " Make :Q equivalent to :q
+cnoreabbrev W w
+cnoreabbrev Q q
 
 " Colors & Syntax
 set t_Co=256                    " Force 256 colors
@@ -196,8 +196,6 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_cpp_checkers = ['cppcheck']
 
 " CTRL-P
 let g:ctrlp_max_files = 0       " Index all files
@@ -231,9 +229,6 @@ let g:NERDTreeDirArrows = 0
 let g:NERDTreeStatusline = "%f"
 nnoremap <F9> :NERDTreeFind<CR>
 nnoremap <F10> :NERDTreeToggle<CR>
-" Open NERDTree when no files are specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Close vim if NERDTree is the only window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -244,8 +239,27 @@ let g:ycm_min_num_of_chars_for_completion = 0
 let g:ycm_min_num_identifier_candidate_chars = 0
 let g:ycm_auto_trigger = 1
 let g:ycm_register_as_syntastic_checker = 0
+let g:ycm_filetype_blacklist = {
+    \ 'vim' : 1,
+    \ 'tagbar' : 1,
+    \ 'qf' : 1,
+    \ 'notes' : 1,
+    \ 'markdown' : 1,
+    \ 'md' : 1,
+    \ 'unite' : 1,
+    \ 'text' : 1,
+    \ 'vimwiki' : 1,
+    \ 'pandoc' : 1,
+    \ 'infolog' : 1,
+    \ 'mail' : 1
+    \}
 nnoremap <F12> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <C-LeftMouse> :YcmCompleter GoTo<CR>
+
+" Clang Format
+map <C-I> :pyf ~/bin/clang-format.py<CR>
+imap <C-I> <c-o>:pyf ~/bin/clang-format.py<CR>
+let g:clang_format_path = "clang-format-3.6"
 
 " Airline
 set laststatus=2                " Alwasy display statusline
