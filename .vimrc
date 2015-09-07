@@ -257,10 +257,8 @@ let g:ycm_filetype_blacklist = {
 nnoremap <F12> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <C-LeftMouse> :YcmCompleter GoTo<CR>
 
-" Clang Format
-map <C-I> :pyf ~/bin/clang-format.py<CR>
-imap <C-I> <c-o>:pyf ~/bin/clang-format.py<CR>
-let g:clang_format_path = "clang-format-3.6"
+" Auto Format
+let g:formatdef_clangformat_objc = '"clang-format-3.6 -style=file"'
 
 " Airline
 set laststatus=2                " Alwasy display statusline
