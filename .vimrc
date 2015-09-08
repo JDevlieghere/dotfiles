@@ -25,6 +25,7 @@ Plugin 'mbbill/undotree'
 Plugin 'moll/vim-bbye'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -202,6 +203,11 @@ let g:syntastic_cpp_checkers = ['cppcheck']
 let g:ctrlp_max_files = 0       " Index all files
 let g:ctrlp_use_caching = 1     " Cache index
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ -g ""'
 
 " Ctags
 set tags=.tags;                 " Find .tags recursively
