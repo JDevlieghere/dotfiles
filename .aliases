@@ -16,9 +16,6 @@ alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 # History
 alias hig="history | grep"
 
-# Enhanced  top
-alias top="htop"
-
 # Find matching files
 alias lsg='ll | grep'
 
