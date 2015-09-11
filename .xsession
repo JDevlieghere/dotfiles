@@ -22,7 +22,5 @@ gnome-terminal &
 # Start a browser instance
 google-chrome &
 
-
 # Start xmonad WM
 exec xmonad
-
