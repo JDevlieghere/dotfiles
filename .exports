@@ -16,6 +16,7 @@ export LESSCHARSET=utf-8
 
 # Go
 export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 
 # Local libraries
 export PATH=$PATH:$HOME/usr/bin
