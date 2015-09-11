@@ -192,6 +192,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_cpp_checkers = ['cppcheck']
+let g:syntastic_python_checkers = ['pylint']
 
 " CTRL-P
 let g:ctrlp_max_files = 0       " Index all files
@@ -287,6 +288,10 @@ let g:gist_update_on_write = 2  " Only :w! updates a gist
 
 " Remove Trailing Whitespace
 autocmd BufWritePre * :%s/\s\+$//e
+
+" Haskell
+au Bufenter *.hs compiler ghc
+let g:haddock_browser = 'chrome'
 
 " Watch $MYVIMRC
 augroup reload_myvimrc
