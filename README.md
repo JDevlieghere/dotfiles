@@ -21,7 +21,7 @@ it's better to have information centralized. That's what this README is for.
 Except for `git` and `curl` which are used in the installation script, not all packages listed below are required. It is a matter of which part of my configuration you are interested in. 
 
 ```
-amixer compton curl dmenu exuberant-ctags git scrot tmux vim xmobar xmonad
+compton curl dmenu exuberant-ctags git scrot tmux vim xmobar xmonad zsh
 ```
 
 ## Installation
