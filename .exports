@@ -14,6 +14,10 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export LESSCHARSET=utf-8
 
+# Go
+export GOROOT=$HOME/go
+export PATH=$PATH:$GOROOT/bin
+
 # Path
 export PATH=/usr/local/bin:$HOME/usr/bin:$PATH
 
