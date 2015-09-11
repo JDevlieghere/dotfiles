@@ -15,8 +15,7 @@ export LANGUAGE=en_US.UTF-8
 export LESSCHARSET=utf-8
 
 # Go
-export GOROOT=$HOME/go
-export PATH=$PATH:$GOROOT/bin
+export GOPATH=$HOME/go
 
 # Local libraries
 export PATH=$PATH:$HOME/usr/bin
