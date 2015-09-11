@@ -19,6 +19,9 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
 
+# Haskell
+export PATH=$PATH:/home/jdevlieghere/.cabal/bin/
+
 # Local libraries
 export PATH=$PATH:$HOME/usr/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib
