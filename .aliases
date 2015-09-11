@@ -10,8 +10,9 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 alias whois="whois -h whois-servers.net"
 
 # Processes
-alias ps="ps auxf"
+alias psa="ps auxf"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias psmy='ps -fu $USER | sort | egrep -v "ps -fu|sort|grep"'
 
 # History
 alias hig="history | grep"
