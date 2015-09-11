@@ -172,16 +172,10 @@ set iskeyword-=_
 vmap Q gq
 nmap Q gqap
 
-" Buffers Navigation
-map <silent> <C-Tab> :bnext<CR>
-map <silent> <S-Tab> :bprevious<CR>
-map <silent> <F4>    :Bdelete<CR>
-
-" Window Navigation
-nmap <silent> <A-Up>    :wincmd k<CR>
-nmap <silent> <A-Down>  :wincmd j<CR>
-nmap <silent> <A-Left>  :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
+" Buffers & Window Navigation
+nnoremap <silent> <Tab> :bnext<CR>
+nnoremap <silent> <S-Tab> :bprevious<CR>
+nnoremap <silent> <F4>    :Bdelete<CR>
 nnoremap <silent> <F3>  <C-w>q
 
 " Enable Copy/Paste
