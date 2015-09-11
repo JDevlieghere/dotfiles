@@ -11,19 +11,15 @@ Plugin 'gmarik/Vundle.vim'
 " Plugins
 Plugin 'bling/vim-airline'
 Plugin 'chiel92/vim-autoformat'
-Plugin 'derekwyatt/vim-fswitch'
 Plugin 'felikz/ctrlp-py-matcher'
 Plugin 'godlygeek/tabular'
 Plugin 'justinmk/vim-sneak'
 Plugin 'kien/ctrlp.vim'
-Plugin 'lukerandall/haskellmode-vim'
 Plugin 'majutsushi/tagbar'
-Plugin 'marijnh/tern_for_vim'
 Plugin 'mattn/gist-vim'
 Plugin 'mattn/webapi-vim'
 Plugin 'mbbill/undotree'
 Plugin 'moll/vim-bbye'
-Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
@@ -32,11 +28,35 @@ Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-latex/vim-latex'
 
-" Unix Plugins
+" YouCompleteMe
 if has("unix")
     if has("python")
         Plugin 'valloric/youcompleteme'
     endif
+endif
+
+" C and C++ Development
+if $CPPDEV
+    Plugin 'derekwyatt/vim-fswitch'
+    Plugin 'octol/vim-cpp-enhanced-highlight'
+endif
+
+" Go Development
+if $GODEV
+    Plugin 'fatih/vim-go'
+endif
+
+" Haskell Development
+if $HASKELLDEV
+    Plugin 'eagletmt/ghcmod-vim'
+    Plugin 'eagletmt/neco-ghc'
+    Plugin 'lukerandall/haskellmode-vim'
+    Plugin 'shougo/vimproc.vim'
+endif
+
+" Web Development
+if $WEBDEV
+    Plugin 'marijnh/tern_for_vim'
 endif
 
 " Color Schemes
@@ -157,7 +177,7 @@ endif
 
 " Disable Bells
 set noeb vb t_vb=
-au GUIEnter * set vb t_vb=
+autocmd GUIEnter * set vb t_vb=
 
 " Disable Arrow Keys
 nmap  <Up>     <NOP>
@@ -257,6 +277,7 @@ let g:ycm_filetype_blacklist = {
     \}
 nnoremap <F12> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <C-LeftMouse> :YcmCompleter GoTo<CR>
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
 " Auto Format
 let g:formatdef_clangformat_objc = '"clang-format-3.6 -style=file"'
@@ -290,8 +311,11 @@ let g:gist_update_on_write = 2  " Only :w! updates a gist
 autocmd BufWritePre * :%s/\s\+$//e
 
 " Haskell
-au Bufenter *.hs compiler ghc
 let g:haddock_browser = 'chrome'
+let g:necoghc_enable_detailed_browse = 1
+let g:haskellmode_completion_ghc = 0
+autocmd Bufenter *.hs compiler ghc
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 " Watch $MYVIMRC
 augroup reload_myvimrc
