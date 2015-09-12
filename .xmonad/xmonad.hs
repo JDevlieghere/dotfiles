@@ -12,11 +12,8 @@ import XMonad.Hooks.SetWMName
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spiral
-import XMonad.Layout.Tabbed
-import XMonad.Layout.ThreeColumns
 import XMonad.Layout.Spacing
 import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeys)
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -292,8 +289,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- with mod-q.
 --
 myStartupHook = do
-    spawn "feh --bg-fill ~/Pictures/wallpaper.png"
-    setWMName "LG3D"
+    spawn ""
 
 
 ------------------------------------------------------------------------

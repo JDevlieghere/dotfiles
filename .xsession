@@ -27,6 +27,4 @@ gnome-terminal &
 google-chrome &
 
 # Start xmonad WM
-gnome-panel &
-gnome-power-manager &
-dbus-launch --sh-syntax --exit-with-session gnome-session
+dbus-launch --sh-syntax --exit-with-session xmonad
