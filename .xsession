@@ -15,6 +15,9 @@ pulseaudio --start &
 # Start compton
 compton --config ~/.compton.conf &
 
-# Start xmonad WM
-xmonad
+# Set background
+xsetroot -solid '#073642'
+feh --bg-fill ~/Pictures/wallpaper.jpg
 
+# Start xmonad WM
+exec dbus-launch --sh-syntax --exit-with-session xmonad
