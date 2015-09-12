@@ -16,6 +16,10 @@ pulseaudio --start &
 # Start compton
 compton --config ~/.compton.conf &
 
+# Set background
+xsetroot -solid '#073642'
+feh --bg-fill ~/Pictures/wallpaper.jpg
+
 # Start a terminal instance
 gnome-terminal &
 
@@ -23,7 +27,6 @@ gnome-terminal &
 google-chrome &
 
 # Start xmonad WM
-export WINDOW_MANAGER=xmonad
-gconftool-2 -t string -s /desktop/gnome/session/required_components/windowmanager xmonad
-gconftool-2 -t string -s /desktop/gnome/applications/window_manager/current xmonad
-exec dbus-launch --sh-syntax --exit-with-session gnome-session
+gnome-panel &
+gnome-power-manager &
+dbus-launch --sh-syntax --exit-with-session gnome-session
