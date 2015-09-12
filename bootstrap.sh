@@ -70,6 +70,8 @@ link ".vimrc"
 link ".xmonad"
 link ".zshrc"
 link ".tmux.conf"
+link ".compton.conf"
+link ".xsession"
 link "bin"
 
 info "Installing software"
