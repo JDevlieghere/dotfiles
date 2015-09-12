@@ -23,4 +23,7 @@ gnome-terminal &
 google-chrome &
 
 # Start xmonad WM
-exec xmonad
+export WINDOW_MANAGER=xmonad
+gconftool-2 -t string -s /desktop/gnome/session/required_components/windowmanager xmonad
+gconftool-2 -t string -s /desktop/gnome/applications/window_manager/current xmonad
+exec dbus-launch --sh-syntax --exit-with-session gnome-session
