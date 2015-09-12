@@ -292,7 +292,6 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- with mod-q.
 --
 myStartupHook = do
-    spawn "feh --bg-fill ~/Pictures/wallpaper.png"
     setWMName "LG3D"
 
 
