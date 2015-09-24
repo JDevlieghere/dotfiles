@@ -257,6 +257,9 @@ let g:NERDTreeDirArrows = 0
 let g:NERDTreeStatusline = "%f"
 nnoremap <F9> :NERDTreeFind<CR>
 nnoremap <F10> :NERDTreeToggle<CR>
+" Open NERDTree when no files are specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Close vim if NERDTree is the only window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -306,6 +309,8 @@ if has("win32")
 endif
 
 " Markdown
+au! BufRead,BufNewFile *.markdown set filetype=mkd
+au! BufRead,BufNewFile *.md       set filetype=mkd
 let g:vim_markdown_folding_disabled = 1
 
 " Gist
