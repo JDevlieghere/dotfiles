@@ -186,10 +186,10 @@ set noeb vb t_vb=
 autocmd GUIEnter * set vb t_vb=
 
 " Disable Arrow Keys
-nmap  <Up>     <NOP>
-nmap  <Down>   <NOP>
-nmap  <Left>   <NOP>
-nmap  <Right>  <NOP>
+"nmap  <Up>     <NOP>
+"nmap  <Down>   <NOP>
+"nmap  <Left>   <NOP>
+"nmap  <Right>  <NOP>
 
 " Treat underscore as a word boundary
 set iskeyword-=_
