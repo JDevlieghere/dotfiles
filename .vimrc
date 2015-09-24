@@ -54,6 +54,12 @@ if $HASKELLDEV
     Plugin 'shougo/vimproc.vim'
 endif
 
+" Rust Development
+if $RUSTDEV
+    Plugin 'racer-rust/vim-racer'
+    Plugin 'rust-lang/rust.vim'
+endif
+
 " Web Development
 if $WEBDEV
     Plugin 'marijnh/tern_for_vim'

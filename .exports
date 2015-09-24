@@ -19,6 +19,9 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
 
+# Rust
+export RUST_SRC_PATH=/usr/local/src/rust/src
+
 # Haskell
 export PATH=$PATH:/home/jdevlieghere/.cabal/bin/
 
