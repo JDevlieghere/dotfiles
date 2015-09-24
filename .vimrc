@@ -309,8 +309,6 @@ if has("win32")
 endif
 
 " Markdown
-au! BufRead,BufNewFile *.markdown set filetype=mkd
-au! BufRead,BufNewFile *.md       set filetype=mkd
 let g:vim_markdown_folding_disabled = 1
 
 " Gist
