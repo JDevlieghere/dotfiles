@@ -17,7 +17,7 @@ pulseaudio --start &
 compton --config ~/.compton.conf &
 
 # Set background
-xsetroot -solid '#073642'
+hsetroot -solid '#073642'
 feh --bg-fill ~/Pictures/wallpaper.jpg
 
 # Start a terminal instance
