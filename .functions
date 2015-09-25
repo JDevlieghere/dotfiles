@@ -54,9 +54,12 @@ function csearch(){
     grep --include=\*.{c,h,cpp,hpp} --color=auto  -rn ./ -e "$@"
 }
 
-# Git show equivalent for Mercurial
+# Mercurial
 function hgshow(){
     hg log -r "$@" -p
+}
+function hgmerge(){
+    vim "$1" && hg resolve --mark "$1"
 }
 
 # Find files and open in Vim
