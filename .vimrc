@@ -30,10 +30,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-latex/vim-latex'
 
 " YouCompleteMe
-if has("unix")
-    if has("python")
-        Plugin 'valloric/youcompleteme'
-    endif
+if has("python")
+    Plugin 'valloric/youcompleteme'
 endif
 
 " C and C++ Development
@@ -172,6 +170,7 @@ autocmd FileType gitcommit setlocal spell
 
 " GUI
 if has("gui_running")
+    set guioptions-=L           " Hide scroll bars
     set lines=999 columns=999
     if has("gui_gtk2")
         set guifont=Source\ Code\ Pro\ for\ Powerline:h12,Source\ Code\ Pro:h12
