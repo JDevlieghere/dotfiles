@@ -177,7 +177,7 @@ if has("gui_running")
     elseif has("gui_macvim")
         set guifont=Source\ Code\ Pro\ for\ Powerline:h14,Source\ Code\ Pro:h14
     elseif has("gui_win32")
-        set guifont=Source\ Code\ Pro\ for\ Powerline:h11,Source\ Code\ Pro:h11
+        set guifont=Sauce_Code_Powerlibe:h11:cANSI,Source_Code_Pro:h11:cANSI
     endif
 endif
 
@@ -277,7 +277,7 @@ let g:ycm_filetype_blacklist = {
     \ 'notes' : 1,
     \ 'markdown' : 1,
     \ 'md' : 1,
-    \ 'unite' : 1,
+    \ 'unite' : 1,f
     \ 'text' : 1,
     \ 'vimwiki' : 1,
     \ 'pandoc' : 1,
