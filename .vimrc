@@ -277,7 +277,7 @@ let g:ycm_filetype_blacklist = {
     \ 'notes' : 1,
     \ 'markdown' : 1,
     \ 'md' : 1,
-    \ 'unite' : 1,f
+    \ 'unite' : 1,
     \ 'text' : 1,
     \ 'vimwiki' : 1,
     \ 'pandoc' : 1,
