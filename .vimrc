@@ -177,7 +177,7 @@ if has("gui_running")
     elseif has("gui_macvim")
         set guifont=Source\ Code\ Pro\ for\ Powerline:h14,Source\ Code\ Pro:h14
     elseif has("gui_win32")
-        set guifont=Sauce_Code_Powerlibe:h11:cANSI,Source_Code_Pro:h11:cANSI
+        set guifont=Sauce_Code_Powerline:h11:cANSI,Source_Code_Pro:h11:cANSI
     endif
 endif
 
