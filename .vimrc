@@ -1,5 +1,5 @@
 set nocompatible                " Be iMproved, required
-filetype off                    " Required
+filetype off                    " Vundle Begin
 
 " Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -67,9 +67,10 @@ endif
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'nanotech/jellybeans.vim'
 
-call vundle#end()               " Required
-filetype plugin indent on       " Required
+call vundle#end()               " End Vundle
 
+" Essentials
+filetype plugin indent on       " Enable file type support
 set hidden                      " Hide buffers
 set showcmd                     " Show current command
 set showmode                    " Show current mode
@@ -83,14 +84,15 @@ set nobackup                    " No backup file
 set noswapfile                  " No swap file
 
 " Undo
-set undofile                    " Persistent undo
-set undodir=~/.vim/undo         " Location to store undo history
-set undolevels=1000             " Maximum number of changes
-set undoreload=10000            " Maximum number of lines to save for undo on a buffer reload
+if has('persistent_undo')
+    set undofile                " Persistent undo
+    set undodir=~/.vim/undo     " Location to store undo history
+    set undolevels=1000         " Maximum number of changes
+    set undoreload=10000        " Maximum lines to save for undo on a buffer reload
+endif
 
 " Line Numbers
 set nu                          " Show line numbers
-"set rnu                        " Relative line numbers
 
 " Scrolling
 set scrolloff=5                 " Keep at least 5 lines above/below
@@ -115,10 +117,12 @@ set expandtab                   " Always use spaces instead of tabs
 
 " Joining
 set nojoinspaces                " Only one space when joining lines
-set formatoptions+=j            " Delete comment character when joining commented lines
+if has('patch-7.3.541')
+    set formatoptions+=j        " Remove comment leader when joining lines
+endif
 
 " Key sequence timeout
-set ttimeout                    " Emable time out
+set ttimeout                    " Enable time out
 set ttimeoutlen=100             " Set timeout time to 100 ms
 
 " Backspace
@@ -134,7 +138,6 @@ cnoreabbrev Q q
 
 " Colors & Syntax
 set t_Co=256                    " Force 256 colors
-let g:solarized_termtrans=1     " Support transparent terminal emulators
 syntax enable                   " Enable syntax highlighting
 set background=dark             " Dark background color
 colorscheme solarized           " Set color scheme
@@ -155,7 +158,7 @@ set listchars=tab:▸\ ,trail:-,extends:>,precedes:<,nbsp:⎵,eol:¬
 set completeopt=longest,menuone " Inserts the longest common text and
                                 " show menu even with only one item
 
-" Paste Toggle
+" Toggle Paste Mode
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 
@@ -170,7 +173,7 @@ autocmd FileType gitcommit setlocal spell
 " GUI
 if has("gui_running")
     set guioptions-=L           " Hide scroll bars
-    set lines=999 columns=999
+    set lines=999 columns=999   " Start maximized
     if has("gui_gtk2")
         set guifont=Source\ Code\ Pro\ for\ Powerline:h12,Source\ Code\ Pro:h12
     elseif has("gui_macvim")
@@ -209,6 +212,21 @@ vmap <C-x> "+c
 vmap <C-v> c<ESC>"+p
 imap <C-v> <ESC>"+pa
 
+" Ctags
+set tags=.tags;                 " Find .tags recursively
+
+" Remove Trailing Whitespace
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Watch $MYVIMRC
+augroup reload_myvimrc
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
+
+" Solarized
+let g:solarized_termtrans=1     " Support transparent terminal emulators
+
 " Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -228,9 +246,6 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .svn
       \ --ignore .hg
       \ -g ""'
-
-" Ctags
-set tags=.tags;                 " Find .tags recursively
 
 " Undotree
 nnoremap <F5> :UndotreeToggle<CR>
@@ -315,18 +330,9 @@ let g:gist_post_private = 1     " Private by default
 let g:gist_detect_filetype = 1  " Detect type from the file name
 let g:gist_update_on_write = 2  " Only :w! updates a gist
 
-" Remove Trailing Whitespace
-autocmd BufWritePre * :%s/\s\+$//e
-
 " Haskell
 let g:haddock_browser = 'chrome'
 let g:necoghc_enable_detailed_browse = 1
 let g:haskellmode_completion_ghc = 0
 autocmd Bufenter *.hs compiler ghc
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-" Watch $MYVIMRC
-augroup reload_myvimrc
-    autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END
