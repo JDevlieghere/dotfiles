@@ -1,5 +1,5 @@
-set nocompatible                " Be iMproved, required
-filetype off                    " Required
+set nocompatible                " Be iMproved
+filetype off                    " Begin Vundle
 
 " Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -41,9 +41,9 @@ endif
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'nanotech/jellybeans.vim'
 
-call vundle#end()               " Required
-filetype plugin indent on       " Required
+call vundle#end()               " End Vundle
 
+filetype plugin indent on       " Enable file type detection & plugins
 set hidden                      " Hide buffers
 set showcmd                     " Show current command
 set showmode                    " Show current mode
@@ -57,14 +57,15 @@ set nobackup                    " No backup file
 set noswapfile                  " No swap file
 
 " Undo
-set undofile                    " Persistent undo
-set undodir=~/.vim/undo         " Location to store undo history
-set undolevels=1000             " Maximum number of changes
-set undoreload=10000            " Maximum number of lines to save for undo on a buffer reload
+if has('persistent_undo')
+    set undofile                " Persistent undo
+    set undodir=~/.vim/undo     " Location to store undo history
+    set undolevels=1000         " Maximum number of changes
+    set undoreload=10000        " Maximum lines to save for undo on a buffer reload
+endif
 
 " Line Numbers
 set nu                          " Show line numbers
-set rnu                         " Relative line numbers
 
 " Scrolling
 set scrolloff=5                 " Keep at least 5 lines above/below
@@ -84,15 +85,17 @@ set autoindent                  " Copy indentation from previous line
 set tabstop=4                   " Columns a tab counts for
 set softtabstop=4               " Columns a tab inserts in insert mode
 set shiftwidth=4                " Columns inserted with the reindent operations
-set shiftround                  " Always indent by multiple of shiftwidth
+set shiftround                  " Always indent by multiple of shift width
 set expandtab                   " Always use spaces instead of tabs
 
 " Joining
 set nojoinspaces                " Only one space when joining lines
-set formatoptions+=j            " Delete comment character when joining commented lines
+if has('patch-7.3.541')
+    set formatoptions+=j        " Remove comment leader when joining lines
+endif
 
 " Key sequence timeout
-set ttimeout                    " Emable time out
+set ttimeout                    " Enable time out
 set ttimeoutlen=100             " Set timeout time to 100 ms
 
 " Backspace
@@ -188,6 +191,20 @@ vmap <C-x> "+c
 vmap <C-v> c<ESC>"+p
 imap <C-v> <ESC>"+pa
 
+" Ctags
+set tags=.tags;                 " Find .tags recursively
+
+" Remove Trailing Whitespace
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Watch $MYVIMRC
+augroup reload_myvimrc
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
+
+" Plugin Configuration
+
 " Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -201,9 +218,6 @@ let g:syntastic_cpp_checkers = ['cppcheck']
 " CTRL-P
 let g:ctrlp_max_files = 0       " Index all files
 let g:ctrlp_use_caching = 1     " Cache index
-
-" Ctags
-set tags=.tags;                 " Find .tags recursively
 
 " Undotree
 nnoremap <F5> :UndotreeToggle<CR>
@@ -269,12 +283,3 @@ let g:vim_markdown_folding_disabled = 1
 let g:gist_post_private = 1     " Private by default
 let g:gist_detect_filetype = 1  " Detect type from the file name
 let g:gist_update_on_write = 2  " Only :w! updates a gist
-
-" Remove Trailing Whitespace
-autocmd BufWritePre * :%s/\s\+$//e
-
-" Watch $MYVIMRC
-augroup reload_myvimrc
-    autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END
