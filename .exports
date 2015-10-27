@@ -15,11 +15,15 @@ export LANGUAGE=en_US.UTF-8
 export LESSCHARSET=utf-8
 
 # Go
-export GOROOT=$HOME/go
-export PATH=$PATH:$GOROOT/bin
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$GOPATH/bin
 
-# Path
-export PATH=/usr/local/bin:$HOME/usr/bin:$PATH
+# Rust
+export RUST_SRC_PATH=/usr/local/src/rust/src
+
+# Haskell
+export PATH=$PATH:/home/jdevlieghere/.cabal/bin/
 
 # Local libraries
 export PATH=$PATH:$HOME/usr/bin

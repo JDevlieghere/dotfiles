@@ -21,17 +21,12 @@ it's better to have information centralized. That's what this README is for.
 Except for `git` and `curl` which are used in the installation script, not all packages listed below are required. It is a matter of which part of my configuration you are interested in.
 
 ```
-amixer compton curl dmenu exuberant-ctags git scrot tmux vim xmobar xmonad
+compton curl dmenu exuberant-ctags feh git hsetroot scrot tmux vim xmobar xmonad zsh
 ```
 
 ## Installation
 
-
-Run the command below from the home directory. It will clone the dotfiles repository and run the bootstrap script.
-
-```
-git clone https://github.com/JDevlieghere/dotfiles.git ~/dotfiles && cd ~/dotfiles  &&  sourc ./bootstrap.sh
-```
+Installation consists of cloning the repo and running the bootstrap script.
 
 ## Vim
 
@@ -40,6 +35,20 @@ make it fit my particular needs. Today it's used mainly for C++ development. I
 use [Vundle](https://github.com/VundleVim/Vundle.vim) to manage my plugins. You
 can have a look at the respective repositories to discover what each of them
 does.
+
+### Plugins
+
+Plugins related to a dedicated type of development have been grouped together and
+are not installed by default. An environment variable is required to be set in order
+to install these plugins. A good place to do so would be the `~/.localrc` which is sourced
+automatically.
+
+```
+export GODEV=1
+export WEBDEV=1
+export CPPDEV=1
+export HASKELLDEV=1
+```
 
 ### YouCompleteMe
 

@@ -60,9 +60,6 @@ installFonts() {
 
 }
 
-info "Checking for updates"
-runCommand "Update repository" "git pull"
-
 info "Linking files"
 link ".aliases"
 link ".exports"
@@ -73,6 +70,8 @@ link ".vimrc"
 link ".xmonad"
 link ".zshrc"
 link ".tmux.conf"
+link ".compton.conf"
+link ".xsession"
 link "bin"
 
 info "Installing software"

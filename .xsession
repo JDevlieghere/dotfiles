@@ -3,11 +3,12 @@
 # Enable access to scripts
 PATH=$PATH:~/.cabal/bin:~/bin
 
-# Start a terminal instance
-gnome-terminal &
-
-# Start a browser instance
-google-chrome &
+# Configure X
+xsetroot -cursor_name left_ptr &
+if [ -f ~/.Xresources ];
+then
+    xrdb -merge .Xresources &
+fi
 
 # Start sound server
 pulseaudio --start &
@@ -16,8 +17,14 @@ pulseaudio --start &
 compton --config ~/.compton.conf &
 
 # Set background
-xsetroot -solid '#073642'
+hsetroot -solid '#073642'
 feh --bg-fill ~/Pictures/wallpaper.jpg
 
+# Start a terminal instance
+gnome-terminal &
+
+# Start a browser instance
+google-chrome &
+
 # Start xmonad WM
-exec dbus-launch --sh-syntax --exit-with-session xmonad
+dbus-launch --sh-syntax --exit-with-session xmonad

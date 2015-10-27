@@ -12,11 +12,8 @@ import XMonad.Hooks.SetWMName
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spiral
-import XMonad.Layout.Tabbed
-import XMonad.Layout.ThreeColumns
 import XMonad.Layout.Spacing
 import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeys)
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -33,7 +30,7 @@ myTerminal = "/usr/bin/gnome-terminal"
 -- Workspaces
 -- The default number of workspaces (virtual screens) and their names.
 --
-myWorkspaces = ["1:term","2:web","3:code","4:vm","5:media"] ++ map show [6..9]
+myWorkspaces = ["1:term","2:web","3:code","4:media"] ++ map show [5..9]
 
 
 ------------------------------------------------------------------------
@@ -58,9 +55,8 @@ myManageHook = composeAll
     , className =? "Galculator"     --> doFloat
     , className =? "Steam"          --> doFloat
     , className =? "Gimp"           --> doFloat
-    , className =? "VirtualBox"     --> doShift "4:vm"
-    , className =? "Vlc"            --> doShift "5:media"
-    , className =? "MPlayer"        --> doShift "5:media"
+    , className =? "Vlc"            --> doShift "4:media"
+    , className =? "MPlayer"        --> doShift "4:media"
     , className =? "stalonetray"    --> doIgnore
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
 
@@ -292,7 +288,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- with mod-q.
 --
 myStartupHook = do
-    setWMName "LG3D"
+    spawn ""
 
 
 ------------------------------------------------------------------------

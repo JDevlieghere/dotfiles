@@ -54,12 +54,22 @@ function csearch(){
     grep --include=\*.{c,h,cpp,hpp} --color=auto  -rn ./ -e "$@"
 }
 
-# Git show equivalent for Mercurial
+# Git Show equivalent for Mercurial
 function hgshow(){
     hg log -r "$@" -p
+}
+
+# Resolve merge conflicts for Mercurial
+function hgresolve(){
+    vim "$1" && hg resolve --mark "$1"
 }
 
 # Find files and open in Vim
 vifi() {
     vim $(find . -name "$1")
+}
+
+# Run in background
+nh() {
+    nohup $@ > /dev/null 2>&1 &
 }
