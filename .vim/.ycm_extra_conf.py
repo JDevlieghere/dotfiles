@@ -12,7 +12,7 @@ BASE_FLAGS = [
     '-Wno-long-long',
     '-Wno-variadic-macros',
     '-fexceptions',
-    '-ferror-limit=1000',
+    '-ferror-limit=10000',
     '-DNDEBUG',
     '-std=c++98',
     '-xc++',
@@ -107,7 +107,7 @@ def FlagsForInclude(root):
         for dirroot, dirnames, filenames in os.walk(include_path):
             for dir_path in dirnames:
                 real_path = os.path.join(dirroot, dir_path)
-                flags = flags + ['-I', real_path]
+                flags = flags + ["-I" +real_path]
         return flags
     except:
         return None
