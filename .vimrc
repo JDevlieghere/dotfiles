@@ -94,6 +94,9 @@ endif
 " Line Numbers
 set nu                          " Show line numbers
 
+" Rulers
+set colorcolumn=80,120          " Color ruler columns
+
 " Scrolling
 set scrolloff=5                 " Keep at least 5 lines above/below
 set sidescrolloff=5             " Keep at least 5 lines left/right
