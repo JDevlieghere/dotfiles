@@ -134,7 +134,7 @@ set backspace=indent,eol,start  " Delete over line breaks
 
 " Mouse
 set mousehide                   " Hide mouse when typing
-set mouse=nicr                  " No visual selection from using mouse
+set mouse=a                     " Enable the use of the mouse
 
 " Typos
 cnoreabbrev W w
