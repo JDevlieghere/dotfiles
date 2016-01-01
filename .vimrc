@@ -1,7 +1,7 @@
 set nocompatible                " Be iMproved
 
 """ Vundle Begin """
-filetype off                    
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -25,6 +25,7 @@ Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-sleuth'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-latex/vim-latex'
 
@@ -67,7 +68,7 @@ endif
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'nanotech/jellybeans.vim'
 
-call vundle#end()               
+call vundle#end()
 """ Vundle End """
 
 " Essentials
@@ -113,9 +114,9 @@ set showmatch                   " Show matching bracket
 set smarttab                    " Better tabs
 set smartindent                 " Inserts new level of indentation
 set autoindent                  " Copy indentation from previous line
-set tabstop=4                   " Columns a tab counts for
-set softtabstop=4               " Columns a tab inserts in insert mode
-set shiftwidth=4                " Columns inserted with the reindent operations
+"set tabstop=4                   " Columns a tab counts for
+"set softtabstop=4               " Columns a tab inserts in insert mode
+"set shiftwidth=4                " Columns inserted with the reindent operations
 set shiftround                  " Always indent by multiple of shiftwidth
 set expandtab                   " Always use spaces instead of tabs
 
@@ -249,7 +250,7 @@ augroup reload_myvimrc
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END
 
-""" Plugin Configuration """ 
+""" Plugin Configuration """
 
 " Solarized
 let g:solarized_termtrans=1     " Support transparent terminal emulators
@@ -331,7 +332,7 @@ nnoremap <C-LeftMouse> :YcmCompleter GoTo<CR>
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
 " Auto Format
-let g:formatdef_clangformat_objc = '"clang-format-3.6 -style=file"'
+let g:formatdef_clangformat_objc = '"clang-format -style=file"'
 
 " Airline
 set laststatus=2                " Alwasy display statusline
