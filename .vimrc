@@ -331,7 +331,7 @@ nnoremap <C-LeftMouse> :YcmCompleter GoTo<CR>
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
 " Auto Format
-let g:formatdef_clangformat_objc = '"clang-format-3.6 -style=file"'
+let g:formatdef_clangformat_objc = '"clang-format -style=file"'
 
 " Airline
 set laststatus=2                " Alwasy display statusline
