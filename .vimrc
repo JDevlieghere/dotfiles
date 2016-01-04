@@ -114,9 +114,9 @@ set showmatch                   " Show matching bracket
 set smarttab                    " Better tabs
 set smartindent                 " Inserts new level of indentation
 set autoindent                  " Copy indentation from previous line
-"set tabstop=4                   " Columns a tab counts for
-"set softtabstop=4               " Columns a tab inserts in insert mode
-"set shiftwidth=4                " Columns inserted with the reindent operations
+set tabstop=4                   " Columns a tab counts for
+set softtabstop=4               " Columns a tab inserts in insert mode
+set shiftwidth=4                " Columns inserted with the reindent operations
 set shiftround                  " Always indent by multiple of shiftwidth
 set expandtab                   " Always use spaces instead of tabs
 
