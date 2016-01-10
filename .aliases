@@ -38,3 +38,6 @@ alias tmux="TERM=screen-256color-bce tmux"
 
 # Lock gnome from terminal
 alias glock="gnome-screensaver-command -l"
+
+# Clang Format
+alias google-format="find . -name '*.c' -o -name '*.cpp' -o -name '*.cxx' -o -name '*.h' -o -name '*.hpp' -print0 | xargs -0 clang-format -i -style=Google"
