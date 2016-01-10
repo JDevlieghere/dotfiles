@@ -11,6 +11,7 @@ Plugin 'gmarik/Vundle.vim'
 " Plugins
 Plugin 'bling/vim-airline'
 Plugin 'chiel92/vim-autoformat'
+Plugin 'ciaranm/detectindent'
 Plugin 'felikz/ctrlp-py-matcher'
 Plugin 'godlygeek/tabular'
 Plugin 'justinmk/vim-sneak'
