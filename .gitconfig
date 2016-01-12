@@ -19,8 +19,10 @@
 	ci = commit -v
 	df = diff --color-words --word-diff-regex=.
 	di = diff
+	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
 	lg = log -p
 	noff = merge --no-ff
 	st = status
+	unstage = reset HEAD --
 [credential]
 	helper = cache --timeout=3600
