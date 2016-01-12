@@ -209,7 +209,9 @@ nmap Q gqap
 nnoremap <silent> <Tab> :bnext<CR>
 nnoremap <silent> <S-Tab> :bprevious<CR>
 nnoremap <silent> <F4>    :Bdelete<CR>
+nmap <silent> <Leader>bd :Bdelete<CR>
 nnoremap <silent> <F3>  <C-w>q
+nmap <silent> <Leader>wd <C-w>q
 
 " Enable Copy/Paste
 vmap <C-c> "+yi
