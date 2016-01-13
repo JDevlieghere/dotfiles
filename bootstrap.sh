@@ -32,6 +32,10 @@ symlink(){
 info "Installing Fonts"
 installFonts
 
+info "Installing Software"
+curl -s -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME"/.oh-my-zsh/zsh-syntax-highlighting
+git clone https://github.com/gmarik/Vundle.vim.git "$HOME"/.vim/bundle/Vundle.vim
 
 info "Linking Dotfiles"
 symlink "$DOTFILES"/.aliases "$HOME"/.aliases
@@ -50,6 +54,3 @@ info "Linking Directories"
 symlink "$DOTFILES"/.irssi "$HOME"/.irssi
 symlink "$DOTFILES"/.xmonad "$HOME"/.xmonad
 symlink "$DOTFILES"/bin "$HOME"/bin
-
-
-
