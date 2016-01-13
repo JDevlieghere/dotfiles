@@ -11,6 +11,10 @@ set width 0
 set disassembly-flavor intel
 set tui border-kind space
 
+define bpl
+ info breakpoints
+end
+
 define argv
  show args
 end
