@@ -1,5 +1,6 @@
 set print pretty on
 set print object on
+set print vtbl on
 
 set history save on
 set history filename ~/.gdb_history
@@ -8,6 +9,7 @@ set height 0
 set width 0
 
 set disassembly-flavor intel
+set tui border-kind space
 
 define argv
  show args
