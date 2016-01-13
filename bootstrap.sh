@@ -1,51 +1,11 @@
 #!/bin/bash
 
-DOTFILES="$HOME/dotfiles"
-LOG="$HOME/dotfiles.log"
-
-log () {
-    printf "$1\n" >> "$LOG"
-}
+pushd `dirname $0` > /dev/null
+DOTFILES=`pwd -P`
+popd > /dev/null
 
 info () {
-    printf "\n\r\033[2K  [\033[00;34mINFO\033[0m] $1\n"
-}
-
-success () {
-    printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
-}
-
-fail () {
-    printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
-}
-
-link(){
-    local from="$DOTFILES/$1"
-    local to="$HOME/$1"
-
-    log "Linking  $from to $to"
-
-    if [ ! -e $to ] && [ ! -L $to ]
-    then
-        ln -s "$from" "$to"
-        success "Linked: $to -> $from"
-    else
-        fail  "File already exists: $to"
-    fi
-}
-
-runCommand() {
-    log "$1"
-    eval $2 >> $LOG 2>&1
-    if [ $? -ne 0 ]; then
-        fail "$1"
-    else
-        success "$1"
-    fi
-}
-
-copyFont() {
-    runCommand "Install font $1" "cp $1 $2"
+    printf "\033[00;34m$@\033[0m\n"
 }
 
 installFonts() {
@@ -56,33 +16,43 @@ installFonts() {
         mkdir -p "$fonts"
     fi
 
-    find "$DOTFILES/fonts" -name "*.[o,t]tf" -type f | while read file; do copyFont "$file" "$fonts"; done
+    find "$DOTFILES/fonts/" -name "*.[o,t]tf" -type f | while read file; do cp -v "$file" "$fonts"; done
 
 }
 
-info "Linking files"
-link ".aliases"
-link ".compton.conf"
-link ".exports"
-link ".functions"
-link ".gdbinit"
-link ".gitconfig"
-link ".irssi"
-link ".tmux.conf"
-link ".vim"
-link ".vimrc"
-link ".xmonad"
-link ".xsession"
-link ".zshrc"
-link "bin"
+symlink(){
+    if [ ! -e $to ] && [ ! -L $to ]
+    then
+        ln -vs "$1" "$2"
+    else
+        echo "Skipping $1"
+    fi
+}
 
-info "Installing software"
-runCommand "Install Oh My Zsh" "curl -s -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh"
-runCommand "Install zsh syntax highlighting" "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/zsh-syntax-highlighting"
-runCommand "Install Vundle" "git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
-
-info "Installing fonts"
+info "Installing Fonts"
 installFonts
 
-info "See $LOG for a detailed log"
-echo -e "\n"
+info "Linking Dotfiles"
+symlink "$DOTFILES"/.aliases "$HOME"/.aliases
+symlink "$DOTFILES"/.compton.conf "$HOME"/.compton.conf
+symlink "$DOTFILES"/.exports "$HOME"/.exports
+symlink "$DOTFILES"/.functions "$HOME"/.functions
+symlink "$DOTFILES"/.gitconfig "$HOME"/.gitconfig
+symlink "$DOTFILES"/.tmux.conf "$HOME"/.tmux.conf
+symlink "$DOTFILES"/.vim "$HOME"/.vim
+symlink "$DOTFILES"/.vimrc "$HOME"/.vimrc
+symlink "$DOTFILES"/.xsession "$HOME"/.xsession
+symlink "$DOTFILES"/.zshrc "$HOME"/.zshrc
+symlink "$DOTFILES"/gdb-dashboard/.gdbinit "$HOME"/.gdbinit
+
+info "Linking Directories"
+symlink "$DOTFILES"/.irssi "$HOME"/.irssi
+symlink "$DOTFILES"/.xmonad "$HOME"/.xmonad
+symlink "$DOTFILES"/bin "$HOME"/bin
+
+info "Installing software"
+curl -s -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME"/.oh-my-zsh/zsh-syntax-highlighting
+git clone https://github.com/gmarik/Vundle.vim.git "$HOME"/.vim/bundle/Vundle.vim
+
+

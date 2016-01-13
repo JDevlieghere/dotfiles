@@ -260,7 +260,7 @@ let g:solarized_termtrans=1     " Support transparent terminal emulators
 " Detect Indent
 let g:detectindent_preferred_expandtab=1
 let g:detectindent_preferred_indent=4
-autocmd BufReadPost * :DetectIndent 
+autocmd BufReadPost * :DetectIndent
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -339,7 +339,7 @@ nnoremap <C-LeftMouse> :YcmCompleter GoTo<CR>
 let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
 " Auto Format
-let g:formatdef_clangformat_objc = '"clang-format -style=file"'
+let g:formatdef_clangformat_objc = '"clang-format -style=Google"'
 
 " Airline
 set laststatus=2                " Alwasy display statusline
