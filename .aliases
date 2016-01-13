@@ -30,8 +30,8 @@ alias mkctags="ctags -R -f .tags --extra=+f"
 alias reload="exec $SHELL -l"
 
 # Build from source
-alias bld="./configure && make && make install"
-alias localbld="./configure --prefix=$HOME/usr && make && make install"
+alias bld="./configure && make -j && make install"
+alias localbld="./configure --prefix=$HOME/usr && make -j && make install"
 
 # Support 256 colors in tmux
 alias tmux="TERM=screen-256color-bce tmux"
