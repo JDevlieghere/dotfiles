@@ -1,3 +1,5 @@
+source ~/dotfiles/gdbinit/gdbinit
+
 set print pretty on
 set print object on
 set print vtbl on

@@ -36,7 +36,6 @@ info "Installing Software"
 curl -s -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME"/.oh-my-zsh/zsh-syntax-highlighting
 git clone https://github.com/gmarik/Vundle.vim.git "$HOME"/.vim/bundle/Vundle.vim
-git clone https://github.com/cyrus-and/gdb-dashboard.git "$HOME"/gdb-dashboard
 
 info "Linking Dotfiles"
 symlink "$DOTFILES"/.aliases "$HOME"/.aliases
@@ -49,7 +48,7 @@ symlink "$DOTFILES"/.vim "$HOME"/.vim
 symlink "$DOTFILES"/.vimrc "$HOME"/.vimrc
 symlink "$DOTFILES"/.xsession "$HOME"/.xsession
 symlink "$DOTFILES"/.zshrc "$HOME"/.zshrc
-symlink "$HOME"/gdb-dashboard/.gdbinit "$HOME"/.gdbinit
+symlink "$DOTFILES"/.gdbinit "$HOME"/.gdbinit
 
 info "Linking Directories"
 symlink "$DOTFILES"/.irssi "$HOME"/.irssi
