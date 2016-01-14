@@ -49,7 +49,7 @@ symlink "$DOTFILES"/.vim "$HOME"/.vim
 symlink "$DOTFILES"/.vimrc "$HOME"/.vimrc
 symlink "$DOTFILES"/.xsession "$HOME"/.xsession
 symlink "$DOTFILES"/.zshrc "$HOME"/.zshrc
-symlink "$HOME"/gdb-dashboard/.gdbinit "$HOME"/.gdbinit
+symlink "$DOTFILES"/.gdbinit "$HOME"/.gdbinit
 
 info "Linking Directories"
 symlink "$DOTFILES"/.irssi "$HOME"/.irssi
