@@ -1,5 +1,3 @@
-source ~/dotfiles/gdbinit/gdbinit
-
 set print pretty on
 set print object on
 set print vtbl on
@@ -12,6 +10,10 @@ set width 0
 
 set disassembly-flavor intel
 set tui border-kind space
+
+define adv
+ source ~/dotfiles/gdbinit/gdbinit
+end
 
 define bpl
  info breakpoints
