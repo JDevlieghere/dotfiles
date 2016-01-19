@@ -214,6 +214,7 @@ nnoremap <silent> <F3>  <C-w>q
 nmap <silent> <Leader>wd <C-w>q
 
 " Enable Copy/Paste
+set clipboard=unnamed
 vmap <C-c> "+yi
 vmap <C-x> "+c
 vmap <C-v> c<ESC>"+p
