@@ -1,8 +1,8 @@
 [core]
  	editor = vim
 [user]
-	email = info@jonasdevlieghere.com
-	name = JDevlieghere
+	email = jonas@devlieghere.com
+	name = Jonas Devlieghere
 [push]
 	default = simple
 [grep]

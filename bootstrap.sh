@@ -43,6 +43,7 @@ symlink "$DOTFILES"/.compton.conf "$HOME"/.compton.conf
 symlink "$DOTFILES"/.exports "$HOME"/.exports
 symlink "$DOTFILES"/.functions "$HOME"/.functions
 symlink "$DOTFILES"/.gitconfig "$HOME"/.gitconfig
+symlink "$DOTFILES"/.hgrc "$HOME"/.hgrc
 symlink "$DOTFILES"/.tmux.conf "$HOME"/.tmux.conf
 symlink "$DOTFILES"/.vim "$HOME"/.vim
 symlink "$DOTFILES"/.vimrc "$HOME"/.vimrc
