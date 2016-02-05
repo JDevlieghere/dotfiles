@@ -9,7 +9,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Plugins
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'chiel92/vim-autoformat'
 Plugin 'ciaranm/detectindent'
 Plugin 'felikz/ctrlp-py-matcher'
