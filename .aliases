@@ -2,7 +2,7 @@
 alias ll="ls -lha"
 
 # Human-readable disk usage
-alias df="df -Tha --total"
+alias dfh="df -Tha --total"
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -32,9 +32,6 @@ alias reload="exec $SHELL -l"
 # Build from source
 alias bld="./configure && make -j && make install"
 alias localbld="./configure --prefix=$HOME/usr && make -j && make install"
-
-# Support 256 colors in tmux
-alias tmux="TERM=screen-256color-bce tmux"
 
 # Clang Format
 alias google-format="find . -name '*.c' -o -name '*.cpp' -o -name '*.cxx' -o -name '*.h' -o -name '*.hpp' -print0 | xargs -0 clang-format -i -style=Google"
