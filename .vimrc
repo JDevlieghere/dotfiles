@@ -317,6 +317,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_extra_conf_globlist = ['~/.vim/*']
 let g:ycm_max_diagnostics_to_display = 1000
 let g:ycm_min_num_of_chars_for_completion = 0
 let g:ycm_min_num_identifier_candidate_chars = 0
