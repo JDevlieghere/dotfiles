@@ -35,7 +35,7 @@ installFonts
 info "Installing Software"
 curl -s -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME"/.oh-my-zsh/zsh-syntax-highlighting
-git clone https://github.com/gmarik/Vundle.vim.git "$HOME"/.vim/bundle/Vundle.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 info "Linking Dotfiles"
 symlink "$DOTFILES"/.aliases "$HOME"/.aliases
