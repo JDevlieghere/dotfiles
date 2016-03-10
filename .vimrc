@@ -1,76 +1,69 @@
 set nocompatible                " Be iMproved
 
-""" Vundle Begin """
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-" Let Vundle manage itself
-Plugin 'gmarik/Vundle.vim'
+" Color Schemes
+Plug 'altercation/vim-colors-solarized'
+Plug 'nanotech/jellybeans.vim'
 
 " Plugins
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'chiel92/vim-autoformat'
-Plugin 'ciaranm/detectindent'
-Plugin 'felikz/ctrlp-py-matcher'
-Plugin 'godlygeek/tabular'
-Plugin 'justinmk/vim-sneak'
-Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'mattn/gist-vim'
-Plugin 'mattn/webapi-vim'
-Plugin 'mbbill/undotree'
-Plugin 'moll/vim-bbye'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'rking/ag.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-latex/vim-latex'
+Plug 'airblade/vim-gitgutter'
+Plug 'chiel92/vim-autoformat'
+Plug 'ciaranm/detectindent'
+Plug 'felikz/ctrlp-py-matcher'
+Plug 'godlygeek/tabular'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'justinmk/vim-sneak'
+Plug 'kien/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
+Plug 'mbbill/undotree'
+Plug 'moll/vim-bbye'
+Plug 'plasticboy/vim-markdown'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-latex/vim-latex'
 
-" YouCompleteMe
 if has("python")
-    Plugin 'valloric/youcompleteme'
+    Plug 'valloric/youcompleteme'
 endif
 
-" C and C++ Development
-if $CPPDEV
-    Plugin 'derekwyatt/vim-fswitch'
-    Plugin 'octol/vim-cpp-enhanced-highlight'
+if has("lua")
+    Plug 'jeaye/color_coded'
 endif
 
 " Go Development
 if $GODEV
-    Plugin 'fatih/vim-go'
+    Plug 'fatih/vim-go'
 endif
 
 " Haskell Development
 if $HASKELLDEV
-    Plugin 'eagletmt/ghcmod-vim'
-    Plugin 'eagletmt/neco-ghc'
-    Plugin 'lukerandall/haskellmode-vim'
-    Plugin 'shougo/vimproc.vim'
+    Plug 'eagletmt/ghcmod-vim'
+    Plug 'eagletmt/neco-ghc'
+    Plug 'lukerandall/haskellmode-vim'
+    Plug 'shougo/vimproc.vim'
 endif
 
 " Rust Development
 if $RUSTDEV
-    Plugin 'racer-rust/vim-racer'
-    Plugin 'rust-lang/rust.vim'
+    Plug 'racer-rust/vim-racer'
+    Plug 'rust-lang/rust.vim'
 endif
 
 " Web Development
 if $WEBDEV
-    Plugin 'marijnh/tern_for_vim'
+    Plug 'marijnh/tern_for_vim'
 endif
 
-" Color Schemes
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'nanotech/jellybeans.vim'
-
-call vundle#end()
-""" Vundle End """
+call plug#end()
 
 " Essentials
 filetype plugin indent on       " Enable file type support
@@ -110,6 +103,7 @@ set hlsearch                    " Highlight matches
 set ignorecase                  " Case-insensitive search
 set smartcase                   " Unless search contains uppercase letter
 set showmatch                   " Show matching bracket
+vnoremap // y/<C-R>"<CR>        " Search for visual selection
 
 " Indentation
 set smarttab                    " Better tabs
@@ -293,13 +287,6 @@ nnoremap <F8> :TagbarToggle<CR>
 let g:tagbar_right = 1
 let g:tagbar_width = 35
 autocmd FileType * nested :call tagbar#autoopen(0)
-
-" FSwitch
-nmap <silent> <Leader>of :FSHere<cr>
-nmap <silent> <Leader>oL :FSSplitRight<cr>
-nmap <silent> <Leader>oH :FSSplitLeft<cr>
-nmap <silent> <Leader>oK :FSSplitAbove<cr>
-nmap <silent> <Leader>oj :FSBelow<cr>
 
 " NERDTree
 let NERDTreeWinPos = "left"
