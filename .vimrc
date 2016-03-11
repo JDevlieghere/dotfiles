@@ -215,7 +215,7 @@ endif
 
 " GUI
 if has("gui_running")
-    autocmd GUIEnter * set vb t_vb=
+    set vb t_vb=
     set guioptions-=L           " Hide scroll bars
     set lines=999 columns=999   " Start maximized
     if has("gui_gtk2")
