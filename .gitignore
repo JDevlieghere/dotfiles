@@ -1,6 +1,8 @@
 # Vim
-.vim/bundle/*
-.vim/undo/*
+.vim/bundle/
+.vim/undo/
+.vim/autoload/
+.vim/plugged/
 
 # Python
 *.pyc
