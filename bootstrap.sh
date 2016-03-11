@@ -49,6 +49,8 @@ symlink "$DOTFILES"/.hgrc "$HOME"/.hgrc
 symlink "$DOTFILES"/.tmux.conf "$HOME"/.tmux.conf
 symlink "$DOTFILES"/.vim "$HOME"/.vim
 symlink "$DOTFILES"/.vimrc "$HOME"/.vimrc
+symlink "$DOTFILES"/.vim "$HOME"/.config/nvim
+symlink "$DOTFILES"/.vimrc "$HOME"/.config/nvim/init.vim
 symlink "$DOTFILES"/.xsession "$HOME"/.xsession
 symlink "$DOTFILES"/.zshrc "$HOME"/.zshrc
 symlink "$DOTFILES"/.gdbinit "$HOME"/.gdbinit

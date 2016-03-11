@@ -265,6 +265,7 @@ augroup END
 let g:solarized_termtrans=1     " Support transparent terminal emulators
 
 " fzf
+let g:fzf_buffers_jump = 1
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
 
@@ -290,7 +291,7 @@ nnoremap <F5> :UndotreeToggle<CR>
 nnoremap <F8> :TagbarToggle<CR>
 let g:tagbar_right = 1
 let g:tagbar_width = 35
-autocmd FileType * nested :call tagbar#autoopen(0)
+autocmd FileType * nested :call tagbar#autoopen(1)
 
 " NERDTree
 let NERDTreeWinPos = "left"
