@@ -14,7 +14,6 @@ ENABLE_CORRECTION="true"
 HIST_STAMPS="yyyy-mm-dd"
 
 # Plugins to load
-plugins=(git zsh-syntax-highlighting)
 
 # User configuration
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/texbin:$HOME/bin"
@@ -30,9 +29,6 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 # Personal aliases
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
-
-# ZSH Syntax Highlighting
-source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Source dotfiles
 source ~/.aliases

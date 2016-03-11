@@ -25,11 +25,16 @@ Plug 'plasticboy/vim-markdown'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-latex/vim-latex'
+
+if has("nvim")
+    Plug 'benekastah/neomake'
+else
+    Plug 'scrooloose/syntastic'
+endif
 
 if has("python")
     Plug 'valloric/youcompleteme'
