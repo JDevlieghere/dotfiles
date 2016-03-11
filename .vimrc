@@ -10,12 +10,10 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'chiel92/vim-autoformat'
 Plug 'ciaranm/detectindent'
-Plug 'felikz/ctrlp-py-matcher'
 Plug 'godlygeek/tabular'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
-Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
@@ -266,6 +264,10 @@ augroup END
 " Solarized
 let g:solarized_termtrans=1     " Support transparent terminal emulators
 
+" fzf
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-b> :Buffers<CR>
+
 " Detect Indent
 let g:detectindent_preferred_expandtab=1
 let g:detectindent_preferred_indent=4
@@ -280,17 +282,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_cpp_checkers = ['cppcheck']
 let g:syntastic_python_checkers = ['pylint']
-
-" CTRL-P
-let g:ctrlp_max_files = 0       " Index all files
-let g:ctrlp_use_caching = 1     " Cache index
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ -g ""'
 
 " Undotree
 nnoremap <F5> :UndotreeToggle<CR>
@@ -310,8 +301,8 @@ let g:NERDTreeStatusline = "%f"
 nnoremap <F9> :NERDTreeFind<CR>
 nnoremap <F10> :NERDTreeToggle<CR>
 " Open NERDTree when no files are specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Close vim if NERDTree is the only window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
