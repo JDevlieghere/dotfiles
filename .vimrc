@@ -205,13 +205,21 @@ set iskeyword-=_
 vmap Q gq
 nmap Q gqap
 
-" Buffers & Window Navigation
+" Cycle through buffers
 nnoremap <silent> <Tab> :bnext<CR>
 nnoremap <silent> <S-Tab> :bprevious<CR>
+
+" Close buffer
 nnoremap <silent> <F4>    :Bdelete<CR>
 nmap <silent> <Leader>bd :Bdelete<CR>
+
+" Close window
 nnoremap <silent> <F3>  <C-w>q
 nmap <silent> <Leader>wd <C-w>q
+
+" Splits
+set splitbelow
+set splitright
 
 " Enable Copy/Paste
 set clipboard=unnamed
