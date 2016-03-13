@@ -3,6 +3,7 @@
 .vim/undo/
 .vim/autoload/
 .vim/plugged/
+.vim/init.vim
 
 # Python
 *.pyc

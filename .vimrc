@@ -36,6 +36,7 @@ if has("nvim")
     Plug 'benekastah/neomake'
 else
     Plug 'scrooloose/syntastic'
+    Plug 'tpope/vim-dispatch'
 endif
 
 if has("python")
@@ -230,6 +231,16 @@ endif
 " Remove Trailing Whitespace
 autocmd BufWritePre * :%s/\s\+$//e
 
+" Watch $MYVIMRC
+augroup reload_myvimrc
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
+
+" ---------------------------------------------------------------------------- "
+" Functions                                                                    "
+" ---------------------------------------------------------------------------- "
+
 " Highlight duplicate lines
 " http://stackoverflow.com/questions/1268032/marking-duplicate-lines
 function! HighlightRepeats() range
@@ -250,12 +261,6 @@ function! HighlightRepeats() range
     endfor
 endfunction
 command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
-
-" Watch $MYVIMRC
-augroup reload_myvimrc
-    autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END
 
 " ---------------------------------------------------------------------------- "
 " Plugin Configuration                                                         "
@@ -283,19 +288,6 @@ let g:airline#extensions#tabline#fnamemod=':t'
 let g:detectindent_preferred_expandtab=1
 let g:detectindent_preferred_indent=4
 autocmd BufReadPost * :DetectIndent
-
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=1
-let g:syntastic_cpp_checkers=['cppcheck']
-let g:syntastic_python_checkers=['pylint']
-
-" Undotree
-nnoremap <F5> :UndotreeToggle<CR>
 
 " Tagbar
 nnoremap <F8> :TagbarToggle<CR>
@@ -367,3 +359,24 @@ let g:necoghc_enable_detailed_browse=1
 let g:haskellmode_completion_ghc=0
 autocmd Bufenter *.hs compiler ghc
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+if has("nvim")
+    "Neomake
+    nnoremap <F5> :Neomake<CR>
+    let g:neomake_javascript_enabled_makers = ['jshint']
+    let g:neomake_python_enabled_makers = ['pylint']
+else
+    " Syntastic
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+    let g:syntastic_always_populate_loc_list=1
+    let g:syntastic_auto_loc_list=1
+    let g:syntastic_check_on_open=1
+    let g:syntastic_cpp_checkers=['cppcheck']
+    let g:syntastic_javascript_checkers = ['jshint']
+    let g:syntastic_python_checkers=['pylint']
+
+    " Dispatch
+    nnoremap <F5> :Make<CR>
+endif
