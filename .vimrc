@@ -293,7 +293,9 @@ autocmd BufReadPost * :DetectIndent
 nnoremap <F8> :TagbarToggle<CR>
 let g:tagbar_right=1
 let g:tagbar_width=35
-autocmd FileType * nested :call tagbar#autoopen(0)
+if (has("nvim") == 0)
+    autocmd FileType * nested :call tagbar#autoopen(0)
+endif
 
 " NERDTree
 let NERDTreeWinPos="left"
@@ -339,7 +341,7 @@ nnoremap <C-LeftMouse> :YcmCompleter GoTo<CR>
 let g:ycm_semantic_triggers={'haskell' : ['.']}
 
 " Auto Format
-let g:formatdef_clangformat="clang-format -style=google"
+let g:formatdef_clangformat='"clang-format -style=google"'
 
 " LaTeX
 let g:Tex_DefaultTargetFormat='pdf'
