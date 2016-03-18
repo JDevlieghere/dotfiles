@@ -334,12 +334,12 @@ let g:ycm_filetype_blacklist={
     \ 'infolog' : 1,
     \ 'mail' : 1
     \}
-nnoremap <F12> :YcmForceCompileAndDiagnostics<CR>
+nnoremap <F12> :YcmDiags<CR>
 nnoremap <C-LeftMouse> :YcmCompleter GoTo<CR>
 let g:ycm_semantic_triggers={'haskell' : ['.']}
 
 " Auto Format
-let g:formatdef_clangformat='"clang-format -style=Google"'
+let g:formatdef_clangformat="clang-format -style=google"
 
 " LaTeX
 let g:Tex_DefaultTargetFormat='pdf'
