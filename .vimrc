@@ -88,10 +88,10 @@ filetype plugin indent on       " Enable file type support
 set hidden                      " Hide buffers
 set showcmd                     " Show current command
 set showmode                    " Show current mode
-set encoding=utf-8              " UTF-8 encoding
 set ruler                       " Show ruler
 set autoread                    " Auto reload
 set ttyfast                     " Fast terminal
+set encoding=utf-8              " UTF-8 encoding
 
 " Temp Files
 set nobackup                    " No backup file
@@ -198,7 +198,7 @@ vmap <C-v> c<ESC>"+p
 imap <C-v> <ESC>"+pa
 
 " Ctags
-set tags=.tags;                 " Find .tags recursively
+set tags=tags;                  " Find tags recursively
 
 " Joining
 set nojoinspaces                " Only one space when joining lines
@@ -262,6 +262,19 @@ function! HighlightRepeats() range
 endfunction
 command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
 
+" Switch between source and header files using ctags
+" Rudimentary approach: only supports .cpp and .h
+function! Switch()
+    let baseName=expand('%:t:r')
+    let extension=expand('%:e')
+    if extension =~ 'c'
+        execute "tag " . baseName . '.h'
+    else
+        execute "tag " . baseName . '.cpp'
+    endif
+endfunction
+nmap <silent> <Leader>fs :call Switch()<CR>
+
 " ---------------------------------------------------------------------------- "
 " Plugin Configuration                                                         "
 " ---------------------------------------------------------------------------- "
@@ -306,7 +319,7 @@ nnoremap <F9> :NERDTreeFind<CR>
 nnoremap <F10> :NERDTreeToggle<CR>
 " Open NERDTree when no files are specified
 " autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Close vim if NERDTree is the only window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
