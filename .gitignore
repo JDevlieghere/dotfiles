@@ -4,6 +4,7 @@
 .vim/autoload/
 .vim/plugged/
 .vim/init.vim
+.vim/.netrwhist
 
 # Python
 *.pyc
