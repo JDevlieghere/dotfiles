@@ -13,14 +13,15 @@ Plug 'nanotech/jellybeans.vim'
 " Plug-ins
 Plug 'chiel92/vim-autoformat'
 Plug 'ciaranm/detectindent'
+Plug 'easymotion/vim-easymotion'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'easymotion/vim-easymotion'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-startify'
 Plug 'moll/vim-bbye'
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'rking/ag.vim'
@@ -81,8 +82,8 @@ set nu                          " Show line numbers
 set colorcolumn=80,120          " Color ruler columns
 
 " Scrolling
-set scrolloff=5                 " Keep at least 5 lines above/below
-set sidescrolloff=5             " Keep at least 5 lines left/right
+set scrolloff=3                 " Keep at least 3 lines above/below
+set sidescrolloff=3             " Keep at least 3 lines left/right
 
 " Searching
 set incsearch                   " Incremental search
@@ -207,7 +208,7 @@ endif
 " Remove Trailing Whitespace
 autocmd BufWritePre * :%s/\s\+$//e
 
-" Watch $MYVIMRC
+" Watch my .vimrc
 augroup reload_myvimrc
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC

@@ -48,4 +48,8 @@ then
       source ~/.localrc
 fi
 
+# Source fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# No duplicates in history
+setopt HIST_IGNORE_ALL_DUPS
