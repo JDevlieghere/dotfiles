@@ -10,27 +10,26 @@ call plug#begin('~/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'nanotech/jellybeans.vim'
 
-" Plugins
-Plug 'airblade/vim-gitgutter'
+" Plug-ins
 Plug 'chiel92/vim-autoformat'
 Plug 'ciaranm/detectindent'
-Plug 'godlygeek/tabular'
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'majutsushi/tagbar'
-Plug 'mattn/gist-vim'
-Plug 'mattn/webapi-vim'
 Plug 'mbbill/undotree'
+Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
-Plug 'plasticboy/vim-markdown'
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'rking/ag.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-latex/vim-latex'
 
 if has("nvim")
     Plug 'benekastah/neomake'
@@ -40,35 +39,11 @@ else
 endif
 
 if has("python")
-    Plug 'valloric/youcompleteme'
+    Plug 'valloric/youcompleteme', { 'do': './install.py -all' }
 endif
 
 if has("lua")
-    Plug 'jeaye/color_coded'
-endif
-
-" Go Development
-if $GODEV
-    Plug 'fatih/vim-go'
-endif
-
-" Haskell Development
-if $HASKELLDEV
-    Plug 'eagletmt/ghcmod-vim'
-    Plug 'eagletmt/neco-ghc'
-    Plug 'lukerandall/haskellmode-vim'
-    Plug 'shougo/vimproc.vim'
-endif
-
-" Rust Development
-if $RUSTDEV
-    Plug 'racer-rust/vim-racer'
-    Plug 'rust-lang/rust.vim'
-endif
-
-" Web Development
-if $WEBDEV
-    Plug 'marijnh/tern_for_vim'
+    Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install' }
 endif
 
 call plug#end()
@@ -85,13 +60,15 @@ highlight clear SignColumn      " Sing column same background as line numbers
 
 " Essentials
 filetype plugin indent on       " Enable file type support
+set encoding=utf-8              " UTF-8 encoding
+set binary                      " Enable binary support
 set hidden                      " Hide buffers
 set showcmd                     " Show current command
 set showmode                    " Show current mode
-set encoding=utf-8              " UTF-8 encoding
-set ruler                       " Show ruler
 set autoread                    " Auto reload
 set ttyfast                     " Fast terminal
+set ruler                       " Show ruler
+set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
 
 " Temp Files
 set nobackup                    " No backup file
@@ -134,11 +111,11 @@ set backspace=indent,eol,start  " Delete over line breaks
 
 " Mouse
 set mousehide                   " Hide mouse when typing
-set mouse=a                     " Enable the use of the mouse
+set mouse=nicr                  " Disable mouse
 
 " Typos
-cnoreabbrev W w
-cnoreabbrev Q q
+cnoreabbrev W w                 " :W
+cnoreabbrev Q q                 " :Q
 
 " Wrapping
 set nowrap                      " No wrapping
@@ -160,19 +137,18 @@ nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 
 " Spell Checking
+set spell
 set spelllang=en_us             " Default language
 set complete+=kspell            " Word completion
-nnoremap <silent> <F7> :set spell!<CR>
-autocmd BufRead,BufNewFile *.md  setlocal spell
-autocmd BufRead,BufNewFile *.tex setlocal spell
-autocmd BufRead,BufNewFile *.tex setlocal spell
-autocmd FileType gitcommit setlocal spell
 
 " Disable Bells
 set noeb vb t_vb=
 
 " Treat underscore as a word boundary
-set iskeyword-=_
+set iskeyword-=_                " '_' is an end of word designator
+set iskeyword-=.                " '.' is an end of word designator
+set iskeyword-=#                " '#' is an end of word designator
+set iskeyword-=-                " '-' is an end of word designator
 
 " Wrapping
 vmap Q gq
@@ -293,24 +269,17 @@ autocmd BufReadPost * :DetectIndent
 nnoremap <F8> :TagbarToggle<CR>
 let g:tagbar_right=1
 let g:tagbar_width=35
-if (has("nvim") == 0)
-    autocmd FileType * nested :call tagbar#autoopen(0)
-endif
 
 " NERDTree
 let NERDTreeWinPos="left"
 let NERDTreeWinSize=35
 let NERDTreeIgnore=['\.job$', '^CVS$', '\.orig', '\~$']
+let NERDTreeShowBookmarks=1
 let g:NERDTreeStatusline="%f"
 nnoremap <F9> :NERDTreeFind<CR>
 nnoremap <F10> :NERDTreeToggle<CR>
-" Open NERDTree when no files are specified
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" Close vim if NERDTree is the only window left
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" YouCompleteMe
+" YouCompleteMe {
 let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 let g:ycm_extra_conf_globlist=['~/.vim/*']
 let g:ycm_always_populate_location_list = 0
@@ -322,6 +291,7 @@ let g:ycm_min_num_identifier_candidate_chars=0
 let g:ycm_min_num_of_chars_for_completion=2
 let g:ycm_open_loclist_on_ycm_diags=1
 let g:ycm_show_diagnostics_ui=1
+let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_filetype_blacklist={
     \ 'vim' : 1,
     \ 'tagbar' : 1,
@@ -336,35 +306,22 @@ let g:ycm_filetype_blacklist={
     \ 'infolog' : 1,
     \ 'mail' : 1
     \}
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 nnoremap <F12> :YcmDiags<CR>
 nnoremap <C-LeftMouse> :YcmCompleter GoTo<CR>
-let g:ycm_semantic_triggers={'haskell' : ['.']}
 
 " Auto Format
 let g:formatdef_clangformat='"clang-format -style=google"'
 
-" LaTeX
-let g:Tex_DefaultTargetFormat='pdf'
-let g:Tex_MultipleCompileFormats='pdf, aux'
-let g:Imap_FreezeImap=1         " Disable mappings
-let Tex_FoldedSections=''       " Disable folding sections
-let Tex_FoldedEnvironments=''   " Disable folding environments
-let Tex_FoldedMisc=''           " Disable folding miscellaneous
-
 " Markdown
 let g:vim_markdown_folding_disabled=1
-
-" Gist
-let g:gist_post_private=1       " Private by default
-let g:gist_detect_filetype=1    " Detect type from the file name
-let g:gist_update_on_write=2    " Only :w! updates a gist
-
-" Haskell
-let g:haddock_browser='chrome'
-let g:necoghc_enable_detailed_browse=1
-let g:haskellmode_completion_ghc=0
-autocmd Bufenter *.hs compiler ghc
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 if has("nvim")
     "Neomake

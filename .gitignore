@@ -20,3 +20,6 @@ Thumbs.db
 
 # Untracked
 .localrc
+
+# bin
+/bin/*/
