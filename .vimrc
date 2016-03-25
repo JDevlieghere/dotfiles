@@ -174,7 +174,7 @@ vmap <C-v> c<ESC>"+p
 imap <C-v> <ESC>"+pa
 
 " Ctags
-set tags=.tags;                 " Find .tags recursively
+set tags=tags;                  " Find tags recursively
 
 " Joining
 set nojoinspaces                " Only one space when joining lines
@@ -237,6 +237,19 @@ function! HighlightRepeats() range
     endfor
 endfunction
 command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
+
+" Switch between source and header files using ctags
+" Rudimentary approach: only supports .cpp and .h
+function! Switch()
+    let baseName=expand('%:t:r')
+    let extension=expand('%:e')
+    if extension =~ 'c'
+        execute "tag " . baseName . '.h'
+    else
+        execute "tag " . baseName . '.cpp'
+    endif
+endfunction
+nmap <silent> <Leader>fs :call Switch()<CR>
 
 " ---------------------------------------------------------------------------- "
 " Plugin Configuration                                                         "
@@ -324,7 +337,7 @@ let g:formatdef_clangformat='"clang-format -style=google"'
 let g:vim_markdown_folding_disabled=1
 
 if has("nvim")
-    "Neomake
+    " Neomake
     nnoremap <F5> :Neomake<CR>
     let g:neomake_javascript_enabled_makers = ['jshint']
     let g:neomake_python_enabled_makers = ['pylint']
