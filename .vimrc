@@ -17,7 +17,7 @@ Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-sneak'
+Plug 'easymotion/vim-easymotion'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
