@@ -42,7 +42,7 @@ else
 endif
 
 if has("python")
-    Plug 'valloric/youcompleteme', { 'do': './install.py -all' }
+    Plug 'valloric/youcompleteme', { 'do': './install.py --all' }
 endif
 
 if has("lua")
