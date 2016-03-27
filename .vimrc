@@ -290,7 +290,6 @@ let g:tagbar_width=35
 let NERDTreeWinPos="left"
 let NERDTreeWinSize=35
 let NERDTreeIgnore=['\.job$', '^CVS$', '\.orig', '\~$']
-let NERDTreeShowBookmarks=1
 let g:NERDTreeStatusline="%f"
 nnoremap <F9> :NERDTreeFind<CR>
 nnoremap <F10> :NERDTreeToggle<CR>
