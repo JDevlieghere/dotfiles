@@ -342,6 +342,10 @@ let g:vim_markdown_folding_disabled=1
 " Startify
 set viminfo='100,n$HOME/.vim/files/info/viminfo
 
+" EasyMotion
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
+
 if has("nvim")
     " Neomake
     nnoremap <F5> :Neomake<CR>
