@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged')
 " Color Schemes
 Plug 'altercation/vim-colors-solarized'
 Plug 'nanotech/jellybeans.vim'
+Plug 'chriskempson/base16-vim'
 
 " Plug-ins
 Plug 'chiel92/vim-autoformat'
@@ -58,8 +59,11 @@ call plug#end()
 " Colors & Syntax
 syntax enable                   " Enable syntax highlighting
 set background=dark             " Dark background color
-colorscheme solarized           " Set color scheme
 highlight clear SignColumn      " Sing column same background as line numbers
+
+" Color Scheme
+colorscheme $COLORSCHEME
+
 
 " Essentials
 filetype plugin indent on       " Enable file type support
@@ -259,7 +263,7 @@ nmap <silent> <Leader>fs :call Switch()<CR>
 " ---------------------------------------------------------------------------- "
 
 " Solarized
-let g:solarized_termtrans=1
+"let g:solarized_termtrans=1
 
 " Close buffer
 nnoremap <silent> <F4>   :Bdelete<CR>
