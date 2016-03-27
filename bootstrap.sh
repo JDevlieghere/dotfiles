@@ -32,11 +32,11 @@ symlink(){
 info "Installing Fonts"
 installFonts
 
-info "Installing Software"
-curl -sL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-git clone https://github.com/gmarik/Vundle.vim.git "$HOME"/.vim/bundle/Vundle.vim
-git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME"/.fzf
+info "Linking Directories"
+symlink "$DOTFILES"/.xmonad "$HOME"/.xmonad
+symlink "$DOTFILES"/bin "$HOME"/bin
+symlink "$DOTFILES"/.vim "$HOME"/.vim
+symlink "$DOTFILES"/.vim "$HOME"/.config/nvim
 
 info "Linking Dotfiles"
 symlink "$DOTFILES"/.aliases "$HOME"/.aliases
@@ -46,15 +46,14 @@ symlink "$DOTFILES"/.functions "$HOME"/.functions
 symlink "$DOTFILES"/.gitconfig "$HOME"/.gitconfig
 symlink "$DOTFILES"/.hgrc "$HOME"/.hgrc
 symlink "$DOTFILES"/.tmux.conf "$HOME"/.tmux.conf
-symlink "$DOTFILES"/.vim "$HOME"/.vim
 symlink "$DOTFILES"/.vimrc "$HOME"/.vimrc
-symlink "$DOTFILES"/.vim "$HOME"/.config/nvim
 symlink "$DOTFILES"/.vimrc "$HOME"/.config/nvim/init.vim
 symlink "$DOTFILES"/.xsession "$HOME"/.xsession
 symlink "$DOTFILES"/.zshrc "$HOME"/.zshrc
 symlink "$DOTFILES"/.gdbinit "$HOME"/.gdbinit
 
-info "Linking Directories"
-symlink "$DOTFILES"/.irssi "$HOME"/.irssi
-symlink "$DOTFILES"/.xmonad "$HOME"/.xmonad
-symlink "$DOTFILES"/bin "$HOME"/bin
+info "Installing Software"
+curl -sL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME"/.fzf
+

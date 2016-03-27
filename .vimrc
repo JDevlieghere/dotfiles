@@ -42,7 +42,7 @@ else
 endif
 
 if has("python")
-    Plug 'valloric/youcompleteme', { 'do': './install.py --all' }
+    Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer --gocode-completer --tern-completer --racer-completer' }
 endif
 
 if has("lua")
@@ -338,6 +338,9 @@ let g:formatdef_clangformat='"clang-format -style=google"'
 
 " Markdown
 let g:vim_markdown_folding_disabled=1
+
+" Startify
+set viminfo='100,n$HOME/.vim/files/info/viminfo
 
 if has("nvim")
     " Neomake
