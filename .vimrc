@@ -262,9 +262,6 @@ nmap <silent> <Leader>fs :call Switch()<CR>
 " Plugin Configuration                                                         "
 " ---------------------------------------------------------------------------- "
 
-" Solarized
-"let g:solarized_termtrans=1
-
 " Close buffer
 nnoremap <silent> <F4>   :Bdelete<CR>
 nmap <silent> <Leader>bd :Bdelete<CR>
