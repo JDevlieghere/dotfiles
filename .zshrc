@@ -31,6 +31,7 @@ alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
 # Source dotfiles
+source ~/.colorscheme
 source ~/.aliases
 source ~/.exports
 source ~/.functions
@@ -42,14 +43,14 @@ then
   ssh-add
 fi
 
-# Configuration not part of the repository
-if [[ -a ~/.localrc ]]
-then
-      source ~/.localrc
-fi
-
 # Source fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # No duplicates in history
 setopt HIST_IGNORE_ALL_DUPS
+
+# Configuration not part of the repository
+if [[ -a ~/.localrc ]]
+then
+      source ~/.localrc
+fi

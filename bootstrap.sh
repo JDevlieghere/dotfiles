@@ -41,6 +41,7 @@ symlink "$DOTFILES"/.vim "$HOME"/.config/nvim
 info "Linking Dotfiles"
 symlink "$DOTFILES"/.aliases "$HOME"/.aliases
 symlink "$DOTFILES"/.compton.conf "$HOME"/.compton.conf
+symlink "$DOTFILES"/.colorscheme "$HOME"/.colorscheme
 symlink "$DOTFILES"/.exports "$HOME"/.exports
 symlink "$DOTFILES"/.functions "$HOME"/.functions
 symlink "$DOTFILES"/.gitconfig "$HOME"/.gitconfig
