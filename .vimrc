@@ -59,11 +59,10 @@ call plug#end()
 " Colors & Syntax
 syntax enable                   " Enable syntax highlighting
 set background=dark             " Dark background color
-highlight clear SignColumn      " Sing column same background as line numbers
 
 " Color Scheme
 colorscheme $COLORSCHEME
-
+highlight clear SignColumn      " Sing column same background as line numbers
 
 " Essentials
 filetype plugin indent on       " Enable file type support
