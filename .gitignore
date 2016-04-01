@@ -25,3 +25,6 @@ Thumbs.db
 
 # bin
 /bin/*/
+
+# weechat
+.weechat/logs/
