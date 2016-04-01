@@ -36,7 +36,8 @@ info "Linking Directories"
 symlink "$DOTFILES"/.xmonad "$HOME"/.xmonad
 symlink "$DOTFILES"/bin "$HOME"/bin
 symlink "$DOTFILES"/.vim "$HOME"/.vim
-symlink "$DOTFILES"/.vim "$HOME"/.config/nvim
+symlink "$DOTFILES"/.vim "$HOME"/.vim
+symlink "$DOTFILES"/.weechat "$HOME"/.weechat
 
 info "Linking Dotfiles"
 symlink "$DOTFILES"/.aliases "$HOME"/.aliases
