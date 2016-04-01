@@ -28,3 +28,4 @@ Thumbs.db
 
 # weechat
 .weechat/logs/
+.weechat/sec.conf
