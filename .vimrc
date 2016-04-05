@@ -34,6 +34,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 
 if has("nvim")
     Plug 'benekastah/neomake'
@@ -333,13 +334,17 @@ nnoremap <F12> :YcmDiags<CR>
 nnoremap <C-LeftMouse> :YcmCompleter GoTo<CR>
 
 " Auto Format
-let g:formatdef_clangformat='"clang-format -style=google"'
+let g:formatdef_clangformat='"clang-format -style=file"'
 
 " Markdown
 let g:vim_markdown_folding_disabled=1
 
 " Startify
-set viminfo='100,n$HOME/.vim/files/info/viminfo
+if has("nvim")
+    set viminfo+=n~/.nvim/tmpfiles/viminfo
+else
+    set viminfo='100,n$HOME/.vim/files/info/viminfo
+endif
 
 " EasyMotion
 nmap s <Plug>(easymotion-s2)
