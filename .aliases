@@ -34,4 +34,4 @@ alias bld="./configure && make -j && make install"
 alias localbld="./configure --prefix=$HOME/usr && make -j && make install"
 
 # Clang Format
-alias google-format="find . -name '*.c' -o -name '*.cpp' -o -name '*.cxx' -o -name '*.h' -o -name '*.hpp' -print0 | xargs -0 clang-format -i -style=Google"
+alias cformat='clang-format -style=file -i $(find . -name \*.h -print -o -name \*.cpp -print)'

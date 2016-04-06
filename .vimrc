@@ -144,9 +144,9 @@ nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 
 " Spell Checking
-set spell
 set spelllang=en_us             " Default language
 set complete+=kspell            " Word completion
+map <F7> :setlocal spell!<CR>   " Toggle spell check
 
 " Disable Bells
 set noeb vb t_vb=
