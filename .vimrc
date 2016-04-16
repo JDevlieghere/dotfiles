@@ -340,6 +340,7 @@ let g:formatdef_clangformat='"clang-format -style=file"'
 let g:vim_markdown_folding_disabled=1
 
 " Startify
+autocmd User Startified setlocal buftype=
 if has("nvim")
     set viminfo+=n~/.nvim/tmpfiles/viminfo
 else

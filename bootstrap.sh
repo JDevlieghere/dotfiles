@@ -22,9 +22,9 @@ doSync() {
 }
 
 doLink() {
-    mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
-    ln -s ~/.vim $XDG_CONFIG_HOME/nvim
-    ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+    mkdir -p ~/.config
+    ln -s ~/.vim ~/nvim
+    ln -s ~/.vimrc ~/nvim/init.vim
 }
 
 doInstall() {
