@@ -31,7 +31,6 @@ alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
 # Source dotfiles
-source ~/.colorscheme
 source ~/.aliases
 source ~/.exports
 source ~/.functions

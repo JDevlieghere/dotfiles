@@ -30,3 +30,4 @@ Thumbs.db
 .weechat/logs/
 .weechat/sec.conf
 .weechat/script/
+.weechat/certs/
