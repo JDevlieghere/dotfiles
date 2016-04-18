@@ -54,4 +54,12 @@ doAll() {
     doFonts
 }
 
-doAll
+if [ "$1" == "--sync" ]; then
+    doSync
+elif [ "$1" == "--install" ]; then
+    doInstall
+elif [ "$1" == "--fonts" ]; then
+    doFonts
+else
+    doAll
+fi
