@@ -341,6 +341,7 @@ let g:vim_markdown_folding_disabled=1
 
 " Startify
 autocmd User Startified setlocal buftype=
+let g:startify_change_to_dir = 0
 if has("nvim")
     set viminfo+=n~/.nvim/tmpfiles/viminfo
 else
