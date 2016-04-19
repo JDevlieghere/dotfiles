@@ -4,7 +4,7 @@ PREFIX="/opt/llvm"
 TYPE="Release"
 
 # Create directories
-mkdir ~/clang-llvm && cd ~/clang-llvm
+mkdir ~/clang-llvm; cd ~/clang-llvm
 
 # Clone the source tree
 git clone http://llvm.org/git/llvm.git
@@ -20,7 +20,7 @@ git checkout "$BRANCH"
 
 # Build
 cd ~/clang-llvm
-mkdir build && cd build
+mkdir build; cd build
 cmake -G Ninja ../llvm -DCMAKE_INSTALL_PREFIX="$PREFIX" -DCMAKE_BUILD_TYPE="$TYPE"
 ninja
 

@@ -20,6 +20,7 @@ brew install htop
 brew install lua
 brew install macvim --with-override-system-vim
 brew install neovim/neovim/neovim
+brew install ninja
 brew install node
 brew install python
 brew install rust
