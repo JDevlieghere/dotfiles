@@ -1,4 +1,4 @@
-# Make sure we have the last version
+# Make sure we have the latest version
 pip install --upgrade pip
 
 # Install packages
