@@ -24,6 +24,7 @@ brew install node
 brew install python
 brew install rust
 brew install tmux
+brew install valgrind
 brew install weechat --with-perl --with-python
 brew install wget --with-iri
 brew install xz
