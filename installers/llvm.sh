@@ -8,14 +8,17 @@ mkdir ~/clang-llvm; cd ~/clang-llvm
 
 # Clone the source tree
 git clone http://llvm.org/git/llvm.git
+cd llvm
 git checkout "$BRANCH"
 
-cd llvm/tools
+cd tools
 git clone http://llvm.org/git/clang.git
+cd clang
 git checkout "$BRANCH"
 
-cd clang/tools
+cd tools
 git clone http://llvm.org/git/clang-tools-extra.git extra
+cd extra
 git checkout "$BRANCH"
 
 # Build
