@@ -5,7 +5,7 @@
 .vim/plugged/
 .vim/init.vim
 .vim/.netrwhist
-.vim/files/info/
+.vim/files/info/.gitkeep
 
 # Python
 *.pyc
