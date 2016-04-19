@@ -15,10 +15,14 @@ doUpdate() {
 
 doSync() {
     info "Syncing"
-    rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" \
-        --exclude "README.md" --exclude ".gitignore"  \
-        --filter=':- .gitignore' -avh --no-perms . ~;
-    source ~/.zsh_rc;
+    rsync --exclude ".git/" \
+        --exclude "installers/" \
+        --exclude ".DS_Store"  \
+        --exclude "bootstrap.sh" \
+        --exclude "README.md" \
+        --exclude ".gitignore" \
+        --filter=':- .gitignore' \
+        -avh --no-perms "$DOTFILES" ~;
 }
 
 doLink() {
@@ -32,6 +36,12 @@ doInstall() {
     curl -sL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+
+    if [ "$(uname)" == "Darwin" ]; then
+        source "$DOTFILES/installers/brew.sh"
+    fi
+
+    source "$DOTFILES/installers/python.sh"
 }
 
 doFonts() {
@@ -46,16 +56,26 @@ doFonts() {
     find "$DOTFILES/fonts/" -name "*.[o,t]tf" -type f | while read file; do cp -v "$file" "$fonts"; done
 }
 
+doConfig() {
+    info "Configuring"
+    source ~/.zshrc;
+    if [ "$(uname)" == "Darwin" ]; then
+        source "$DOTFILES/.osx"
+    fi
+}
+
 doAll() {
     doUpdate
     doSync
     doLink
     doInstall
     doFonts
+    doConfig
 }
 
 if [ "$1" == "--sync" ]; then
     doSync
+    doConfig
 elif [ "$1" == "--install" ]; then
     doInstall
 elif [ "$1" == "--fonts" ]; then
