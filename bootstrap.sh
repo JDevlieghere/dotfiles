@@ -22,7 +22,7 @@ doSync() {
         --exclude "README.md" \
         --exclude ".gitignore" \
         --filter=':- .gitignore' \
-        -avh --no-perms "$DOTFILES" ~;
+        -avh --no-perms . ~;
 }
 
 doLink() {
