@@ -25,6 +25,9 @@ export RUST_SRC_PATH=/usr/local/src/rust/src
 # Haskell
 export PATH=$PATH:/home/jdevlieghere/.cabal/bin/
 
+# LLVM
+export PATH=$PATH:/opt/llvm/bin
+
 # Local libraries
 export PATH=$PATH:$HOME/usr/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib
