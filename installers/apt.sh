@@ -9,6 +9,7 @@ sudo apt-get install -y git
 sudo apt-get install -y htop
 sudo apt-get install -y ncurses
 sudo apt-get install -y nodejs
+sudo apt-get install -y python
 sudo apt-get install -y scrot
 sudo apt-get install -y tmux
 sudo apt-get install -y vim
