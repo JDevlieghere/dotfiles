@@ -13,6 +13,7 @@ brew install cmake
 brew install coreutils
 brew install findutils
 brew install gcc --without-multilib
+brew install gdb
 brew install git
 brew install go
 brew install graphviz
