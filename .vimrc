@@ -103,9 +103,9 @@ vnoremap // y/<C-R>"<CR>        " Search for visual selection
 set smarttab                    " Better tabs
 set smartindent                 " Inserts new level of indentation
 set autoindent                  " Copy indentation from previous line
-set tabstop=4                   " Columns a tab counts for
-set softtabstop=4               " Columns a tab inserts in insert mode
-set shiftwidth=4                " Columns inserted with the reindent operations
+set tabstop=2                   " Columns a tab counts for
+set softtabstop=2               " Columns a tab inserts in insert mode
+set shiftwidth=2                " Columns inserted with the reindent operations
 set shiftround                  " Always indent by multiple of shiftwidth
 set expandtab                   " Always use spaces instead of tabs
 
@@ -274,7 +274,7 @@ nnoremap <silent> <C-b> :Buffers<CR>
 " Airline
 set laststatus=2                " Alwasy display statusline
 let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#enabled=0
 let g:airline#extensions#tabline#fnamemod=':t'
 
 " Detect Indent
