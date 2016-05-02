@@ -83,6 +83,7 @@ set noswapfile                  " No swap file
 
 " Line Numbers
 set nu                          " Show line numbers
+set rnu                         " Relative line numbers
 
 " Rulers
 set colorcolumn=80,120          " Color ruler columns
