@@ -27,8 +27,8 @@ doSync() {
 
 doLink() {
     mkdir -p ~/.config
-    ln -s ~/.vim ~/nvim
-    ln -s ~/.vimrc ~/nvim/init.vim
+    ln -s ~/.vim ~/.config/nvim
+    ln -s ~/.vimrc ~/.config/nvim/init.vim
 }
 
 doInstall() {
@@ -75,6 +75,7 @@ doAll() {
 
 if [ "$1" == "--sync" ]; then
     doSync
+    doLink
     doConfig
 elif [ "$1" == "--install" ]; then
     doInstall
