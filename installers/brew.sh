@@ -9,8 +9,10 @@ fi
 
 # Install formulae
 brew install binutils
+brew install cloc
 brew install cmake
 brew install coreutils
+brew install doxygent
 brew install findutils
 brew install gcc --without-multilib
 brew install gdb
