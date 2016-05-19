@@ -25,7 +25,9 @@ Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'mhinz/vim-startify'
 Plug 'moll/vim-bbye'
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }
 Plug 'rking/ag.vim'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdcommenter'
@@ -34,7 +36,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 
 if has("nvim")
     Plug 'benekastah/neomake'
@@ -135,6 +136,7 @@ set wrapmargin=0                " Turn off physical line wrapping
 nmap <leader>l :set list!<CR>   " Toggle hidden characters
 set nolist                      " Hide by default
 set listchars=tab:▸\ ,trail:-,extends:>,precedes:<,nbsp:⎵,eol:¬
+set showbreak=↪
 
 " Completion Menu
 set completeopt=longest,menuone " Inserts the longest common text and
