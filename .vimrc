@@ -287,8 +287,12 @@ autocmd BufReadPost * :DetectIndent
 
 " Tagbar
 nnoremap <F8> :TagbarToggle<CR>
+let g:tagbar_autofocus=0
 let g:tagbar_right=1
 let g:tagbar_width=35
+if !has("nvim")
+    autocmd VimEnter * nested :TagbarOpen
+endif
 
 " NERDTree
 let NERDTreeWinPos="left"
