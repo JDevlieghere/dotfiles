@@ -58,8 +58,9 @@ doFonts() {
 
 doConfig() {
     info "Configuring"
-    source ~/.zshrc;
+    exec /bin/zsh -l
     if [ "$(uname)" == "Darwin" ]; then
+        printf "Configuring OSX"
         source "$DOTFILES/.osx"
     fi
 }
