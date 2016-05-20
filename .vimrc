@@ -141,7 +141,6 @@ set wrapmargin=0                " Turn off physical line wrapping
 nmap <leader>l :set list!<CR>   " Toggle hidden characters
 set nolist                      " Hide by default
 set listchars=tab:▸\ ,trail:-,extends:>,precedes:<,nbsp:⎵,eol:¬
-set showbreak=↪
 
 " Completion Menu
 set completeopt=longest,menuone " Inserts the longest common text and

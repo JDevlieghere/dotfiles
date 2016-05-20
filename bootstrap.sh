@@ -57,12 +57,13 @@ doFonts() {
 }
 
 doConfig() {
-    info "Configuring"
-    exec /bin/zsh -l
+    info "Configuring?"
     if [ "$(uname)" == "Darwin" ]; then
-        printf "Configuring OSX"
+        echo "Configuring OSX"
         source "$DOTFILES/.osx"
     fi
+    echo "Reloading ZSH"
+    exec /bin/zsh -l
 }
 
 doAll() {
@@ -77,7 +78,6 @@ doAll() {
 if [ "$1" == "--sync" ]; then
     doSync
     doLink
-    doConfig
 elif [ "$1" == "--install" ]; then
     doInstall
 elif [ "$1" == "--fonts" ]; then
@@ -85,3 +85,5 @@ elif [ "$1" == "--fonts" ]; then
 else
     doAll
 fi
+
+doConfig
