@@ -77,6 +77,7 @@ set autoread                    " Auto reload
 set ttyfast                     " Fast terminal
 set ruler                       " Show ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
+set cm=blowfish                 " Better crypto
 
 " Temp Files
 set nobackup                    " No backup file
@@ -84,10 +85,14 @@ set noswapfile                  " No swap file
 
 " Line Numbers
 set nu                          " Show line numbers
-set rnu                         " Relative line numbers
+"set rnu                        " Relative line numbers
 
 " Rulers
-set colorcolumn=80,120          " Color ruler columns
+set colorcolumn=80,120          " Show ruler columns
+
+" Cursor
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
 
 " Scrolling
 set scrolloff=3                 " Keep at least 3 lines above/below
