@@ -1,1 +1,23 @@
+# Always look in all compile units
 settings set target.inline-breakpoint-strategy always
+
+# Breakpoint shortcuts
+#   break on function/method/selector: b -n name
+#   break on C/C++ method: b -M method
+#   break on selector: b -S selector:here:
+#   break on address: b -a 0xfeedface
+command alias b breakpoint set
+command alias bd breakpoint disable
+command alias be breakpoint enable
+command alias bdel breakpoint delete
+command alias bcommand breakpoint command add
+command alias commands breakpoint command list
+
+# Jump aliases
+#   jump 0xfeedface
+command alias jump register write pc
+command alias jmp register write pc
+command alias j register write pc
+
+# Return alias
+command alias return thread return
