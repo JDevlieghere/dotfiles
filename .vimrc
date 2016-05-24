@@ -77,7 +77,11 @@ set autoread                    " Auto reload
 set ttyfast                     " Fast terminal
 set ruler                       " Show ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
-set cm=blowfish                 " Better crypto
+
+" Crypto
+if !has("nvim")
+    set cm=blowfish
+endif
 
 " Temp Files
 set nobackup                    " No backup file
