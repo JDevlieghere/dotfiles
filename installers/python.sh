@@ -7,3 +7,4 @@ pip install haxor-news
 pip install numpy
 pip install pandas
 pip install scipy
+pip install voltron
