@@ -1,0 +1,24 @@
+#voltron.session
+
+# Split horizontally into two halves
+splitw -h -p 50
+
+# Split right half vertically
+splitw -v -p 50
+
+# Split top right half
+selectp -t 1
+splitw -v -p 20
+
+# Split bottom right half
+selectp -t 3
+splitw -v -p 50
+
+# Open Voltron
+send -t 1 C-z 'voltron view disasm' Enter # Open disassembly view
+send -t 2 C-z 'voltron view reg -o' Enter # Open registers view
+send -t 3 C-z 'voltron view stack' Enter  # Open Stack view
+send -t 4 C-z 'voltron view bt' Enter     # Open backtrace view
+
+# Select left pane
+selectp -t 0
