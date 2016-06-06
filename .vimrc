@@ -23,7 +23,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
-Plug 'mhinz/vim-startify'
 Plug 'moll/vim-bbye'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
@@ -31,7 +30,7 @@ Plug 'rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }
 Plug 'rking/ag.vim'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -208,6 +207,9 @@ if has('persistent_undo')
     set undoreload=10000        " Max lines to save for undo on a buffer reload
 endif
 
+" NASM
+au BufRead,BufNewFile *.nasm set filetype=nasm
+
 " GUI
 if has("gui_running")
     set vb t_vb=
@@ -309,6 +311,11 @@ let NERDTreeIgnore=['\.job$', '^CVS$', '\.orig', '\~$']
 let g:NERDTreeStatusline="%f"
 nnoremap <F9> :NERDTreeFind<CR>
 nnoremap <F10> :NERDTreeToggle<CR>
+" Open NERDTree when vim is started without file
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Close vim if the only window left is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " YouCompleteMe {
 let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
@@ -355,15 +362,6 @@ let g:formatdef_clangformat='"clang-format -style=file"'
 
 " Markdown
 let g:vim_markdown_folding_disabled=1
-
-" Startify
-autocmd User Startified setlocal buftype=
-let g:startify_change_to_dir = 0
-if has("nvim")
-    set viminfo+=n~/.nvim/tmpfiles/viminfo
-else
-    set viminfo='100,n$HOME/.vim/files/info/viminfo
-endif
 
 " EasyMotion
 nmap s <Plug>(easymotion-s2)
