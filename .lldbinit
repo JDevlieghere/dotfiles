@@ -23,4 +23,4 @@ command alias j register write pc
 command alias return thread return
 
 # Voltron
-command script import /usr/local/lib/python2.7/site-packages/voltron/entry.py
+command script import ~/voltron/voltron/entry.py

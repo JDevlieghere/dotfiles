@@ -1,0 +1,3 @@
+source ~/voltron/voltron/entry.py
+voltron init
+set disassembly-flavor intel
