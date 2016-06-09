@@ -93,9 +93,9 @@ set nu                          " Show line numbers
 " Rulers
 set colorcolumn=80,120          " Show ruler columns
 
-" Cursor
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorline
+" Cursor Line
+"autocmd WinEnter * setlocal cursorline
+"autocmd WinLeave * setlocal nocursorline
 
 " Scrolling
 set scrolloff=3                 " Keep at least 3 lines above/below

@@ -26,9 +26,11 @@ doSync() {
 }
 
 doLink() {
-    mkdir -p ~/.config
-    ln -s ~/.vim ~/.config/nvim
-    ln -s ~/.vimrc ~/.config/nvim/init.vim
+    if [ ! -e ~/.config/nvim ]; then
+        mkdir -p ~/.config
+        ln -s ~/.vim ~/.config/nvim
+        ln -s ~/.vimrc ~/.config/nvim/init.vim
+    fi
 }
 
 doInstall() {

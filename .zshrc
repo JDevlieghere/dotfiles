@@ -2,7 +2,7 @@
 export ZSH=$HOME/.oh-my-zsh
 
 # Theme
-ZSH_THEME="mh"
+ZSH_THEME="ys"
 
 # How often to auto-update (in days)
 export UPDATE_ZSH_DAYS=7
