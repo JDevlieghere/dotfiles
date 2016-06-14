@@ -35,3 +35,6 @@ alias localbld="./configure --prefix=$HOME/usr && make -j && make install"
 
 # Clang Format
 alias cformat='clang-format -style=file -i $(find . -name \*.h -print -o -name \*.cpp -print)'
+
+# ccache
+alias ccache-enable='export PATH=/usr/local/opt/ccache/libexec:/usr/lib/ccache:$PATH;echo "ccache enabled"'

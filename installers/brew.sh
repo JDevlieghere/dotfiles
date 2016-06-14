@@ -9,6 +9,7 @@ fi
 
 # Install formulae
 brew install binutils
+brew install ccache
 brew install cloc
 brew install cmake
 brew install coreutils
