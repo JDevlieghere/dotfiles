@@ -354,8 +354,8 @@ autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 nnoremap <F12> :YcmDiags<CR>
 nnoremap <silent> <Leader>yd :YcmDiags<CR>
-nnoremap <silent> <Leader>yf :YcmCompleter FixIt<CR>
-nnoremap <silent> <Leader>yg :YcmCompleter GoTo<CR>
+nnoremap <silent> <Leader>fi :YcmCompleter FixIt<CR>
+nnoremap <silent> <Leader>gt :YcmCompleter GoTo<CR>
 
 " Auto Format
 let g:formatdef_clangformat='"clang-format -style=file"'
