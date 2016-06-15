@@ -12,6 +12,7 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'chriskempson/base16-vim'
 
 " Plug-ins
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'chiel92/vim-autoformat'
 Plug 'ciaranm/detectindent'
 Plug 'easymotion/vim-easymotion'
@@ -25,16 +26,24 @@ Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }
 Plug 'rking/ag.vim'
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+" Rust
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+
+" Haskell
+Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
+Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
+Plug 'mpickering/hlint-refactor-vim', { 'for': 'haskell' }
 
 if has("nvim")
     Plug 'benekastah/neomake'
