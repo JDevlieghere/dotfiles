@@ -284,8 +284,8 @@ nmap <silent> <Leader>fs :call Switch()<CR>
 " ---------------------------------------------------------------------------- "
 
 " Close buffer
-nmap <silent> <Leader>bd :Bdelete<CR>
-nmap <silent> <Leader>bd! :Bdelete!<CR>
+nnoremap <silent> <Leader>q :Bdelete<CR>
+nnoremap <silent> <Leader>bd :Bdelete!<CR>
 
 " FZF
 let g:fzf_buffers_jump=1
