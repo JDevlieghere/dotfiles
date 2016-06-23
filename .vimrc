@@ -185,7 +185,6 @@ nnoremap <silent> <Tab> :bnext<CR>
 nnoremap <silent> <S-Tab> :bprevious<CR>
 
 " Close window
-nnoremap <silent> <F3>  <C-w>q
 nmap <silent> <Leader>wd <C-w>q
 
 " Splits
@@ -285,8 +284,8 @@ nmap <silent> <Leader>fs :call Switch()<CR>
 " ---------------------------------------------------------------------------- "
 
 " Close buffer
-nnoremap <silent> <F4>   :Bdelete<CR>
 nmap <silent> <Leader>bd :Bdelete<CR>
+nmap <silent> <Leader>bd! :Bdelete!<CR>
 
 " FZF
 let g:fzf_buffers_jump=1
