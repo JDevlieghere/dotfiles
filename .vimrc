@@ -22,7 +22,7 @@ Plug 'jdevlieghere/llvm.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
-Plug 'mbbill/undotree'
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
