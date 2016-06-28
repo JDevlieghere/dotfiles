@@ -62,7 +62,7 @@ doConfig() {
     info "Configuring"
     if [ "$(uname)" == "Darwin" ]; then
         echo "Configuring OSX"
-        source "$DOTFILES/.osx"
+        source "$DOTFILES/.macos"
     fi
     echo "Configuring global gitignore"
     git config --global core.excludesfile ~/.gitignore_global

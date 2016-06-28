@@ -12,7 +12,12 @@
 	ui = auto
 	branch = auto
 	diff = auto
-	status = auto
+[commit]
+	gpgsign = true
+[diff "bin"]
+	textconv = hexdump -v -C
+[help]
+	autocorrect = 1
 [alias]
 	aa = add -A
 	ca = commit -vam
