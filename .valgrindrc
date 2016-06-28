@@ -1,0 +1,6 @@
+--memcheck:leak-check=full 
+--memcheck:show-reachable=yes 
+--memcheck:track-origins=yes
+--callgrind:compress-strings=no
+--cachegrind:cache-sim=yes
+--cachegrind:branch-sim=yes
