@@ -59,11 +59,13 @@ doFonts() {
 }
 
 doConfig() {
-    info "Configuring?"
+    info "Configuring"
     if [ "$(uname)" == "Darwin" ]; then
         echo "Configuring OSX"
         source "$DOTFILES/.osx"
     fi
+    echo "Configuring global gitignore"
+    git config --global core.excludesfile ~/.gitignore_global
     echo "Reloading ZSH"
     exec /bin/zsh -l
 }
