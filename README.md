@@ -1,9 +1,9 @@
 # Dotfiles
 
-This is my dotfile repository. There are many like it, but this one is mine.
+> This is my dotfile repository. There are many like it, but this one is mine.
 
 I did my best to make everythings work as transparently as possible under both Linux and macOS. 
-Feel free to try out my dotfiles or use them as inspiration!
+**Feel free to try out my dotfiles or use them as inspiration!** If you have a suggestion, improvement or question, don't hesitate to open an issue.
 
 ## Screenshot
 
@@ -23,7 +23,7 @@ cd dotfiles
 
 ### Vim & YouCompleteMe
 
-Vim is my editor of choice. For C++ development, I rely heavily on [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) for which I created [a better .ycm_extra_conf.py](https://jonasdevlieghere.com/a-better-youcompleteme-config/). 
+Vim is my editor of choice. Most of my [.vimrc](https://github.com/JDevlieghere/dotfiles/blob/master/.vimrc) should be self-explanatory. For C++ development, I rely heavily on [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) for which I created [a better .ycm_extra_conf.py](https://jonasdevlieghere.com/a-better-youcompleteme-config/). 
 
 ## macOS
 
