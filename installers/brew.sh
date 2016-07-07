@@ -8,6 +8,7 @@ else
 fi
 
 # Install formulae
+brew install ag
 brew install binutils
 brew install ccache
 brew install cloc
