@@ -1,5 +1,5 @@
 # LLVM Configuration
-BRANCH="release_38"
+BRANCH="$1"
 PREFIX="/opt/llvm"
 TYPE="Release"
 
