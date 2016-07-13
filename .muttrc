@@ -81,7 +81,19 @@ set editor = "vim"        					  # Use terminal Vim to compose email.
 # Account Settings ------------------------------------------------------------
 set from = "jonas@devlieghere.com"
 set realname = "Jonas Devlieghere"
+
 source ~/.account.muttrc
+
+# Gmail -----------------------------------------------------------------------
+set smtp_authenticators = 'gssapi:login'
+set folder      = "imaps://imap.gmail.com:993"
+set spoolfile   = "+INBOX"
+set postponed   = "+[Gmail]/Drafts"
+set record      = "+[Gmail]/'Sent Mail'"
+
+# Misc ------------------------------------------------------------------------
+set imap_keepalive = 300              # keep alive by polling
+unset imap_passive                    # open new connection automatically
 
 # Solarized Dark --------------------------------------------------------------
 
