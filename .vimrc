@@ -56,10 +56,6 @@ if has("python")
     Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer --gocode-completer --tern-completer --racer-completer' }
 endif
 
-if has("lua")
-    Plug 'jeaye/color_coded', { 'do': 'cmake . && make && make install' }
-endif
-
 call plug#end()
 
 " ---------------------------------------------------------------------------- "
