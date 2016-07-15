@@ -36,6 +36,9 @@ export LD_RUN_PATH=$LD_RUN_PATH:$HOME/usr/lib
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/usr/include
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/usr/include
 
+# Ccache
+export PATH=/usr/local/opt/ccache/libexec:/usr/lib/ccache:$PATH
+
 export FZF_DEFAULT_OPTS='
 --color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254
 --color info:254,prompt:37,spinner:108,pointer:235,marker:235
