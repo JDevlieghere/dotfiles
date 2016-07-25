@@ -35,3 +35,6 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+# [cfe-dev] clang++ build from source is not able to find C++ headers
+sudo ln -s /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 /usr/include/c++/v1
