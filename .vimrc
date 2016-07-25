@@ -81,6 +81,7 @@ set autoread                    " Auto reload
 set ttyfast                     " Fast terminal
 set ruler                       " Show ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
+set nofoldenable                " disable folding
 
 " Crypto
 if !has("nvim")
@@ -99,8 +100,7 @@ set nu                          " Show line numbers
 set colorcolumn=80,120          " Show ruler columns
 
 " Cursor Line
-"autocmd WinEnter * setlocal cursorline
-"autocmd WinLeave * setlocal nocursorline
+set cursorline
 
 " Scrolling
 set scrolloff=3                 " Keep at least 3 lines above/below
@@ -363,9 +363,6 @@ nnoremap <silent> <Leader>gt :YcmCompleter GoTo<CR>
 
 " Auto Format
 let g:formatdef_clangformat='"clang-format -style=file"'
-
-" Markdown
-let g:vim_markdown_folding_disabled=1
 
 " EasyMotion
 nmap s <Plug>(easymotion-s2)
