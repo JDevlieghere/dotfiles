@@ -27,7 +27,6 @@ Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }
-Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
