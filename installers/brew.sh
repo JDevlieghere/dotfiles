@@ -14,7 +14,7 @@ brew install ccache
 brew install cloc
 brew install cmake
 brew install coreutils
-brew install doxygent
+brew install doxygen
 brew install findutils
 brew install gcc --without-multilib
 brew install gdb
