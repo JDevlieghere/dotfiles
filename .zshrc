@@ -13,43 +13,17 @@ ENABLE_CORRECTION="true"
 # Command execution time stamp shown in the history command output
 HIST_STAMPS="yyyy-mm-dd"
 
-# Plugins to load
+# No duplicates in history
+setopt HIST_IGNORE_ALL_DUPS
 
 # User configuration
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/texbin:$HOME/bin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 
-# Language environment
-export LANG=en_US.UTF-8
-
-# SSH
-export SSH_KEY_PATH="~/.ssh/id_rsa"
-
-# Personal aliases
+# Oh-My-Zsh aliases
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
-# Source dotfiles
-source ~/.aliases
-source ~/.exports
-source ~/.functions
-
-# Start SSH Agent
-if [ -z "$SSH_AUTH_SOCK" ] ;
-then
-  eval `ssh-agent -s`
-  ssh-add
-fi
-
-# Source fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# No duplicates in history
-setopt HIST_IGNORE_ALL_DUPS
-
-# Configuration not part of the repository
-if [[ -a ~/.localrc ]]
-then
-      source ~/.localrc
-fi
+# Dotfiles
+source ~/.shellrc

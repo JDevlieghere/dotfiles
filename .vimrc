@@ -308,10 +308,11 @@ if !has("nvim")
 endif
 
 " NERDTree
-let NERDTreeWinPos="left"
-let NERDTreeWinSize=35
-let NERDTreeIgnore=['\.job$', '^CVS$', '\.orig', '\~$']
+let g:NERDTreeIgnore=['\.job$', '^CVS$', '\.orig', '\~$']
+let g:NERDTreeShowHidden=1
 let g:NERDTreeStatusline="%f"
+let g:NERDTreeWinPos="left"
+let g:NERDTreeWinSize=35
 nnoremap <F9> :NERDTreeFind<CR>
 nnoremap <F10> :NERDTreeToggle<CR>
 " Open NERDTree when vim is started without file

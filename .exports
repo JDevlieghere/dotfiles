@@ -28,6 +28,9 @@ export PATH=$PATH:/home/jdevlieghere/.cabal/bin/
 # LLVM
 export PATH=$PATH:/opt/llvm/bin
 
+# SSH
+export SSH_KEY_PATH="~/.ssh/id_rsa"
+
 # Local libraries
 export PATH=$PATH:$HOME/usr/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib

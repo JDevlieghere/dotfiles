@@ -1,0 +1,2 @@
+# Dotfiles
+source ~/.localrc
