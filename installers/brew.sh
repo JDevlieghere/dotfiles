@@ -20,6 +20,7 @@ brew install fish
 brew install gcc --without-multilib
 brew install gdb
 brew install git
+brew install gnupg
 brew install go
 brew install graphviz
 brew install htop
