@@ -13,15 +13,11 @@ ENABLE_CORRECTION="true"
 # Command execution time stamp shown in the history command output
 HIST_STAMPS="yyyy-mm-dd"
 
-# No duplicates in history
-setopt HIST_IGNORE_ALL_DUPS
-
 # User configuration
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/texbin:$HOME/bin:$PATH"
 
+# Oh-My-Zsh
 source $ZSH/oh-my-zsh.sh
-
-# Oh-My-Zsh aliases
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 

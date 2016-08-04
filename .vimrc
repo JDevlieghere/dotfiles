@@ -99,7 +99,7 @@ set nu                          " Show line numbers
 set colorcolumn=80,120          " Show ruler columns
 
 " Cursor Line
-set cursorline
+"set cursorline
 
 " Scrolling
 set scrolloff=3                 " Keep at least 3 lines above/below
