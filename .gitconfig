@@ -5,6 +5,8 @@
 	name = Jonas Devlieghere
 [push]
 	default = simple
+[pull]
+	rebase = true
 [grep]
 	extendRegexp = true
 	lineNumber = true
