@@ -14,6 +14,9 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export LESSCHARSET=utf-8
 
+# Path
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$HOME/bin:$PATH
+
 # Go
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin
@@ -23,13 +26,13 @@ export PATH=$PATH:$GOPATH/bin
 export RUST_SRC_PATH=/usr/local/src/rust/src
 
 # Haskell
-export PATH=$PATH:/home/jdevlieghere/.cabal/bin/
+export PATH=$PATH:$HOME/.cabal/bin/
 
 # LLVM
 export PATH=$PATH:/opt/llvm/bin
 
 # SSH
-export SSH_KEY_PATH="~/.ssh/id_rsa"
+export SSH_KEY_PATH=$HOME/.ssh/id_rsa
 
 # Local libraries
 export PATH=$PATH:$HOME/usr/bin
@@ -44,5 +47,4 @@ export PATH=/usr/local/opt/ccache/libexec:/usr/lib/ccache:$PATH
 
 export FZF_DEFAULT_OPTS='
 --color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254
---color info:254,prompt:37,spinner:108,pointer:235,marker:235
-'
+--color info:254,prompt:37,spinner:108,pointer:235,marker:235'
