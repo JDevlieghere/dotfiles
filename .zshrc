@@ -13,8 +13,11 @@ ENABLE_CORRECTION="true"
 # Command execution time stamp shown in the history command output
 HIST_STAMPS="yyyy-mm-dd"
 
-# User configuration
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/texbin:$HOME/bin:$PATH"
+# Plugins
+plugins=(git brew osx tmux)
+
+# Automatically start a tmux session upon logging in
+ZSH_TMUX_AUTOSTART=true
 
 # Oh-My-Zsh
 source $ZSH/oh-my-zsh.sh
