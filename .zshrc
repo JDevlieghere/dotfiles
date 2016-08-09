@@ -16,9 +16,6 @@ HIST_STAMPS="yyyy-mm-dd"
 # Plugins
 plugins=(git brew osx tmux)
 
-# Automatically start a tmux session upon logging in
-ZSH_TMUX_AUTOSTART=true
-
 # Oh-My-Zsh
 source $ZSH/oh-my-zsh.sh
 alias zshconfig="vim ~/.zshrc"
