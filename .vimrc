@@ -227,6 +227,9 @@ if has("gui_running")
     endif
 endif
 
+" Copy filename:linenumber to clipboard
+nnoremap <leader>y :let @+=expand('%:t') . ':' . line(".")<CR>
+
 " Remove Trailing Whitespace
 autocmd BufWritePre * :%s/\s\+$//e
 
