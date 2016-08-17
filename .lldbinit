@@ -22,5 +22,5 @@ command alias j register write pc
 # Return alias
 command alias return thread return
 
-# Voltron
-command script import ~/voltron/voltron/entry.py
+# Set breakpoints "GDB" style
+command alias bfl breakpoint set -f %1 -l %2
