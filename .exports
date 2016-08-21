@@ -29,22 +29,18 @@ export RUST_SRC_PATH=/usr/local/src/rust/src
 export PATH=$PATH:$HOME/.cabal/bin/
 
 # LLVM
-export PATH=$PATH:/opt/llvm/bin
+export PATH=$PATH:/usr/local/opt/llvm/bin:/opt/llvm/bin
 
 # SSH
 export SSH_KEY_PATH=$HOME/.ssh/id_rsa
 
 # Local libraries
 export PATH=$PATH:$HOME/usr/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib
-export LD_LIBRARY_PRELOAD=LD_LIBRARY_PRELOAD:$HOME/usr/lib
-export LD_RUN_PATH=$LD_RUN_PATH:$HOME/usr/lib
-export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/usr/include
-export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/usr/include
 
-# Ccache
+# CCache
 export PATH=/usr/local/opt/ccache/libexec:/usr/lib/ccache:$PATH
 
+# FZF Theme
 export FZF_DEFAULT_OPTS='
 --color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254
 --color info:254,prompt:37,spinner:108,pointer:235,marker:235'
