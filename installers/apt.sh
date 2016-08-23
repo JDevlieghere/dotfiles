@@ -9,9 +9,9 @@ sudo apt install -y \
     git \
     htop \
     nasm \
-    ncurses \
     nodejs \
     python \
+    re2c \
     scrot \
     tmux \
     weechat-curses weechat-plugins \
