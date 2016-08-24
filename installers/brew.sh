@@ -24,6 +24,7 @@ brew install gnupg
 brew install go
 brew install graphviz
 brew install htop
+brew install lcov
 brew install libxml2
 brew install lua
 brew install macvim --with-override-system-vim
@@ -32,6 +33,7 @@ brew install ninja
 brew install node
 brew install python
 brew install rust
+brew install tig
 brew install tmux
 brew install valgrind
 brew install weechat --with-perl --with-python
