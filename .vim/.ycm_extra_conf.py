@@ -3,6 +3,7 @@ import os.path
 import fnmatch
 import logging
 import ycm_core
+import re
 
 BASE_FLAGS = [
     '-Wall',
@@ -62,6 +63,26 @@ def FindNearest(path, target):
             raise RuntimeError("Could not find " + target);
         return FindNearest(parent, target)
 
+def FindNearestOutOfSource(path, target, buildFolderName):
+    candidate = os.path.join(path, target)
+    if(os.path.isfile(candidate) or os.path.isdir(candidate)):
+        logging.info("Found nearest " + target + " at " + candidate)
+        return candidate;
+    else:
+        parent = os.path.dirname(os.path.abspath(path));
+        nextBuildFolder = os.path.join(os.path.dirname(os.path.abspath(parent)),buildFolderName)
+        if (os.path.isdir(nextBuildFolder)):
+            if re.search(buildFolderName,path):
+                logging.info("NOT doing twice" + path + " folder")
+            else:
+                return FindNearestOutOfSource(nextBuildFolder, target, buildFolderName)
+                # return FindNearest(nextBuildFolder,target) could be used,
+                # since we already found the correct build folder in the structure
+                # in this if-then-else substructure (os.path.isdir(nextBuildFolder))
+        if(parent == path):
+            raise RuntimeError("Could not find " + target);
+        return FindNearestOutOfSource(parent, target, buildFolderName)
+
 def MakeRelativePathsInFlagsAbsolute(flags, working_directory):
     if not working_directory:
         return list(flags)
@@ -113,7 +134,9 @@ def FlagsForInclude(root):
 
 def FlagsForCompilationDatabase(root, filename):
     try:
-        compilation_db_path = FindNearest(root, 'compile_commands.json')
+        # Last argument of next function is the name of the build folder for
+        # out of source projects
+        compilation_db_path = FindNearestOutOfSource(root, 'compile_commands.json','build')
         compilation_db_dir = os.path.dirname(compilation_db_path)
         logging.info("Set compilation database directory to " + compilation_db_dir)
         compilation_db =  ycm_core.CompilationDatabase(compilation_db_dir)
