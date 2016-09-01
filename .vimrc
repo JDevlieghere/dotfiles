@@ -163,6 +163,9 @@ set spelllang=en_us             " Default language
 set complete+=kspell            " Word completion
 map <F7> :setlocal spell!<CR>   " Toggle spell check
 
+autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd FileType gitcommit setlocal spell
+
 " Disable Bells
 set noeb vb t_vb=
 
