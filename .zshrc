@@ -21,12 +21,6 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
-# Linux specifics
-if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    # Set the typematic delay and rate for an active X server
-    xset r rate 200 50
-fi
-
 # Source dotfiles
 source ~/.aliases
 source ~/.exports

@@ -83,6 +83,7 @@ set ttyfast                     " Fast terminal
 set ruler                       " Show ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
 set nofoldenable                " disable folding
+set laststatus=2                " Alwasy display statusline
 
 " Crypto
 if !has("nvim")
@@ -163,9 +164,11 @@ set pastetoggle=<F2>
 set spelllang=en_us             " Default language
 set complete+=kspell            " Word completion
 map <F7> :setlocal spell!<CR>   " Toggle spell check
-
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd FileType gitcommit setlocal spell
+
+" Doxygen
+autocmd Filetype c,cpp set comments^=:///
 
 " Disable Bells
 set noeb vb t_vb=
@@ -296,7 +299,6 @@ nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
 
 " Airline
-set laststatus=2                " Alwasy display statusline
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod=':t'
@@ -375,9 +377,8 @@ nnoremap <silent> <Leader>gt :YcmCompleter GoTo<CR>
 " Auto Format
 let g:formatdef_clangformat='"clang-format -style=file"'
 
-" EasyMotion
-nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
+" Doxygen
+let g:DoxygenToolkit_commentType = "C++"
 
 if has("nvim")
     " Neomake
