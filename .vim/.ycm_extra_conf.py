@@ -6,35 +6,35 @@ import ycm_core
 import re
 
 BASE_FLAGS = [
-    '-Wall',
-    '-Wextra',
-    '-Werror',
-    '-Wno-long-long',
-    '-Wno-variadic-macros',
-    '-fexceptions',
-    '-ferror-limit=10000',
-    '-DNDEBUG',
-    '-std=c++11',
-    '-xc++',
-    '-I/usr/lib/'
-    '-I/usr/include/'
-]
+        '-Wall',
+        '-Wextra',
+        '-Werror',
+        '-Wno-long-long',
+        '-Wno-variadic-macros',
+        '-fexceptions',
+        '-ferror-limit=10000',
+        '-DNDEBUG',
+        '-std=c++11',
+        '-xc++',
+        '-I/usr/lib/'
+        '-I/usr/include/'
+        ]
 
 SOURCE_EXTENSIONS = [
-    '.cpp',
-    '.cxx',
-    '.cc',
-    '.c',
-    '.m',
-    '.mm'
-]
+        '.cpp',
+        '.cxx',
+        '.cc',
+        '.c',
+        '.m',
+        '.mm'
+        ]
 
 HEADER_EXTENSIONS = [
-    '.h',
-    '.hxx',
-    '.hpp',
-    '.hh'
-]
+        '.h',
+        '.hxx',
+        '.hpp',
+        '.hh'
+        ]
 
 def IsHeaderFile(filename):
     extension = os.path.splitext(filename)[1]
@@ -52,36 +52,23 @@ def GetCompilationInfoForFile(database, filename):
         return None
     return database.GetCompilationInfoForFile(filename)
 
-def FindNearest(path, target):
+def FindNearest(path, target, build_folder):
     candidate = os.path.join(path, target)
     if(os.path.isfile(candidate) or os.path.isdir(candidate)):
         logging.info("Found nearest " + target + " at " + candidate)
         return candidate;
-    else:
-        parent = os.path.dirname(os.path.abspath(path));
-        if(parent == path):
-            raise RuntimeError("Could not find " + target);
-        return FindNearest(parent, target)
 
-def FindNearestOutOfSource(path, target, buildFolderName):
-    candidate = os.path.join(path, target)
-    if(os.path.isfile(candidate) or os.path.isdir(candidate)):
-        logging.info("Found nearest " + target + " at " + candidate)
-        return candidate;
-    else:
-        parent = os.path.dirname(os.path.abspath(path));
-        nextBuildFolder = os.path.join(os.path.dirname(os.path.abspath(parent)),buildFolderName)
-        if (os.path.isdir(nextBuildFolder)):
-            if re.search(buildFolderName,path):
-                logging.info("NOT doing twice" + path + " folder")
-            else:
-                return FindNearestOutOfSource(nextBuildFolder, target, buildFolderName)
-                # return FindNearest(nextBuildFolder,target) could be used,
-                # since we already found the correct build folder in the structure
-                # in this if-then-else substructure (os.path.isdir(nextBuildFolder))
-        if(parent == path):
-            raise RuntimeError("Could not find " + target);
-        return FindNearestOutOfSource(parent, target, buildFolderName)
+    parent = os.path.dirname(os.path.abspath(path));
+    if(parent == path):
+        raise RuntimeError("Could not find " + target);
+
+    if(build_folder):
+        candidate = os.path.join(parent, build_folder, target)
+        if(os.path.isfile(candidate) or os.path.isdir(candidate)):
+            logging.info("Found nearest " + target + " in build folder at " + candidate)
+            return candidate;
+
+    return FindNearest(parent, target, build_folder)
 
 def MakeRelativePathsInFlagsAbsolute(flags, working_directory):
     if not working_directory:
@@ -136,7 +123,7 @@ def FlagsForCompilationDatabase(root, filename):
     try:
         # Last argument of next function is the name of the build folder for
         # out of source projects
-        compilation_db_path = FindNearestOutOfSource(root, 'compile_commands.json','build')
+        compilation_db_path = FindNearest(root, 'compile_commands.json', 'build')
         compilation_db_dir = os.path.dirname(compilation_db_path)
         logging.info("Set compilation database directory to " + compilation_db_dir)
         compilation_db =  ycm_core.CompilationDatabase(compilation_db_dir)
@@ -148,8 +135,8 @@ def FlagsForCompilationDatabase(root, filename):
             logging.info("No compilation info for " + filename + " in compilation database")
             return None
         return MakeRelativePathsInFlagsAbsolute(
-            compilation_info.compiler_flags_,
-            compilation_info.compiler_working_dir_)
+                compilation_info.compiler_flags_,
+                compilation_info.compiler_working_dir_)
     except:
         return None
 
@@ -167,6 +154,6 @@ def FlagsForFile(filename):
         if include_flags:
             final_flags = final_flags + include_flags
     return {
-        'flags': final_flags,
-        'do_cache': True
-    }
+            'flags': final_flags,
+            'do_cache': True
+            }
