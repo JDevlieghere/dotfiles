@@ -22,6 +22,9 @@ export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$GOPATH/bin
 
+# Use GNU core utils on macOS
+PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
 # Rust
 export RUST_SRC_PATH=/usr/local/src/rust/src
 

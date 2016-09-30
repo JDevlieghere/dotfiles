@@ -3,7 +3,7 @@ which -s brew
 if [[ $? != 0 ]] ; then
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 else
-    brew update
+	brew update
 	brew upgrade --all
 fi
 
@@ -13,14 +13,16 @@ brew install binutils
 brew install ccache
 brew install cloc
 brew install cmake
-brew install coreutils
+brew install coreutils --with-default-names
 brew install doxygen
-brew install findutils
+brew install findutils --with-default-names
 brew install fish
 brew install gcc --without-multilib
 brew install gdb
 brew install git
+brew install gnu-sed --with-default-names
 brew install gnupg
+brew install gnutls
 brew install go
 brew install graphviz
 brew install htop
