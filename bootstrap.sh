@@ -89,5 +89,3 @@ elif [ "$1" == "--fonts" ]; then
 else
     doAll
 fi
-
-doConfig

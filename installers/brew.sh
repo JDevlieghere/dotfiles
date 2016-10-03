@@ -34,6 +34,7 @@ brew install neovim/neovim/neovim
 brew install ninja
 brew install node
 brew install python
+brew install reattach-to-user-namespace
 brew install rust
 brew install tig
 brew install tmux
