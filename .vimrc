@@ -173,11 +173,9 @@ autocmd Filetype c,cpp set comments^=:///
 " Disable Bells
 set noeb vb t_vb=
 
-" Treat underscore as a word boundary
-set iskeyword-=_                " '_' is an end of word designator
+" Treat given characters as a word boundary
 set iskeyword-=.                " '.' is an end of word designator
 set iskeyword-=#                " '#' is an end of word designator
-set iskeyword-=-                " '-' is an end of word designator
 
 " Wrapping
 vmap Q gq
