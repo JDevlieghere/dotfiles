@@ -14,6 +14,7 @@ brew install ccache
 brew install cloc
 brew install cmake
 brew install coreutils --with-default-names
+brew install ctags
 brew install doxygen
 brew install findutils --with-default-names
 brew install fish
