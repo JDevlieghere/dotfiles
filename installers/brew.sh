@@ -41,6 +41,7 @@ brew install tmux
 brew install valgrind
 brew install weechat --with-perl --with-python
 brew install wget --with-iri
+brew install wireshark --with-qt5
 brew install xz
 brew install zsh
 
