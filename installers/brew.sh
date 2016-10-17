@@ -16,6 +16,7 @@ brew install cmake
 brew install coreutils --with-default-names
 brew install ctags
 brew install doxygen
+brew install ffmpeg
 brew install findutils --with-default-names
 brew install fish
 brew install gcc --without-multilib
