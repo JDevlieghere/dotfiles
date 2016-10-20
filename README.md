@@ -2,8 +2,11 @@
 
 > This is my dotfile repository. There are many like it, but this one is mine.
 
-I did my best to make everythings work as transparently as possible under both Linux and macOS. 
-**Feel free to try out my dotfiles or use them as inspiration!** If you have a suggestion, improvement or question, don't hesitate to open an issue.
+I did my best to make everythings work as transparently as possible under both
+Linux and macOS.
+
+**Feel free to try out my dotfiles or use them as inspiration!** If you have a
+suggestion, improvement or question, don't hesitate to open an issue.
 
 ## Screenshot
 
@@ -21,9 +24,14 @@ cd dotfiles
 ./bootstrap.sh
 ```
 
-### Vim & YouCompleteMe
+## Vim & YouCompleteMe
 
-Vim is my editor of choice. Most of my [.vimrc](https://github.com/JDevlieghere/dotfiles/blob/master/.vimrc) should be self-explanatory. For C++ development, I rely heavily on [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) for which I created [a better .ycm_extra_conf.py](https://jonasdevlieghere.com/a-better-youcompleteme-config/). 
+Vim is my editor of choice. Most of my
+[.vimrc](https://github.com/JDevlieghere/dotfiles/blob/master/.vimrc) should be
+self-explanatory. For C++ development, I rely heavily on
+[YouCompleteMe](https://github.com/Valloric/YouCompleteMe) for which I created
+[a better
+.ycm_extra_conf.py](https://jonasdevlieghere.com/a-better-youcompleteme-config/).
 
 ## macOS
 
@@ -31,6 +39,15 @@ The `.macos` file contains some sensible defaults for OSX, heavily inspired by
 [Mathias Bynens'
 dotfiles](https://github.com/mathiasbynens/dotfiles/blob/master/.osx). These
 are automatically set on running the bootstrap script under macOS.
+
+## tmux
+
+Instead of constantly polling for the current WAN IP, I have my tmux read a
+cache file which is updated every five minutes by a cron job.
+
+```
+*/5 * * * * dig +short myip.opendns.com @resolver1.opendns.com > ~/.tmux.cache.ip
+```
 
 ## xmonad
 
