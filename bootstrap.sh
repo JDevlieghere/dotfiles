@@ -35,7 +35,6 @@ doLink() {
 
 doInstall() {
     info "Installing Extras"
-    curl -sL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -67,8 +66,6 @@ doConfig() {
     fi
     echo "Configuring global gitignore"
     git config --global core.excludesfile ~/.gitignore_global
-    echo "Reloading ZSH"
-    exec /bin/zsh -l
 }
 
 doAll() {
