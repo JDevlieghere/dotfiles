@@ -30,7 +30,7 @@ alias mktags="ctags --extra=+f -R ."
 alias reload="exec $SHELL -l"
 
 # Clang Format
-alias cformat='clang-format -style=file -i $(find . -name \*.h -print -o -name \*.cpp -print)'
+alias cformat='clang-format -style=file -i (find . -name \*.h -print -o -name \*.cpp -print)'
 
 # View dirty memory
 alias dirty='watch grep -e Dirty: -e Writeback: /proc/meminfo'
