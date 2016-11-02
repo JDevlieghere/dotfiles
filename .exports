@@ -1,6 +1,6 @@
 # Set default editor to Vim
-set -U EDITOR vim
-set -U VISUAL vim
+set -x EDITOR vim
+set -x VISUAL vim
 
 # Set default language to US English (UTF-8)
 set -x LC_COLLATE en_US.UTF-8
@@ -13,6 +13,9 @@ set -x LC_ALL en_US.UTF-8
 set -x LANG en_US.UTF-8
 set -x LANGUAGE en_US.UTF-8
 set -x LESSCHARSET utf-8
+
+# SSH
+set -x SSH_KEY_PATH $HOME/.ssh/id_rsa
 
 # Path
 set PATH /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin $HOME/bin $PATH
@@ -32,9 +35,6 @@ set PATH $PATH $HOME/.cabal/bin/
 
 # LLVM
 set PATH $PATH /usr/local/opt/llvm/bin /opt/llvm/bin
-
-# SSH
-set -U SSH_KEY_PATH $HOME/.ssh/id_rsa
 
 # Local libraries
 set PATH $PATH $HOME/usr/bin
