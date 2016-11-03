@@ -27,6 +27,7 @@ brew install gnupg
 brew install gnutls
 brew install go
 brew install graphviz
+brew install highlight
 brew install htop
 brew install lcov
 brew install libxml2
