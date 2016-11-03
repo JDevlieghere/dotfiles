@@ -12,7 +12,6 @@ alias whois="whois -h whois-servers.net"
 # Processes
 alias psa="ps auxf"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
-alias psmy='ps -fu $USER | sort | egrep -v "ps -fu|sort|grep"'
 
 # History
 alias hig="history | grep"
@@ -30,7 +29,7 @@ alias mktags="ctags --extra=+f -R ."
 alias reload="exec $SHELL -l"
 
 # Clang Format
-alias cformat='clang-format -style=file -i $(find . -name \*.h -print -o -name \*.cpp -print)'
+alias cformat='clang-format -style=file -i (find . -name \*.h -print -o -name \*.cpp -print)'
 
 # View dirty memory
 alias dirty='watch grep -e Dirty: -e Writeback: /proc/meminfo'
