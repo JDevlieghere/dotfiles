@@ -1,5 +1,5 @@
 # GPG agent
-function __refresh_gpg_agent_info -d "Re-load ~/.gpg-agent-info into environment"
+function __refresh_gpg_agent_info -d "Reload ~/.gpg-agent-info into environment"
 	cat ~/.gpg-agent-info | sed 's/=/ /' | while read key value
 		set -e $key
 		set -U -x $key "$value"
@@ -21,5 +21,5 @@ if test -f ~/.gpg-agent-info
 	end
 end
 
-# Curses based Pinentry
+# Use curses based Pinentry
 set -x GPG_TTY (tty)

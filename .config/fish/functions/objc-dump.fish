@@ -1,3 +1,3 @@
-function objc-dump -d "class dump for objective-c"
+function objc-dump -d "Class dump for Objective-C"
     class-dump $argv  | highlight -S objc -O ansi | less
 end
