@@ -68,7 +68,7 @@ syntax enable                   " Enable syntax highlighting
 set background=dark             " Dark background color
 
 " Color Scheme
-colorscheme base16-default-dark
+colorscheme solarized
 highlight clear SignColumn      " Sing column same background as line numbers
 
 " Essentials
