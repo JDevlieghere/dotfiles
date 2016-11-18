@@ -1,24 +1,24 @@
 #voltron.session
 
-# Split horizontally into two halves
-splitw -h -p 50
-
-# Split right half vertically
+# Create Panes
+selectp -t 0
+splitw -v -p 40
+splitw -h -p 40
 splitw -v -p 50
 
-# Split top right half
-selectp -t 1
-splitw -v -p 20
+selectp -t 0
+splitw -v -p 40
 
-# Split bottom right half
-selectp -t 3
-splitw -v -p 50
+selectp -t 0
+splitw -h -p 60
 
 # Open Voltron
-send -t 1 C-z 'voltron view disasm -FE' Enter # Open disassembly view
-send -t 2 C-z 'voltron view reg -o -FE' Enter # Open registers view
-send -t 3 C-z 'voltron view stack -FE' Enter  # Open Stack view
-send -t 4 C-z 'voltron view bt -FE' Enter     # Open backtrace view
+send -t 0 C-z 'voltron view disasm' Enter
+send -t 1 C-z 'voltron view reg -i' Enter
+send -t 2 C-z 'lldb' Enter
+send -t 3 C-z 'voltron view stack' Enter
+send -t 4 C-z 'voltron view bp' Enter
+send -t 5 C-z 'voltron view bt' Enter
 
-# Select left pane
-selectp -t 0
+# Focus on LLDB
+selectp -t 2
