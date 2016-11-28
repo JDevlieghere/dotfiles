@@ -291,6 +291,9 @@ nmap <silent> <Leader>fs :call Switch()<CR>
 nnoremap <silent> <Leader>q :Bdelete<CR>
 nnoremap <silent> <Leader>bd :Bdelete!<CR>
 
+" Signify
+let g:signify_vcs_list = [ 'git' ]
+
 " FZF
 let g:fzf_buffers_jump=1
 nnoremap <silent> <C-p> :Files<CR>
