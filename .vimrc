@@ -164,8 +164,11 @@ set pastetoggle=<F2>
 set spelllang=en_us             " Default language
 set complete+=kspell            " Word completion
 map <F7> :setlocal spell!<CR>   " Toggle spell check
-autocmd BufRead,BufNewFile *.md setlocal spell
+
 autocmd FileType gitcommit setlocal spell
+autocmd FileType markdown setlocal spell
+autocmd FileType text setlocal spell
+autocmd FileType rst setlocal spell
 
 " Doxygen
 autocmd Filetype c,cpp set comments^=:///
@@ -292,7 +295,7 @@ nnoremap <silent> <Leader>q :Bdelete<CR>
 nnoremap <silent> <Leader>bd :Bdelete!<CR>
 
 " Signify
-let g:signify_vcs_list = [ 'git' ]
+let g:signify_vcs_list = [ 'git', 'hg', 'svn' ]
 
 " FZF
 let g:fzf_buffers_jump=1
