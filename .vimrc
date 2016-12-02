@@ -141,6 +141,10 @@ set mouse=nicr                  " Disable mouse
 cnoreabbrev W w                 " :W
 cnoreabbrev Q q                 " :Q
 
+" Italics
+highlight Comment cterm=italic
+highlight htmlArg cterm=italic
+
 " Wrapping
 set nowrap                      " No wrapping
 set linebreak                   " When wrapping, only at certain characters
