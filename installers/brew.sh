@@ -8,6 +8,7 @@ else
 fi
 
 # Install formulae
+brew install afl-fuzz
 brew install ag
 brew install binutils
 brew install ccache
@@ -42,6 +43,7 @@ brew install reattach-to-user-namespace
 brew install rust
 brew install tig
 brew install tmux
+brew install unrar
 brew install valgrind
 brew install weechat --with-perl --with-python
 brew install wget --with-iri
