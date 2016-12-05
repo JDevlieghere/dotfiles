@@ -7,6 +7,7 @@ source ~/.exports
 
 # Source fish files.
 source ~/.config/fish/gpg.fish
+source ~/.config/fish/fzf.fish
 
 # Source localrc which is not sync'd.
 source ~/.localrc
