@@ -21,7 +21,7 @@ set -x SSH_KEY_PATH $HOME/.ssh/id_rsa
 set PATH /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin $HOME/bin $PATH
 
 # Go
-set GOPATH $HOME/go
+set -x GOPATH $HOME/go
 set PATH $PATH $GOPATH/bin
 
 # Use GNU core utils on macOS
