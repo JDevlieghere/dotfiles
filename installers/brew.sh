@@ -43,6 +43,7 @@ brew install reattach-to-user-namespace
 brew install rust
 brew install tig
 brew install tmux
+brew install tree
 brew install unrar
 brew install valgrind
 brew install weechat --with-perl --with-python

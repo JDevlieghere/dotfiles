@@ -1,31 +1,39 @@
+#!/usr/bin/env bash
+
+# Builds LLVM, clang and clang-tools extra in the curren directory.
+# .
+# ├── build
+# ├── install
+# └── llvm
+
+
 # LLVM Configuration
-BRANCH="$1"
-PREFIX="/opt/llvm"
-TYPE="Release"
+if [ -z "$1" ]; then
+    TYPE="Debug"
+else
+    TYPE="Release"
+fi
 
-# Create directories
-mkdir ~/clang-llvm; cd ~/clang-llvm
+ROOT=$(pwd)
 
-# Clone the source tree
+# LLVM
 git clone http://llvm.org/git/llvm.git
-cd llvm
-git checkout "$BRANCH"
+cd "$ROOT/llvm" || exit
 
-cd tools
+# Compiler-RT
+cd "$ROOT/llvm/projects" || exit
+git clone http://llvm.org/git/compiler-rt.git
+
+# Clang
+cd "$ROOT/llvm/tools" || exit
 git clone http://llvm.org/git/clang.git
-cd clang
-git checkout "$BRANCH"
 
-cd tools
+# Clang-tools-extra
+cd "$ROOT/llvm/tools/clang/tools" || exit
 git clone http://llvm.org/git/clang-tools-extra.git extra
-cd extra
-git checkout "$BRANCH"
 
-# Build
-cd ~/clang-llvm
-mkdir build; cd build
-cmake -G Ninja ../llvm -DCMAKE_INSTALL_PREFIX="$PREFIX" -DCMAKE_BUILD_TYPE="$TYPE"
-ninja
-
-# Install
-ninja install
+# Create build folder
+cd "$ROOT" || exit
+mkdir build || exit
+cd build || exit
+cmake -G Ninja ../llvm -DCMAKE_INSTALL_PREFIX="$ROOT/install" -DCMAKE_BUILD_TYPE="$TYPE"
