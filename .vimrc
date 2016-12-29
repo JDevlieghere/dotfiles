@@ -13,38 +13,45 @@ Plug 'chriskempson/base16-vim'
 
 " Plug-ins
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'chiel92/vim-autoformat', { 'on': 'Autoformat' }
 Plug 'ciaranm/detectindent'
-Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-Plug 'jdevlieghere/llvm.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
-Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-Plug 'rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+" On-Demand Plug-ins
+Plug 'chiel92/vim-autoformat', { 'on': 'Autoformat' }
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
+Plug 'rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 Plug 'vim-scripts/DoxygenToolkit.vim', { 'for': 'cpp' }
 
-" FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-" Rust
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+" Go
+Plug 'fatih/vim-go', { 'for': 'go' }
 
 " Haskell
 Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 Plug 'mpickering/hlint-refactor-vim', { 'for': 'haskell' }
+
+" LLVM
+Plug 'jdevlieghere/llvm.vim', { 'for': 'llvm' }
+
+" Mardown
+Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+
+" Rust
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+
 
 if has("nvim")
     Plug 'benekastah/neomake'
@@ -55,6 +62,8 @@ endif
 
 if has("python")
     Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer --gocode-completer --tern-completer --racer-completer' }
+else
+    Plug 'ervandew/supertab'
 endif
 
 call plug#end()
@@ -140,6 +149,7 @@ set mouse=nicr                  " Disable mouse
 " Typos
 cnoreabbrev W w                 " :W
 cnoreabbrev Q q                 " :Q
+command Qa :qa!
 
 " Italics
 highlight Comment cterm=italic
@@ -321,9 +331,6 @@ nnoremap <F8> :TagbarToggle<CR>
 let g:tagbar_autofocus=0
 let g:tagbar_right=1
 let g:tagbar_width=35
-if !has("nvim")
-    autocmd VimEnter * nested :TagbarOpen
-endif
 
 " NERDTree
 let g:NERDTreeIgnore=['\.job$', '^CVS$', '\.orig', '\~$']
