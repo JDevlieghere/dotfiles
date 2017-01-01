@@ -25,14 +25,6 @@ doSync() {
         -avh --no-perms . ~;
 }
 
-doLink() {
-    if [ ! -e ~/.config/nvim ]; then
-        mkdir -p ~/.config
-        ln -s ~/.vim ~/.config/nvim
-        ln -s ~/.vimrc ~/.config/nvim/init.vim
-    fi
-}
-
 doInstall() {
     info "Installing Extras"
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -71,7 +63,6 @@ doConfig() {
 doAll() {
     doUpdate
     doSync
-    doLink
     doInstall
     doFonts
     doConfig
@@ -79,7 +70,6 @@ doAll() {
 
 if [ "$1" == "--sync" ]; then
     doSync
-    doLink
 elif [ "$1" == "--install" ]; then
     doInstall
 elif [ "$1" == "--fonts" ]; then

@@ -20,6 +20,8 @@ Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
 Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -33,7 +35,7 @@ Plug 'rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 Plug 'vim-scripts/DoxygenToolkit.vim', { 'for': 'cpp' }
 
-" Go
+" Golang
 Plug 'fatih/vim-go', { 'for': 'go' }
 
 " Haskell
@@ -52,18 +54,9 @@ Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
-
-if has("nvim")
-    Plug 'benekastah/neomake'
-else
-    Plug 'scrooloose/syntastic'
-    Plug 'tpope/vim-dispatch'
-endif
-
+" YouCompleteMe
 if has("python")
     Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer --gocode-completer --tern-completer --racer-completer' }
-else
-    Plug 'ervandew/supertab'
 endif
 
 call plug#end()
@@ -95,9 +88,7 @@ set nofoldenable                " disable folding
 set laststatus=2                " Alwasy display statusline
 
 " Crypto
-if !has("nvim")
-    set cm=blowfish
-endif
+set cm=blowfish
 
 " Temp Files
 set nobackup                    " No backup file
@@ -168,7 +159,7 @@ set listchars=tab:▸\ ,trail:-,extends:>,precedes:<,nbsp:⎵,eol:¬
 
 " Completion Menu
 set completeopt=longest,menuone " Inserts the longest common text and
-" show menu even with only one item
+                                " show menu even with only one item
 
 " Toggle Paste Mode
 nnoremap <F2> :set invpaste paste?<CR>
@@ -241,13 +232,6 @@ if has("gui_running")
     set vb t_vb=
     set guioptions-=L           " Hide scroll bars
     set lines=999 columns=999   " Start maximized
-    if has("gui_gtk2")
-        set guifont=Source\ Code\ Pro\ for\ Powerline:h12,Source\ Code\ Pro:h12
-    elseif has("gui_macvim")
-        set guifont=Source\ Code\ Pro\ for\ Powerline:h14,Source\ Code\ Pro:h14
-    elseif has("gui_win32")
-        set guifont=Sauce_Code_Powerline:h11:cANSI,Source_Code_Pro:h11:cANSI
-    endif
 endif
 
 " Copy filename:linenumber to clipboard
@@ -261,44 +245,6 @@ augroup reload_myvimrc
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END
-
-" ---------------------------------------------------------------------------- "
-" Functions                                                                    "
-" ---------------------------------------------------------------------------- "
-
-" Highlight duplicate lines
-" http://stackoverflow.com/questions/1268032/marking-duplicate-lines
-function! HighlightRepeats() range
-    let lineCounts={}
-    let lineNum=a:firstline
-    while lineNum <= a:lastline
-        let lineText=getline(lineNum)
-        if lineText != ""
-            let lineCounts[lineText]=(has_key(lineCounts, lineText) ? lineCounts[lineText] : 0) + 1
-        endif
-        let lineNum=lineNum + 1
-    endwhile
-    exe 'syn clear Repeat'
-    for lineText in keys(lineCounts)
-        if lineCounts[lineText] >= 2
-            exe 'syn match Repeat "^' . escape(lineText, '".\^$*[]') . '$"'
-        endif
-    endfor
-endfunction
-command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
-
-" Switch between source and header files using ctags
-" Rudimentary approach: only supports .cpp and .h
-function! Switch()
-    let baseName=expand('%:t:r')
-    let extension=expand('%:e')
-    if extension =~ 'c'
-        execute "tag " . baseName . '.h'
-    else
-        execute "tag " . baseName . '.cpp'
-    endif
-endfunction
-nmap <silent> <Leader>fs :call Switch()<CR>
 
 " ---------------------------------------------------------------------------- "
 " Plugin Configuration                                                         "
@@ -323,7 +269,7 @@ let g:airline#extensions#tabline#fnamemod=':t'
 
 " Detect Indent
 let g:detectindent_preferred_expandtab=1
-let g:detectindent_preferred_indent=4
+let g:detectindent_preferred_indent=2
 autocmd BufReadPost * :DetectIndent
 
 " Tagbar
@@ -340,10 +286,6 @@ let g:NERDTreeWinPos="left"
 let g:NERDTreeWinSize=35
 nnoremap <F9> :NERDTreeFind<CR>
 nnoremap <F10> :NERDTreeToggle<CR>
-
-" Open NERDTree when vim is started without file
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Close vim if the only window left is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -386,8 +328,8 @@ autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 nnoremap <F12> :YcmDiags<CR>
 nnoremap <silent> <Leader>yd :YcmDiags<CR>
-nnoremap <silent> <Leader>fi :YcmCompleter FixIt<CR>
-nnoremap <silent> <Leader>gt :YcmCompleter GoTo<CR>
+nnoremap <silent> <Leader>yf :YcmCompleter FixIt<CR>
+nnoremap <silent> <Leader>yg :YcmCompleter GoTo<CR>
 
 " Auto Format
 let g:formatdef_clangformat='"clang-format -style=file"'
@@ -395,23 +337,19 @@ let g:formatdef_clangformat='"clang-format -style=file"'
 " Doxygen
 let g:DoxygenToolkit_commentType = "C++"
 
-if has("nvim")
-    " Neomake
-    nnoremap <F5> :Neomake<CR>
-    let g:neomake_javascript_enabled_makers = ['jshint']
-    let g:neomake_python_enabled_makers = ['pylint']
-else
-    " Syntastic
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
-    let g:syntastic_always_populate_loc_list=1
-    let g:syntastic_auto_loc_list=1
-    let g:syntastic_check_on_open=1
-    let g:syntastic_cpp_checkers=['cppcheck']
-    let g:syntastic_javascript_checkers = ['jshint']
-    let g:syntastic_python_checkers=['pylint']
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq = 0
+" Syntastic Checkers
+let g:syntastic_cpp_checkers=['cppcheck']
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_python_checkers=['pylint']
 
-    " Dispatch
-    nnoremap <F5> :Make<CR>
-endif
+" Dispatch
+nnoremap <F5> :Make<CR>
