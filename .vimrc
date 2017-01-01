@@ -70,7 +70,7 @@ syntax enable                   " Enable syntax highlighting
 set background=dark             " Dark background color
 
 " Color Scheme
-colorscheme solarized
+colorscheme solarized           " Solarized color scheme
 highlight clear SignColumn      " Sing column same background as line numbers
 
 " Essentials
@@ -138,8 +138,8 @@ set mousehide                   " Hide mouse when typing
 set mouse=nicr                  " Disable mouse
 
 " Typos
-cnoreabbrev W w                 " :W
-cnoreabbrev Q q                 " :Q
+cnoreabbrev W w
+cnoreabbrev Q q
 command Qa :qa!
 
 " Italics
@@ -152,24 +152,25 @@ set linebreak                   " When wrapping, only at certain characters
 set textwidth=0                 " Turn off physical line wrapping
 set wrapmargin=0                " Turn off physical line wrapping
 
-" Invisible Characters
+" Invisible characters
 nmap <leader>l :set list!<CR>   " Toggle hidden characters
 set nolist                      " Hide by default
 set listchars=tab:▸\ ,trail:-,extends:>,precedes:<,nbsp:⎵,eol:¬
 
-" Completion Menu
+" Completion menu
 set completeopt=longest,menuone " Inserts the longest common text and
                                 " show menu even with only one item
 
-" Toggle Paste Mode
+" Toggle paste mode
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 
-" Spell Checking
+" Spell checking
 set spelllang=en_us             " Default language
 set complete+=kspell            " Word completion
 map <F7> :setlocal spell!<CR>   " Toggle spell check
 
+" Enable spell checking
 autocmd FileType gitcommit setlocal spell
 autocmd FileType markdown setlocal spell
 autocmd FileType text setlocal spell
@@ -178,7 +179,7 @@ autocmd FileType rst setlocal spell
 " Doxygen
 autocmd Filetype c,cpp set comments^=:///
 
-" Disable Bells
+" Disable visual bell
 set noeb vb t_vb=
 
 " Treat given characters as a word boundary
@@ -186,26 +187,22 @@ set iskeyword-=.                " '.' is an end of word designator
 set iskeyword-=#                " '#' is an end of word designator
 
 " Wrapping
-vmap Q gq
-nmap Q gqap
+vmap Q gq                       " Wrap the current visual selection
+nmap Q gqap                     " Wrap the current paragraph
 
-" Cycle through buffers
+" Cycle through buffers with (ctrl) tab
 nnoremap <silent> <Tab> :bnext<CR>
 nnoremap <silent> <S-Tab> :bprevious<CR>
 
 " Close window
-nmap <silent> <Leader>wd <C-w>q
+nmap <silent> <Leader>wd <C-w>q " Close the current window
 
 " Splits
-set splitbelow
-set splitright
+set splitbelow                  " Horizontal split below
+set splitright                  " Vertical split right
 
-" Enable Copy/Paste
-set clipboard=unnamed
-vmap <C-c> "+yi
-vmap <C-x> "+c
-vmap <C-v> c<ESC>"+p
-imap <C-v> <ESC>"+pa
+" Copy/Paste
+set clipboard=unnamed           " Use system clip board
 
 " Ctags
 set tags=tags;                  " Find tags recursively
@@ -224,18 +221,18 @@ if has('persistent_undo')
     set undoreload=10000        " Max lines to save for undo on a buffer reload
 endif
 
-" NASM
+" Recognize NASM extension
 au BufRead,BufNewFile *.nasm set filetype=nasm
 
 " GUI
 if has("gui_running")
-    set vb t_vb=
+    set vb t_vb=                " Disable visual bell
     set guioptions-=L           " Hide scroll bars
     set lines=999 columns=999   " Start maximized
 endif
 
 " Copy filename:linenumber to clipboard
-nnoremap <leader>y :let @+=expand('%:t') . ':' . line(".")<CR>
+nnoremap <leader>yy :let @+=expand('%:t') . ':' . line(".")<CR>
 
 " Remove Trailing Whitespace
 autocmd BufWritePre * :%s/\s\+$//e
@@ -318,7 +315,7 @@ let g:ycm_filetype_blacklist={
             \ 'mail' : 1
             \}
 
-" Enable omni completion.
+" YouCompleteMe Omni-Completion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -326,12 +323,19 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+" YouCompleteMe key bindings
+nnoremap <F11> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <F12> :YcmDiags<CR>
-nnoremap <silent> <Leader>yd :YcmDiags<CR>
+
+" YcmCompleter Subcommands
+nnoremap <silent> <Leader>yd :YcmCompleter GetDoc<CR>
 nnoremap <silent> <Leader>yf :YcmCompleter FixIt<CR>
 nnoremap <silent> <Leader>yg :YcmCompleter GoTo<CR>
+nnoremap <silent> <Leader>yi :YcmCompleter GoToInclude<CR>
+nnoremap <silent> <Leader>yt :YcmCompleter GetType<CR>
 
-" Auto Format
+" AutoFormat
 let g:formatdef_clangformat='"clang-format -style=file"'
 
 " Doxygen
@@ -346,6 +350,7 @@ let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq = 0
+
 " Syntastic Checkers
 let g:syntastic_cpp_checkers=['cppcheck']
 let g:syntastic_javascript_checkers = ['jshint']
