@@ -28,7 +28,7 @@ set PATH $PATH $GOPATH/bin
 set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
 
 # Rust
-set RUST_SRC_PATH /usr/local/src/rust/src
+set PATH $PATH $HOME/.cargo/bin/
 
 # Haskell
 set PATH $PATH $HOME/.cabal/bin/
