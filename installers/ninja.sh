@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 git clone git://github.com/ninja-build/ninja.git ~/ninja
 cd ~/ninja
 git checkout release

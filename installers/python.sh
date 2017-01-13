@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Make sure we have the latest version
 pip install --upgrade pip
 
