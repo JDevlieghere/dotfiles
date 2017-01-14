@@ -4,27 +4,39 @@ sudo apt update
 sudo apt upgrade
 
 sudo apt install -y \
+    afl \
     build-essential \
     ccache \
     curl \
+    doxygen \
     exuberant-ctags \
+    ffmpeg \
+    fish \
     gdb \
     git \
     gnupg \
+    gparted \
     graphviz \
     htop \
     lcov \
+    libsqlite3-dev \
     libxml2-dev \
+    lldb \
     nasm \
     nodejs \
     python \
     python-dev \
+    python-pip \
     re2c \
     scrot \
     silversearcher-ag \
     tig \
+    tig \
     tmux \
+    tree \
+    unrar \
     weechat-curses weechat-plugins \
+    xz-utils \
     zsh
 
 sudo apt remove vim vim-runtime gvim
