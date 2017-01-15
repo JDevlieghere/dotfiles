@@ -7,7 +7,7 @@ function __refresh_gpg_agent_info -d "Reload ~/.gpg-agent-info into environment"
 end
 
 if not set -q -x GPG_AGENT_INFO
-	gpg-agent --daemon --write-env-file ~/.gpg-agent-info >/dev/null
+	gpg-agent --daemon --write-env-file ~/.gpg-agent-info > /dev/null ^ /dev/null
 end
 
 if test -f ~/.gpg-agent-info
@@ -16,7 +16,7 @@ if test -f ~/.gpg-agent-info
 	gpg-connect-agent /bye ^/dev/null
 	if test $status -eq 1
 		pkill -U $USER gpg-agent
-		gpg-agent --daemon --write-env-file ~/.gpg-agent-info >/dev/null
+		gpg-agent --daemon --write-env-file ~/.gpg-agent-info > /dev/null ^ /dev/null
 		__refresh_gpg_agent_info
 	end
 end
