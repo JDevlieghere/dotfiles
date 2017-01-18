@@ -140,7 +140,7 @@ set mouse=nicr                  " Disable mouse
 " Typos
 cnoreabbrev W w
 cnoreabbrev Q q
-command Qa :qa!
+command! Qa :qa!
 
 " Italics
 highlight Comment cterm=italic
@@ -258,6 +258,7 @@ let g:signify_vcs_list = [ 'git', 'hg', 'svn' ]
 let g:fzf_buffers_jump=1
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
+vnoremap ag y :Ag <C-R>"<CR>        " Ag for visual selection
 
 " Airline
 let g:airline_powerline_fonts=1
