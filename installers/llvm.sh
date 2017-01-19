@@ -11,29 +11,38 @@
 if [ -z "$1" ]; then
     TYPE="Debug"
 else
-    TYPE="Release"
+    TYPE="$1"
 fi
 
 ROOT=$(pwd)
 
-# LLVM
-git clone http://llvm.org/git/llvm.git
-cd "$ROOT/llvm" || exit
+if [[ ! -e llvm ]]; then
+    # LLVM
+    git clone http://llvm.org/git/llvm.git
+    cd "$ROOT/llvm" || exit
 
-# Compiler-RT
-cd "$ROOT/llvm/projects" || exit
-git clone http://llvm.org/git/compiler-rt.git
+    # Compiler-RT
+    cd "$ROOT/llvm/projects" || exit
+    git clone http://llvm.org/git/compiler-rt.git
 
-# Clang
-cd "$ROOT/llvm/tools" || exit
-git clone http://llvm.org/git/clang.git
+    # Clang
+    cd "$ROOT/llvm/tools" || exit
+    git clone http://llvm.org/git/clang.git
 
-# Clang-tools-extra
-cd "$ROOT/llvm/tools/clang/tools" || exit
-git clone http://llvm.org/git/clang-tools-extra.git extra
+    # Clang-tools-extra
+    cd "$ROOT/llvm/tools/clang/tools" || exit
+    git clone http://llvm.org/git/clang-tools-extra.git extra
+fi
 
 # Create build folder
 cd "$ROOT" || exit
-mkdir build || exit
+mkdir -p build
 cd build || exit
-cmake -G Ninja ../llvm -DCMAKE_INSTALL_PREFIX="$ROOT/install" -DCMAKE_BUILD_TYPE="$TYPE"
+
+# Run Cmake
+cmake ../llvm \
+    -G Ninja \
+    -DCMAKE_INSTALL_PREFIX="$ROOT/install" \
+    -DCMAKE_BUILD_TYPE="$TYPE" \
+    -DBUILD_SHARED_LIBS=ON \
+    -DLLVM_TARGETS_TO_BUILD="ARM;X86"
