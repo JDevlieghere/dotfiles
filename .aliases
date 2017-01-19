@@ -33,3 +33,9 @@ alias cformat='clang-format -style=file -i (find . -name \*.h -print -o -name \*
 
 # View dirty memory
 alias dirty='watch grep -e Dirty: -e Writeback: /proc/meminfo'
+
+# CPU temperature with sensors
+alias cputemp='sensors'
+
+# GPU temperature with NVIDIA System Management Interface
+alias gputemp='nvidia-smi -q -d temperature'

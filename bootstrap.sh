@@ -35,7 +35,7 @@ doInstall() {
         source "$DOTFILES/installers/brew.sh"
     fi
 
-    source "$DOTFILES/installers/python.sh"
+    sudo "$DOTFILES/installers/python.sh"
 }
 
 doFonts() {
