@@ -24,9 +24,10 @@ brew install gcc --without-multilib
 brew install gdb
 brew install git
 brew install gnu-sed --with-default-names
-brew install gnupg
 brew install gnutls
 brew install go
+brew install gpg
+brew install gpg-agent
 brew install graphviz
 brew install highlight
 brew install htop
