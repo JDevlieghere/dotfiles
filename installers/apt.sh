@@ -19,17 +19,20 @@ sudo apt install -y \
     graphviz \
     htop \
     lcov \
+    liblzma-dev \
     libsqlite3-dev \
     libxml2-dev \
     lldb \
     lm-sensors \
     nasm \
+    nfs-common \
     nodejs \
     python \
     python-dev \
     python-pip \
     re2c \
     scrot \
+    shellcheck \
     silversearcher-ag \
     tig \
     tig \
@@ -40,7 +43,7 @@ sudo apt install -y \
     xz-utils \
     zsh
 
-# Install latest Vim
+# Install latest Vim from source
 # https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
 sudo apt remove vim vim-runtime gvim
 
@@ -52,7 +55,7 @@ if [ $? != 0 ] ; then
         ruby-dev
 
     git clone https://github.com/vim/vim.git ~/vim
-    cd ~/vim
+    cd ~/vim || exit 1
     ./configure --with-features=huge \
                 --enable-multibyte \
                 --enable-rubyinterp \
