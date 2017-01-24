@@ -54,3 +54,6 @@ brew install zsh
 
 # Cleanup
 brew cleanup
+
+# Link applications
+brew linkapps
