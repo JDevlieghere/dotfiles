@@ -33,12 +33,21 @@ self-explanatory. For C++ development, I rely heavily on
 [a better
 .ycm_extra_conf.py](https://jonasdevlieghere.com/a-better-youcompleteme-config/).
 
-## macOS
+## OS Specific Configuration
 
-The `.macos` file contains some sensible defaults for OSX, heavily inspired by
-[Mathias Bynens'
-dotfiles](https://github.com/mathiasbynens/dotfiles/blob/master/.osx). These
-are automatically set on running the bootstrap script under macOS.
+The shell scripts in the `os` folder contains configurations for different
+operating systems. These files are automatically executed when running the
+bootstrap script under the corresponding operating system.
+
+### macOS
+
+The `os/macos.sh` file contains some sensible defaults for OSX. The file is
+heavily inspired by [Mathias Bynens'
+dotfiles](https://github.com/mathiasbynens/dotfiles/blob/master/.macos).
+
+### Linux
+
+The `os/linux.sh` file contains some configuration values for Gnome 3.
 
 ## tmux
 

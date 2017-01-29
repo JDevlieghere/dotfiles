@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-pushd `dirname $0` > /dev/null
+pushd "dirname $0" > /dev/null
 DOTFILES=`pwd -P`
 popd > /dev/null
 
@@ -54,7 +54,11 @@ doConfig() {
     info "Configuring"
     if [ "$(uname)" == "Darwin" ]; then
         echo "Configuring OSX"
-        source "$DOTFILES/.macos"
+        source "$DOTFILES/os/macos.sh"
+    fi
+    if [ "$(uname)" == "Linux" ]; then
+        echo "Configuring Linux"
+        source "$DOTFILES/os/linux.sh"
     fi
     echo "Configuring global gitignore"
     git config --global core.excludesfile ~/.gitignore_global
@@ -72,7 +76,7 @@ if [ "$1" == "--sync" ]; then
     doSync
 elif [ "$1" == "--install" ]; then
     doInstall
-elif [ "$1" == "--fonts" ]; then
+elif [ "$2" == "--fonts" ]; then
     doFonts
 else
     doAll
