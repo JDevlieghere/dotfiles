@@ -19,6 +19,7 @@ sudo apt install -y \
     graphviz \
     htop \
     lcov \
+    libboost-all-dev \
     liblzma-dev \
     libsqlite3-dev \
     libxml2-dev \
@@ -75,3 +76,7 @@ fi
 
 # Setup Sensors
 sudo sensors-detect
+
+# Cleanup
+sudo apt autoremove
+sudo apt autoclean

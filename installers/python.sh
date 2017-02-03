@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
 # Make sure we have the latest version
-pip install --upgrade pip
+sudo pip install --upgrade pip
 
 # Install packages
-pip install gprof2dot
-pip install haxor-news
-pip install numpy
-pip install pandas
-pip install scipy
-pip install voltron
+sudo pip install gprof2dot
+sudo pip install haxor-news
+sudo pip install mkdocs
+sudo pip install numpy
+sudo pip install pandas
+sudo pip install scipy
+sudo pip install voltron
