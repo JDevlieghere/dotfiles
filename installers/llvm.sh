@@ -17,19 +17,28 @@ fi
 ROOT=$(pwd)
 
 if [[ ! -e llvm ]]; then
-    # LLVM
+    # llvm
     git clone http://llvm.org/git/llvm.git
     cd "$ROOT/llvm" || exit
 
-    # Compiler-RT
+    # compiler-RT
     cd "$ROOT/llvm/projects" || exit
     git clone http://llvm.org/git/compiler-rt.git
 
-    # Clang
+    # libcxx and libcxxabi
+    cd "$ROOT/llvm/projects" || exit
+    git clone http://llvm.org/git/libcxx.git
+    git clone http://llvm.org/git/libcxxabi.git
+
+    # lld
+    cd "$ROOT/llvm/tools" || exit
+    git clone http://llvm.org/git/lld.git
+
+    # clang
     cd "$ROOT/llvm/tools" || exit
     git clone http://llvm.org/git/clang.git
 
-    # Clang-tools-extra
+    # clang-tools-extra
     cd "$ROOT/llvm/tools/clang/tools" || exit
     git clone http://llvm.org/git/clang-tools-extra.git extra
 fi
