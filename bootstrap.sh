@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-pushd "dirname $0" > /dev/null
-DOTFILES=`pwd -P`
-popd > /dev/null
+DOTFILES=$(pwd -P)
 
 info () {
     printf "\033[00;34m$@\033[0m\n"
@@ -17,6 +15,7 @@ doSync() {
     info "Syncing"
     rsync --exclude ".git/" \
         --exclude "installers/" \
+        --exclude "os/" \
         --exclude ".DS_Store"  \
         --exclude "bootstrap.sh" \
         --exclude "README.md" \
@@ -27,40 +26,46 @@ doSync() {
 
 doInstall() {
     info "Installing Extras"
+
+    # Plug.vim
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+    # Tmux Plugin Manager
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+    # FZF
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-
-    if [ "$(uname)" == "Darwin" ]; then
-        source "$DOTFILES/installers/brew.sh"
-    fi
-
-    sudo "$DOTFILES/installers/python.sh"
+    ~/.fzf/install
 }
 
 doFonts() {
     info "Installing Fonts"
+
     if [ "$(uname)" == "Darwin" ]; then
         fonts=~/Library/Fonts
-    elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    elif [ "$(uname)" == "Linux" ]; then
         fonts=~/.fonts
         mkdir -p "$fonts"
     fi
 
-    find "$DOTFILES/fonts/" -name "*.[o,t]tf" -type f | while read file; do cp -v "$file" "$fonts"; done
+    find "$DOTFILES/fonts/" -name "*.[o,t]tf" -type f | while read -r file
+do
+    cp -v "$file" "$fonts"
+done
 }
 
 doConfig() {
     info "Configuring"
+
     if [ "$(uname)" == "Darwin" ]; then
-        echo "Configuring OSX"
-        source "$DOTFILES/os/macos.sh"
-    fi
-    if [ "$(uname)" == "Linux" ]; then
+        echo "Configuring macOS"
+        ./os/macos.sh
+    elif [ "$(uname)" == "Linux" ]; then
         echo "Configuring Linux"
-        source "$DOTFILES/os/linux.sh"
+        ./os/linux.sh
     fi
-    echo "Configuring global gitignore"
+
+    echo  "Configuring global gitignore"
     git config --global core.excludesfile ~/.gitignore_global
 }
 
@@ -72,12 +77,47 @@ doAll() {
     doConfig
 }
 
-if [ "$1" == "--sync" ]; then
-    doSync
-elif [ "$1" == "--install" ]; then
-    doInstall
-elif [ "$2" == "--fonts" ]; then
-    doFonts
+doHelp() {
+    echo "Usage: $(basename "$0") [options]" >&2
+    echo
+    echo "   -s, --sync             Synchronizes dotfiles to home directory"
+    echo "   -i, --install          Install (extra) software"
+    echo "   -f, --fonts            Copies font files"
+    echo "   -c, --config           Configures your system"
+    echo "   -a, --all              Does all of the above"
+    echo
+    exit 1
+}
+if [ $# -eq 0 ]; then
+    doHelp
 else
-    doAll
+    for i in "$@"
+    do
+        case $i in
+            -s|--sync)
+                doSync
+                shift
+                ;;
+            -i|--install)
+                doInstall
+                shift
+                ;;
+            -f|--fonts)
+                doFonts
+                shift
+                ;;
+            -c|--config)
+                doConfig
+                shift
+                ;;
+            -a|--all)
+                doAll
+                shift
+                ;;
+            *)
+                doHelp
+                shift
+                ;;
+        esac
+    done
 fi
