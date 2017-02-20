@@ -29,11 +29,20 @@ SOURCE_EXTENSIONS = [
         '.mm'
         ]
 
+SOURCE_DIRECTORIES = [
+        'src',
+        'lib'
+        ]
+
 HEADER_EXTENSIONS = [
         '.h',
         '.hxx',
         '.hpp',
         '.hh'
+        ]
+
+HEADER_DIRECTORIES = [
+        'include'
         ]
 
 def IsHeaderFile(filename):
@@ -44,11 +53,20 @@ def GetCompilationInfoForFile(database, filename):
     if IsHeaderFile(filename):
         basename = os.path.splitext(filename)[0]
         for extension in SOURCE_EXTENSIONS:
+            # Get info from the source files by replacing the extension.
             replacement_file = basename + extension
             if os.path.exists(replacement_file):
                 compilation_info = database.GetCompilationInfoForFile(replacement_file)
                 if compilation_info.compiler_flags_:
                     return compilation_info
+            # If that wasn't successful, try replacing possible header directory with possible source directories.
+            for header_dir in HEADER_DIRECTORIES:
+                for source_dir in SOURCE_DIRECTORIES:
+                    src_file = replacement_file.replace(header_dir, source_dir)
+                    if os.path.exists(src_file):
+                        compilation_info = database.GetCompilationInfoForFile(src_file)
+                        if compilation_info.compiler_flags_:
+                            return compilation_info
         return None
     return database.GetCompilationInfoForFile(filename)
 
