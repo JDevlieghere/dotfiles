@@ -39,3 +39,6 @@ alias cputemp='sensors'
 
 # GPU temperature with NVIDIA System Management Interface
 alias gputemp='nvidia-smi -q -d temperature'
+
+# CPU Clock Speed
+alias clockspeed='watch -n 0 "lscpu | grep \'MHz\'"'
