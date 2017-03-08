@@ -2,10 +2,10 @@
 
 # Get the latest release
 git clone https://github.com/Kitware/CMake.git ~/CMake
-cd ~/CMake
+cd ~/CMake || exit 1
 git checkout release
 
 # Install CMake
 ./bootstrap
-make
+make -j
 sudo make install
