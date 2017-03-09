@@ -19,6 +19,7 @@
 [help]
 	autocorrect = 1
 [alias]
+	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	aa = add -A
 	ca = commit -vam
 	ci = commit -v

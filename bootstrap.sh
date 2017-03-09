@@ -22,6 +22,9 @@ doSync() {
         --exclude ".gitignore" \
         --filter=':- .gitignore' \
         -avh --no-perms . ~;
+
+    # The .gitconfig was overwritten so reconfigure it.
+    git config --global core.excludesfile ~/.gitignore_global
 }
 
 doInstall() {
@@ -64,9 +67,6 @@ doConfig() {
         echo "Configuring Linux"
         ./os/linux.sh
     fi
-
-    echo  "Configuring global gitignore"
-    git config --global core.excludesfile ~/.gitignore_global
 }
 
 doAll() {
