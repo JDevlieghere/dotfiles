@@ -7,11 +7,18 @@
 # └── llvm
 
 
-# LLVM Configuration
+# LLVM Build Type
 if [ -z "$1" ]; then
     TYPE="Debug"
 else
     TYPE="$1"
+fi
+
+# Without a second argument only LLVM and clang will be built.
+if [ -z "$2" ]; then
+    ALL=false
+else
+    ALL=true
 fi
 
 ROOT=$(pwd)
@@ -21,26 +28,29 @@ if [[ ! -e llvm ]]; then
     git clone http://llvm.org/git/llvm.git
     cd "$ROOT/llvm" || exit
 
-    # compiler-RT
-    cd "$ROOT/llvm/projects" || exit
-    git clone http://llvm.org/git/compiler-rt.git
-
-    # libcxx and libcxxabi
-    cd "$ROOT/llvm/projects" || exit
-    git clone http://llvm.org/git/libcxx.git
-    git clone http://llvm.org/git/libcxxabi.git
-
-    # lld
-    cd "$ROOT/llvm/tools" || exit
-    git clone http://llvm.org/git/lld.git
-
     # clang
     cd "$ROOT/llvm/tools" || exit
     git clone http://llvm.org/git/clang.git
 
-    # clang-tools-extra
-    cd "$ROOT/llvm/tools/clang/tools" || exit
-    git clone http://llvm.org/git/clang-tools-extra.git extra
+    if [ "$ALL" = true ]; then
+        # compiler-RT
+        cd "$ROOT/llvm/projects" || exit
+        git clone http://llvm.org/git/compiler-rt.git
+
+        # libcxx and libcxxabi
+        cd "$ROOT/llvm/projects" || exit
+        git clone http://llvm.org/git/libcxx.git
+        git clone http://llvm.org/git/libcxxabi.git
+
+        # lld
+        cd "$ROOT/llvm/tools" || exit
+        git clone http://llvm.org/git/lld.git
+
+
+        # clang-tools-extra
+        cd "$ROOT/llvm/tools/clang/tools" || exit
+        git clone http://llvm.org/git/clang-tools-extra.git extra
+    fi
 fi
 
 # Create build folder
