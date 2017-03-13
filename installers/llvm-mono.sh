@@ -29,5 +29,4 @@ cmake ../llvm-project/llvm \
     -DLLVM_ENABLE_PROJECTS="$*" \
     -DCMAKE_INSTALL_PREFIX="$TOP_LEVEL_DIR/install" \
     -DCMAKE_BUILD_TYPE="Debug" \
-    -DBUILD_SHARED_LIBS=ON \
-    -DLLVM_TARGETS_TO_BUILD="ARM;X86"
+    -DBUILD_SHARED_LIBS=ON
