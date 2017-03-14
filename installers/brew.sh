@@ -23,6 +23,7 @@ brew install fish
 brew install gcc --without-multilib
 brew install gdb
 brew install git
+brew install git-lfs
 brew install gnu-sed --with-default-names
 brew install gnutls
 brew install go
