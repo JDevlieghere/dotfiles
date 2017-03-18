@@ -35,6 +35,7 @@ Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 Plug 'vim-scripts/DoxygenToolkit.vim', { 'for': 'cpp' }
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 " Golang
 Plug 'fatih/vim-go', { 'for': 'go' }
