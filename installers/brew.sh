@@ -36,6 +36,7 @@ brew install lcov
 brew install libxml2
 brew install lua
 brew install macvim --with-override-system-vim
+brew install ncdu
 brew install ninja
 brew install node
 brew install python
