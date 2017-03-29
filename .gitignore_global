@@ -44,3 +44,6 @@ tags
 # Ninja
 .ninja_deps
 .ninja_log
+
+# CMake
+compile_commands.json
