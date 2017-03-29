@@ -14,7 +14,7 @@ Plug 'chriskempson/base16-vim'
 " Plug-ins
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'ciaranm/detectindent'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
@@ -38,7 +38,7 @@ Plug 'vim-scripts/DoxygenToolkit.vim', { 'for': 'cpp' }
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 " Golang
-Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'for': 'go' }
 
 " Haskell
 Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
