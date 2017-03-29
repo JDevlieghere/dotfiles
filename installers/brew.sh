@@ -41,6 +41,7 @@ brew install ninja
 brew install node
 brew install python
 brew install radare2
+brew install ranger
 brew install reattach-to-user-namespace
 brew install rust
 brew install tig

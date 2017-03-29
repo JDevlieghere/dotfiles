@@ -27,6 +27,7 @@ sudo apt install -y \
     nodejs \
     python \
     python-pip \
+    ranger \
     re2c \
     scrot \
     shellcheck \
