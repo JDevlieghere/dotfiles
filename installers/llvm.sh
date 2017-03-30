@@ -63,5 +63,4 @@ cmake ../llvm \
     -G Ninja \
     -DCMAKE_INSTALL_PREFIX="$ROOT/install" \
     -DCMAKE_BUILD_TYPE="$TYPE" \
-    -DBUILD_SHARED_LIBS=ON \
-    -DLLVM_TARGETS_TO_BUILD="ARM;X86"
+    -DBUILD_SHARED_LIBS=ON
