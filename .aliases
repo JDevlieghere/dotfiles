@@ -43,5 +43,8 @@ alias gputemp='nvidia-smi -q -d temperature'
 # CPU Clock Speed
 alias clockspeed='watch -n 0 "lscpu | grep \'MHz\'"'
 
+# Show CCache stats
+alias ccaches='watch -n 0 "ccache -s"'
+
 # rsync with progress
 alias psync='rsync --info=progress2'
