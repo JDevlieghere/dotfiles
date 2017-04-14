@@ -2,7 +2,7 @@
 settings set target.inline-breakpoint-strategy always
 
 # Always break after the dynamic linker is finished
-settings set target.process.stop-on-sharedlibrary-events on
+# settings set target.process.stop-on-sharedlibrary-events on
 
 # Always print the dynamic type of the result of an expression
 settings set target.prefer-dynamic-value run-target
