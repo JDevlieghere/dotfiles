@@ -24,6 +24,7 @@ sudo apt install -y \
     lm-sensors \
     nasm \
     nfs-common \
+    neofetch \
     nodejs \
     python \
     python-pip \
