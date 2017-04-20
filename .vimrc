@@ -142,7 +142,7 @@ set mouse=nicr                  " Disable mouse
 " Typos
 cnoreabbrev W w
 cnoreabbrev Q q
-command! Qa :qa!
+cnoreabbrev Qa qa
 
 " Italics
 highlight Comment cterm=italic
