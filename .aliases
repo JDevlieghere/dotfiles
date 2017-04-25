@@ -35,10 +35,10 @@ alias cformat='clang-format -style=file -i (find . -name \*.h -print -o -name \*
 alias dirty='watch grep -e Dirty: -e Writeback: /proc/meminfo'
 
 # CPU temperature with sensors
-alias cputemp='sensors'
+alias cputemp='watch -n 0 "sensors | grep Core"'
 
 # GPU temperature with NVIDIA System Management Interface
-alias gputemp='nvidia-smi -q -d temperature'
+alias gputemp='watch -n 0 "nvidia-smi -q -d temperature"'
 
 # CPU Clock Speed
 alias clockspeed='watch -n 0 "lscpu | grep \'MHz\'"'

@@ -14,7 +14,7 @@ BASE_FLAGS = [
         '-fexceptions',
         '-ferror-limit=10000',
         '-DNDEBUG',
-        '-std=c++11',
+        '-std=c++14',
         '-xc++',
         '-I/usr/lib/',
         '-I/usr/include/'

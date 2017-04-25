@@ -27,8 +27,10 @@ doSync() {
     git config --global core.excludesfile ~/.gitignore_global
 
     # Copy files that have different locations on macOS and Linux.
-    cp -f "$HOME/.config/Code/User/settings.json" \
-        "$HOME/Library/Application Support/Code/User/settings.json"
+    if [ -d "$HOME/Library/Application Support/Code/User/" ]; then
+        cp -f "$HOME/.config/Code/User/settings.json" \
+            "$HOME/Library/Application Support/Code/User/settings.json"
+    fi
 }
 
 doInstall() {
