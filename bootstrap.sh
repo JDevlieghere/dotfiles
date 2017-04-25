@@ -25,6 +25,10 @@ doSync() {
 
     # The .gitconfig was overwritten so reconfigure it.
     git config --global core.excludesfile ~/.gitignore_global
+
+    # Copy files that have different locations on macOS and Linux.
+    cp -f "$HOME/.config/Code/User/settings.json" \
+        "$HOME/Library/Application Support/Code/User/settings.json"
 }
 
 doInstall() {
