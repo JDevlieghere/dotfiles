@@ -1,10 +1,17 @@
 {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "C_Cpp.clang_format_formatOnSave": true,
+    "C_Cpp.intelliSenseEngine": "Default",
+    "C_Cpp.clang_format_fallbackStyle": "LLVM",
     "[cpp]": {
         "editor.quickSuggestions": true
     },
     "[c]": {
         "editor.quickSuggestions": true
-    },
-    "editor.fontFamily": "'Operator Mono', Menlo, Monaco, 'Courier New', monospace",
-    "editor.tabSize": 2
+    }
 }
