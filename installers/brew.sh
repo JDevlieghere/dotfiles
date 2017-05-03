@@ -29,7 +29,8 @@ brew install gnupg
 brew install gnutls
 brew install go
 brew install gpg-agent
-brew install graphviz
+brew install graphviz --with-gts
+brew install gts
 brew install highlight
 brew install htop
 brew install lcov
