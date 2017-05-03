@@ -104,11 +104,11 @@ set nu                          " Show line numbers
 set colorcolumn=80,120          " Show ruler columns
 
 " Cursor Line
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
-augroup END
+"augroup CursorLine
+" au!
+" au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+" au WinLeave * setlocal nocursorline
+"augroup END
 
 " Scrolling
 set scrolloff=3                 " Keep at least 3 lines above/below
