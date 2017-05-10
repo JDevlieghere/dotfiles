@@ -16,14 +16,13 @@ doSync() {
     rsync --exclude ".git/" \
         --exclude "installers/" \
         --exclude "os/" \
-        --exclude ".DS_Store"  \
         --exclude "bootstrap.sh" \
         --exclude "README.md" \
         --exclude ".gitignore" \
         --filter=':- .gitignore' \
         -avh --no-perms . ~;
 
-    # The .gitconfig was overwritten so reconfigure it.
+    # The .gitconfig will be overwritten; reconfigure it.
     git config --global core.excludesfile ~/.gitignore_global
 
     # Copy files that have different locations on macOS and Linux.
@@ -36,10 +35,10 @@ doSync() {
 doInstall() {
     info "Installing Extras"
 
-    # Plug.vim
+    # plug.vim
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-    # Tmux Plugin Manager
+    # tmux Plugin Manager
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
     # FZF
@@ -58,9 +57,9 @@ doFonts() {
     fi
 
     find "$DOTFILES/fonts/" -name "*.[o,t]tf" -type f | while read -r file
-do
-    cp -v "$file" "$fonts"
-done
+    do
+        cp -v "$file" "$fonts"
+    done
 }
 
 doConfig() {
