@@ -11,6 +11,7 @@ fi
 brew install afl-fuzz
 brew install ag
 brew install binutils
+brew install boost
 brew install ccache
 brew install cloc
 brew install cmake
@@ -56,6 +57,12 @@ brew install wget --with-iri
 brew install wireshark --with-qt5
 brew install xz
 brew install zsh
+
+# Install casks
+brew cask install google-chrome
+brew cask install iterm2
+brew cask install tunnelblick
+brew cask install vlc
 
 # Cleanup
 brew cleanup
