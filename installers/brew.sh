@@ -35,6 +35,7 @@ brew install gts
 brew install highlight
 brew install htop
 brew install lcov
+brew install libiconv
 brew install libxml2
 brew install lua
 brew install macvim --with-override-system-vim
