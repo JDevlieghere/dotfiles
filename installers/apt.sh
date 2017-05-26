@@ -6,6 +6,7 @@ sudo apt upgrade
 # Essentials
 sudo apt install -y \
     afl \
+    arc-theme \
     build-essential \
     ccache \
     curl \

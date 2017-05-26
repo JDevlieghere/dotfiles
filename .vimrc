@@ -148,10 +148,6 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qa qa
 
-" Italics
-highlight Comment cterm=italic
-highlight htmlArg cterm=italic
-
 " Wrapping
 set nowrap                      " No wrapping
 set linebreak                   " When wrapping, only at certain characters
