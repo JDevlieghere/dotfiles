@@ -235,7 +235,7 @@ if has("gui_running")
     set vb t_vb=                " Disable visual bell
     set guioptions-=L           " Hide scroll bars
     set lines=999 columns=999   " Start maximized
-    set guifont=Operator\ Mono\ For\ Powerline:h14
+    set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 endif
 
 " Copy filename:linenumber to clipboard
