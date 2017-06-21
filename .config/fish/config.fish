@@ -1,5 +1,5 @@
 # No greeting.
-set --erase fish_greeting
+set fish_greeting
 
 # Source dotfiles.
 source ~/.aliases
