@@ -42,7 +42,9 @@ if test -e $HOME/.cabal
 end
 
 # CCache
-set PATH /usr/lib/ccache $PATH
+if test -e /usr/lib/ccache
+  set PATH /usr/lib/ccache $PATH
+end
 if test -e /usr/local/opt/ccache
   set PATH /usr/local/opt/ccache/libexec $PATH
 end

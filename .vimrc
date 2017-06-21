@@ -179,7 +179,10 @@ autocmd FileType text setlocal spell
 autocmd FileType rst setlocal spell
 
 " Doxygen
-autocmd Filetype c,cpp set comments^=:///
+autocmd FileType c,cpp set comments^=:///
+
+" Crontab
+autocmd FileType crontab setlocal nobackup nowritebackup
 
 " Disable visual bell
 set noeb vb t_vb=
