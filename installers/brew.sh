@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Install Homebrew or make sure it's up to date
 which -s brew
 if [[ $? != 0 ]] ; then
