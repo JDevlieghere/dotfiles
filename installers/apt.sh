@@ -11,6 +11,7 @@ sudo apt install -y \
     ccache \
     curl \
     doxygen \
+    dtrx \
     exuberant-ctags \
     ffmpeg \
     fish \

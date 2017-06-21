@@ -15,6 +15,7 @@ brew install boost
 brew install ccache
 brew install cloc
 brew install cmake
+brew install dtrx
 brew install coreutils --with-default-names
 brew install ctags
 brew install doxygen
