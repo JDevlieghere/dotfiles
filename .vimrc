@@ -297,15 +297,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 let g:ycm_extra_conf_globlist=['~/.vim/*']
-let g:ycm_always_populate_location_list = 0
-let g:ycm_auto_trigger=1
-let g:ycm_enable_diagnostic_highlighting=1
-let g:ycm_enable_diagnostic_signs=1
-let g:ycm_max_diagnostics_to_display=10000
-let g:ycm_min_num_identifier_candidate_chars=0
-let g:ycm_min_num_of_chars_for_completion=2
-let g:ycm_open_loclist_on_ycm_diags=1
-let g:ycm_show_diagnostics_ui=1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_filetype_blacklist={
             \ 'vim' : 1,
@@ -319,6 +310,7 @@ let g:ycm_filetype_blacklist={
             \ 'vimwiki' : 1,
             \ 'pandoc' : 1,
             \ 'infolog' : 1,
+            \ 'objc' : 1,
             \ 'mail' : 1
             \}
 
@@ -359,9 +351,9 @@ let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq = 0
 
 " Syntastic Checkers
-let g:syntastic_cpp_checkers=['cppcheck']
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_python_checkers=['pylint']
+let g:syntastic_cpp_checkers=['clang_check', 'clang_tidy', 'gcc', 'cppcheck']
+let g:syntastic_javascript_checkers = ['jshint', 'jslint']
+let g:syntastic_python_checkers=['pylint','pyflakes']
 
 " Dispatch
 nnoremap <F5> :Make<CR>
