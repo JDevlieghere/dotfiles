@@ -17,10 +17,11 @@ brew install boost
 brew install ccache
 brew install cloc
 brew install cmake
-brew install dtrx
 brew install coreutils --with-default-names
+brew install cppcheck
 brew install ctags
 brew install doxygen
+brew install dtrx
 brew install ffmpeg
 brew install findutils --with-default-names
 brew install fish

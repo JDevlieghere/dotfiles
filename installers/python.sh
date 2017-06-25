@@ -4,10 +4,14 @@
 sudo pip install --upgrade pip
 
 # Install packages
-sudo pip install gprof2dot
-sudo pip install haxor-news
-sudo pip install mkdocs
-sudo pip install numpy
-sudo pip install pandas
-sudo pip install scipy
-sudo pip install voltron
+sudo pip install --upgrade gprof2dot
+sudo pip install --upgrade haxor-news
+sudo pip install --upgrade mkdocs
+sudo pip install --upgrade mkdocs
+sudo pip install --upgrade mkdocs-material
+sudo pip install --upgrade numpy
+sudo pip install --upgrade pandas
+sudo pip install --upgrade pyflakes
+sudo pip install --upgrade pylint
+sudo pip install --upgrade scipy
+sudo pip install --upgrade voltron
