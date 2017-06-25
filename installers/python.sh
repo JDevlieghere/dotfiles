@@ -4,6 +4,7 @@
 sudo pip install --upgrade pip
 
 # Install packages
+sudo pip install --upgrade autopep8
 sudo pip install --upgrade gprof2dot
 sudo pip install --upgrade haxor-news
 sudo pip install --upgrade mkdocs
