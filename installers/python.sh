@@ -16,3 +16,4 @@ sudo pip install --upgrade pyflakes
 sudo pip install --upgrade pylint
 sudo pip install --upgrade scipy
 sudo pip install --upgrade voltron
+sudo pip install --upgrade yapf
