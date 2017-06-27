@@ -56,6 +56,9 @@ Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
+" Python
+Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
+
 " YouCompleteMe
 if has("python")
     Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer --gocode-completer --tern-completer --racer-completer' }
