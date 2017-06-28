@@ -28,6 +28,7 @@ sudo apt install -y \
     nfs-common \
     neofetch \
     nodejs \
+    npm \
     python \
     python-pip \
     ranger \

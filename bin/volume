@@ -1,8 +1,0 @@
-#!/bin/sh
-# Script to display current volume in xmobar
-# Author: Jonas Devlieghere
-# https://github.com/JDevlieghere/dotfiles
-
-VOLUME=$(amixer get Master | egrep -o "[0-9]+%")
-echo "Volume: ${VOLUME}"
-

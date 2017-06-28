@@ -1,8 +1,0 @@
-[
-	{
-		"button": "button1",
-		"count": 1,
-		"modifiers": ["ctrl"],
-		"command": "navigate_to_definition"
-	}
-]
