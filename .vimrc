@@ -19,7 +19,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
-Plug 'rhysd/vim-clang-format'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-dispatch'
@@ -55,9 +54,6 @@ Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 " Rust
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-
-" Python
-Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 " YouCompleteMe
 if has("python")
@@ -339,6 +335,7 @@ nnoremap <silent> <Leader>yt :YcmCompleter GetType<CR>
 
 " AutoFormat
 let g:formatdef_clangformat='"clang-format -style=file"'
+let g:formatter_yapf_style = 'pep8'
 
 " Doxygen
 let g:DoxygenToolkit_commentType = "C++"
