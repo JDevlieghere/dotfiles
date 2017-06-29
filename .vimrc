@@ -191,8 +191,8 @@ set iskeyword-=.                " '.' is an end of word designator
 set iskeyword-=#                " '#' is an end of word designator
 
 " Wrapping
-vmap Q gq                       " Wrap the current visual selection
-nmap Q gqap                     " Wrap the current paragraph
+vnoremap Q gq                   " Wrap the current visual selection
+nnoremap Q gqap                 " Wrap the current paragraph
 
 " Cycle through buffers with (ctrl) tab
 nnoremap <silent> <Tab> :bnext<CR>
@@ -334,8 +334,7 @@ nnoremap <silent> <Leader>yi :YcmCompleter GoToInclude<CR>
 nnoremap <silent> <Leader>yt :YcmCompleter GetType<CR>
 
 " AutoFormat
-let g:formatdef_clangformat='"clang-format -style=file"'
-let g:formatter_yapf_style = 'pep8'
+noremap <F3> :Autoformat<CR>
 
 " Doxygen
 let g:DoxygenToolkit_commentType = "C++"
