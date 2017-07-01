@@ -1,4 +1,4 @@
-function linker -d "Symlink the given linker"
+function chld -d "Change linker"
   set --local dest /usr/local/bin/ld
   set --local source /usr/bin/$argv[1]
   if test -e $source

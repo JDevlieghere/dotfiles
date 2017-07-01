@@ -1,6 +1,6 @@
 function server -d "Start an HTTP server from a directory, \
   optionally specifying the port"
-  set ip (ipconfig getifaddr en1)
+  set ip (ipconfig getifaddr en1 ;or echo "127.0.0.1")
   if [ $argv ]
     set port $argv
   else
