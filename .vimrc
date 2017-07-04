@@ -335,6 +335,7 @@ nnoremap <silent> <Leader>yt :YcmCompleter GetType<CR>
 
 " AutoFormat
 noremap <F3> :Autoformat<CR>
+let g:formatters_python = ['yapf', 'autopep8']
 
 " Doxygen
 let g:DoxygenToolkit_commentType = "C++"
