@@ -68,28 +68,32 @@ call plug#end()
 
 " Colors & Syntax
 syntax enable                   " Enable syntax highlighting
-set background=dark             " Dark background color
+set background=dark             " Dark terminal background
 
 " Color Scheme
 colorscheme solarized           " Solarized color scheme
-highlight clear SignColumn      " Sing column same background as line numbers
+highlight clear SignColumn      " Same color for sign column and line numbers
 
 " Essentials
 filetype plugin indent on       " Enable file type support
-set encoding=utf-8              " UTF-8 encoding
+set encoding=utf-8              " Use UTF-8 encoding
 set binary                      " Enable binary support
-set hidden                      " Hide buffers
+set hidden                      " Hide buffers instead of closing them
 set showcmd                     " Show current command
 set showmode                    " Show current mode
-set autoread                    " Auto reload
+set autoread                    " Auto reload file after external command
 set ttyfast                     " Fast terminal
 set ruler                       " Show ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
-set nofoldenable                " disable folding
-set laststatus=2                " Alwasy display statusline
+set nofoldenable                " Disable folding
+set laststatus=2                " Always display the status line
+set title                       " Change terminal title
+
+" Save keystrokes
+nnoremap ; :
 
 " Crypto
-set cm=blowfish
+set cm=blowfish                 " Better encryption algorithm
 
 " Temp Files
 set nobackup                    " No backup file
@@ -102,13 +106,6 @@ set nu                          " Show line numbers
 " Rulers
 set colorcolumn=80,120          " Show ruler columns
 
-" Cursor Line
-"augroup CursorLine
-" au!
-" au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-" au WinLeave * setlocal nocursorline
-"augroup END
-
 " Scrolling
 set scrolloff=3                 " Keep at least 3 lines above/below
 set sidescrolloff=3             " Keep at least 3 lines left/right
@@ -116,10 +113,10 @@ set sidescrolloff=3             " Keep at least 3 lines left/right
 " Searching
 set incsearch                   " Incremental search
 set hlsearch                    " Highlight matches
-set ignorecase                  " Case-insensitive search
-set smartcase                   " Unless search contains uppercase letter
-set showmatch                   " Show matching bracket
-vnoremap // y/<C-R>"<CR>        " Search for visual selection
+set ignorecase                  " Case-insensitive search...
+set smartcase                   " ... unless search contains uppercase letter
+set showmatch                   " Show matching bracket/parenthesis/etc
+vnoremap // y/<C-R>"<CR>        " Search for current visual selection
 
 " Indentation
 set smarttab                    " Better tabs
@@ -148,7 +145,7 @@ cnoreabbrev Q q
 cnoreabbrev Qa qa
 
 " Wrapping
-set nowrap                      " No wrapping
+set nowrap                      " Don't wrap long lines
 set linebreak                   " When wrapping, only at certain characters
 set textwidth=0                 " Turn off physical line wrapping
 set wrapmargin=0                " Turn off physical line wrapping
@@ -177,14 +174,15 @@ autocmd FileType markdown setlocal spell
 autocmd FileType text setlocal spell
 autocmd FileType rst setlocal spell
 
-" Doxygen
+" Use doxygen style comments in C and C++
 autocmd FileType c,cpp set comments^=:///
 
 " Crontab
 autocmd FileType crontab setlocal nobackup nowritebackup
 
-" Disable visual bell
-set noeb vb t_vb=
+" Disable bell
+set visualbell                  " Disable visual bell
+set noerrorbells                " Disable error bell
 
 " Treat given characters as a word boundary
 set iskeyword-=.                " '.' is an end of word designator
@@ -194,7 +192,7 @@ set iskeyword-=#                " '#' is an end of word designator
 vnoremap Q gq                   " Wrap the current visual selection
 nnoremap Q gqap                 " Wrap the current paragraph
 
-" Cycle through buffers with (ctrl) tab
+" Cycle through buffers with (CTRL +) tab
 nnoremap <silent> <Tab> :bnext<CR>
 nnoremap <silent> <S-Tab> :bprevious<CR>
 
@@ -217,7 +215,8 @@ if has('patch-7.3.541')
     set formatoptions+=j        " Remove comment leader when joining lines
 endif
 
-" Undo
+" History
+set history=1000                " Remember more commands
 if has('persistent_undo')
     set undofile                " Persistent undo
     set undodir=~/.vim/undo     " Location to store undo history
@@ -228,6 +227,15 @@ endif
 " Recognize NASM extension
 au BufRead,BufNewFile *.nasm set filetype=nasm
 
+" Copy filename:linenumber to clipboard
+nnoremap <leader>yy :let @+=expand('%:t') . ':' . line(".")<CR>
+
+" Save file which you forgot to open with sudo
+cmap w!! w !sudo tee % >/dev/null
+
+" Remove Trailing Whitespace
+autocmd BufWritePre * :%s/\s\+$//e
+
 " GUI
 if has("gui_running")
     set vb t_vb=                " Disable visual bell
@@ -235,12 +243,6 @@ if has("gui_running")
     set lines=999 columns=999   " Start maximized
     set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 endif
-
-" Copy filename:linenumber to clipboard
-nnoremap <leader>yy :let @+=expand('%:t') . ':' . line(".")<CR>
-
-" Remove Trailing Whitespace
-autocmd BufWritePre * :%s/\s\+$//e
 
 " Watch my .vimrc
 augroup reload_myvimrc
