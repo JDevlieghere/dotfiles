@@ -24,7 +24,7 @@ export TOP_LEVEL_DIR="$TOP_LEVEL_DIR"
 export PATH=$PATH:$TOP_LEVEL_DIR/llvm-project/llvm/utils/git-svn/
 
 # Clone momorepo
-git clone https://github.com/llvm-project/llvm-project/
+git clone https://github.com/llvm-project/llvm-project-20170507/ llvm-project
 cd llvm-project || exit 1
 git config branch.master.rebase true
 
