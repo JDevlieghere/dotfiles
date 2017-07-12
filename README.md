@@ -21,8 +21,11 @@ Use the bootstrap script to synchronize the dotfiles to your home directory.
 cd ~
 git clone https://github.com/JDevlieghere/dotfiles.git
 cd dotfiles
-./bootstrap.sh
+./bootstrap.sh -a
 ```
+
+If you decide to use this configuration as is, don't forget to change your name
+and e-mail address in the `.gitconfig` and `.hgrc` files.
 
 ## Vim & YouCompleteMe
 
