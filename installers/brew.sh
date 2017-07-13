@@ -65,6 +65,7 @@ brew install xz
 brew install zsh
 
 # Install casks
+brew cask install aerial
 brew cask install google-chrome
 brew cask install iterm2
 brew cask install tunnelblick
