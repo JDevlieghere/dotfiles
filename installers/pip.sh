@@ -14,6 +14,7 @@ sudo pip install --upgrade numpy
 sudo pip install --upgrade pandas
 sudo pip install --upgrade pyflakes
 sudo pip install --upgrade pylint
+sudo pip install --upgrade rtv
 sudo pip install --upgrade scipy
 sudo pip install --upgrade voltron
 sudo pip install --upgrade yapf
