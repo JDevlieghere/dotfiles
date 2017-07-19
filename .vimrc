@@ -12,12 +12,12 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'chriskempson/base16-vim'
 
 " Plug-ins
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'ciaranm/detectindent'
 Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-startify'
 Plug 'moll/vim-bbye'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
