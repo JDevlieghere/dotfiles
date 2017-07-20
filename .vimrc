@@ -17,7 +17,7 @@ Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
-Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify', { 'do': 'mkdir -p $HOME/.vim/files/info/' }
 Plug 'moll/vim-bbye'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
