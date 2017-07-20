@@ -99,6 +99,9 @@ set cm=blowfish                 " Better encryption algorithm
 set nobackup                    " No backup file
 set noswapfile                  " No swap file
 
+" Vim Info
+set viminfo='100,n$HOME/.vim/files/info/viminfo
+
 " Line Numbers
 set nu                          " Show line numbers
 "set rnu                        " Relative line numbers
