@@ -336,7 +336,12 @@ nnoremap <silent> <Leader>yi :YcmCompleter GoToInclude<CR>
 nnoremap <silent> <Leader>yt :YcmCompleter GetType<CR>
 
 " AutoFormat
-noremap <F3> :Autoformat<CR>
+vmap = :Autoformat<CR>
+nmap =G :.,$Autoformat<CR>
+nmap == :Autoformat<CR>
+nmap =% :.,/}/; Autoformat<CR>
+nmap = :.-1,.Autoformat<CR>
+nmap = :.,.+1Autoformat<CR>
 let g:formatters_python = ['yapf', 'autopep8']
 
 " Doxygen
