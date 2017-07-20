@@ -25,8 +25,8 @@ sudo apt install -y \
     lldb \
     lm-sensors \
     nasm \
-    nfs-common \
     neofetch \
+    nfs-common \
     nodejs \
     npm \
     python \
@@ -42,8 +42,7 @@ sudo apt install -y \
     tree \
     unrar \
     weechat-curses weechat-plugins \
-    xz-utils \
-    zsh
+    xz-utils
 
 # Pass any argument to this script for a "full" install
 if [ -n "$1" ]; then
