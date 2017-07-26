@@ -58,6 +58,7 @@ brew install tmux
 brew install tree
 brew install unrar
 brew install valgrind
+brew install vbindiff
 brew install weechat --with-perl --with-python
 brew install wget --with-iri
 brew install wireshark --with-qt5

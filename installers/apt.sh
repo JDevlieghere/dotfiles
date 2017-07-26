@@ -41,6 +41,7 @@ sudo apt install -y \
     tmux \
     tree \
     unrar \
+    vbindiff \
     weechat-curses weechat-plugins \
     xz-utils
 
