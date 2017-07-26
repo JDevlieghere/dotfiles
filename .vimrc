@@ -264,6 +264,9 @@ nnoremap <silent> <Leader>bd :Bdelete!<CR>
 " Signify
 let g:signify_vcs_list = [ 'git', 'hg', 'svn' ]
 
+" Startify
+let g:startify_change_to_dir = 0
+
 " FZF
 let g:fzf_buffers_jump=1
 nnoremap <silent> <C-p> :Files<CR>
