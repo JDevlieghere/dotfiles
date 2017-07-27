@@ -93,6 +93,7 @@ doHelp() {
     echo
     exit 1
 }
+
 if [ $# -eq 0 ]; then
     doHelp
 else

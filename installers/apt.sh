@@ -74,6 +74,16 @@ if [ -n "$1" ]; then
         network-manager-openvpn \
         network-manager-openvpn-gnome
 
+    # xmonad
+    sudo apt install -y \
+        compton \
+        dmenu \
+        feh \
+        hsetroot \
+        scrot \
+        xmobar \
+        xmonad
+
     # Vim (from source)
     # https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
     sudo apt remove vim vim-runtime gvim
