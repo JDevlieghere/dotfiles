@@ -17,19 +17,19 @@ brew install boost
 brew install ccache
 brew install cloc
 brew install cmake
-brew install coreutils --with-default-names
+brew install coreutils
 brew install cppcheck
 brew install ctags
 brew install doxygen
 brew install dtrx
 brew install ffmpeg
-brew install findutils --with-default-names
+brew install findutils
 brew install fish
 brew install gcc --without-multilib
 brew install gdb
 brew install git
 brew install git-lfs
-brew install gnu-sed --with-default-names
+brew install gnu-sed
 brew install gnupg
 brew install gnutls
 brew install go
