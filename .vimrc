@@ -186,6 +186,9 @@ highlight clear SignColumn
 " Save a keystroke
 nnoremap ; :
 
+" Avoid the ESC key
+inoremap jj <Esc>
+
 " Typos
 cnoreabbrev W w
 cnoreabbrev Q q

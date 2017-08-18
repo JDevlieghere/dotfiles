@@ -13,7 +13,7 @@
 
 # CMake Build Type
 if [ -z "$1" ]; then
-    PROJECTS="clang;clang-tools-extra"
+    PROJECTS="clang;clang-tools-extra;compiler-rt"
 else
     PROJECTS="$1"
 fi
@@ -39,5 +39,5 @@ cmake ../llvm-project/llvm \
     -G Ninja \
     -DLLVM_ENABLE_PROJECTS="$PROJECTS" \
     -DCMAKE_INSTALL_PREFIX="$TOP_LEVEL_DIR/install" \
-    -DCMAKE_BUILD_TYPE="Debug" \
+    -DCMAKE_BUILD_TYPE="RelWithDebInfo" \
     -DBUILD_SHARED_LIBS=ON
