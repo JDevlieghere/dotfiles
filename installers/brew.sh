@@ -25,7 +25,6 @@ brew install dtrx
 brew install ffmpeg
 brew install findutils
 brew install fish
-brew install gcc --without-multilib
 brew install gdb
 brew install git
 brew install git-lfs

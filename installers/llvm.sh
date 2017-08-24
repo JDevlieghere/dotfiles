@@ -1,66 +1,79 @@
 #!/usr/bin/env bash
 
-# Builds LLVM, clang and clang-tools extra in the curren directory.
+# Builds LLVM, clang and some projects (see below) in the curren directory.
 # .
 # ├── build
 # ├── install
 # └── llvm
 
-
 # LLVM Build Type
 if [ -z "$1" ]; then
-    TYPE="Debug"
+    BUILD_TYPE="RelWithDebInfo"
 else
-    TYPE="$1"
-fi
-
-# Without a second argument only LLVM and clang will be built.
-if [ -z "$2" ]; then
-    ALL=false
-else
-    ALL=true
+    BUILD_TYPE="$1"
 fi
 
 ROOT=$(pwd)
+USER="jdevlieghere"
 
-if [[ ! -e llvm ]]; then
-    # llvm
-    git clone http://llvm.org/git/llvm.git
-    cd "$ROOT/llvm" || exit
+function init {
+    local DIR=$1
+    local PROJECT=$2
 
-    # clang
-    cd "$ROOT/llvm/tools" || exit
-    git clone http://llvm.org/git/clang.git
+    cd "$DIR" || exit
 
-    if [ "$ALL" = true ]; then
-        # compiler-RT
-        cd "$ROOT/llvm/projects" || exit
-        git clone http://llvm.org/git/compiler-rt.git
+    # Prevent non-linear history
+    git config branch.master.rebase true
 
-        # libcxx and libcxxabi
-        cd "$ROOT/llvm/projects" || exit
-        git clone http://llvm.org/git/libcxx.git
-        git clone http://llvm.org/git/libcxxabi.git
+    # Set-up git svn
+    git svn init "https://llvm.org/svn/llvm-project/$PROJECT/trunk" --username="$USER"
+    git config svn-remote.svn.fetch :refs/remotes/origin/master
+    git svn rebase -l
+}
 
-        # lld
-        cd "$ROOT/llvm/tools" || exit
-        git clone http://llvm.org/git/lld.git
-
-
-        # clang-tools-extra
-        cd "$ROOT/llvm/tools/clang/tools" || exit
-        git clone http://llvm.org/git/clang-tools-extra.git extra
-    fi
+# llvm
+if [[ ! -e "$ROOT/llvm" ]]; then
+    git clone https://llvm.org/git/llvm.git
+    init "$ROOT/llvm" "llvm"
 fi
 
-# Create build folder
+# clang
+if [[ ! -e "$ROOT/llvm/tools/clang" ]]; then
+    cd "$ROOT/llvm/tools" || exit
+    git clone https://llvm.org/git/clang.git
+    init "$ROOT/llvm/tools/clang" "cfe"
+fi
+
+# clang-tools-extra
+if [[ ! -e "$ROOT/llvm/tools/clang/tools/extra" ]]; then
+    cd "$ROOT/llvm/tools/clang/tools" || exit
+    git clone https://llvm.org/git/clang-tools-extra.git extra
+    init "$ROOT/llvm/tools/clang/tools/extra" "clang-tools-extra"
+fi
+
+# compiler-rt
+if [[ ! -e "$ROOT/llvm/projects/compiler-rt" ]]; then
+    cd "$ROOT/llvm/projects" || exit
+    git clone https://llvm.org/git/compiler-rt.git
+    init "$ROOT/llvm/projects/compiler-rt" "compiler-rt"
+fi
+
+# Create build and install dirs
 cd "$ROOT" || exit
 mkdir -p build
-cd build || exit
+mkdir -p install
 
 # Run Cmake
+cd build || exit
 cmake ../llvm \
     -G Ninja \
     -DCMAKE_INSTALL_PREFIX="$ROOT/install" \
-    -DCMAKE_BUILD_TYPE="$TYPE" \
-    -DBUILD_SHARED_LIBS=ON
+    -DCMAKE_BUILD_TYPE="$BUILD_TYPE" \
+    -DBUILD_SHARED_LIBS=On \
+    -DCOMPILER_RT_DEBUG=On \
+    -DLLVM_INCLUDE_TESTS=On \
+    -DLLVM_ENABLE_ASSERTIONS=On \
+    -DLLVM_INCLUDE_TESTS=On
+
+# Run Ninja
+ninja

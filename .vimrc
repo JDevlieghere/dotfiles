@@ -336,8 +336,6 @@ nnoremap <silent> <Leader>yi :YcmCompleter GoToInclude<CR>
 nnoremap <silent> <Leader>yt :YcmCompleter GetType<CR>
 
 " vim-autoformat
-vnoremap = :Autoformat<CR>
-nnoremap == :Autoformat<CR>
 let g:formatters_python = ['yapf', 'autopep8']
 
 " doxygentoolkit.vim
@@ -353,6 +351,6 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq = 0
 
-let g:syntastic_cpp_checkers=['clang_check', 'clang_tidy', 'gcc', 'cppcheck']
+"let g:syntastic_cpp_checkers=['clang_check', 'clang_tidy', 'gcc', 'cppcheck']
 let g:syntastic_javascript_checkers = ['jshint', 'jslint']
 let g:syntastic_python_checkers=['pylint','pyflakes']
