@@ -17,6 +17,7 @@ doSync() {
         --exclude "installers/" \
         --exclude "os/" \
         --exclude "bootstrap.sh" \
+        --exclude "tmux.terminfo" \
         --exclude "README.md" \
         --exclude ".gitignore" \
         --filter=':- .gitignore' \

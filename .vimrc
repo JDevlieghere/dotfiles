@@ -179,6 +179,10 @@ endif
 " Same color for sign column and line numbers
 highlight clear SignColumn
 
+" Use italics
+highlight Comment cterm=italic
+highlight htmlArg cterm=italic
+
 " ---------------------------------------------------------------------------- "
 " Key Mapping
 " ---------------------------------------------------------------------------- "
@@ -337,6 +341,7 @@ nnoremap <silent> <Leader>yt :YcmCompleter GetType<CR>
 
 " vim-autoformat
 let g:formatters_python = ['yapf', 'autopep8']
+let g:formatter_yapf_style = 'pep8'
 
 " doxygentoolkit.vim
 let g:DoxygenToolkit_commentType = "C++"

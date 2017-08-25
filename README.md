@@ -61,6 +61,12 @@ file which is updated every five minutes by a cron job.
 */5 * * * * dig +short myip.opendns.com @resolver1.opendns.com > ~/.tmux.cache.ip
 ```
 
+To enable italics you will need to compile and install  `tmux.terminfo`.
+
+```
+tic -x tmux.terminfo
+```
+
 ### git
 
 My git is configured to sign every commit with the machine's GPG key.
