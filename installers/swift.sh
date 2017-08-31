@@ -26,12 +26,15 @@ git clone https://github.com/apple/swift 2> /dev/null
 
 cd "$SWIFT_SOURCE_ROOT/clang" || exit
 git checkout "$LLVM_BRANCH"
+git pull --rebase
 
 cd "$SWIFT_SOURCE_ROOT/llvm" || exit
 git checkout "$LLVM_BRANCH"
+git pull --rebase
 
 cd "$SWIFT_SOURCE_ROOT/swift" || exit
 git checkout "$SWIFT_BRANCH"
+git pull --rebase
 
 cd "$SWIFT_SOURCE_ROOT" || exit
 ./swift/utils/build-script "$@"

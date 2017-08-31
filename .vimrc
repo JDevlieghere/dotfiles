@@ -155,6 +155,7 @@ set splitright                  " Vertical split right
 " Spell checking
 set spelllang=en_us             " English as default language
 set complete+=kspell            " Word completion
+set spell                       " Enable by default
 
 " Vim Info
 set viminfo='100,n$HOME/.vim/files/info/viminfo
@@ -229,12 +230,6 @@ nnoremap <silent> <Leader>wd <C-w>q
 " ---------------------------------------------------------------------------- "
 " Auto Commands                                                                "
 " ---------------------------------------------------------------------------- "
-
-" Enable spell checking
-autocmd FileType gitcommit setlocal spell
-autocmd FileType markdown setlocal spell
-autocmd FileType text setlocal spell
-autocmd FileType rst setlocal spell
 
 " Use Doxygen style comments in C and C++
 autocmd FileType c,cpp set comments^=:///
