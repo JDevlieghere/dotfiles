@@ -1,17 +1,10 @@
 #!/usr/bin/env bash
 
-# Builds LLVM, clang and some projects (see below) in the curren directory.
+# Builds LLVM, clang and some projects (see below) in the current directory.
 # .
 # ├── build
 # ├── install
 # └── llvm
-
-# LLVM Build Type
-if [ -z "$1" ]; then
-    BUILD_TYPE="RelWithDebInfo"
-else
-    BUILD_TYPE="$1"
-fi
 
 ROOT=$(pwd)
 USER="jdevlieghere"
@@ -67,8 +60,8 @@ mkdir -p install
 cd build || exit
 cmake ../llvm \
     -G Ninja \
-    -DCMAKE_INSTALL_PREFIX="$ROOT/install" \
-    -DCMAKE_BUILD_TYPE="$BUILD_TYPE" \
+    -DCMAKE_INSTALL_PREFIX="../install" \
+    -DCMAKE_BUILD_TYPE="RelWithDebInfo" \
     -DBUILD_SHARED_LIBS=On \
     -DCOMPILER_RT_DEBUG=On \
     -DLLVM_INCLUDE_TESTS=On \

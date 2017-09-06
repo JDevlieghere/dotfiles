@@ -300,7 +300,6 @@ autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " youcompleteme
 let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 let g:ycm_extra_conf_globlist=['~/.vim/*']
-let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_filetype_blacklist={
             \ 'vim' : 1,
             \ 'tagbar' : 1,
@@ -346,9 +345,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq = 0
 
 "let g:syntastic_cpp_checkers=['clang_check', 'clang_tidy', 'gcc', 'cppcheck']
