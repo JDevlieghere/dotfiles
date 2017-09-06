@@ -23,18 +23,22 @@
 [alias]
 	aa = add -A
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
+	amend = commit --amend
 	cached = diff --cached
-	df = diff --word-diff=color
 	find = log --all --grep
 	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+	has = log --grep
+	last = log -n 5 --pretty=short
 	lg = log -p
 	noff = merge --no-ff
 	patch =  show HEAD -U999999
 	st = status
 	stash-all = stash save --include-untracked
-	top = log -n 5 --pretty=short
+	top = log --stat -n 1
+	uncommit = reset HEAD~
 	undo = reset --soft HEAD^
 	unstage = reset HEAD --
+	wdiff = diff --word-diff=color
 [credential]
 	helper = cache --timeout=3600
 [filter "lfs"]
