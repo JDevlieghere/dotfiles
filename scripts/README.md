@@ -1,6 +1,6 @@
-# Installers
+# Scripts
 
-## Package Managers
+## Package Managers Installers
 
  - Node (`npm`)
  - Python (`pip`)
@@ -14,4 +14,5 @@
  - `gcc`
  - `llvm`
  - `ninja`
+ - `swift`
  - `xnu`
