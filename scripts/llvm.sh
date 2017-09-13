@@ -13,7 +13,7 @@ function init {
     local DIR=$1
     local PROJECT=$2
 
-    cd "$DIR" || exit
+    cd "$DIR" || return
 
     # Prevent non-linear history
     git config branch.master.rebase true
@@ -21,34 +21,39 @@ function init {
     # Set-up git svn
     git svn init "https://llvm.org/svn/llvm-project/$PROJECT/trunk" --username="$USER"
     git config svn-remote.svn.fetch :refs/remotes/origin/master
-    git svn rebase -l
+    git svn rebase -l > /dev/null
 }
 
 # llvm
-if [[ ! -e "$ROOT/llvm" ]]; then
-    git clone https://llvm.org/git/llvm.git
-    init "$ROOT/llvm" "llvm"
-fi
+git clone https://llvm.org/git/llvm.git
+init "$ROOT/llvm" "llvm"
 
 # clang
-if [[ ! -e "$ROOT/llvm/tools/clang" ]]; then
-    cd "$ROOT/llvm/tools" || exit
-    git clone https://llvm.org/git/clang.git
-    init "$ROOT/llvm/tools/clang" "cfe"
-fi
+cd "$ROOT/llvm/tools" || exit
+git clone https://llvm.org/git/clang.git
+init "$ROOT/llvm/tools/clang" "cfe"
 
 # clang-tools-extra
-if [[ ! -e "$ROOT/llvm/tools/clang/tools/extra" ]]; then
-    cd "$ROOT/llvm/tools/clang/tools" || exit
-    git clone https://llvm.org/git/clang-tools-extra.git extra
-    init "$ROOT/llvm/tools/clang/tools/extra" "clang-tools-extra"
-fi
+cd "$ROOT/llvm/tools/clang/tools" || exit
+git clone https://llvm.org/git/clang-tools-extra.git extra
+init "$ROOT/llvm/tools/clang/tools/extra" "clang-tools-extra"
 
 # compiler-rt
-if [[ ! -e "$ROOT/llvm/projects/compiler-rt" ]]; then
+cd "$ROOT/llvm/projects" || exit
+git clone https://llvm.org/git/compiler-rt.git
+init "$ROOT/llvm/projects/compiler-rt" "compiler-rt"
+
+# libcxx
+if [[ -n "$LIBCXX" ]]; then
     cd "$ROOT/llvm/projects" || exit
-    git clone https://llvm.org/git/compiler-rt.git
-    init "$ROOT/llvm/projects/compiler-rt" "compiler-rt"
+    git clone http://llvm.org/git/libcxx.git
+    git clone http://llvm.org/git/libcxxabi.git
+fi
+
+# test-suite
+if [[ -n "$TESTSUITE" ]]; then
+    cd "$ROOT/llvm/projects" || exit
+    git clone http://llvm.org/git/test-suite.git
 fi
 
 # Create build and install dirs
@@ -65,8 +70,7 @@ cmake ../llvm \
     -DBUILD_SHARED_LIBS=On \
     -DCOMPILER_RT_DEBUG=On \
     -DLLVM_INCLUDE_TESTS=On \
-    -DLLVM_ENABLE_ASSERTIONS=On \
-    -DLLVM_INCLUDE_TESTS=On
+    -DLLVM_ENABLE_ASSERTIONS=On
 
 # Run Ninja
 ninja

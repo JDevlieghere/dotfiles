@@ -50,20 +50,21 @@ pull() {
 cd "$SWIFT_SOURCE_ROOT" || exit
 
 # Clone if directories don't exist.
-git clone https://github.com/apple/swift-clang "$SWIFT_CLANG_ROOT" 2> /dev/null && info "Cloning clang"
-git clone https://github.com/apple/swift-cmark "$SWIFT_CMARK_ROOT" 2> /dev/null && info "Cloning cmark"
-git clone https://github.com/apple/swift-llvm "$SWIFT_LLVM_ROOT" 2> /dev/null && info "Cloning llvm"
-git clone https://github.com/apple/swift "$SWIFT_SWIFT_ROOT" 2> /dev/null && info "Cloning swift"
+info "Cloning repositories"
+git clone git@github.com:apple/swift-clang.git "$SWIFT_CLANG_ROOT"
+git clone git@github.com:apple/swift-cmark.git "$SWIFT_CMARK_ROOT"
+git clone git@github.com:apple/swift-llvm.git "$SWIFT_LLVM_ROOT"
+git clone git@github.com:apple/swift.git "$SWIFT_SWIFT_ROOT"
 
 # Checkout LLVM/clang branch if environment variable LLVM_BRANCH is set.
-if [ -n "$LLVM_BRANCH" ]; then
+if [[ -n "$LLVM_BRANCH" ]]; then
   info "Checking out $LLVM_BRANCH"
   checkout "$SWIFT_CLANG_ROOT" "$LLVM_BRANCH"
   checkout "$SWIFT_LLVM_ROOT" "$LLVM_BRANCH"
 fi
 
 # Pull all repositories if environment variable PULL is set.
-if [ -n "$PULL" ]; then
+if [[ -n "$PULL" ]]; then
   info "Pulling repositories"
   pull "$SWIFT_CLANG_ROOT"
   pull "$SWIFT_LLVM_ROOT"
