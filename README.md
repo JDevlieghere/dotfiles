@@ -58,7 +58,7 @@ corner. Instead of constantly polling for the current IP, it reads a cache
 file which is updated every five minutes by a cron job.
 
 ```
-*/5 * * * * dig +short myip.opendns.com @resolver1.opendns.com > ~/.tmux.cache.ip
+*/5 * * * * curl -s http://whatismyip.akamai.com > ~/.tmux.cache.ip
 ```
 
 To enable italics you will need to compile and install  `tmux.terminfo`.
