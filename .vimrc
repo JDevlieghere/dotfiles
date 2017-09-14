@@ -136,10 +136,6 @@ set scrolloff=3                 " Keep at least 3 lines above/below
 set mousehide                   " Hide mouse when typing
 set mouse=nicr                  " Disable mouse
 
-" Spell checking
-set spelllang=en_us             " Default language
-set complete+=kspell            " Word completion
-
 " Disable bell
 set visualbell                  " Disable visual bell
 set noerrorbells                " Disable error bell
@@ -214,15 +210,18 @@ nnoremap Q gqap
 " Search for current visual selection
 vnoremap // y/<C-R>"<CR>
 
+" Copy file path to clipboard
+nnoremap <leader>yy :let @+=expand("%:p")<CR>
+
+" Copy filename:linenumber to clipboard (for setting breakpoints)
+nnoremap <leader>bp :let @+=expand('%:t') . ':' . line(".")<CR>
+
 " Cycle through buffers with (CTRL +) tab
 nnoremap <silent> <Tab> :bnext<CR>
 nnoremap <silent> <S-Tab> :bprevious<CR>
 
 " Toggle hidden characters
 nnoremap <silent> <leader>l :set list!<CR>
-
-" Copy filename:linenumber to clipboard
-nnoremap <silent> <leader>yy :let @+=expand('%:t') . ':' . line(".")<CR>
 
 " Close current window
 nnoremap <silent> <Leader>wd <C-w>q
@@ -258,7 +257,8 @@ nnoremap <silent> <Leader>q :Bdelete<CR>
 nnoremap <silent> <Leader>bd :Bdelete!<CR>
 
 " vim-signify
-let g:signify_vcs_list = [ 'git', 'hg', 'svn' ]
+let g:signify_vcs_list = [ 'git' ]
+let g:signify_update_on_bufenter = 0
 
 " vim-startify
 let g:startify_change_to_dir = 0
@@ -284,6 +284,7 @@ nnoremap <F8> :TagbarToggle<CR>
 let g:tagbar_autofocus=0
 let g:tagbar_right=1
 let g:tagbar_width=35
+autocmd FileType * nested :call tagbar#autoopen(0)
 
 " nerdtree
 let g:NERDTreeIgnore=['\.job$', '^CVS$', '\.orig', '\~$']
@@ -345,9 +346,9 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_aggregate_errors = 1
-let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_wq = 0
 
-"let g:syntastic_cpp_checkers=['clang_check', 'clang_tidy', 'gcc', 'cppcheck']
+let g:syntastic_cpp_checkers = []
 let g:syntastic_javascript_checkers = ['jshint', 'jslint']
-let g:syntastic_python_checkers=['pylint','pyflakes']
+let g:syntastic_python_checkers = ['pylint','pyflakes']
