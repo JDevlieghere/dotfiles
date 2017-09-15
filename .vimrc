@@ -27,13 +27,11 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'mbbill/undotree',                     { 'on': 'UndotreeToggle' }
-Plug 'rhysd/vim-grammarous',                { 'on': 'GrammarousCheck' }
 Plug 'scrooloose/nerdtree',                 { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 
 Plug 'vim-scripts/doxygentoolkit.vim',      { 'for': 'cpp' }
 Plug 'octol/vim-cpp-enhanced-highlight',    { 'for': 'cpp' }
-Plug 'Twinside/vim-hoogle',                 { 'for': 'haskell' }
+Plug 'twinside/vim-hoogle',                 { 'for': 'haskell' }
 Plug 'eagletmt/ghcmod-vim',                 { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc',                   { 'for': 'haskell' }
 Plug 'mpickering/hlint-refactor-vim',       { 'for': 'haskell' }
@@ -55,13 +53,18 @@ endif
 call plug#end()
 
 " ---------------------------------------------------------------------------- "
-" Color Scheme                                                                 "
+" (G)UI                                                                        "
 " ---------------------------------------------------------------------------- "
 
 try
     colorscheme solarized
 catch
 endtry
+
+if has("gui_running")
+    set guifont=Source\ Code\ Pro\ Medium:h13
+    set antialias
+end
 
 " ---------------------------------------------------------------------------- "
 " General Settings                                                             "
@@ -81,6 +84,7 @@ set encoding=utf-8              " Use UTF-8 encoding
 set hidden                      " Hide buffers instead of closing them
 set laststatus=2                " Always display the status line
 set nofoldenable                " Disable folding
+set nolazyredraw                " Always redraw
 set noshowmode                  " Don't show mode
 set nu                          " Show line numbers
 set pastetoggle=<F2>            " Toggle paste mode with F2
@@ -150,7 +154,6 @@ set splitright                  " Vertical split right
 
 " Spell checking
 set spelllang=en_us             " English as default language
-set complete+=kspell            " Word completion
 set spell                       " Enable by default
 
 " Vim Info
@@ -163,6 +166,16 @@ set listchars=tab:▸\ ,trail:-,extends:>,precedes:<,nbsp:⎵,eol:¬
 " Completion menu
 set completeopt=longest,menuone " Inserts the longest common text and
                                 " show menu even with only one item
+
+" Omni-completion
+set omnifunc=syntaxcomplete#Complete
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 " History
 set history=1000                " Remember more commands
@@ -177,8 +190,8 @@ endif
 highlight clear SignColumn
 
 " Use italics
-highlight Comment cterm=italic
-highlight htmlArg cterm=italic
+"highlight Comment cterm=italic
+"highlight htmlArg cterm=italic
 
 " ---------------------------------------------------------------------------- "
 " Key Mapping
@@ -209,6 +222,9 @@ nnoremap Q gqap
 
 " Search for current visual selection
 vnoremap // y/<C-R>"<CR>
+
+" Map leader to space
+let mapleader=" "
 
 " Copy file path to clipboard
 nnoremap <leader>yy :let @+=expand("%:p")<CR>
@@ -298,9 +314,15 @@ nnoremap <F10> :NERDTreeToggle<CR>
 
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" vim-autoformat
+let g:formatters_python = ['yapf', 'autopep8']
+let g:formatter_yapf_style = 'pep8'
+
+" doxygentoolkit.vim
+let g:DoxygenToolkit_commentType = "C++"
+
 " youcompleteme
-let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-let g:ycm_extra_conf_globlist=['~/.vim/*']
+let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_filetype_blacklist={
             \ 'vim' : 1,
             \ 'tagbar' : 1,
@@ -316,30 +338,6 @@ let g:ycm_filetype_blacklist={
             \ 'objc' : 1,
             \ 'mail' : 1
             \}
-
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-nnoremap <F11> :YcmForceCompileAndDiagnostics<CR>
-nnoremap <F12> :YcmDiags<CR>
-
-nnoremap <silent> <Leader>yd :YcmCompleter GetDoc<CR>
-nnoremap <silent> <Leader>yf :YcmCompleter FixIt<CR>
-nnoremap <silent> <Leader>yg :YcmCompleter GoTo<CR>
-nnoremap <silent> <Leader>yi :YcmCompleter GoToInclude<CR>
-nnoremap <silent> <Leader>yt :YcmCompleter GetType<CR>
-
-" vim-autoformat
-let g:formatters_python = ['yapf', 'autopep8']
-let g:formatter_yapf_style = 'pep8'
-
-" doxygentoolkit.vim
-let g:DoxygenToolkit_commentType = "C++"
 
 " syntastic
 set statusline+=%#warningmsg#

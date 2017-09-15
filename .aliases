@@ -1,6 +1,9 @@
 # Better ls
 alias ll="ls -lha"
 
+# Emacs
+alias em="emacsclient --no-wait"
+
 # Human-readable disk usage
 alias dfh="df -Tha --total"
 

@@ -7,6 +7,7 @@ sudo pip install --upgrade pip
 sudo pip install --upgrade autopep8
 sudo pip install --upgrade gprof2dot
 sudo pip install --upgrade haxor-news
+sudo pip install --upgrade jedi
 sudo pip install --upgrade mkdocs
 sudo pip install --upgrade mkdocs
 sudo pip install --upgrade mkdocs-material
