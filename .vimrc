@@ -80,7 +80,6 @@ set autoread                    " Auto reload file after external command
 set background=dark             " Use a dark background
 set backspace=indent,eol,start  " Delete over line breaks
 set binary                      " Enable binary support
-set cm=blowfish                 " Better encryption algorithm
 set colorcolumn=80,120          " Show ruler columns
 set encoding=utf-8              " Use UTF-8 encoding
 set hidden                      " Hide buffers instead of closing them
@@ -159,9 +158,6 @@ set splitright                  " Vertical split right
 set spelllang=en_us             " English as default language
 set spell                       " Enable by default
 
-" Vim Info
-set viminfo='100,n$HOME/.vim/files/info/viminfo
-
 " Invisible characters
 set nolist                      " Hide by default
 set listchars=tab:▸\ ,trail:-,extends:>,precedes:<,nbsp:⎵,eol:¬
@@ -194,6 +190,12 @@ endif
 
 " Same color for sign column and line numbers
 highlight clear SignColumn
+
+" NeoVim incompatible options
+if !has('nvim')
+    set cm=blowfish
+    set viminfo='100,n$HOME/.vim/files/info/viminfo
+endif
 
 " Use italics
 "highlight Comment cterm=italic
