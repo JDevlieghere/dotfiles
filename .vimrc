@@ -1,4 +1,6 @@
-set nocompatible
+if &compatible
+    set nocompatible
+endif
 
 " ---------------------------------------------------------------------------- "
 " Plugins                                                                      "
@@ -26,8 +28,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
-Plug 'scrooloose/nerdtree',                 { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 
 Plug 'vim-scripts/doxygentoolkit.vim',      { 'for': 'cpp' }
 Plug 'octol/vim-cpp-enhanced-highlight',    { 'for': 'cpp' }
@@ -70,14 +70,16 @@ end
 " General Settings                                                             "
 " ---------------------------------------------------------------------------- "
 
-filetype plugin indent on       " Enable file type support
-syntax enable                   " Enable syntax highlighting
+filetype plugin indent on
+
+if !exists("g:syntax_on")
+    syntax enable
+endif
 
 set autoread                    " Auto reload file after external command
 set background=dark             " Use a dark background
 set backspace=indent,eol,start  " Delete over line breaks
 set binary                      " Enable binary support
-set clipboard=unnamed           " Use system clipboard
 set cm=blowfish                 " Better encryption algorithm
 set colorcolumn=80,120          " Show ruler columns
 set encoding=utf-8              " Use UTF-8 encoding
@@ -96,6 +98,7 @@ set tags=tags;                  " Find tags recursively
 set title                       " Change terminal title
 set ttyfast                     " Fast terminal
 set wildmenu                    " Visual autocomplete for command menu
+set clipboard^=unnamed,unnamedplus
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
 
 " Temp Files
@@ -169,13 +172,16 @@ set completeopt=longest,menuone " Inserts the longest common text and
 
 " Omni-completion
 set omnifunc=syntaxcomplete#Complete
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+augroup set_omnifunc
+    autocmd!
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+augroup end
 
 " History
 set history=1000                " Remember more commands
@@ -194,22 +200,16 @@ highlight clear SignColumn
 "highlight htmlArg cterm=italic
 
 " ---------------------------------------------------------------------------- "
-" Key Mapping
+" Key Mappings                                                                 "
 " ---------------------------------------------------------------------------- "
 
 " Save a keystroke
 nnoremap ; :
 
-" Avoid the ESC key
-inoremap jj <Esc>
-
 " Typos
 cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qa qa
-
-" Toggle spell check
-noremap <F7> :setlocal spell!<CR>
 
 " Save file which you forgot to open with sudo
 cnoremap w!! w !sudo tee % >/dev/null
@@ -223,40 +223,71 @@ nnoremap Q gqap
 " Search for current visual selection
 vnoremap // y/<C-R>"<CR>
 
-" Map leader to space
-let mapleader=" "
-
-" Copy file path to clipboard
-nnoremap <leader>yy :let @+=expand("%:p")<CR>
-
-" Copy filename:linenumber to clipboard (for setting breakpoints)
-nnoremap <leader>bp :let @+=expand('%:t') . ':' . line(".")<CR>
-
 " Cycle through buffers with (CTRL +) tab
 nnoremap <silent> <Tab> :bnext<CR>
 nnoremap <silent> <S-Tab> :bprevious<CR>
 
-" Toggle hidden characters
-nnoremap <silent> <leader>l :set list!<CR>
+" ---------------------------------------------------------------------------- "
+" Leader Mappings                                                              "
+" ---------------------------------------------------------------------------- "
 
-" Close current window
-nnoremap <silent> <Leader>wd <C-w>q
+" Map leader to space
+let mapleader=" "
+
+" Clear search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+
+" Yank
+nnoremap <leader>yf :let @+=expand("%:p")<CR>
+nnoremap <leader>yl :let @+=expand('%:t') . ':' . line(".")<CR>
+
+" Toggle
+nnoremap <leader>ts :setlocal spell!<CR>
+nnoremap <leader>tl :set list!<CR>
+
+" Spelling
+nnoremap <leader>sa zg
+nnoremap <leader>sn ]s
+nnoremap <leader>sp [s
+nnoremap <leader>ss z=
+
+" Buffers
+nnoremap <silent> <leader>bd :bdelete<CR>
+nnoremap <silent> <leader>bn :bnext<CR>
+nnoremap <silent> <leader>bp :bprevious<CR>
+
+" Windows
+nnoremap <silent> <leader>wd <C-w>q
+nnoremap <silent> <leader>wh <C-w>h
+nnoremap <silent> <leader>wv <C-w>v
 
 " ---------------------------------------------------------------------------- "
 " Auto Commands                                                                "
 " ---------------------------------------------------------------------------- "
 
 " Use Doxygen style comments in C and C++
-autocmd FileType c,cpp set comments^=:///
+augroup doxygen_comments
+    autocmd!
+    autocmd FileType c,cpp set comments^=:///
+augroup end
 
 " Write directly to the original file when editing the crontab
-autocmd FileType crontab setlocal nobackup nowritebackup
+augroup crontab
+    autocmd!
+    autocmd FileType crontab setlocal nobackup nowritebackup
+augroup end
 
 " Recognize NASM filetype
-autocmd BufRead,BufNewFile *.nasm set filetype=nasm
+augroup recognize_nasm
+    autocmd!
+    autocmd BufRead,BufNewFile *.nasm set filetype=nasm
+augroup end
 
 " Remove trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//e
+augroup remove_trailing_whitespace
+    autocmd!
+    autocmd BufWritePre * :%s/\s\+$//e
+augroup end
 
 " Watch my .vimrc
 augroup reload_vimrc
@@ -269,8 +300,7 @@ augroup end
 " ---------------------------------------------------------------------------- "
 
 " vim-bbye
-nnoremap <silent> <Leader>q :Bdelete<CR>
-nnoremap <silent> <Leader>bd :Bdelete!<CR>
+nnoremap <silent> <leader>bd :Bdelete!<CR>
 
 " vim-signify
 let g:signify_vcs_list = [ 'git' ]
@@ -281,9 +311,16 @@ let g:startify_change_to_dir = 0
 
 " fzf.vim
 let g:fzf_buffers_jump=1
+nnoremap \ :Ag<SPACE>
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
-vnoremap ag y :Ag <C-R>"<CR>        " Ag for visual selection
+
+nnoremap <silent> <leader>ff :Files<CR>
+nnoremap <silent> <leader>fg :GFiles<CR>
+nnoremap <silent> <leader>fb :Buffers<CR>
+nnoremap <silent> <leader>fm :Marks<CR>
+nnoremap <silent> <leader>fw :Windows<CR>
+nnoremap <silent> <leader>fh :History:<CR>
 
 " vim-airline
 let g:airline_powerline_fonts=1
@@ -293,26 +330,19 @@ let g:airline#extensions#tabline#fnamemod=':t'
 " detectindent
 let g:detectindent_preferred_expandtab=1
 let g:detectindent_preferred_indent=2
-autocmd BufReadPost * :DetectIndent
+augroup detect_indent
+    autocmd!
+    autocmd BufReadPost * :DetectIndent
+augroup end
 
 " tagbar
-nnoremap <F8> :TagbarToggle<CR>
 let g:tagbar_autofocus=0
 let g:tagbar_right=1
 let g:tagbar_width=35
-autocmd FileType * nested :call tagbar#autoopen(0)
-
-" nerdtree
-let g:NERDTreeIgnore=['\.job$', '^CVS$', '\.orig', '\~$']
-let g:NERDTreeShowHidden=1
-let g:NERDTreeStatusline="%f"
-let g:NERDTreeWinPos="left"
-let g:NERDTreeWinSize=35
-
-nnoremap <F9> :NERDTreeFind<CR>
-nnoremap <F10> :NERDTreeToggle<CR>
-
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup tagbar_open
+    autocmd!
+    autocmd FileType * nested :call tagbar#autoopen(0)
+augroup end
 
 " vim-autoformat
 let g:formatters_python = ['yapf', 'autopep8']
