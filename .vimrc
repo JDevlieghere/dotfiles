@@ -14,7 +14,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'chiel92/vim-autoformat'
+Plug 'chiel92/vim-autoformat',              { 'on': 'Autoformat' }
 Plug 'ciaranm/detectindent'
 Plug 'junegunn/fzf',                        { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
@@ -23,7 +23,6 @@ Plug 'mhinz/vim-signify'
 Plug 'mhinz/vim-startify',                  { 'do': 'mkdir -p $HOME/.vim/files/info/' }
 Plug 'moll/vim-bbye'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -85,7 +84,7 @@ set encoding=utf-8              " Use UTF-8 encoding
 set hidden                      " Hide buffers instead of closing them
 set laststatus=2                " Always display the status line
 set nofoldenable                " Disable folding
-set nolazyredraw                " Always redraw
+set lazyredraw                  " Use lazy redrawing
 set noshowmode                  " Don't show mode
 set nu                          " Show line numbers
 set pastetoggle=<F2>            " Toggle paste mode with F2
@@ -166,19 +165,6 @@ set listchars=tab:▸\ ,trail:-,extends:>,precedes:<,nbsp:⎵,eol:¬
 set completeopt=longest,menuone " Inserts the longest common text and
                                 " show menu even with only one item
 
-" Omni-completion
-set omnifunc=syntaxcomplete#Complete
-augroup set_omnifunc
-    autocmd!
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-augroup end
-
 " History
 set history=1000                " Remember more commands
 if has('persistent_undo')
@@ -254,9 +240,9 @@ nnoremap <leader>sp [s
 nnoremap <leader>ss z=
 
 " Buffers
-nnoremap <silent> <leader>bd :bdelete<CR>
-nnoremap <silent> <leader>bn :bnext<CR>
-nnoremap <silent> <leader>bp :bprevious<CR>
+nnoremap <leader>bd :bdelete<CR>
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprevious<CR>
 
 " Windows
 nnoremap <silent> <leader>wd <C-w>q
@@ -317,12 +303,12 @@ nnoremap \ :Ag<SPACE>
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
 
+nnoremap <silent> <leader>fa :Ag<CR>
+nnoremap <silent> <leader>fb :Buffers<CR>
 nnoremap <silent> <leader>ff :Files<CR>
 nnoremap <silent> <leader>fg :GFiles<CR>
-nnoremap <silent> <leader>fb :Buffers<CR>
-nnoremap <silent> <leader>fm :Marks<CR>
-nnoremap <silent> <leader>fw :Windows<CR>
 nnoremap <silent> <leader>fh :History:<CR>
+nnoremap <silent> <leader>fm :Marks<CR>
 
 " vim-airline
 let g:airline_powerline_fonts=1
@@ -341,10 +327,7 @@ augroup end
 let g:tagbar_autofocus=0
 let g:tagbar_right=1
 let g:tagbar_width=35
-augroup tagbar_open
-    autocmd!
-    autocmd FileType * nested :call tagbar#autoopen(0)
-augroup end
+nnoremap <leader>tt :TagbarToggle<CR>
 
 " vim-autoformat
 let g:formatters_python = ['yapf', 'autopep8']
@@ -354,6 +337,8 @@ let g:formatter_yapf_style = 'pep8'
 let g:DoxygenToolkit_commentType = "C++"
 
 " youcompleteme
+let g:ycm_extra_conf_globlist=['~/.vim/*']
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_filetype_blacklist={
             \ 'vim' : 1,
@@ -371,14 +356,8 @@ let g:ycm_filetype_blacklist={
             \ 'mail' : 1
             \}
 
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_cpp_checkers = []
-let g:syntastic_javascript_checkers = ['jshint', 'jslint']
-let g:syntastic_python_checkers = ['pylint','pyflakes']
+nnoremap <Leader>ycd :YcmDiags<CR>
+nnoremap <Leader>ycf :YcmCompleter FixIt<CR>
+nnoremap <Leader>ycg :YcmCompleter GoTo<CR>
+nnoremap <Leader>yci :YcmCompleter GoToInclude<CR>
+nnoremap <Leader>yct :YcmCompleter GetType<CR>
