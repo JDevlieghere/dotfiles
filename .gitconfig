@@ -9,11 +9,13 @@
 	extendRegexp = true
 	lineNumber = true
 [color]
-	ui = auto
 	branch = auto
 	diff = auto
+	status = auto
+	ui = true
 [commit]
 	gpgsign = false
+	verbose = false
 [diff "bin"]
 	textconv = hexdump -v -C
 [help]
@@ -21,18 +23,24 @@
 [status]
 	showuntrackedfiles = all
 [alias]
-	aa = add -A
+	aa = add --all
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	amend = commit --amend
+	b = branch -v
 	cached = diff --cached
+	co = checkout
+	cp = cherry-pick
 	find = log --all --grep
+	five = log -n 5 --pretty=short
+	format = clang-format
+	git = "!exec git"
 	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
 	has = log --grep
-	last = log -n 5 --pretty=short
 	lg = log -p
-	noff = merge --no-ff
 	patch =  show HEAD -U999999
+	sha = rev-parse HEAD
 	st = status
+	staged = diff --staged
 	stash-all = stash save --include-untracked
 	top = log --stat -n 1
 	uncommit = reset HEAD~
