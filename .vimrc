@@ -39,6 +39,8 @@ Plug 'chriskempson/base16-vim'
 
 if has("python")
     Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer --gocode-completer --tern-completer --racer-completer' }
+else
+    Plug 'ervandew/supertab'
 endif
 
 call plug#end()
@@ -155,7 +157,7 @@ set listchars=tab:▸\ ,trail:-,extends:>,precedes:<,nbsp:⎵,eol:¬
 
 " Completion menu
 set completeopt=longest,menuone " Inserts the longest common text and
-                                " show menu even with only one item
+" show menu even with only one item
 
 " History
 set history=1000                " Remember more commands
@@ -332,21 +334,6 @@ let g:DoxygenToolkit_commentType = "C++"
 let g:ycm_extra_conf_globlist=['~/.vim/*']
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_filetype_blacklist={
-            \ 'vim' : 1,
-            \ 'tagbar' : 1,
-            \ 'qf' : 1,
-            \ 'notes' : 1,
-            \ 'markdown' : 1,
-            \ 'md' : 1,
-            \ 'unite' : 1,
-            \ 'text' : 1,
-            \ 'vimwiki' : 1,
-            \ 'pandoc' : 1,
-            \ 'infolog' : 1,
-            \ 'objc' : 1,
-            \ 'mail' : 1
-            \}
 
 nnoremap <Leader>ycd :YcmDiags<CR>
 nnoremap <Leader>ycf :YcmCompleter FixIt<CR>
