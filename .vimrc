@@ -12,7 +12,6 @@ Plug 'junegunn/fzf',                        { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
-Plug 'mhinz/vim-startify',                  { 'do': 'mkdir -p $HOME/.vim/files/info/' }
 Plug 'moll/vim-bbye'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
@@ -287,9 +286,6 @@ nnoremap <silent> <leader>bd :Bdelete!<CR>
 " vim-signify
 let g:signify_vcs_list = [ 'git' ]
 let g:signify_update_on_bufenter = 0
-
-" vim-startify
-let g:startify_change_to_dir = 0
 
 " fzf.vim
 let g:fzf_buffers_jump=1
