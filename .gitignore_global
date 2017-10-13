@@ -45,5 +45,8 @@ tags
 .ninja_deps
 .ninja_log
 
+# VSCode
+.vscode
+
 # CMake
 compile_commands.json
