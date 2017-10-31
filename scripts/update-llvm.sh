@@ -9,6 +9,8 @@
 ROOT="$1"
 cd "$ROOT"
 
+export PATH=/usr/local/bin:$PATH
+
 time {
     for d in $(find . -type d -name ".git"); do
         cd $(dirname "$d")
