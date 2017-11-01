@@ -170,12 +170,6 @@ endif
 " Same color for sign column and line numbers
 highlight clear SignColumn
 
-" NeoVim incompatible options
-if !has('nvim')
-    set cm=blowfish
-    set viminfo='100,n$HOME/.vim/files/info/viminfo
-endif
-
 " Use italics
 "highlight Comment cterm=italic
 "highlight htmlArg cterm=italic
@@ -288,6 +282,7 @@ let g:signify_vcs_list = [ 'git' ]
 let g:signify_update_on_bufenter = 0
 
 " fzf.vim
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_buffers_jump=1
 nnoremap \ :Ag<SPACE>
 nnoremap <silent> <C-p> :Files<CR>
@@ -336,3 +331,7 @@ nnoremap <Leader>ycf :YcmCompleter FixIt<CR>
 nnoremap <Leader>ycg :YcmCompleter GoTo<CR>
 nnoremap <Leader>yci :YcmCompleter GoToInclude<CR>
 nnoremap <Leader>yct :YcmCompleter GetType<CR>
+
+" supertab
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = "context"
