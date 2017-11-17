@@ -20,6 +20,7 @@ brew install cmake
 brew install coreutils
 brew install cppcheck
 brew install ctags
+brew install distcc
 brew install doxygen
 brew install dtrx
 brew install ffmpeg
