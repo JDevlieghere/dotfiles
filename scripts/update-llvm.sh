@@ -6,6 +6,10 @@
 # The first argument is the root where we should start looking for
 # repositories and build folders.
 
+# Make this low priority.
+renice 19 -p $$ >/dev/null 2>&1
+ionice -c3 -p $$ >/dev/null 2>&1
+
 ROOT="$1"
 cd "$ROOT"
 
