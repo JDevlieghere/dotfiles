@@ -14,6 +14,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
 Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree',                 { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -282,18 +283,10 @@ let g:signify_vcs_list = [ 'git' ]
 let g:signify_update_on_bufenter = 0
 
 " fzf.vim
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_buffers_jump=1
 nnoremap \ :Ag<SPACE>
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
-
-nnoremap <silent> <leader>fa :Ag<CR>
-nnoremap <silent> <leader>fb :Buffers<CR>
-nnoremap <silent> <leader>ff :Files<CR>
-nnoremap <silent> <leader>fg :GFiles<CR>
-nnoremap <silent> <leader>fh :History:<CR>
-nnoremap <silent> <leader>fm :Marks<CR>
 
 " vim-airline
 let g:airline_powerline_fonts=1
@@ -303,15 +296,31 @@ let g:airline#extensions#tabline#fnamemod=':t'
 " detectindent
 let g:detectindent_preferred_expandtab=1
 let g:detectindent_preferred_indent=2
+
 augroup detect_indent
     autocmd!
     autocmd BufReadPost * :DetectIndent
+augroup end
+
+" nerdtree
+let g:NERDTreeIgnore=['\.job$', '^CVS$', '\.orig', '\~$']
+let g:NERDTreeShowHidden=1
+let g:NERDTreeWinPos="left"
+let g:NERDTreeWinSize=35
+
+nnoremap <leader>n :NERDTreeFind<CR>
+nnoremap <leader>tn :NERDTreeToggle<CR>
+
+augroup close_nerdtree
+    autocmd!
+    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup end
 
 " tagbar
 let g:tagbar_autofocus=0
 let g:tagbar_right=1
 let g:tagbar_width=35
+
 nnoremap <leader>tt :TagbarToggle<CR>
 
 " vim-autoformat
