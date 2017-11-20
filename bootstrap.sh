@@ -33,6 +33,12 @@ doSync() {
     fi
 }
 
+doSymLink() {
+    mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+    ln -s ~/.vim/* $XDG_CONFIG_HOME/nvim
+    ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+}
+
 doInstall() {
     info "Installing Extras"
 
@@ -78,6 +84,7 @@ doConfig() {
 doAll() {
     doUpdate
     doSync
+    doSymLink
     doInstall
     doFonts
     doConfig
@@ -87,6 +94,7 @@ doHelp() {
     echo "Usage: $(basename "$0") [options]" >&2
     echo
     echo "   -s, --sync             Synchronizes dotfiles to home directory"
+    echo "   -l, --link             Create symbolic links"
     echo "   -i, --install          Install (extra) software"
     echo "   -f, --fonts            Copies font files"
     echo "   -c, --config           Configures your system"
@@ -103,6 +111,10 @@ else
         case $i in
             -s|--sync)
                 doSync
+                shift
+                ;;
+            -l|--link)
+                doSymLink
                 shift
                 ;;
             -i|--install)
