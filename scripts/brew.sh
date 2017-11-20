@@ -46,6 +46,7 @@ brew install lua
 brew install macvim --with-override-system-vim
 brew install ncdu
 brew install neofetch
+brew install neovim
 brew install ninja
 brew install node
 brew install python
@@ -68,6 +69,7 @@ brew install zsh
 # Install casks
 brew cask install aerial
 brew cask install google-chrome
+brew cask install haskell-platform
 brew cask install iterm2
 brew cask install tunnelblick
 brew cask install vlc
