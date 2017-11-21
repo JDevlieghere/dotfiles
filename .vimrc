@@ -15,12 +15,12 @@ Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree',                 { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
+Plug 'shougo/vimproc',                      { 'do': 'make' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
-Plug 'shougo/vimproc',                      { 'do': 'make' }
 
 Plug 'vim-scripts/doxygentoolkit.vim',      { 'for': 'cpp' }
 Plug 'octol/vim-cpp-enhanced-highlight',    { 'for': 'cpp' }
