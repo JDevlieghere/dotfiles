@@ -5,6 +5,12 @@ import logging
 import ycm_core
 import re
 
+# Directory where to find the file 'compile_commands.json' for out-of-source
+# builds.
+# This is not necessary to set BUILD_DIR if the build directory is called
+# `build` and is either inside the sources or at the same level.
+BUILD_DIR = ''
+
 BASE_FLAGS = [
         '-Wall',
         '-Wextra',
@@ -161,7 +167,11 @@ def FlagsForCompilationDatabase(root, filename):
         return None
 
 def FlagsForFile(filename):
-    root = os.path.realpath(filename);
+    root = ''
+    if BUILD_DIR:
+        root = os.path.realpath(BUILD_DIR)
+    if not os.path.exists(root + '/compile_commands.json'):
+        root = os.path.realpath(filename)
     compilation_db_flags = FlagsForCompilationDatabase(root, filename)
     if compilation_db_flags:
         final_flags = compilation_db_flags
