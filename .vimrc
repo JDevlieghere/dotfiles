@@ -36,8 +36,8 @@ Plug 'rust-lang/rust.vim',                  { 'for': 'rust' }
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
 Plug 'nanotech/jellybeans.vim'
-Plug 'chriskempson/base16-vim'
 
 if has("python")
     Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer --gocode-completer --tern-completer --racer-completer' }
@@ -171,7 +171,7 @@ if has('persistent_undo')
 endif
 
 " Same color for sign column and line numbers
-highlight clear SignColumn
+"highlight clear SignColumn
 
 " Use italics
 "highlight Comment cterm=italic
@@ -287,6 +287,7 @@ let g:signify_update_on_bufenter = 0
 " fzf.vim
 let g:fzf_buffers_jump=1
 nnoremap \ :Ag<SPACE>
+vnoremap \ y :Ag <C-R>"<CR>
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
 
@@ -295,6 +296,10 @@ let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod=':t'
 let g:airline#extensions#ale#enabled = 1
+
+" ale
+let g:ale_sign_error = '•'
+let g:ale_sign_warning = '•'
 
 " detectindent
 let g:detectindent_preferred_expandtab=1
@@ -307,6 +312,7 @@ augroup end
 
 " nerdtree
 let g:NERDTreeIgnore=['\.job$', '^CVS$', '\.orig', '\~$']
+let g:NERDTreeMinimalUI=1
 let g:NERDTreeShowHidden=1
 let g:NERDTreeWinPos="left"
 let g:NERDTreeWinSize=35
@@ -321,10 +327,16 @@ augroup end
 
 " tagbar
 let g:tagbar_autofocus=0
+let g:tagbar_compact=1
 let g:tagbar_right=1
 let g:tagbar_width=35
 
 nnoremap <leader>tt :TagbarToggle<CR>
+
+augroup open_tagbar
+    autocmd!
+    autocmd FileType * nested :call tagbar#autoopen(0)
+augroup end
 
 " vim-autoformat
 let g:formatters_python = ['yapf', 'autopep8']
