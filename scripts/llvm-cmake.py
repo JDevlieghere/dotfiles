@@ -67,4 +67,4 @@ try:
 except KeyboardInterrupt:
     exit(1)
 
-subprocess.call(cmake_cmd, shell=True)
+subprocess.call(' '.join(cmake_cmd), shell=True)
