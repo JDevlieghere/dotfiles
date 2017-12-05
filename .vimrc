@@ -20,7 +20,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'w0rp/ale'
 
 Plug 'vim-scripts/doxygentoolkit.vim',      { 'for': 'cpp' }
 Plug 'octol/vim-cpp-enhanced-highlight',    { 'for': 'cpp' }
@@ -295,11 +294,6 @@ nnoremap <silent> <C-b> :Buffers<CR>
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod=':t'
-let g:airline#extensions#ale#enabled = 1
-
-" ale
-let g:ale_sign_error = '•'
-let g:ale_sign_warning = '•'
 
 " detectindent
 let g:detectindent_preferred_expandtab=1
