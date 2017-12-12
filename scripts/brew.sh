@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Install Homebrew or make sure it's up to date
+# Install Homebrew or make sure it's up to date.
 which -s brew
 if [[ $? != 0 ]] ; then
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -9,7 +9,10 @@ else
 	brew upgrade
 fi
 
-# Install formulae
+# Disable analytics.
+brew analytics off
+
+# Install formulae.
 brew install afl-fuzz
 brew install ag
 brew install binutils
@@ -66,7 +69,7 @@ brew install wireshark --with-qt5
 brew install xz
 brew install zsh
 
-# Install casks
+# Install casks.
 brew cask install aerial
 brew cask install google-chrome
 brew cask install haskell-platform
@@ -74,8 +77,8 @@ brew cask install iterm2
 brew cask install tunnelblick
 brew cask install vlc
 
-# Cleanup
+# Cleanup.
 brew cleanup
 
-# Link applications
+# Link applications.
 brew linkapps

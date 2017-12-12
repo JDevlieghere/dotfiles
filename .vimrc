@@ -170,7 +170,7 @@ if has('persistent_undo')
 endif
 
 " Same color for sign column and line numbers
-"highlight clear SignColumn
+highlight clear SignColumn
 
 " Use italics
 "highlight Comment cterm=italic
@@ -182,6 +182,7 @@ endif
 
 " Save a keystroke
 nnoremap ; :
+vnoremap ; :
 
 " Typos
 cnoreabbrev W w
@@ -326,11 +327,6 @@ let g:tagbar_right=1
 let g:tagbar_width=35
 
 nnoremap <leader>tt :TagbarToggle<CR>
-
-augroup open_tagbar
-    autocmd!
-    autocmd FileType * nested :call tagbar#autoopen(0)
-augroup end
 
 " vim-autoformat
 let g:formatters_python = ['yapf', 'autopep8']
