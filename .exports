@@ -55,3 +55,6 @@ if test -e ~/.distcc/hosts
     set -x CCACHE_PREFIX "distcc"
   end
 end
+
+# dotfiles
+set PATH $PATH $HOME/dotfiles/scripts
