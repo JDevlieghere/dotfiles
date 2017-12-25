@@ -13,9 +13,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
-Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree',                 { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 Plug 'shougo/vimproc',                      { 'do': 'make' }
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -102,11 +102,11 @@ set noswapfile                  " No swap file
 set incsearch                   " Incremental search
 set hlsearch                    " Highlight matches
 set ignorecase                  " Case-insensitive search...
-set smartcase                   " ... unless search contains uppercase letter
+set smartcase                   " ...unless search contains uppercase letter
 
 " Indentation
 set smarttab                    " Better tabs
-set smartindent                 " Inserts new level of indentation
+set smartindent                 " Insert new level of indentation
 set autoindent                  " Copy indentation from previous line
 set tabstop=2                   " Columns a tab counts for
 set softtabstop=2               " Columns a tab inserts in insert mode
@@ -116,7 +116,7 @@ set expandtab                   " Always use spaces instead of tabs
 
 " Key sequence timeout
 set ttimeout                    " Enable time out
-set ttimeoutlen=100             " Set timeout time to 100 ms
+set ttimeoutlen=0               " Disable key code delay
 
 " Wrapping
 set nowrap                      " Don't wrap long lines
@@ -154,11 +154,11 @@ set spell                       " Enable by default
 
 " Invisible characters
 set nolist                      " Hide by default
-set listchars=tab:▸\ ,trail:-,extends:>,precedes:<,nbsp:⎵,eol:¬
+set listchars=eol:¬,tab:▶\ ,trail:~,extends:>,precedes:<,space:␣
 
 " Completion menu
 set completeopt=longest,menuone " Inserts the longest common text and
-" show menu even with only one item
+                                " show menu even with only one item
 
 " History
 set history=1000                " Remember more commands
@@ -179,10 +179,6 @@ highlight clear SignColumn
 " ---------------------------------------------------------------------------- "
 " Key Mappings                                                                 "
 " ---------------------------------------------------------------------------- "
-
-" Save a keystroke
-nnoremap ; :
-vnoremap ; :
 
 " Typos
 cnoreabbrev W w
@@ -223,12 +219,6 @@ nnoremap <leader>yl :let @+=expand('%:t') . ':' . line(".")<CR>
 nnoremap <leader>ts :setlocal spell!<CR>
 nnoremap <leader>tl :set list!<CR>
 
-" Spelling
-nnoremap <leader>sa zg
-nnoremap <leader>sn ]s
-nnoremap <leader>sp [s
-nnoremap <leader>ss z=
-
 " Buffers
 nnoremap <leader>bd :bdelete<CR>
 nnoremap <leader>bn :bnext<CR>
@@ -246,7 +236,7 @@ nnoremap <silent> <leader>wv <C-w>v
 " Use Doxygen style comments in C and C++
 augroup doxygen_comments
     autocmd!
-    autocmd FileType c,cpp set comments^=:///
+    autocmd FileType c,cpp setlocal commentstring=///\ %s
 augroup end
 
 " Write directly to the original file when editing the crontab
