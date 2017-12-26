@@ -6,20 +6,20 @@ set nocompatible
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'chiel92/vim-autoformat',              { 'on': 'Autoformat' }
 Plug 'ciaranm/detectindent'
 Plug 'junegunn/fzf',                        { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
-Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
-Plug 'scrooloose/nerdtree',                 { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 Plug 'shougo/vimproc',                      { 'do': 'make' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+Plug 'chiel92/vim-autoformat',              { 'on': 'Autoformat' }
+Plug 'majutsushi/tagbar',                   { 'on': 'TagbarToggle' }
 
 Plug 'vim-scripts/doxygentoolkit.vim',      { 'for': 'cpp' }
 Plug 'octol/vim-cpp-enhanced-highlight',    { 'for': 'cpp' }
@@ -36,35 +36,25 @@ Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
-Plug 'nanotech/jellybeans.vim'
 
 if has("python")
-    Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer --gocode-completer --tern-completer --racer-completer' }
+    Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer --gocode-completer --racer-completer' }
 else
-    Plug 'ervandew/supertab'
+    Plug 'ajh17/vimcompletesme'
 endif
 
 call plug#end()
-
-" ---------------------------------------------------------------------------- "
-" (G)UI                                                                        "
-" ---------------------------------------------------------------------------- "
-
-try
-    colorscheme solarized
-catch
-endtry
-
-if has("gui_running")
-    set guifont=Source\ Code\ Pro\ Medium:h13
-    set antialias
-end
 
 " ---------------------------------------------------------------------------- "
 " General Settings                                                             "
 " ---------------------------------------------------------------------------- "
 
 filetype plugin indent on
+
+try
+    colorscheme solarized
+catch
+endtry
 
 if !exists("g:syntax_on")
     syntax enable
@@ -81,7 +71,7 @@ set laststatus=2                " Always display the status line
 set nofoldenable                " Disable folding
 set lazyredraw                  " Use lazy redrawing
 set noshowmode                  " Don't show mode
-set nu                          " Show line numbers
+set number                      " Show line numbers
 set pastetoggle=<F2>            " Toggle paste mode with F2
 set ruler                       " Show ruler
 set showcmd                     " Show current command
@@ -129,8 +119,8 @@ set nojoinspaces                " Only one space when joining lines
 set formatoptions+=j            " Remove comment leader when joining lines
 
 " Scroll
-set sidescrolloff=3             " Keep at least 3 lines left/right
-set scrolloff=3                 " Keep at least 3 lines above/below
+set sidescrolloff=5             " Keep at least 5 lines left/right
+set scrolloff=5                 " Keep at least 5 lines above/below
 
 " Mouse
 set mousehide                   " Hide mouse when typing
@@ -153,12 +143,17 @@ set spelllang=en_us             " English as default language
 set spell                       " Enable by default
 
 " Invisible characters
-set nolist                      " Hide by default
-set listchars=eol:¬,tab:▶\ ,trail:~,extends:>,precedes:<,space:␣
+set nolist
+set listchars=eol:¬,tab:▶\ ,trail:~,extends:⟩,precedes:⟨,nbsp:␣
+set showbreak=↳\ \ \ "
 
-" Completion menu
-set completeopt=longest,menuone " Inserts the longest common text and
-                                " show menu even with only one item
+" Make completion menu behave like an IDE
+set completeopt=longest,menuone
+
+" Encryption
+if has("crypt-blowfish2")
+    set cm=blowfish2
+endif
 
 " History
 set history=1000                " Remember more commands
@@ -169,12 +164,23 @@ if has('persistent_undo')
     set undoreload=10000        " Max lines to save for undo on a buffer reload
 endif
 
+" ---------------------------------------------------------------------------- "
+" Colors & User Interface                                                      "
+" ---------------------------------------------------------------------------- "
+
+if has("gui_running")
+    set guifont=Source\ Code\ Pro\ Medium:h13
+    set antialias
+end
+
 " Same color for sign column and line numbers
 highlight clear SignColumn
 
-" Use italics
-"highlight Comment cterm=italic
-"highlight htmlArg cterm=italic
+" Custom spell-checking highlighting
+highlight SpellBad     term=underline cterm=underline
+highlight SpellCap     term=underline cterm=underline
+highlight SpellRare    term=underline cterm=underline
+highlight SpellLocal   term=underline cterm=underline
 
 " ---------------------------------------------------------------------------- "
 " Key Mappings                                                                 "
@@ -195,21 +201,18 @@ vnoremap Q gq
 nnoremap Q gqap
 
 " Search for current visual selection
-vnoremap // y/<C-R>"<CR>
+vnoremap // y/\V<C-R>"<CR>
 
-" Cycle through buffers with (CTRL +) tab
-nnoremap <silent> <Tab> :bnext<CR>
-nnoremap <silent> <S-Tab> :bprevious<CR>
+" Move between open buffers.
+nnoremap <C-n> :bnext<CR>
+nnoremap <C-p> :bprev<CR>
 
 " ---------------------------------------------------------------------------- "
 " Leader Mappings                                                              "
 " ---------------------------------------------------------------------------- "
 
-" Map leader to space
-let mapleader=" "
-
 " Clear search highlight
-nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <leader><space> :noh<CR>
 
 " Yank
 nnoremap <leader>yf :let @+=expand("%:p")<CR>
@@ -221,34 +224,24 @@ nnoremap <leader>tl :set list!<CR>
 
 " Buffers
 nnoremap <leader>bd :bdelete<CR>
+nnoremap <leader>bf :bfirst<CR>
+nnoremap <leader>bl :blast<CR>
 nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bp :bprevious<CR>
 
 " Windows
-nnoremap <silent> <leader>wd <C-w>q
-nnoremap <silent> <leader>wh <C-w>h
-nnoremap <silent> <leader>wv <C-w>v
+nnoremap <leader>wd <C-w>c
+nnoremap <leader>wo <C-w>o
 
 " ---------------------------------------------------------------------------- "
 " Auto Commands                                                                "
 " ---------------------------------------------------------------------------- "
 
-" Use Doxygen style comments in C and C++
-augroup doxygen_comments
+" Filetype specific settings
+augroup filtypes
     autocmd!
     autocmd FileType c,cpp setlocal commentstring=///\ %s
-augroup end
-
-" Write directly to the original file when editing the crontab
-augroup crontab
-    autocmd!
     autocmd FileType crontab setlocal nobackup nowritebackup
-augroup end
-
-" Recognize NASM filetype
-augroup recognize_nasm
-    autocmd!
-    autocmd BufRead,BufNewFile *.nasm set filetype=nasm
 augroup end
 
 " Remove trailing whitespace
@@ -271,14 +264,14 @@ augroup end
 nnoremap <silent> <leader>bd :Bdelete!<CR>
 
 " vim-signify
-let g:signify_vcs_list = [ 'git' ]
-let g:signify_update_on_bufenter = 0
+let g:signify_vcs_list=['git']
+let g:signify_update_on_bufenter=0
 
 " fzf.vim
 let g:fzf_buffers_jump=1
-nnoremap \ :Ag<SPACE>
-vnoremap \ y :Ag <C-R>"<CR>
-nnoremap <silent> <C-p> :Files<CR>
+nnoremap <leader>a :Ag<SPACE>
+vnoremap <leader>a y :Ag <C-R>"<CR>
+nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
 
 " vim-airline
@@ -295,47 +288,23 @@ augroup detect_indent
     autocmd BufReadPost * :DetectIndent
 augroup end
 
-" nerdtree
-let g:NERDTreeIgnore=['\.job$', '^CVS$', '\.orig', '\~$']
-let g:NERDTreeMinimalUI=1
-let g:NERDTreeShowHidden=1
-let g:NERDTreeWinPos="left"
-let g:NERDTreeWinSize=35
-
-nnoremap <leader>n :NERDTreeFind<CR>
-nnoremap <leader>tn :NERDTreeToggle<CR>
-
-augroup close_nerdtree
-    autocmd!
-    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-augroup end
-
 " tagbar
 let g:tagbar_autofocus=0
 let g:tagbar_compact=1
 let g:tagbar_right=1
 let g:tagbar_width=35
-
 nnoremap <leader>tt :TagbarToggle<CR>
 
 " vim-autoformat
-let g:formatters_python = ['yapf', 'autopep8']
-let g:formatter_yapf_style = 'pep8'
+let g:formatters_python=['yapf', 'autopep8']
+let g:formatter_yapf_style='pep8'
 
 " doxygentoolkit.vim
-let g:DoxygenToolkit_commentType = "C++"
+let g:DoxygenToolkit_commentType="C++"
 
 " youcompleteme
 let g:ycm_extra_conf_globlist=['~/.vim/*']
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:ycm_collect_identifiers_from_tags_files = 1
-
-nnoremap <Leader>ycd :YcmDiags<CR>
-nnoremap <Leader>ycf :YcmCompleter FixIt<CR>
-nnoremap <Leader>ycg :YcmCompleter GoTo<CR>
-nnoremap <Leader>yci :YcmCompleter GoToInclude<CR>
-nnoremap <Leader>yct :YcmCompleter GetType<CR>
-
-" supertab
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
-let g:SuperTabDefaultCompletionType = "context"
+let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_error_symbol='✗'
+let g:ycm_warning_symbol='▲'
