@@ -8,10 +8,9 @@ Linux and macOS.
 **Feel free to try out my dotfiles or use them as inspiration!** If you have a
 suggestion, improvement or question, don't hesitate to open an issue.
 
-## Screenshots
+## Screenshot
 
-![macOS](https://i.imgur.com/1HKzLs7.png)
-![Voltron](https://i.imgur.com/pNVKuy0.png)
+![macOS](https://jonasdevlieghere.com/static/dotfiles.png)
 
 ## Installation
 

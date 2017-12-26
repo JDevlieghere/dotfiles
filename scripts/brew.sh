@@ -15,6 +15,7 @@ brew analytics off
 # Install formulae.
 brew install afl-fuzz
 brew install ag
+brew install archey
 brew install binutils
 brew install boost
 brew install ccache
