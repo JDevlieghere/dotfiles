@@ -15,6 +15,7 @@ sudo pip install --upgrade numpy
 sudo pip install --upgrade pandas
 sudo pip install --upgrade pyflakes
 sudo pip install --upgrade pylint
+sudo pip install --upgrade python-language-server
 sudo pip install --upgrade rtv
 sudo pip install --upgrade scipy
 sudo pip install --upgrade sphinx

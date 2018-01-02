@@ -18,6 +18,10 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'ajh17/vimcompletesme'
+
 Plug 'chiel92/vim-autoformat',              { 'on': 'Autoformat' }
 Plug 'majutsushi/tagbar',                   { 'on': 'TagbarToggle' }
 
@@ -37,11 +41,9 @@ Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 
-if has("python")
-    Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer --gocode-completer --racer-completer' }
-else
-    Plug 'ajh17/vimcompletesme'
-endif
+" if has("python")
+"      Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer --gocode-completer --racer-completer' }
+" endif
 
 call plug#end()
 
@@ -148,7 +150,7 @@ set listchars=eol:¬,tab:▶\ ,trail:~,extends:⟩,precedes:⟨,nbsp:␣
 set showbreak=↳\ \ \ "
 
 " Make completion menu behave like an IDE
-set completeopt=longest,menuone
+set completeopt=longest,menuone,preview
 
 " Encryption
 if has("crypt-blowfish2")
@@ -203,13 +205,17 @@ nnoremap Q gqap
 " Search for current visual selection
 vnoremap // y/\V<C-R>"<CR>
 
-" Move between open buffers.
+" Move between open buffers
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprev<CR>
+
+" Redraw the screen and remove highlighting
+nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 " ---------------------------------------------------------------------------- "
 " Leader Mappings                                                              "
 " ---------------------------------------------------------------------------- "
+let mapleader=" "
 
 " Clear search highlight
 nnoremap <leader><space> :noh<CR>
@@ -240,6 +246,7 @@ nnoremap <leader>wo <C-w>o
 " Filetype specific settings
 augroup filtypes
     autocmd!
+    autocmd FileType c,cpp setlocal comments^=:///
     autocmd FileType c,cpp setlocal commentstring=///\ %s
     autocmd FileType crontab setlocal nobackup nowritebackup
 augroup end
@@ -269,8 +276,8 @@ let g:signify_update_on_bufenter=0
 
 " fzf.vim
 let g:fzf_buffers_jump=1
-nnoremap <leader>a :Ag<SPACE>
-vnoremap <leader>a y :Ag <C-R>"<CR>
+nnoremap \ :Ag<SPACE>
+vnoremap \ y :Ag <C-R>"<CR>
 nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
 
@@ -308,3 +315,52 @@ let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_error_symbol='✗'
 let g:ycm_warning_symbol='▲'
+
+" LSP
+nnoremap <leader>gd :LspDefinition<CR>
+nnoremap <Leader>rn :LspRename<CR>
+nnoremap <Leader>h  :LspHover<CR>
+nnoremap <Leader>fr :LspReferences<CR>
+nnoremap <Leader>ld :LspDocumentFormat<CR>
+
+if executable('app')
+    augroup lsp_cquery
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'cquery',
+                    \ 'cmd': {server_info->['app']},
+                    \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+                    \ 'initialization_options': { 'cacheDirectory': '/path/to/cquery/cache' },
+                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                    \ })
+        autocmd FileType c setlocal omnifunc=lsp#complete
+        autocmd FileType cpp setlocal omnifunc=lsp#complete
+        autocmd FileType objc setlocal omnifunc=lsp#complete
+        autocmd FileType objcpp setlocal omnifunc=lsp#complete
+    augroup end
+elseif executable('clangd')
+    augroup lsp_clangd
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'clangd',
+                    \ 'cmd': {server_info->['clangd']},
+                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                    \ })
+        autocmd FileType c setlocal omnifunc=lsp#complete
+        autocmd FileType cpp setlocal omnifunc=lsp#complete
+        autocmd FileType objc setlocal omnifunc=lsp#complete
+        autocmd FileType objcpp setlocal omnifunc=lsp#complete
+    augroup end
+endif
+
+if executable('pyls')
+    augroup lsp_pyls
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'pyls',
+                    \ 'cmd': {server_info->['pyls']},
+                    \ 'whitelist': ['python'],
+                    \ })
+        autocmd FileType python setlocal omnifunc=lsp#complete
+    augroup end
+endif

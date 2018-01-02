@@ -50,3 +50,6 @@ tags
 
 # CMake
 compile_commands.json
+
+# CQuery
+cquery_diagnostics.log
