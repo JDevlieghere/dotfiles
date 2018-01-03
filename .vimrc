@@ -323,12 +323,12 @@ nnoremap <Leader>h  :LspHover<CR>
 nnoremap <Leader>fr :LspReferences<CR>
 nnoremap <Leader>ld :LspDocumentFormat<CR>
 
-if executable('app')
+if executable('cquery')
     augroup lsp_cquery
         autocmd!
         autocmd User lsp_setup call lsp#register_server({
                     \ 'name': 'cquery',
-                    \ 'cmd': {server_info->['app']},
+                    \ 'cmd': {server_info->['cquery']},
                     \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
                     \ 'initialization_options': { 'cacheDirectory': '/tmp/cache' },
                     \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
