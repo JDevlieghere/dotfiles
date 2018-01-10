@@ -1,4 +1,4 @@
-# OSX
+# macOS
 *.DS_Store
 .AppleDouble
 .LSOverride
@@ -51,5 +51,6 @@ tags
 # CMake
 compile_commands.json
 
-# CQuery
+# LSP
 cquery_diagnostics.log
+.ropeproject
