@@ -51,7 +51,7 @@ if args.ra:
 
 if args.debug:
     cmake_cmd.append("-DCMAKE_BUILD_TYPE='Debug'")
-    cmake_cmd.append("-LLVM_OPTIMIZED_TABLEGEN:BOOL=ON")
+    cmake_cmd.append("-DLLVM_OPTIMIZED_TABLEGEN:BOOL=ON")
 
 if args.modules:
     cmake_cmd.append("-DLLVM_ENABLE_MODULES:BOOL=ON")
