@@ -53,6 +53,7 @@ brew install neofetch
 brew install neovim
 brew install ninja
 brew install node
+brew install pandoc
 brew install python
 brew install radare2
 brew install ranger
