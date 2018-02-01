@@ -9,8 +9,7 @@
 # └── swift
 
 # Optional environment variables that affect the behavior of this script:
-#   LLVM_BRANCH (checkout the given LLVM and clang branch)
-#   PULL        (pull all repositories)
+#   LLVM_BRANCH: checkout the given LLVM and clang branch
 #
 # Useful arguments to the build script include:
 #   -i (build for iOS)
@@ -21,9 +20,10 @@ export SWIFT_SOURCE_ROOT=$(pwd)
 export SWIFT_BUILD_ROOT=$(pwd)/build
 
 SWIFT_CLANG_ROOT=$SWIFT_SOURCE_ROOT/clang
+SWIFT_CMARK_ROOT=$SWIFT_SOURCE_ROOT/cmark
+SWIFT_LLDB_ROOT=$SWIFT_SOURCE_ROOT/lldb
 SWIFT_LLVM_ROOT=$SWIFT_SOURCE_ROOT/llvm
 SWIFT_SWIFT_ROOT=$SWIFT_SOURCE_ROOT/swift
-SWIFT_CMARK_ROOT=$SWIFT_SOURCE_ROOT/cmark
 
 info() {
   printf "\033[00;34m$@\033[0m\n"
@@ -38,14 +38,6 @@ checkout() {
   cd "$SWIFT_SOURCE_ROOT"
 }
 
-pull() {
-  local ROOT=$1
-
-  cd "$ROOT" || return 1
-  git pull --rebase
-  cd "$SWIFT_SOURCE_ROOT"
-}
-
 # Start in the root.
 cd "$SWIFT_SOURCE_ROOT" || exit
 
@@ -53,6 +45,7 @@ cd "$SWIFT_SOURCE_ROOT" || exit
 info "Cloning repositories"
 git clone git@github.com:apple/swift-clang.git "$SWIFT_CLANG_ROOT"
 git clone git@github.com:apple/swift-cmark.git "$SWIFT_CMARK_ROOT"
+git clone git@github.com:apple/swift-lldb.git "$SWIFT_LLDB_ROOT"
 git clone git@github.com:apple/swift-llvm.git "$SWIFT_LLVM_ROOT"
 git clone git@github.com:apple/swift.git "$SWIFT_SWIFT_ROOT"
 
@@ -60,16 +53,8 @@ git clone git@github.com:apple/swift.git "$SWIFT_SWIFT_ROOT"
 if [[ -n "$LLVM_BRANCH" ]]; then
   info "Checking out $LLVM_BRANCH"
   checkout "$SWIFT_CLANG_ROOT" "$LLVM_BRANCH"
+  checkout "$SWIFT_LLDB_ROOT" "$LLVM_BRANCH"
   checkout "$SWIFT_LLVM_ROOT" "$LLVM_BRANCH"
-fi
-
-# Pull all repositories if environment variable PULL is set.
-if [[ -n "$PULL" ]]; then
-  info "Pulling repositories"
-  pull "$SWIFT_CLANG_ROOT"
-  pull "$SWIFT_LLVM_ROOT"
-  pull "$SWIFT_CMARK_ROOT"
-  pull "$SWIFT_SWIFT_ROOT"
 fi
 
 # Finally invoke build-script and forward all arguments.
