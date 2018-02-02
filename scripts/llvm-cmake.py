@@ -29,7 +29,13 @@ parser.add_argument(
 parser.add_argument(
     '-x', '--x86', action='store_true', help="Only build x86 target")
 parser.add_argument(
-    '-a', '--asan', action='store_true', help="Enabled address sanitizers")
+    '-a', '--sanitizers', nargs='*', help="Sanitizers to enable")
+parser.add_argument(
+    '-p',
+    '--projects',
+    nargs='*',
+    help="Project to enable (only for the monorepo)")
+
 args = parser.parse_args()
 
 cmake_cmd = [
@@ -51,7 +57,7 @@ if args.ra:
 
 if args.debug:
     cmake_cmd.append("-DCMAKE_BUILD_TYPE='Debug'")
-    cmake_cmd.append("-DLLVM_OPTIMIZED_TABLEGEN:BOOL=ON")
+    cmake_cmd.append("-LLVM_OPTIMIZED_TABLEGEN:BOOL=ON")
 
 if args.modules:
     cmake_cmd.append("-DLLVM_ENABLE_MODULES:BOOL=ON")
@@ -59,8 +65,13 @@ if args.modules:
 if args.x86:
     cmake_cmd.append("-DLLVM_TARGETS_TO_BUILD='X86'")
 
-if args.asan:
-    cmake_cmd.append("-DLLVM_USE_SANITIZER='Address'")
+if args.sanitizers:
+    sanitizers = ';'.join(args.sanitizers)
+    cmake_cmd.append("-DLLVM_USE_SANITIZER='{}'".format(sanitizers))
+
+if args.projects:
+    projects = ';'.join(args.projects)
+    cmake_cmd.append("-DLLVM_ENABLE_PROJECTS='{}'".format(projects))
 
 try:
     print(' \\\n    '.join(cmake_cmd))
