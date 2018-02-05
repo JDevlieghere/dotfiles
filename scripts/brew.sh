@@ -42,6 +42,7 @@ brew install graphviz --with-gts
 brew install gts
 brew install highlight
 brew install htop
+brew install imagemagick
 brew install lcov
 brew install libiconv
 brew install libimobiledevice
