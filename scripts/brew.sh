@@ -80,8 +80,12 @@ brew cask install iterm2
 brew cask install tunnelblick
 brew cask install vlc
 
+# Link applications.
+brew linkapps
+
 # Cleanup.
 brew cleanup
 
-# Link applications.
-brew linkapps
+# List what's installed.
+brew list
+brew cask list
