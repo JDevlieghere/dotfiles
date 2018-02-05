@@ -11,13 +11,16 @@ parser = argparse.ArgumentParser(
     "remember mnemonic arguments.")
 
 parser.add_argument("source", help="LLVM source path", type=str)
+
 parser.add_argument(
     '-s', '--shared', action='store_true', help="Build shared libraries")
 parser.add_argument(
-    '-l',
-    '--light',
+    '-c',
+    '--clang-light',
     action='store_true',
-    help="Don't build clang ARC, Static Anaylzer or Plugins")
+    help=
+    "Build a light version of clang, which means no ARC, Static Anaylzer or plugins"
+)
 parser.add_argument(
     '-r',
     '--ra',
@@ -28,13 +31,18 @@ parser.add_argument(
     '-m', '--modules', action='store_true', help="Enable modules")
 parser.add_argument(
     '-x', '--x86', action='store_true', help="Only build x86 target")
+
+parser.add_argument('--sanitizers', nargs='*', help="Sanitizers to enable")
 parser.add_argument(
-    '-a', '--sanitizers', nargs='*', help="Sanitizers to enable")
+    '--system-debugserver',
+    action='store_true',
+    help="Use system debug server")
+
 parser.add_argument(
     '-p',
     '--projects',
     nargs='*',
-    help="Project to enable (only for the monorepo)")
+    help="Project to enable when using the monorepo")
 
 args = parser.parse_args()
 
@@ -46,7 +54,7 @@ cmake_cmd = [
 if args.shared:
     cmake_cmd.append("-DBUILD_SHARED_LIBS:BOOL=ON")
 
-if args.light:
+if args.clang_light:
     cmake_cmd.append("-DCLANG_ENABLE_ARCMT:BOOL=OFF")
     cmake_cmd.append("-DCLANG_ENABLE_STATIC_ANALYZER:BOOL=OFF")
     cmake_cmd.append("-DCLANG_PLUGIN_SUPPORT:BOOL=OFF")
@@ -68,6 +76,9 @@ if args.x86:
 if args.sanitizers:
     sanitizers = ';'.join(args.sanitizers)
     cmake_cmd.append("-DLLVM_USE_SANITIZER='{}'".format(sanitizers))
+
+if args.system_debugserver:
+    cmake_cmd.append("-DLLDB_CODESIGN_IDENTITY=\"\"")
 
 if args.projects:
     projects = ';'.join(args.projects)
