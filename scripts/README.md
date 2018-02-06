@@ -10,6 +10,7 @@
 ## Build From Source
 
  - `cmake`
+ - `cquery`
  - `ffmpeg`
  - `gcc`
  - `llvm`
