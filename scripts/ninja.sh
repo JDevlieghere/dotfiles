@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
-git clone git://github.com/ninja-build/ninja.git ~/ninja
-cd ~/ninja
+# Clone
+git clone git://github.com/ninja-build/ninja.git /tmp/ninja
+cd /tmp/ninja || exit 2
 git checkout release
+
+# Build
 ./configure.py --bootstrap
-sudo cp ninja /usr/bin
+
+# Install
+sudo cp ninja /usr/local/bin

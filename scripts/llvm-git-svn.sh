@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Builds LLVM, clang and some projects (see below) in the current directory.
+# Creates LLVM repository structure for git-svn.
 # .
 # ├── build
 # ├── install
@@ -23,7 +23,6 @@ function init {
     git config svn-remote.svn.fetch :refs/remotes/origin/master
     git svn rebase -l > /dev/null
 }
-
 
 # llvm
 git clone https://llvm.org/git/llvm.git
@@ -49,6 +48,7 @@ cd "$ROOT/llvm/projects" || exit
 git clone https://llvm.org/git/compiler-rt.git
 init "$ROOT/llvm/projects/compiler-rt" "compiler-rt"
 
+# libcxx
 cd "$ROOT/llvm/projects" || exit
 git clone http://llvm.org/git/libcxx.git
 git clone http://llvm.org/git/libcxxabi.git
