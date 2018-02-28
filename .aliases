@@ -51,3 +51,9 @@ alias ccaches='watch -n 0 "ccache -s"'
 
 # rsync with progress
 alias psync='rsync --info=progress2'
+
+# Get first column and ignore binary matches
+alias fstnl='cut -d":" -f1 | uniq | grep -v "Binary "'
+
+# Git grep
+alias gg='git grep'
