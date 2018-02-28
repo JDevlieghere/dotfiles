@@ -28,34 +28,32 @@ function init {
 git clone https://llvm.org/git/llvm.git
 init "$ROOT/llvm" "llvm"
 
-# clang
-cd "$ROOT/llvm/tools" || exit
-git clone https://llvm.org/git/clang.git
-init "$ROOT/llvm/tools/clang" "cfe"
+if [ -z "$1" ]; then
+    # clang
+    cd "$ROOT/llvm/tools" || exit
+    git clone https://llvm.org/git/clang.git
+    init "$ROOT/llvm/tools/clang" "cfe"
 
-# clang-tools-extra
-cd "$ROOT/llvm/tools/clang/tools" || exit
-git clone https://llvm.org/git/clang-tools-extra.git extra
-init "$ROOT/llvm/tools/clang/tools/extra" "clang-tools-extra"
+    # clang-tools-extra
+    cd "$ROOT/llvm/tools/clang/tools" || exit
+    git clone https://llvm.org/git/clang-tools-extra.git extra
+    init "$ROOT/llvm/tools/clang/tools/extra" "clang-tools-extra"
 
-# lldb
-cd "$ROOT/llvm/tools" || exit
-git clone https://llvm.org/git/lldb.git
-init "$ROOT/llvm/tools/lldb" "lldb"
+    # lldb
+    cd "$ROOT/llvm/tools" || exit
+    git clone https://llvm.org/git/lldb.git
+    init "$ROOT/llvm/tools/lldb" "lldb"
 
-# compiler-rt
-cd "$ROOT/llvm/projects" || exit
-git clone https://llvm.org/git/compiler-rt.git
-init "$ROOT/llvm/projects/compiler-rt" "compiler-rt"
+    # compiler-rt
+    cd "$ROOT/llvm/projects" || exit
+    git clone https://llvm.org/git/compiler-rt.git
+    init "$ROOT/llvm/projects/compiler-rt" "compiler-rt"
 
-# libcxx
-cd "$ROOT/llvm/projects" || exit
-git clone http://llvm.org/git/libcxx.git
-git clone http://llvm.org/git/libcxxabi.git
-
-# test-suite
-cd "$ROOT/llvm/projects" || exit
-git clone http://llvm.org/git/test-suite.git
+    # libcxx
+    cd "$ROOT/llvm/projects" || exit
+    git clone http://llvm.org/git/libcxx.git
+    git clone http://llvm.org/git/libcxxabi.git
+fi
 
 # Create build and install dirs
 cd "$ROOT" || exit
