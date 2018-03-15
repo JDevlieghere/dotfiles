@@ -35,6 +35,7 @@ Plug 'fatih/vim-go',                        { 'for': 'go', 'do': ':GoInstallBina
 Plug 'jdevlieghere/llvm.vim',               { 'for': 'llvm' }
 Plug 'racer-rust/vim-racer',                { 'for': 'rust' }
 Plug 'rust-lang/rust.vim',                  { 'for': 'rust' }
+Plug 'lervag/vimtex',                       { 'for': 'tex' }
 
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
@@ -242,6 +243,12 @@ nnoremap <leader>wo <C-w>o
 " ---------------------------------------------------------------------------- "
 " Auto Commands                                                                "
 " ---------------------------------------------------------------------------- "
+
+" Recognize custom extensions
+augroup recognize_filetype
+    autocmd!
+    autocmd BufNewFile,BufRead *.lytex set filetype=tex
+augroup end
 
 " Filetype specific settings
 augroup filtypes
