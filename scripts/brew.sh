@@ -23,6 +23,7 @@ brew install cloc
 brew install cmake
 brew install coreutils
 brew install cppcheck
+brew install creduce
 brew install ctags
 brew install distcc
 brew install doxygen
