@@ -122,7 +122,7 @@ def FlagsForClangComplete(root):
     try:
         clang_complete_path = FindNearest(root, '.clang_complete')
         clang_complete_flags = open(clang_complete_path, 'r').read().splitlines()
-        return clang_complete_flags
+        return clang_complete_flags, clang_complete_path
     except:
         return None
 
@@ -166,7 +166,7 @@ def FlagsForFile(filename):
         final_flags = compilation_db_flags
     else:
         final_flags = BASE_FLAGS
-        clang_flags = FlagsForClangComplete(root)
+        clang_flags, clang_path = FlagsForClangComplete(root)
         if clang_flags:
             final_flags = final_flags + clang_flags
         include_flags = FlagsForInclude(root)
@@ -174,5 +174,6 @@ def FlagsForFile(filename):
             final_flags = final_flags + include_flags
     return {
             'flags': final_flags,
+            'include_paths_relative_to_dir': os.path.dirname(os.path.abspath(clang_path)),
             'do_cache': True
             }
