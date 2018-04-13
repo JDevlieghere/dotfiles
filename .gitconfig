@@ -1,5 +1,6 @@
 [core]
 	editor = vim
+	excludesfile = /Users/jdevlieghere/.gitignore_global
 [user]
 	email = jonas@devlieghere.com
 	name = Jonas Devlieghere
@@ -16,8 +17,12 @@
 [commit]
 	gpgsign = false
 	verbose = false
+[diff]
+	tool = vimdiff
 [diff "bin"]
 	textconv = hexdump -v -C
+[merge]
+	tool = vimdiff
 [help]
 	autocorrect = 1
 [status]
@@ -53,3 +58,5 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[mergetool "araxis"]
+	path = /Applications/Araxis Merge.app/Contents/Utilities/compare

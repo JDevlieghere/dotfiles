@@ -17,29 +17,18 @@ set -x LESSCHARSET utf-8
 # PATH
 set PATH /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin $PATH
 
-# Go
-if test -e $HOME/go
-  set -x GOPATH $HOME/go
-  set PATH $PATH $GOPATH/bin
-end
+# dotfiles
+set PATH $PATH $HOME/dotfiles/scripts
 
 # Use GNU core utils on macOS if available.
 if test -e /usr/local/opt/coreutils
   set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
 end
 
-# Rust
-if test -e $HOME/.cargo
-  set PATH $PATH $HOME/.cargo/bin/
+# Araxis Merge
+if test -e /Applications/Araxis\ Merge.app/Contents/Utilities
+  set PATH /Applications/Araxis\ Merge.app/Contents/Utilities $PATH
 end
-
-# Haskell
-if test -e $HOME/.cabal
-  set PATH $PATH $HOME/.cabal/bin/
-end
-
-# ssh
-set -x SSH_KEY_PATH $HOME/.ssh/id_rsa
 
 # ccache
 if test -e /usr/lib/ccache
@@ -56,5 +45,21 @@ if test -e ~/.distcc/hosts
   end
 end
 
-# dotfiles
-set PATH $PATH $HOME/dotfiles/scripts
+# Go
+if test -e $HOME/go
+  set -x GOPATH $HOME/go
+  set PATH $PATH $GOPATH/bin
+end
+
+# Rust
+if test -e $HOME/.cargo
+  set PATH $PATH $HOME/.cargo/bin/
+end
+
+# Haskell
+if test -e $HOME/.cabal
+  set PATH $PATH $HOME/.cabal/bin/
+end
+
+# ssh
+set -x SSH_KEY_PATH $HOME/.ssh/id_rsa

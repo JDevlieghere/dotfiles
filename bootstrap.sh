@@ -11,6 +11,21 @@ doUpdate() {
     git pull origin master;
 }
 
+doGitConfig() {
+    info "Configuring Git"
+
+    # The .gitconfig will be overwritten; reconfigure it.
+    echo "Configuring global .gitignore"
+    git config --global core.excludesfile ~/.gitignore_global
+
+    # Use Araxis Merge as diff and merge tool when available.
+    if [ -d "/Applications/Araxis Merge.app/Contents/Utilities/" ]; then
+        echo "Configuring Araxis Merge"
+        git config --global diff.guitool araxis
+        git config --global merge.guitool araxis
+    fi
+}
+
 doSync() {
     info "Syncing"
     rsync --exclude ".git/" \
@@ -22,9 +37,6 @@ doSync() {
         --exclude ".gitignore" \
         --filter=':- .gitignore' \
         -avh --no-perms . ~;
-
-    # The .gitconfig will be overwritten; reconfigure it.
-    git config --global core.excludesfile ~/.gitignore_global
 
     # Copy files that have different locations on macOS and Linux.
     if [ -d "$HOME/Library/Application Support/Code/User/" ]; then
@@ -84,6 +96,7 @@ doConfig() {
 doAll() {
     doUpdate
     doSync
+    doGitConfig
     doSymLink
     doInstall
     doFonts
@@ -111,6 +124,7 @@ else
         case $i in
             -s|--sync)
                 doSync
+                doGitConfig
                 shift
                 ;;
             -l|--link)
