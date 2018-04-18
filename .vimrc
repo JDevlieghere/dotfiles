@@ -324,6 +324,7 @@ let g:ycm_warning_symbol='▲'
 
 " LSP
 let g:lsp_signs_enabled=1
+let g:lsp_diagnostics_echo_cursor=1
 
 nnoremap <leader>gd :LspDefinition<CR>
 nnoremap <Leader>rn :LspRename<CR>
@@ -331,14 +332,12 @@ nnoremap <Leader>h  :LspHover<CR>
 nnoremap <Leader>fr :LspReferences<CR>
 nnoremap <Leader>ld :LspDocumentFormat<CR>
 
-if executable('cquery')
-    augroup lsp_cquery
+if executable('clangd')
+    augroup lsp_clangd
         autocmd!
         autocmd User lsp_setup call lsp#register_server({
-                    \ 'name': 'cquery',
-                    \ 'cmd': {server_info->['cquery']},
-                    \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-                    \ 'initialization_options': { 'cacheDirectory': '/tmp/cache' },
+                    \ 'name': 'clangd',
+                    \ 'cmd': {server_info->['clangd']},
                     \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
                     \ })
         autocmd FileType c setlocal omnifunc=lsp#complete
@@ -346,12 +345,14 @@ if executable('cquery')
         autocmd FileType objc setlocal omnifunc=lsp#complete
         autocmd FileType objcpp setlocal omnifunc=lsp#complete
     augroup end
-elseif executable('clangd')
-    augroup lsp_clangd
+elseif  executable('cquery')
+    augroup lsp_cquery
         autocmd!
         autocmd User lsp_setup call lsp#register_server({
-                    \ 'name': 'clangd',
-                    \ 'cmd': {server_info->['clangd']},
+                    \ 'name': 'cquery',
+                    \ 'cmd': {server_info->['cquery']},
+                    \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+                    \ 'initialization_options': { 'cacheDirectory': '/tmp/cache' },
                     \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
                     \ })
         autocmd FileType c setlocal omnifunc=lsp#complete
