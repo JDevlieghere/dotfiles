@@ -323,6 +323,8 @@ let g:ycm_error_symbol='✗'
 let g:ycm_warning_symbol='▲'
 
 " LSP
+let g:lsp_signs_enabled=1
+
 nnoremap <leader>gd :LspDefinition<CR>
 nnoremap <Leader>rn :LspRename<CR>
 nnoremap <Leader>h  :LspHover<CR>
