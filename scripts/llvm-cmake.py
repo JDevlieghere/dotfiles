@@ -3,6 +3,16 @@
 import argparse
 import subprocess
 
+
+def parallel_link_jobs():
+    try:
+        import multiprocessing
+        cpus = multiprocessing.cpu_count()
+        return max(cpus / 4, 2)
+    except:
+        return 2
+
+
 parser = argparse.ArgumentParser(
     description=
     "CMake configuration options are relatively verbose and remembering the "
@@ -48,8 +58,11 @@ args = parser.parse_args()
 
 cmake_cmd = [
     "cmake {}".format(args.source), "-G Ninja",
-    "-DCMAKE_INSTALL_PREFIX='../install'", "-DLLVM_PARALLEL_LINK_JOBS:INT=2"
+    "-DCMAKE_INSTALL_PREFIX='../install'"
 ]
+
+cmake_cmd.append("-DLLVM_PARALLEL_LINK_JOBS:INT={}".format(
+    parallel_link_jobs()))
 
 if args.shared:
     cmake_cmd.append("-DBUILD_SHARED_LIBS:BOOL=ON")
