@@ -42,6 +42,10 @@ Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 
+" if has("python")
+"      Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer --gocode-completer --racer-completer' }
+" endif
+
 call plug#end()
 
 " ---------------------------------------------------------------------------- "
@@ -51,7 +55,6 @@ call plug#end()
 filetype plugin indent on
 
 try
-    set background=dark
     colorscheme gruvbox
 catch
 endtry
@@ -61,6 +64,7 @@ if !exists("g:syntax_on")
 endif
 
 set autoread                    " Auto reload file after external command
+set background=dark             " Use a dark background
 set backspace=indent,eol,start  " Delete over line breaks
 set binary                      " Enable binary support
 set colorcolumn=80,120          " Show ruler columns
