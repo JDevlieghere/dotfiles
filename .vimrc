@@ -55,7 +55,7 @@ call plug#end()
 filetype plugin indent on
 
 try
-    colorscheme gruvbox
+    colorscheme solarized
 catch
 endtry
 
