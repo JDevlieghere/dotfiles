@@ -328,7 +328,6 @@ let g:ycm_warning_symbol='▲'
 
 " LSP
 let g:lsp_signs_enabled=1
-let g:lsp_diagnostics_echo_cursor=1
 
 nnoremap <leader>gd :LspDefinition<CR>
 nnoremap <Leader>rn :LspRename<CR>
