@@ -42,10 +42,6 @@ Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 
-" if has("python")
-"      Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer --gocode-completer --racer-completer' }
-" endif
-
 call plug#end()
 
 " ---------------------------------------------------------------------------- "
