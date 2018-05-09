@@ -31,6 +31,7 @@ doSync() {
     rsync --exclude ".git/" \
         --exclude "installers/" \
         --exclude "os/" \
+        --exclude "scripts/" \
         --exclude "bootstrap.sh" \
         --exclude "tmux.terminfo" \
         --exclude "README.md" \
