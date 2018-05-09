@@ -50,7 +50,7 @@ alias clockspeed='watch -n 0 "lscpu | grep \'MHz\'"'
 alias ccaches='watch -n 0 "ccache -s"'
 
 # rsync with progress
-alias psync='rsync --info=progress2'
+alias psync='rsync --progress'
 
 # Get first column and ignore binary matches
 alias fstnl='cut -d":" -f1 | uniq | grep -v "Binary "'
