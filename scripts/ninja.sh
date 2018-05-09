@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+BUILD_DIR=/tmp/ninja
+
 # Clone
-git clone git://github.com/ninja-build/ninja.git /tmp/ninja
-cd /tmp/ninja || exit 2
+git clone git://github.com/ninja-build/ninja.git "$BUILD_DIR"
+cd "$BUILD_DIR" || exit 1
 git checkout release
 
 # Build
