@@ -61,7 +61,6 @@ brew install radare2
 brew install ranger
 brew install reattach-to-user-namespace
 brew install rsync
-brew install rust
 brew install tig
 brew install tmux
 brew install tree
