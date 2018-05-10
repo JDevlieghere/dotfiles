@@ -33,5 +33,8 @@ git clone git@github.com:apple/swift.git "$SWIFT_SWIFT_ROOT"
 info "Updating checkout"
 "$SWIFT_SWIFT_ROOT/utils/update-checkout" --scheme=master --reset-to-remote
 
-info "Invoking build script"
-"$SWIFT_SWIFT_ROOT/utils/build-script" "$@"
+
+if [ $# -ne 0 ]
+  info "Invoking build script"
+  "$SWIFT_SWIFT_ROOT/utils/build-script" "$@"
+fi
