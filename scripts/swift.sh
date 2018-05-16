@@ -34,7 +34,7 @@ info "Updating checkout"
 "$SWIFT_SWIFT_ROOT/utils/update-checkout" --scheme=master --reset-to-remote
 
 
-if [ $# -ne 0 ]
+if [ $# -ne 0 ]; then
   info "Invoking build script"
   "$SWIFT_SWIFT_ROOT/utils/build-script" "$@"
 fi
