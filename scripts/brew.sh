@@ -58,7 +58,9 @@ installEssentials() {
 	brew install python
 	brew install re2c
 	brew install reattach-to-user-namespace
+	brew install ripgrep
 	brew install rsync
+	brew install the_silver_searcher
 	brew install tig
 	brew install tmux
 	brew install tree
