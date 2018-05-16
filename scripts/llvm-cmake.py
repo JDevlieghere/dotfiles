@@ -47,6 +47,10 @@ parser.add_argument(
     '--system-debugserver',
     action='store_true',
     help="Use system debug server")
+parser.add_argument(
+    '--docs',
+    action='store_true',
+    help="Build the documentation")
 
 parser.add_argument(
     '-p',
@@ -92,6 +96,9 @@ if args.sanitizers:
 
 if args.system_debugserver:
     cmake_cmd.append("-DLLDB_CODESIGN_IDENTITY=\"\"")
+
+if args.docs:
+    cmake_cmd.append("-DLLVM_ENABLE_SPHINX:BOOL=ON")
 
 if args.projects:
     projects = ';'.join(args.projects)
