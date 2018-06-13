@@ -29,13 +29,14 @@ doGitConfig() {
 doSync() {
     info "Syncing"
     rsync --exclude ".git/" \
+        --exclude ".gitignore" \
+        --exclude "Preferences.sublime-settings" \
+        --exclude "README.md" \
+        --exclude "bootstrap.sh" \
         --exclude "installers/" \
         --exclude "os/" \
         --exclude "scripts/" \
-        --exclude "bootstrap.sh" \
         --exclude "tmux.terminfo" \
-        --exclude "README.md" \
-        --exclude ".gitignore" \
         --filter=':- .gitignore' \
         -avh --no-perms . ~;
 
