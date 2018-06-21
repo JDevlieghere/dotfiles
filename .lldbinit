@@ -1,23 +1,11 @@
 # Always look in all compile units
-settings set target.inline-breakpoint-strategy always
+# settings set target.inline-breakpoint-strategy always
 
 # Always break after the dynamic linker is finished
 # settings set target.process.stop-on-sharedlibrary-events on
 
 # Always print the dynamic type of the result of an expression
-settings set target.prefer-dynamic-value run-target
-
-# GDB's rwatch alias
-command alias rwatch watchpoint set variable -w read
-
-# Jump aliases
-#   jump 0xfeedface
-command alias jump register write pc
-command alias jmp register write pc
-command alias j register write pc
-
-# Return alias
-command alias return thread return
+# settings set target.prefer-dynamic-value run-target
 
 # Voltron
 command script import /usr/local/lib/python2.7/site-packages/voltron/entry.py
