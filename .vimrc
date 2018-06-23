@@ -118,8 +118,8 @@ set nojoinspaces                " Only one space when joining lines
 set formatoptions+=j            " Remove comment leader when joining lines
 
 " Scroll
-set sidescrolloff=5             " Keep at least 5 lines left/right
-set scrolloff=5                 " Keep at least 5 lines above/below
+set sidescrolloff=3             " Keep at least 3 lines left/right
+set scrolloff=3                 " Keep at least 3 lines above/below
 
 " Mouse
 set mousehide                   " Hide mouse when typing
@@ -130,8 +130,8 @@ set visualbell                  " Disable visual bell
 set noerrorbells                " Disable error bell
 
 " Treat given characters as a word boundary
-set iskeyword-=.                " '.' is an end of word designator
-set iskeyword-=#                " '#' is an end of word designator
+set iskeyword-=.                " Make '.' end of word designator
+set iskeyword-=#                " Make '#' end of word designator
 
 " Splits
 set splitbelow                  " Horizontal split below
