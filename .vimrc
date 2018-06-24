@@ -15,8 +15,7 @@ Plug 'shougo/vimproc',                      { 'do': 'make' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
@@ -285,10 +284,10 @@ nnoremap _ yaw :Ag <C-R>"<CR>
 nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
 
-" vim-airline
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#fnamemod=':t'
+" vim-lightline
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ }
 
 " detectindent
 let g:detectindent_preferred_expandtab=1
