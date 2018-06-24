@@ -313,21 +313,12 @@ let g:formatter_yapf_style='pep8'
 " doxygentoolkit.vim
 let g:DoxygenToolkit_commentType="C++"
 
-" youcompleteme
-let g:ycm_extra_conf_globlist=['~/.vim/*']
-let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_error_symbol='✗'
-let g:ycm_warning_symbol='▲'
-
 " LSP
 let g:lsp_signs_enabled=1
-
-nnoremap <leader>gd :LspDefinition<CR>
-nnoremap <Leader>rn :LspRename<CR>
-nnoremap <Leader>h  :LspHover<CR>
-nnoremap <Leader>fr :LspReferences<CR>
-nnoremap <Leader>ld :LspDocumentFormat<CR>
+nnoremap <leader>ld :LspDefinition<CR>
+nnoremap <leader>lf :LspDocumentFormat<CR>
+nnoremap <leader>lh :LspHover<CR>
+nnoremap <leader>lr :LspReferences<CR>
 
 if executable('clangd')
     augroup lsp_clangd
