@@ -7,6 +7,7 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 Plug 'ciaranm/detectindent'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf',                        { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-signify'
@@ -15,7 +16,6 @@ Plug 'shougo/vimproc',                      { 'do': 'make' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'itchyny/lightline.vim'
 
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
