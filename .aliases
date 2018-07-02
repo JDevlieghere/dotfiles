@@ -1,59 +1,59 @@
-# Better ls
+# Better ls.
 alias ll="ls -lha"
 
-# Emacs
+# Launch Emacs.
 alias em="emacsclient --no-wait"
 
-# Human-readable disk usage
+# Human-readable disk usage.
 alias dfh="df -Tha --total"
 
-# IP addresses
+# Show IP addresses.
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias whois="whois -h whois-servers.net"
 
-# Processes
+# Show processes.
 alias psa="ps auxf"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
-# History
+# History.
 alias hig="history | grep"
 
-# Find matching files
+# Find matching files.
 alias lsg='ll | grep'
 
-# Map function
+# Map function.
 alias map="xargs -n1"
 
-# Ctags
+# Build ctags.
 alias mktags="ctags --extra=+f -R ."
 
-# Reload shell
+# Reload shell.
 alias reload="exec $SHELL -l"
 
-# Clang Format
-alias clang-format-all='clang-format -style=file -i (find . -name \*.h -print -o -name \*.cpp -print)'
-
-# View dirty memory
+# View dirty memory.
 alias dirty='watch grep -e Dirty: -e Writeback: /proc/meminfo'
 
-# CPU temperature with sensors
+# Show CPU temperature with sensors.
 alias cputemp='watch -n 0 "sensors | grep Core"'
 
-# GPU temperature with NVIDIA System Management Interface
+# Show GPU temperature with NVIDIA System Management Interface.
 alias gputemp='watch -n 0 "nvidia-smi -q -d temperature"'
 
-# CPU Clock Speed
+# Show CPU Clock Speed.
 alias clockspeed='watch -n 0 "lscpu | grep \'MHz\'"'
 
-# Show CCache stats
+# Show CCache stats.
 alias ccaches='watch -n 0 "ccache -s"'
 
-# rsync with progress
+# Rsync with progress.
 alias psync='rsync --progress'
 
-# Get first column and ignore binary matches
+# Get first column and ignore binary matches.
 alias fstnl='cut -d":" -f1 | uniq | grep -v "Binary "'
 
-# Git grep
+# Git grep.
 alias gg='git grep'
+
+# Fast diff for large files.
+fdiff='diff --speed-large-files'
