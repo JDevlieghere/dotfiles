@@ -56,4 +56,4 @@ alias fstnl='cut -d":" -f1 | uniq | grep -v "Binary "'
 alias gg='git grep'
 
 # Fast diff for large files.
-fdiff='diff --speed-large-files'
+alias fdiff='diff --speed-large-files'
