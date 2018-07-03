@@ -6,6 +6,9 @@ set nocompatible
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'altercation/vim-colors-solarized'
+
+Plug 'ap/vim-buftabline'
 Plug 'ciaranm/detectindent'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf',                        { 'do': 'yes \| ./install' }
@@ -37,9 +40,6 @@ Plug 'rust-lang/rust.vim',                  { 'for': 'rust' }
 Plug 'lervag/vimtex',                       { 'for': 'tex' }
 
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-
-Plug 'altercation/vim-colors-solarized'
-Plug 'morhetz/gruvbox'
 
 call plug#end()
 
@@ -179,6 +179,11 @@ highlight SpellBad     term=underline cterm=underline
 highlight SpellCap     term=underline cterm=underline
 highlight SpellRare    term=underline cterm=underline
 highlight SpellLocal   term=underline cterm=underline
+
+" Tab line
+highlight TabLine      ctermfg=White  ctermbg=Black     cterm=NONE
+highlight TabLineFill  ctermfg=White  ctermbg=Black     cterm=NONE
+highlight TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
 
 " ---------------------------------------------------------------------------- "
 " Key Mappings                                                                 "
