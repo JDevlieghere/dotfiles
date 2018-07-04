@@ -250,6 +250,15 @@ key_bindings:
   - { key: Q,        mods: Command, action: Quit                         }
   - { key: W,        mods: Command, action: Quit                         }
   - { key: T,        mods: Command, chars: "\x01\x63"                    }
+  - { key: Key1,     mods: Command, chars: "\x01\x31"                    }
+  - { key: Key2,     mods: Command, chars: "\x01\x32"                    }
+  - { key: Key3,     mods: Command, chars: "\x01\x33"                    }
+  - { key: Key4,     mods: Command, chars: "\x01\x34"                    }
+  - { key: Key5,     mods: Command, chars: "\x01\x35"                    }
+  - { key: Key6,     mods: Command, chars: "\x01\x36"                    }
+  - { key: Key7,     mods: Command, chars: "\x01\x37"                    }
+  - { key: Key8,     mods: Command, chars: "\x01\x38"                    }
+  - { key: Key9,     mods: Command, chars: "\x01\x39"                    }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }
