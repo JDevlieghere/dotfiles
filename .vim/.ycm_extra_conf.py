@@ -5,7 +5,21 @@ import logging
 import ycm_core
 import re
 
-BASE_FLAGS = [
+C_BASE_FLAGS = [
+        '-Wall',
+        '-Wextra',
+        '-Werror',
+        '-Wno-long-long',
+        '-Wno-variadic-macros',
+        '-fexceptions',
+        '-ferror-limit=10000',
+        '-DNDEBUG',
+        '-std=c11',
+        '-I/usr/lib/',
+        '-I/usr/include/'
+        ]
+
+CPP_BASE_FLAGS = [
         '-Wall',
         '-Wextra',
         '-Wno-long-long',
@@ -19,11 +33,14 @@ BASE_FLAGS = [
         '-I/usr/include/'
         ]
 
-SOURCE_EXTENSIONS = [
+C_SOURCE_EXTENSIONS = [
+        '.c'
+        ]
+
+CPP_SOURCE_EXTENSIONS = [
         '.cpp',
         '.cxx',
         '.cc',
-        '.c',
         '.m',
         '.mm'
         ]
@@ -46,6 +63,10 @@ HEADER_DIRECTORIES = [
 
 BUILD_DIRECTORY = 'build';
 
+def IsSourceFile(filename):
+    extension = os.path.splitext(filename)[1]
+    return extension in C_SOURCE_EXTENSIONS + CPP_SOURCE_EXTENSIONS
+
 def IsHeaderFile(filename):
     extension = os.path.splitext(filename)[1]
     return extension in HEADER_EXTENSIONS
@@ -53,7 +74,7 @@ def IsHeaderFile(filename):
 def GetCompilationInfoForFile(database, filename):
     if IsHeaderFile(filename):
         basename = os.path.splitext(filename)[0]
-        for extension in SOURCE_EXTENSIONS:
+        for extension in C_SOURCE_EXTENSIONS + CPP_SOURCE_EXTENSIONS:
             # Get info from the source files by replacing the extension.
             replacement_file = basename + extension
             if os.path.exists(replacement_file):
@@ -165,7 +186,13 @@ def FlagsForFile(filename):
     if compilation_db_flags:
         final_flags = compilation_db_flags
     else:
-        final_flags = BASE_FLAGS
+        if IsSourceFile(filename):
+            extension = os.path.splitext(filename)[1]
+            if extension in C_SOURCE_EXTENSIONS:
+                final_flags = C_BASE_FLAGS
+            else:
+                final_flags = CPP_BASE_FLAGS
+
         clang_flags = FlagsForClangComplete(root)
         if clang_flags:
             final_flags = final_flags + clang_flags
