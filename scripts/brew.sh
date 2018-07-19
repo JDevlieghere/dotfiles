@@ -57,7 +57,6 @@ installEssentials() {
 	brew install pandoc
 	brew install python
 	brew install re2c
-	brew install reattach-to-user-namespace
 	brew install ripgrep
 	brew install rsync
 	brew install the_silver_searcher
