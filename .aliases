@@ -57,3 +57,6 @@ alias gg='git grep'
 
 # Fast diff for large files.
 alias fdiff='diff --speed-large-files'
+
+# Simple HTTP server.
+alias serve='python3 -m http.server'
