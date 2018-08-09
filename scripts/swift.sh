@@ -17,6 +17,7 @@ SWIFT_LLDB_ROOT=$SWIFT_SOURCE_ROOT/lldb
 SWIFT_LLVM_ROOT=$SWIFT_SOURCE_ROOT/llvm
 SWIFT_SWIFT_ROOT=$SWIFT_SOURCE_ROOT/swift
 SWIFT_SWIFTPM_ROOT=$SWIFT_SOURCE_ROOT/swiftpm
+SWIFT_LLBUILD_ROOT=$SWIFT_SOURCE_ROOT/llbuild
 
 info() {
   printf "\033[00;34m$@\033[0m\n"
@@ -33,6 +34,7 @@ git clone git@github.com:apple/swift-llvm.git "$SWIFT_LLVM_ROOT" &> /dev/null &
 git clone git@github.com:apple/swift.git "$SWIFT_SWIFT_ROOT" &> /dev/null &
 
 git clone git@github.com:apple/swift-package-manager.git "$SWIFT_SWIFTPM_ROOT" &> /dev/null &
+git clone git@github.com:apple/swift-llbuild.git "$SWIFT_LLBUILD_ROOT" &> /dev/null &
 
 git clone git@github.com:apple/swift-corelibs-foundation.git &> /dev/null &
 git clone git@github.com:apple/swift-corelibs-libdispatch.git &> /dev/null &
