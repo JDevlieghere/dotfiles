@@ -31,6 +31,9 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 
+# Disable mouse accelerator.
+defaults write .GlobalPreferences com.apple.mouse.scaling -1
+
 # Set language and text formats
 defaults write NSGlobalDomain AppleLanguages -array "en" "nl"
 defaults write NSGlobalDomain AppleLocale -string "en_US@currency=EUR"
