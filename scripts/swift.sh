@@ -42,6 +42,17 @@ git clone git@github.com:apple/swift-corelibs-xctest.git &> /dev/null &
 
 wait
 
+info "Adding upstream remotes"
+
+cd "$SWIFT_CLANG_ROOT" || exit
+git remote add upstream https://git.llvm.org/git/clang.git
+
+cd "$SWIFT_LLDB_ROOT" || exit
+git remote add upstream https://git.llvm.org/git/lldb.git
+
+cd "$SWIFT_LLVM_ROOT" || exit
+git remote add upstream https://git.llvm.org/git/llvm.git
+
 info "Updating checkout"
 "$SWIFT_SWIFT_ROOT/utils/update-checkout" --scheme=master --reset-to-remote
 
