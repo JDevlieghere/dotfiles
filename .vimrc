@@ -190,9 +190,10 @@ highlight TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
 " ---------------------------------------------------------------------------- "
 
 " Typos
-cnoreabbrev W w
+cnoreabbrev E e
 cnoreabbrev Q q
 cnoreabbrev Qa qa
+cnoreabbrev W w
 
 " Save file which you forgot to open with sudo
 cnoremap w!! w !sudo tee % >/dev/null
