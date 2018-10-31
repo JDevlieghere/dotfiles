@@ -100,7 +100,7 @@ if [ -n "$1" ]; then
             --enable-perlinterp \
             --enable-luainterp \
             --enable-gui=gtk2 --enable-cscope --prefix=/usr
-        make -j VIMRUNTIMEDIR=/usr/share/vim/vim80
+        make -j VIMRUNTIMEDIR=/usr/share/vim/vim81
         sudo make install
 
         sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 1
