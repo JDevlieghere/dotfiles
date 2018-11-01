@@ -54,6 +54,7 @@ if [ -n "$1" ]; then
         libbonoboui2-dev \
         libboost-all-dev \
         libcairo2-dev \
+        libedit-dev \
         libgnome2-dev \
         libgnomeui-dev \
         libgtk2.0-dev \
@@ -65,7 +66,10 @@ if [ -n "$1" ]; then
         libxpm-dev \
         libxt-dev \
         python-dev \
+        python2.7-dev \
         ruby-dev \
+        subversion \
+        swig \
         uuid-dev
 
     # OpenVPN
