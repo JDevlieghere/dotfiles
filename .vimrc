@@ -27,6 +27,7 @@ Plug 'ajh17/vimcompletesme'
 
 Plug 'chiel92/vim-autoformat',              { 'on': 'Autoformat' }
 Plug 'majutsushi/tagbar',                   { 'on': 'TagbarToggle' }
+Plug 'scrooloose/nerdtree',                 { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 
 Plug 'vim-scripts/doxygentoolkit.vim',      { 'for': 'cpp' }
 Plug 'octol/vim-cpp-enhanced-highlight',    { 'for': 'cpp' }
@@ -323,6 +324,34 @@ let g:tagbar_compact=1
 let g:tagbar_right=1
 let g:tagbar_width=35
 nnoremap <leader>tt :TagbarToggle<CR>
+
+" nerdtree
+let g:NERDTreeAutoDeleteBuffer=1
+let g:NERDTreeIgnore=['\.job$', '^CVS$', '\.orig', '\~$']
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeQuitOnOpen=1
+let g:NERDTreeShowHidden=1
+let g:NERDTreeWinPos="left"
+let g:NERDTreeWinSize=35
+
+nnoremap <leader>tn :NERDTreeToggle<CR>
+
+function! SyncNerdTree()
+    if exists("t:NERDTreeBufName")
+      NERDTreeFind
+      wincmd p
+    endif
+endfunction
+
+augroup nerdtree_close
+    autocmd!
+    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup end
+
+augroup nerdtree_find
+    autocmd!
+    autocmd BufReadPost * call SyncNerdTree()
+augroup end
 
 " vim-autoformat
 let g:formatters_python=['yapf', 'autopep8']
