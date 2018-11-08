@@ -251,10 +251,10 @@ nnoremap <leader>wo <C-w>o
 function! ToggleRemoveTrailingWhitespace()
   if exists("g:dont_remove_trailing_whitespace")
     unlet g:dont_remove_trailing_whitespace
-    echo "Disabled removing trailing whitespace"
+    echo "Enabled removing trailing whitespace"
   else
     let g:dont_remove_trailing_whitespace=1
-    echo "Enabled removing trailing whitespace"
+    echo "Disabled removing trailing whitespace"
   endif
 endfunction
 
