@@ -231,6 +231,7 @@ nnoremap <leader>yl :let @+=expand('%:t') . ':' . line(".")<CR>
 " Toggle
 nnoremap <leader>ts :setlocal spell!<CR>
 nnoremap <leader>tl :set list!<CR>
+nnoremap <leader>tw :call ToggleRemoveTrailingWhitespace()<CR>
 
 " Buffers
 nnoremap <leader>bd :bdelete<CR>
@@ -242,6 +243,26 @@ nnoremap <leader>bp :bprevious<CR>
 " Windows
 nnoremap <leader>wd <C-w>c
 nnoremap <leader>wo <C-w>o
+
+" ---------------------------------------------------------------------------- "
+" Functions                                                                    "
+" ---------------------------------------------------------------------------- "
+
+function! ToggleRemoveTrailingWhitespace()
+  if exists("g:dont_remove_trailing_whitespace")
+    unlet g:dont_remove_trailing_whitespace
+    echo "Disabled removing trailing whitespace"
+  else
+    let g:dont_remove_trailing_whitespace=1
+    echo "Enabled removing trailing whitespace"
+  endif
+endfunction
+
+function! RemoveTrailingWhitespace()
+  if !exists("g:dont_remove_trailing_whitespace")
+    %s/\s\+$//e
+  endif
+endfunction
 
 " ---------------------------------------------------------------------------- "
 " Auto Commands                                                                "
@@ -264,7 +285,7 @@ augroup end
 " Remove trailing whitespace
 augroup remove_trailing_whitespace
     autocmd!
-    autocmd BufWritePre * :%s/\s\+$//e
+    autocmd BufWritePre * :call RemoveTrailingWhitespace()
 augroup end
 
 " Watch my .vimrc
