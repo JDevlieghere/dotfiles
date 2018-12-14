@@ -183,6 +183,7 @@ def FlagsForCompilationDatabase(root, filename):
 def FlagsForFile(filename):
     root = os.path.realpath(filename);
     compilation_db_flags = FlagsForCompilationDatabase(root, filename)
+    final_flags = []
     if compilation_db_flags:
         final_flags = compilation_db_flags
     else:
