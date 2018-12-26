@@ -20,6 +20,7 @@ Plug 'shougo/vimproc',                      { 'do': 'make' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'sheerun/vim-polyglot'
 
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
@@ -29,18 +30,9 @@ Plug 'chiel92/vim-autoformat',              { 'on': 'Autoformat' }
 Plug 'majutsushi/tagbar',                   { 'on': 'TagbarToggle' }
 
 Plug 'vim-scripts/doxygentoolkit.vim',      { 'for': 'cpp' }
-Plug 'octol/vim-cpp-enhanced-highlight',    { 'for': 'cpp' }
-Plug 'twinside/vim-hoogle',                 { 'for': 'haskell' }
-Plug 'eagletmt/ghcmod-vim',                 { 'for': 'haskell' }
-Plug 'eagletmt/neco-ghc',                   { 'for': 'haskell' }
-Plug 'mpickering/hlint-refactor-vim',       { 'for': 'haskell' }
-Plug 'fatih/vim-go',                        { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'jdevlieghere/llvm.vim',               { 'for': 'llvm' }
 Plug 'racer-rust/vim-racer',                { 'for': 'rust' }
-Plug 'rust-lang/rust.vim',                  { 'for': 'rust' }
 Plug 'lervag/vimtex',                       { 'for': 'tex' }
-
-Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 call plug#end()
 
