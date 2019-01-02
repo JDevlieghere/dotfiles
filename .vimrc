@@ -15,7 +15,6 @@ Plug 'junegunn/fzf',                        { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
-Plug 'ryanoasis/vim-devicons'
 Plug 'shougo/vimproc',                      { 'do': 'make' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -307,19 +306,7 @@ nnoremap <silent> <C-b> :Buffers<CR>
 " vim-lightline
 let g:lightline = {
       \ 'colorscheme': 'solarized',
-      \ 'component_function': {
-      \   'filetype': 'MyFiletype',
-      \   'fileformat': 'MyFileformat',
       \ }
-      \ }
-
-function! MyFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
-function! MyFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
 
 " detectindent
 let g:detectindent_preferred_expandtab=1
