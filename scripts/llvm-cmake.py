@@ -51,6 +51,10 @@ parser.add_argument(
     '--docs',
     action='store_true',
     help="Build the documentation")
+parser.add_argument(
+    '--expensive',
+    action='store_true',
+    help="Enable expensive checks")
 
 parser.add_argument(
     '-p',
@@ -99,6 +103,10 @@ if args.system_debugserver:
 
 if args.docs:
     cmake_cmd.append("-DLLVM_ENABLE_SPHINX:BOOL=ON")
+
+if args.expensive:
+    cmake_cmd.append("-DLLVM_ENABLE_EXPENSIVE_CHECKS:BOOL=ON")
+    cmake_cmd.append("-DLLVM_ENABLE_REVERSE_ITERATION:BOOL=ON")
 
 if args.projects:
     projects = ';'.join(args.projects)
