@@ -13,13 +13,14 @@ Plug 'ciaranm/detectindent'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf',                        { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
+Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
+Plug 'sheerun/vim-polyglot'
 Plug 'shougo/vimproc',                      { 'do': 'make' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'sheerun/vim-polyglot'
 
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
