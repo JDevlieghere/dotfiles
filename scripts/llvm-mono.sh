@@ -17,7 +17,7 @@ export PATH=$PATH:$GIT_SVN_DIR
 
 
 # Clone
-git clone https://github.com/llvm-git-prototype/llvm.git llvm-project
+git clone https://github.com/llvm/llvm-project
 
 # Configure repo
 cd llvm-project || exit 1
