@@ -33,6 +33,7 @@ installEssentials() {
 	brew install distcc
 	brew install doxygen
 	brew install dtrx
+	brew install fd
 	brew install ffmpeg
 	brew install fish
 	brew install git
