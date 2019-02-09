@@ -41,7 +41,7 @@ installEssentials() {
 	brew install gnupg
 	brew install go
 	brew install gpg-agent
-	brew install graphviz --with-gts
+	brew install graphviz
 	brew install gts
 	brew install highlight
 	brew install htop
@@ -49,7 +49,7 @@ installEssentials() {
 	brew install lcov
 	brew install libxml2
 	brew install lua
-	brew install macvim --with-override-system-vim
+	brew install macvim
 	brew install ncdu
 	brew install neofetch
 	brew install neovim
