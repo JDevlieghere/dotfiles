@@ -24,6 +24,7 @@ parser.add_argument("source", help="LLVM source path", type=str)
 
 parser.add_argument(
     '-s', '--shared', action='store_true', help="Build shared libraries")
+
 parser.add_argument(
     '-c',
     '--clang-light',
@@ -31,26 +32,32 @@ parser.add_argument(
     help=
     "Build a light version of clang, which means no ARC, Static Anaylzer or plugins"
 )
+
 parser.add_argument(
     '-r',
     '--ra',
     action='store_true',
     help="Release build with debug info and asserts")
 parser.add_argument('-d', '--debug', action='store_true', help="Debug build")
+
 parser.add_argument(
     '-m', '--modules', action='store_true', help="Enable modules")
+
 parser.add_argument(
     '-x', '--x86', action='store_true', help="Only build x86 target")
 
 parser.add_argument('--sanitizers', nargs='*', help="Sanitizers to enable")
+
 parser.add_argument(
     '--system-debugserver',
     action='store_true',
     help="Use system debug server")
+
 parser.add_argument(
     '--docs',
     action='store_true',
     help="Build the documentation")
+
 parser.add_argument(
     '--expensive',
     action='store_true',
