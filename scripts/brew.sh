@@ -49,7 +49,6 @@ installEssentials() {
 	brew install lcov
 	brew install libxml2
 	brew install lua
-	brew install macvim
 	brew install ncdu
 	brew install neofetch
 	brew install neovim
@@ -68,6 +67,7 @@ installEssentials() {
 	brew install unrar
 	brew install valgrind
 	brew install vbindiff
+	brew install vim
 	brew install xz
 	brew install zsh
 }
