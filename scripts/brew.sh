@@ -98,7 +98,7 @@ installCasks() {
 
 	brew cask install aerial
 	brew cask install alacritty
-	brew cask install haskell-platform
+	brew cask install iina
 	brew cask install tunnelblick
 	brew cask install vlc
 }
