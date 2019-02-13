@@ -15,14 +15,12 @@ export TOP_LEVEL_DIR=`pwd`
 export GIT_SVN_DIR="$TOP_LEVEL_DIR/llvm-project/llvm/utils/git-svn/"
 export PATH=$PATH:$GIT_SVN_DIR
 
-
-# Clone
+# Clone the official repository.
 git clone https://github.com/llvm/llvm-project
 
-# Configure repo
+# Configure repository.
 cd llvm-project || exit 1
 git config branch.master.rebase true
-git config --add remote.origin.fetch +refs/notes/commits:refs/notes/commits
 git fetch
 
 # Create build dir
