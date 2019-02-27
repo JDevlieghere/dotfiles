@@ -25,12 +25,10 @@ installEssentials() {
 
 	brew install ag
 	brew install boost
-	brew install ccache
 	brew install cloc
 	brew install cmake
 	brew install creduce
 	brew install ctags
-	brew install distcc
 	brew install doxygen
 	brew install dtrx
 	brew install fd
@@ -39,7 +37,6 @@ installEssentials() {
 	brew install git
 	brew install git-lfs
 	brew install gnupg
-	brew install go
 	brew install gpg-agent
 	brew install graphviz
 	brew install gts
@@ -78,8 +75,10 @@ installExtras() {
 	brew install afl-fuzz
 	brew install archey
 	brew install binutils
+	brew install ccache
 	brew install coreutils
 	brew install cppcheck
+	brew install distcc
 	brew install findutils
 	brew install gdb
 	brew install gnu-sed
