@@ -106,7 +106,7 @@ if args.sanitizers:
     cmake_cmd.append("-DLLVM_USE_SANITIZER='{}'".format(sanitizers))
 
 if args.system_debugserver:
-    cmake_cmd.append("-DLLDB_CODESIGN_IDENTITY=\"\"")
+    cmake_cmd.append("-DLLDB_USE_SYSTEM_DEBUGSERVER:BOOL=ON")
 
 if args.docs:
     cmake_cmd.append("-DLLVM_ENABLE_SPHINX:BOOL=ON")
