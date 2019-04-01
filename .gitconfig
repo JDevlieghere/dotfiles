@@ -45,10 +45,12 @@
 	hist = log -p -M --follow --stat
 	lg = log -p
 	ll = log --stat
+	ours = checkout --ours
 	patch =  show HEAD -U999999
 	review = !git diff --name-only --cached | xargs -n 1 git blame --porcelain | grep  \"^author \" | sort | uniq -c | sort -nr | head -10
 	sha = rev-parse HEAD
 	st = status
+	theirs = checkout --theirs
 	top = log --stat -n 1
 	uncommit = reset HEAD~
 	undo = reset --soft HEAD^
