@@ -30,21 +30,6 @@ if test -e /Applications/Araxis\ Merge.app/Contents/Utilities
   set PATH /Applications/Araxis\ Merge.app/Contents/Utilities $PATH
 end
 
-# ccache
-if test -e /usr/lib/ccache
-  set PATH /usr/lib/ccache $PATH
-end
-if test -e /usr/local/opt/ccache
-  set PATH /usr/local/opt/ccache/libexec $PATH
-end
-
-# distcc
-if test -e ~/.distcc/hosts
-  if type -p distcc >/dev/null 2>&1
-    set -x CCACHE_PREFIX "distcc"
-  end
-end
-
 # Go
 if test -e $HOME/go
   set -x GOPATH $HOME/go
