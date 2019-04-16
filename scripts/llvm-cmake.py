@@ -64,6 +64,11 @@ parser.add_argument(
     help="Enable expensive checks")
 
 parser.add_argument(
+    '--launcher',
+    help="Specify launcher",
+    type=str)
+
+parser.add_argument(
     '-p',
     '--projects',
     nargs='*',
@@ -114,6 +119,10 @@ if args.docs:
 if args.expensive:
     cmake_cmd.append("-DLLVM_ENABLE_EXPENSIVE_CHECKS:BOOL=ON")
     cmake_cmd.append("-DLLVM_ENABLE_REVERSE_ITERATION:BOOL=ON")
+
+if args.launcher:
+    cmake_cmd.append("-DCMAKE_C_COMPILER_LAUNCHER='{}'".format(args.launcher))
+    cmake_cmd.append("-DCMAKE_CXX_COMPILER_LAUNCHER='{}'".format(args.launcher))
 
 if args.projects:
     projects = ';'.join(args.projects)
