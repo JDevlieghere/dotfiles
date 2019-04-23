@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+import six
 import subprocess
 
 
@@ -130,7 +131,7 @@ if args.projects:
 
 try:
     print(' \\\n    '.join(cmake_cmd))
-    raw_input("Press Enter to run CMake or ^C to abort...")
+    six.moves.input("Press Enter to run CMake or ^C to abort...")
 except KeyboardInterrupt:
     exit(1)
 
