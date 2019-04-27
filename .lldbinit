@@ -6,6 +6,3 @@
 
 # Always print the dynamic type of the result of an expression
 # settings set target.prefer-dynamic-value run-target
-
-# Voltron
-command script import /usr/local/lib/python2.7/site-packages/voltron/entry.py

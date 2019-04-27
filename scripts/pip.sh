@@ -19,5 +19,4 @@ sudo pip install --upgrade python-language-server
 sudo pip install --upgrade rtv
 sudo pip install --upgrade scipy
 sudo pip install --upgrade sphinx
-sudo pip install --upgrade voltron
 sudo pip install --upgrade yapf
