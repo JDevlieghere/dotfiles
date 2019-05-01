@@ -216,7 +216,7 @@ let mapleader=" "
 nnoremap <leader><space> :noh<CR>
 
 " Yank
-nnoremap <leader>yf :let @+=expand("%:p")<CR>
+nnoremap <leader>yp :let @+=expand("%:p")<CR>
 nnoremap <leader>yl :let @+=expand('%:t') . ':' . line(".")<CR>
 
 " Toggle
