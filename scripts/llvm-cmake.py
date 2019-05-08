@@ -70,10 +70,14 @@ parser.add_argument(
     type=str)
 
 parser.add_argument(
-    '-p',
     '--projects',
     nargs='*',
     help="Project to enable when using the monorepo")
+
+parser.add_argument(
+    '--runtimes',
+    nargs='*',
+    help="Runtimes to enable when using the monorepo")
 
 args = parser.parse_args()
 
@@ -128,6 +132,10 @@ if args.launcher:
 if args.projects:
     projects = ';'.join(args.projects)
     cmake_cmd.append("-DLLVM_ENABLE_PROJECTS='{}'".format(projects))
+
+if args.runtimes:
+    runtimes = ';'.join(args.runtimes)
+    cmake_cmd.append("-DLLVM_ENABLE_RUNTIMES='{}'".format(runtimes))
 
 try:
     print(' \\\n    '.join(cmake_cmd))
