@@ -25,6 +25,5 @@ git fetch
 
 # Create build dir
 cd "$TOP_LEVEL_DIR" || exit 1
-mkdir llvm-build && cd llvm-build
 
 echo "Add the following directory to your \$PATH: $GIT_SVN_DIR"
