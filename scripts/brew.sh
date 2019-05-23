@@ -52,6 +52,7 @@ installEssentials() {
 	brew install ninja
 	brew install node
 	brew install pandoc
+	brew install patchutils
 	brew install python
 	brew install re2c
 	brew install reattach-to-user-namespace
