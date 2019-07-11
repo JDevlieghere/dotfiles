@@ -6,6 +6,3 @@
 
 # Always print the dynamic type of the result of an expression
 # settings set target.prefer-dynamic-value run-target
-
-# Add colors to backtrace
-settings set -f frame-format "frame #${frame.index}: ${frame.pc}{ ${module.file.basename}\`${ansi.fg.green}{${function.name-with-args}${ansi.normal}{${frame.no-debug}${function.pc-offset}}}}{ at ${ansi.fg.yellow}${line.file.basename}:${line.number}{:${line.column}}}${ansi.normal}{${function.is-optimized} [opt]}{${frame.is-artificial} [artificial]}\n"
