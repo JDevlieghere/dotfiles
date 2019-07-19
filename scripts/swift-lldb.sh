@@ -2,7 +2,7 @@
 
 swift/utils/build-script \
   --lldb \
-  --release \
+  --release-debuginfo \
   --test \
   -- \
   --skip-build-benchmarks \
@@ -10,4 +10,4 @@ swift/utils/build-script \
   --lldb-use-system-debugserver \
   --lldb-build-with-cmake \
   --skip-test-swift \
-  --skip-test-cmark
+  --skip-test-cmark $@
