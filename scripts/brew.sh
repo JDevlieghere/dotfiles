@@ -56,6 +56,7 @@ installEssentials() {
 	brew install python
 	brew install re2c
 	brew install reattach-to-user-namespace
+	brew install redis
 	brew install ripgrep
 	brew install rsync
 	brew install sccache
