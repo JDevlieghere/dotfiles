@@ -78,7 +78,6 @@ installExtras() {
 	brew install afl-fuzz
 	brew install archey
 	brew install binutils
-	brew install ccache
 	brew install coreutils
 	brew install cppcheck
 	brew install distcc
@@ -87,6 +86,7 @@ installExtras() {
 	brew install gnu-sed
 	brew install gnutls
 	brew install libiconv
+	brew install mosh
 	brew install neovim
 	brew install radare2
 	brew install ranger
