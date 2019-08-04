@@ -155,6 +155,11 @@ if has('persistent_undo')
     set undoreload=10000        " Max lines to save for undo on a buffer reload
 endif
 
+" Neovim
+if has('nvim')
+  set wildoptions+=pum,tagfile
+endif
+
 " ---------------------------------------------------------------------------- "
 " Colors & User Interface                                                      "
 " ---------------------------------------------------------------------------- "
