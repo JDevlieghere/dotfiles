@@ -70,6 +70,11 @@ parser.add_argument(
     type=str)
 
 parser.add_argument(
+    '--extra',
+    help="Specify extra C/CXX flags",
+    type=str)
+
+parser.add_argument(
     '--projects',
     nargs='*',
     help="Project to enable when using the monorepo")
@@ -128,6 +133,10 @@ if args.expensive:
 if args.launcher:
     cmake_cmd.append("-DCMAKE_C_COMPILER_LAUNCHER='{}'".format(args.launcher))
     cmake_cmd.append("-DCMAKE_CXX_COMPILER_LAUNCHER='{}'".format(args.launcher))
+
+if args.extra:
+    cmake_cmd.append("-DCMAKE_C_FLAGS='{}'".format(args.extra))
+    cmake_cmd.append("-DCMAKE_CXX_FLAGS='{}'".format(args.extra))
 
 if args.projects:
     projects = ';'.join(args.projects)
