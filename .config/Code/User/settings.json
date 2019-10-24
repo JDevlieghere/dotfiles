@@ -7,6 +7,7 @@
         120
     ],
     "editor.minimap.enabled": false,
+    "editor.renderIndentGuides": false,
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
