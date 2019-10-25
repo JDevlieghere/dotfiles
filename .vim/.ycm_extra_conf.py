@@ -180,7 +180,7 @@ def FlagsForCompilationDatabase(root, filename):
     except:
         return None
 
-def FlagsForFile(filename, **kwargs):
+def Settings(filename, **kwargs):
     root = os.path.realpath(filename);
     compilation_db_flags = FlagsForCompilationDatabase(root, filename)
     if compilation_db_flags:
