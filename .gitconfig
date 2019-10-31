@@ -1,11 +1,12 @@
 [core]
 	editor = vim
-	excludesfile = /Users/jdevlieghere/.gitignore_global
 [user]
 	email = jonas@devlieghere.com
 	name = Jonas Devlieghere
 [push]
 	default = simple
+[pull]
+	rebase = true
 [grep]
 	extendRegexp = true
 	lineNumber = true
@@ -32,8 +33,6 @@
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	amend = commit --amend
 	anw = !sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
-	ap = add --patch
-	b = branch -v
 	ca = diff --cached
 	co = checkout
 	cp = cherry-pick
@@ -42,18 +41,13 @@
 	fmt = clang-format
 	git = "!exec git"
 	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
-	hist = log -p -M --follow --stat
-	lg = log -p
-	ll = log --stat
 	ours = checkout --ours
 	patch =  show HEAD -U999999
 	review = !git diff --name-only --cached | xargs -n 1 git blame --porcelain | grep  \"^author \" | sort | uniq -c | sort -nr | head -10
 	sha = rev-parse HEAD
 	st = status
 	theirs = checkout --theirs
-	top = log --stat -n 1
 	uncommit = reset HEAD~
-	undo = reset --soft HEAD^
 	unstage = reset HEAD --
 [credential]
 	helper = cache --timeout=3600
@@ -62,5 +56,3 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
-[mergetool "araxis"]
-	path = /Applications/Araxis Merge.app/Contents/Utilities/compare
