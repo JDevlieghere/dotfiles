@@ -98,7 +98,6 @@ installExtras() {
 installCasks() {
 	info "Installing casks"
 
-	brew cask install aerial
 	brew cask install alacritty
 	brew cask install iina
 	brew cask install tunnelblick
