@@ -41,6 +41,7 @@
 	fmt = clang-format
 	git = "!exec git"
 	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+	nopush = !sh -c 'git remote set-url --push $1 /dev/null' -
 	ours = checkout --ours
 	patch =  show HEAD -U999999
 	review = !git diff --name-only --cached | xargs -n 1 git blame --porcelain | grep  \"^author \" | sort | uniq -c | sort -nr | head -10
