@@ -17,7 +17,6 @@ Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
 Plug 'sheerun/vim-polyglot'
-Plug 'shougo/vimproc',                      { 'do': 'make' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
