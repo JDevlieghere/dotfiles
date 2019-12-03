@@ -16,5 +16,6 @@
 	"tab_size": 4,
 	"theme": "Adaptive.sublime-theme",
 	"trim_trailing_white_space_on_save": true,
-	"wrap_width": 120
+	"word_wrap": false,
+	"wrap_width": 120,
 }
