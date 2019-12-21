@@ -140,6 +140,10 @@ set showbreak=↳\ \ \ "
 " Make completion menu behave like an IDE
 set completeopt=longest,menuone,preview
 
+" Disable modelines as a security precaution
+set modelines=0
+set nomodeline
+
 " Encryption
 if has("crypt-blowfish2")
     set cm=blowfish2
