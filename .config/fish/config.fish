@@ -1,5 +1,6 @@
 # No greeting.
 set fish_greeting
+set fish_emoji_width 2
 
 if status --is-interactive
   # Source dotfiles.
