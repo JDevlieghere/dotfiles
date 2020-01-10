@@ -360,21 +360,6 @@ if executable('clangd')
         autocmd FileType objc setlocal omnifunc=lsp#complete
         autocmd FileType objcpp setlocal omnifunc=lsp#complete
     augroup end
-elseif  executable('cquery')
-    augroup lsp_cquery
-        autocmd!
-        autocmd User lsp_setup call lsp#register_server({
-                    \ 'name': 'cquery',
-                    \ 'cmd': {server_info->['cquery']},
-                    \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-                    \ 'initialization_options': { 'cacheDirectory': '/tmp/cache' },
-                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-                    \ })
-        autocmd FileType c setlocal omnifunc=lsp#complete
-        autocmd FileType cpp setlocal omnifunc=lsp#complete
-        autocmd FileType objc setlocal omnifunc=lsp#complete
-        autocmd FileType objcpp setlocal omnifunc=lsp#complete
-    augroup end
 endif
 
 if executable('pyls')
