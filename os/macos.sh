@@ -72,5 +72,9 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Visualize CPU usage in the Activity Monitor Dock icon
 defaults write com.apple.ActivityMonitor IconType -int 5
 
+# Set tile and large size
+defaults write com.apple.dock tilesize -int 32
+defaults write com.apple.dock largesize -int 128
+
 # Show all processes in Activity Monitor
 defaults write com.apple.ActivityMonitor ShowCategory -int 0
