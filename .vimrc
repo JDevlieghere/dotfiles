@@ -226,6 +226,7 @@ nnoremap <leader><space> :noh<CR>
 " Yank
 nnoremap <leader>yp :let @+=expand("%:p")<CR>
 nnoremap <leader>yl :let @+=expand('%:t') . ':' . line(".")<CR>
+nnoremap <leader>yc :let @+=expand('%:t') . ':' . line( "."). ':' . col(".")<CR>
 
 " Toggle
 nnoremap <leader>ts :setlocal spell!<CR>
