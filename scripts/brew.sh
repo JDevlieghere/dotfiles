@@ -36,6 +36,7 @@ installEssentials() {
 	brew install fish
 	brew install git
 	brew install git-lfs
+	brew install github/gh/gh
 	brew install gnupg
 	brew install gpg-agent
 	brew install graphviz
