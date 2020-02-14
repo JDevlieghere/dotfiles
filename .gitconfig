@@ -7,6 +7,8 @@
 	default = simple
 [pull]
 	rebase = true
+[rebase]
+	autoStash = true
 [grep]
 	extendRegexp = true
 	lineNumber = true
