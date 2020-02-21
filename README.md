@@ -52,14 +52,6 @@ self-explanatory. For C++ development, I rely heavily on
 
 ### tmux
 
-My tmux configuration will display your WAN IP address in the bottom right
-corner. Instead of constantly polling for the current IP, it reads a cache
-file which is updated every five minutes by a cron job.
-
-```
-*/5 * * * * curl -s http://whatismyip.akamai.com > ~/.tmux.cache.ip
-```
-
 To enable italics you will need to compile and install  `tmux.terminfo`.
 
 ```
