@@ -53,6 +53,10 @@ doSymLink() {
     ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
 }
 
+doDirectories() {
+    mkdir -p ~/.vim/undo
+}
+
 doInstall() {
     info "Installing Extras"
 
@@ -99,6 +103,7 @@ doAll() {
     doUpdate
     doSync
     doGitConfig
+    doDirectories
     doSymLink
     doInstall
     doFonts
@@ -127,6 +132,7 @@ else
             -s|--sync)
                 doSync
                 doGitConfig
+                doDirectories
                 shift
                 ;;
             -l|--link)
