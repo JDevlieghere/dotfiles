@@ -43,9 +43,9 @@ filetype plugin indent on
 set background=dark
 
 if has("termguicolors")
-  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
+    let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
 endif
 
 try
@@ -180,6 +180,11 @@ end
 
 " Same color for sign column and line numbers
 highlight clear SignColumn
+
+" Tab line
+highlight TabLine      cterm=NONE  ctermfg=33   ctermbg=235  guifg=#268bd2  guibg=#073642
+highlight TabLineFill  cterm=NONE  ctermfg=33   ctermbg=235  guifg=#268bd2  guibg=#073642
+highlight TabLineSel   cterm=NONE  ctermfg=235  ctermbg=33   guifg=#073642  guibg=#268bd2
 
 " ---------------------------------------------------------------------------- "
 " Key Mappings                                                                 "
