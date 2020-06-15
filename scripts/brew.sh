@@ -14,6 +14,7 @@ update() {
 		info "Updating"
 		brew update
 		brew upgrade
+		brew cask upgrade
 	fi
 
 	# Disable analytics.
