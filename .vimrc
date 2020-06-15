@@ -6,7 +6,7 @@ set nocompatible
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 
 Plug 'ap/vim-buftabline'
 Plug 'ciaranm/detectindent'
@@ -40,9 +40,16 @@ call plug#end()
 " ---------------------------------------------------------------------------- "
 
 filetype plugin indent on
+set background=dark
+
+if has("termguicolors")
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 
 try
-    colorscheme solarized
+    colorscheme solarized8
 catch
 endtry
 
@@ -51,7 +58,6 @@ if !exists("g:syntax_on")
 endif
 
 set autoread                    " Auto reload file after external command
-set background=dark             " Use a dark background
 set backspace=indent,eol,start  " Delete over line breaks
 set binary                      " Enable binary support
 set colorcolumn=80,120          " Show ruler columns
@@ -151,7 +157,7 @@ endif
 
 " History
 set history=1000                " Remember more commands
-if has('persistent_undo')
+if has("persistent_undo")
     set undofile                " Persistent undo
     set undodir=~/.vim/undo     " Location to store undo history
     set undolevels=1000         " Max number of changes
@@ -159,7 +165,7 @@ if has('persistent_undo')
 endif
 
 " Neovim
-if has('nvim')
+if has("nvim")
   set wildoptions+=pum,tagfile
 endif
 
@@ -174,17 +180,6 @@ end
 
 " Same color for sign column and line numbers
 highlight clear SignColumn
-
-" Custom spell-checking highlighting
-highlight SpellBad     term=underline cterm=underline
-highlight SpellCap     term=underline cterm=underline
-highlight SpellRare    term=underline cterm=underline
-highlight SpellLocal   term=underline cterm=underline
-
-" Tab line
-highlight TabLine      ctermfg=White  ctermbg=Black     cterm=NONE
-highlight TabLineFill  ctermfg=White  ctermbg=Black     cterm=NONE
-highlight TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
 
 " ---------------------------------------------------------------------------- "
 " Key Mappings                                                                 "
