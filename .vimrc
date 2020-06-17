@@ -181,6 +181,12 @@ end
 " Same color for sign column and line numbers
 highlight clear SignColumn
 
+" Custom spell-checking highlighting
+highlight SpellBad     cterm=underline  term=underline  gui=underline
+highlight SpellCap     cterm=underline  term=underline  gui=underline
+highlight SpellRare    cterm=underline  term=underline  gui=underline
+highlight SpellLocal   cterm=underline  term=underline  gui=underline
+
 " Tab line
 highlight TabLine      cterm=NONE  ctermfg=33   ctermbg=235  guifg=#268bd2  guibg=#073642
 highlight TabLineFill  cterm=NONE  ctermfg=33   ctermbg=235  guifg=#268bd2  guibg=#073642
