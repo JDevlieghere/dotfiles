@@ -1,9 +1,6 @@
 # Better ls.
 alias ll="ls -lha"
 
-# Launch Emacs.
-alias em="emacsclient --no-wait"
-
 # Human-readable disk usage.
 alias dfh="df -Tha --total"
 
@@ -14,12 +11,6 @@ alias whois="whois -h whois-servers.net"
 
 # Show processes.
 alias psg="ps -e -o pid,comm | grep "
-
-# History.
-alias hig="history | grep"
-
-# Find matching files.
-alias lsg='ll | grep'
 
 # Map function.
 alias map="xargs -n1"
@@ -50,9 +41,6 @@ alias psync='rsync --progress'
 
 # Get first column and ignore binary matches.
 alias fstnl='cut -d":" -f1 | uniq | grep -v "Binary "'
-
-# Git grep.
-alias gg='git grep'
 
 # Fast diff for large files.
 alias fdiff='diff --speed-large-files'
