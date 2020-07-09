@@ -24,6 +24,14 @@ doGitConfig() {
         git config --global diff.guitool araxis
         git config --global merge.guitool araxis
     fi
+
+    # Use Sublime Merge as diff and merge tool when available.
+    if [ -d "/Applications/Sublime Merge.app/Contents/SharedSupport/bin/" ]; then
+        echo "Configuring Sublime Merge"
+        git config --global mergetool.smerge.cmd 'smerge mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"'
+        git config --global mergetool.smerge.trustExitCode true
+        git config --global merge.tool smerge
+    fi
 }
 
 doSync() {

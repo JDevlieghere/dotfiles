@@ -27,7 +27,12 @@ end
 
 # Araxis Merge
 if test -e /Applications/Araxis\ Merge.app/Contents/Utilities
-  set PATH /Applications/Araxis\ Merge.app/Contents/Utilities $PATH
+  set PATH $PATH /Applications/Araxis\ Merge.app/Contents/Utilities
+end
+
+# Sublime Merge
+if test -e /Applications/Sublime\ Merge.app/Contents/SharedSupport/bin/
+  set PATH $PATH /Applications/Sublime\ Merge.app/Contents/SharedSupport/bin/
 end
 
 # Go
