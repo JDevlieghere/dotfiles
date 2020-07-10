@@ -23,6 +23,7 @@ doGitConfig() {
         echo "Configuring Araxis Merge"
         git config --global diff.guitool araxis
         git config --global merge.guitool araxis
+        git config --global mergetool.araxis.path /Applications/Araxis\ Merge.app/Contents/Utilities/compare
     fi
 
     # Use Sublime Merge as diff and merge tool when available.
