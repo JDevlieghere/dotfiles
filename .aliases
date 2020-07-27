@@ -9,9 +9,6 @@ alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias whois="whois -h whois-servers.net"
 
-# Show processes.
-alias psg="ps -e -o pid,comm | grep "
-
 # Map function.
 alias map="xargs -n1"
 
@@ -32,12 +29,6 @@ alias gputemp='watch -n 0 "nvidia-smi -q -d temperature"'
 
 # Show CPU Clock Speed.
 alias clockspeed='watch -n 0 "lscpu | grep \'MHz\'"'
-
-# Show CCache stats.
-alias ccaches='watch -n 0 "ccache -s"'
-
-# Rsync with progress.
-alias psync='rsync --progress'
 
 # Get first column and ignore binary matches.
 alias fstnl='cut -d":" -f1 | uniq | grep -v "Binary "'
