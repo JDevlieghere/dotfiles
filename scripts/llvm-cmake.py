@@ -23,66 +23,63 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument("source", help="LLVM source path", type=str)
 
-parser.add_argument(
-    '-s', '--shared', action='store_true', help="Build shared libraries")
+parser.add_argument('-s',
+                    '--shared',
+                    action='store_true',
+                    help="Build shared libraries")
 
-parser.add_argument(
-    '-c',
-    '--clang-light',
-    action='store_true',
-    help=
-    "Build a light version of clang, which means no ARC, Static Anaylzer or plugins"
-)
+parser.add_argument('--diet-clang',
+                    action='store_true',
+                    help="No ARC, Static Anaylzer or plugins")
 
-parser.add_argument(
-    '-r',
-    '--ra',
-    action='store_true',
-    help="Release build with debug info and asserts")
+parser.add_argument('-r',
+                    '--ra',
+                    action='store_true',
+                    help="Release build with debug info and asserts")
+
 parser.add_argument('-d', '--debug', action='store_true', help="Debug build")
 
-parser.add_argument(
-    '-m', '--modules', action='store_true', help="Enable modules")
+parser.add_argument('-m',
+                    '--modules',
+                    action='store_true',
+                    help="Enable modules")
 
-parser.add_argument(
-    '-x', '--x86', action='store_true', help="Only build x86 target")
+parser.add_argument('-x',
+                    '--x86',
+                    action='store_true',
+                    help="Only build x86 target")
+
+parser.add_argument('--lto',
+                    nargs='?',
+                    const='',
+                    default=None,
+                    help="Enable LTO")
 
 parser.add_argument('--sanitizers', nargs='*', help="Sanitizers to enable")
 
-parser.add_argument(
-    '--system-debugserver',
-    action='store_true',
-    help="Use system debug server")
+parser.add_argument('--system-debugserver',
+                    action='store_true',
+                    help="Use system debug server")
 
-parser.add_argument(
-    '--docs',
-    action='store_true',
-    help="Build the documentation")
+parser.add_argument('--docs',
+                    action='store_true',
+                    help="Build the documentation")
 
-parser.add_argument(
-    '--expensive',
-    action='store_true',
-    help="Enable expensive checks")
+parser.add_argument('--expensive',
+                    action='store_true',
+                    help="Enable expensive checks")
 
-parser.add_argument(
-    '--launcher',
-    help="Specify launcher",
-    type=str)
+parser.add_argument('--launcher', help="Specify launcher", type=str)
 
-parser.add_argument(
-    '--extra',
-    help="Specify extra C/CXX flags",
-    type=str)
+parser.add_argument('--extra', help="Specify extra C/CXX flags", type=str)
 
-parser.add_argument(
-    '--projects',
-    nargs='*',
-    help="Project to enable when using the monorepo")
+parser.add_argument('--projects',
+                    nargs='*',
+                    help="Project to enable when using the monorepo")
 
-parser.add_argument(
-    '--runtimes',
-    nargs='*',
-    help="Runtimes to enable when using the monorepo")
+parser.add_argument('--runtimes',
+                    nargs='*',
+                    help="Runtimes to enable when using the monorepo")
 
 args = parser.parse_args()
 
@@ -97,7 +94,7 @@ cmake_cmd.append("-DLLVM_PARALLEL_LINK_JOBS:INT={}".format(
 if args.shared:
     cmake_cmd.append("-DBUILD_SHARED_LIBS:BOOL=ON")
 
-if args.clang_light:
+if args.diet_clang:
     cmake_cmd.append("-DCLANG_ENABLE_ARCMT:BOOL=OFF")
     cmake_cmd.append("-DCLANG_ENABLE_STATIC_ANALYZER:BOOL=OFF")
     cmake_cmd.append("-DCLANG_PLUGIN_SUPPORT:BOOL=OFF")
@@ -109,6 +106,10 @@ if args.ra:
 if args.debug:
     cmake_cmd.append("-DCMAKE_BUILD_TYPE='Debug'")
     cmake_cmd.append("-DLLVM_OPTIMIZED_TABLEGEN:BOOL=ON")
+
+if args.lto is not None:
+    lto = args.lto if args.lto else "ON"
+    cmake_cmd.append("-DLLVM_ENABLE_LTO={}".format(lto))
 
 if args.modules:
     cmake_cmd.append("-DLLVM_ENABLE_MODULES:BOOL=ON")
@@ -132,7 +133,8 @@ if args.expensive:
 
 if args.launcher:
     cmake_cmd.append("-DCMAKE_C_COMPILER_LAUNCHER='{}'".format(args.launcher))
-    cmake_cmd.append("-DCMAKE_CXX_COMPILER_LAUNCHER='{}'".format(args.launcher))
+    cmake_cmd.append("-DCMAKE_CXX_COMPILER_LAUNCHER='{}'".format(
+        args.launcher))
 
 if args.extra:
     cmake_cmd.append("-DCMAKE_C_FLAGS='{}'".format(args.extra))
