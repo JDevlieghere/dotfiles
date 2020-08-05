@@ -99,7 +99,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Source Code Pro
+    family: Source Code Pro for Powerline
 
     # The `style` can be specified to pick a specific face.
     #style: Regular
