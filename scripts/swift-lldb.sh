@@ -3,9 +3,8 @@
 ./swift/utils/build-script \
   --lldb \
   --release-debuginfo \
-  --skip-build-benchmarks \
   --no-swift-stdlib-assertions \
-  --lldb-use-system-debugserver \
+  --skip-build-benchmarks \
   --skip-test-swift \
   --skip-test-cmark \
   $@
