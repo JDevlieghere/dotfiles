@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 
 # Make sure we have the latest version
-sudo pip install --upgrade pip
+sudo pip3 install --upgrade pip
 
 # Install packages
-sudo pip install --upgrade autopep8
-sudo pip install --upgrade gprof2dot
-sudo pip install --upgrade haxor-news
-sudo pip install --upgrade jedi
-sudo pip install --upgrade mkdocs
-sudo pip install --upgrade mkdocs-material
-sudo pip install --upgrade neovim
-sudo pip install --upgrade numpy
-sudo pip install --upgrade pandas
-sudo pip install --upgrade pyflakes
-sudo pip install --upgrade pylint
-sudo pip install --upgrade python-language-server
-sudo pip install --upgrade rtv
-sudo pip install --upgrade scipy
-sudo pip install --upgrade sphinx
-sudo pip install --upgrade yapf
+sudo pip3 install --upgrade autopep8
+sudo pip3 install --upgrade gprof2dot
+sudo pip3 install --upgrade haxor-news
+sudo pip3 install --upgrade jedi
+sudo pip3 install --upgrade mkdocs
+sudo pip3 install --upgrade mkdocs-material
+sudo pip3 install --upgrade neovim
+sudo pip3 install --upgrade numpy
+sudo pip3 install --upgrade pandas
+sudo pip3 install --upgrade pyflakes
+sudo pip3 install --upgrade pylint
+sudo pip3 install --upgrade python-language-server
+sudo pip3 install --upgrade rtv
+sudo pip3 install --upgrade scipy
+sudo pip3 install --upgrade sphinx
+sudo pip3 install --upgrade yapf
