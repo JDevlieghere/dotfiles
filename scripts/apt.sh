@@ -41,7 +41,6 @@ sudo apt install -y \
     tree \
     unrar \
     vbindiff \
-    weechat-curses weechat-plugins \
     xz-utils
 
 # Pass any argument to this script for a "full" install
