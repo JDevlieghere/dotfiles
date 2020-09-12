@@ -114,6 +114,7 @@ installExtras() {
 	brew install neovim
 	brew install radare2
 	brew install ranger
+	brew install shellcheck
 	brew install wget --with-iri
 	brew install wireshark --with-qt5
 }
