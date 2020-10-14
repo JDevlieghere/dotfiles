@@ -47,6 +47,7 @@ installEssentials() {
 	info "Installing essentials"
 
 	brew install ag
+	brew install bat
 	brew install boost
 	brew install cloc
 	brew install cmake
