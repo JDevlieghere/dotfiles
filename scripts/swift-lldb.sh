@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+export SKIP_XCODE_VERSION_CHECK=1
 ./swift/utils/build-script \
   --lldb \
   --release-debuginfo \
