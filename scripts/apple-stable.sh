@@ -2,12 +2,11 @@
 
 set -euo pipefail
 
+readonly repo="apple/llvm-project"
+
 # This changes only a few times a year.
 readonly stable_branch="apple/stable/20200714"
 readonly stable_mnemonic="bastille"
-
-# Remote for my fork.
-readonly remote="jonas"
 
 # Make sure we have upstream llvm as a remote.
 git ls-remote --exit-code llvm > /dev/null
@@ -27,5 +26,7 @@ done
 function join { local IFS='+'; echo "$*"; }
 
 target_branch="🍒/$stable_mnemonic/$(join "$@")"
+git checkout -b "$target_branch"
 
-git push $remote "HEAD:refs/heads/$target_branch"
+# Use GitHub CLI to create a PR against the correct repo.
+gh pr create --fill --base "$stable_branch"  --repo "$repo" --web
