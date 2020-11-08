@@ -67,6 +67,7 @@ installEssentials() {
 	brew install gts
 	brew install highlight
 	brew install htop
+	brew install hyperfine
 	brew install imagemagick
 	brew install lcov
 	brew install libxml2
