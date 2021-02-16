@@ -224,6 +224,7 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 " ---------------------------------------------------------------------------- "
 " Leader Mappings                                                              "
 " ---------------------------------------------------------------------------- "
+
 let mapleader=" "
 
 " Clear search highlight
@@ -314,6 +315,7 @@ let g:signify_update_on_bufenter=0
 " fzf.vim
 let g:fzf_buffers_jump=1
 nnoremap \ :Rg<SPACE>
+nnoremap \| :Tags<SPACE>
 vnoremap _ y :Rg <C-R>"<CR>
 nnoremap _ yaw :Rg <C-R>"<CR>
 nnoremap <silent> <C-f> :Files<CR>
