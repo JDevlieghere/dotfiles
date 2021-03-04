@@ -21,28 +21,6 @@ update() {
 	brew analytics off
 }
 
-fixOwnershipAndPermissions() {
-	DIRS="/usr/local/Frameworks \
-		/usr/local/bin \
-		/usr/local/etc \
-		/usr/local/lib \
-		/usr/local/sbin \
-		/usr/local/share \
-		/usr/local/share/doc \
-		/usr/local/share/locale \
-		/usr/local/share/man \
-		/usr/local/share/man/man1 \
-		/usr/local/share/man/man2 \
-		/usr/local/share/man/man3 \
-		/usr/local/share/man/man4 \
-		/usr/local/share/man/man5 \
-		/usr/local/share/man/man7 \
-		/usr/local/share/man/man8"
-
-	sudo chown -R $(whoami) $DIRS
-	chmod u+w $DIRS
-}
-
 installEssentials() {
 	info "Installing essentials"
 
@@ -168,7 +146,6 @@ else
 	do
 		case $i in
 			-i|--install)
-				fixOwnershipAndPermissions
 				update
 				installEssentials
 				cleanup
@@ -176,7 +153,6 @@ else
 				shift
 				;;
 			-e|--extras)
-				fixOwnershipAndPermissions
 				update
 				installExtras
 				cleanup
@@ -184,11 +160,9 @@ else
 				shift
 				;;
 			-f|--fix)
-				fixOwnershipAndPermissions
 				shift
 				;;
 			-u|--update)
-				fixOwnershipAndPermissions
 				update
 				cleanup
 				shift
@@ -198,7 +172,6 @@ else
 				shift
 				;;
 			-c|--cask)
-				fixOwnershipAndPermissions
 				installCasks
 				linkApps
 				cleanup
