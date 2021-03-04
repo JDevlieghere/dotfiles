@@ -49,6 +49,9 @@ doSync() {
         --filter=':- .gitignore' \
         -avh --no-perms . ~;
 
+    # Touch .localrc so fish can source it.
+    touch ~/.localrc
+
     # Copy files that have different locations on macOS and Linux.
     if [ -d "$HOME/Library/Application Support/Code/User/" ]; then
         cp -f "$HOME/.config/Code/User/settings.json" \
