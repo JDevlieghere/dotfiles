@@ -287,6 +287,7 @@ augroup filtypes
     autocmd FileType c,cpp setlocal comments^=:///
     autocmd FileType c,cpp setlocal commentstring=///\ %s
     autocmd FileType crontab setlocal nobackup nowritebackup
+    autocmd FileType make setlocal noexpandtab
 augroup end
 
 " Remove trailing whitespace
