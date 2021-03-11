@@ -6,3 +6,14 @@
 
 # Always print the dynamic type of the result of an expression
 # settings set target.prefer-dynamic-value run-target
+
+# Inherit TCC from the parent
+# settings set target.inherit-tcc true
+
+# Debug utility functions
+# settings set target.debug-utility-expression true
+
+# Enable logging
+# log enable lldb types -f /tmp/types.log
+# log enable lldb dyld -f /tmp/dyld.log
+# log enable gdb-remote packets -f /tmp/gdb.log
