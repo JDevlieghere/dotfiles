@@ -22,6 +22,14 @@
     "vim.hlsearch": true,
     "vim.incsearch": true,
     "vim.leader": "<space>",
+    "vim.normalModeKeyBindingsNonRecursive": [{
+        "before": [
+            "<Esc>"
+        ],
+        "commands": [
+            ":nohl"
+        ]
+    }],
     "vim.statusBarColorControl": true,
     "vim.useCtrlKeys": true,
     "vim.useSystemClipboard": true,
