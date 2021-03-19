@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'lifepillar/vim-solarized8'
 
+Plug 'ajh17/vimcompletesme'
 Plug 'ap/vim-buftabline'
 Plug 'ciaranm/detectindent'
 Plug 'itchyny/lightline.vim'
@@ -21,9 +22,13 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'ajh17/vimcompletesme'
+if has('nvim')
+    Plug 'neovim/nvim-lspconfig'
+else
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/vim-lsp'
+endif
+
 
 Plug 'chiel92/vim-autoformat',              { 'on': 'Autoformat' }
 Plug 'majutsushi/tagbar',                   { 'on': 'TagbarToggle' }
@@ -167,6 +172,7 @@ endif
 " Neovim
 if has("nvim")
   set wildoptions+=pum,tagfile
+  set inccommand=split
 endif
 
 " ---------------------------------------------------------------------------- "
@@ -351,35 +357,48 @@ let g:formatter_yapf_style='pep8'
 let g:DoxygenToolkit_commentType="C++"
 
 " LSP
-let g:lsp_signs_enabled=1
-nnoremap <leader>ld :LspDefinition<CR>
-nnoremap <leader>lf :LspDocumentFormat<CR>
-nnoremap <leader>lh :LspHover<CR>
-nnoremap <leader>lr :LspReferences<CR>
+if has('nvim')
+    luafile ~/.vim/.lsp.lua
 
-if executable('clangd')
-    augroup lsp_clangd
-        autocmd!
-        autocmd User lsp_setup call lsp#register_server({
-                    \ 'name': 'clangd',
-                    \ 'cmd': {server_info->['clangd']},
-                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-                    \ })
-        autocmd FileType c setlocal omnifunc=lsp#complete
-        autocmd FileType cpp setlocal omnifunc=lsp#complete
-        autocmd FileType objc setlocal omnifunc=lsp#complete
-        autocmd FileType objcpp setlocal omnifunc=lsp#complete
-    augroup end
-endif
+    nnoremap <leader>ld <cmd>lua vim.lsp.buf.definition()<CR>
+    nnoremap <leader>lh <cmd>lua vim.lsp.buf.hover()<CR>
+    nnoremap <leader>lr <cmd>lua vim.lsp.buf.references()<CR>
 
-if executable('pyls')
-    augroup lsp_pyls
-        autocmd!
-        autocmd User lsp_setup call lsp#register_server({
-                    \ 'name': 'pyls',
-                    \ 'cmd': {server_info->['pyls']},
-                    \ 'whitelist': ['python'],
-                    \ })
-        autocmd FileType python setlocal omnifunc=lsp#complete
-    augroup end
+    autocmd FileType c setlocal omnifunc=v:lua.vim.lsp.omnifunc
+    autocmd FileType cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
+    autocmd FileType objc setlocal omnifunc=v:lua.vim.lsp.omnifunc
+    autocmd FileType objcpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
+    autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
+else
+    let g:lsp_signs_enabled=1
+    nnoremap <leader>ld :LspDefinition<CR>
+    nnoremap <leader>lf :LspDocumentFormat<CR>
+    nnoremap <leader>lh :LspHover<CR>
+    nnoremap <leader>lr :LspReferences<CR>
+
+    if executable('clangd')
+        augroup lsp_clangd
+            autocmd!
+            autocmd User lsp_setup call lsp#register_server({
+                        \ 'name': 'clangd',
+                        \ 'cmd': {server_info->['clangd']},
+                        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                        \ })
+            autocmd FileType c setlocal omnifunc=lsp#complete
+            autocmd FileType cpp setlocal omnifunc=lsp#complete
+            autocmd FileType objc setlocal omnifunc=lsp#complete
+            autocmd FileType objcpp setlocal omnifunc=lsp#complete
+        augroup end
+    endif
+    if executable('pyls')
+        augroup lsp_pyls
+            autocmd!
+            autocmd User lsp_setup call lsp#register_server({
+                        \ 'name': 'pyls',
+                        \ 'cmd': {server_info->['pyls']},
+                        \ 'whitelist': ['python'],
+                        \ })
+            autocmd FileType python setlocal omnifunc=lsp#complete
+        augroup end
+    endif
 endif
