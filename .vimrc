@@ -4,6 +4,8 @@ set nocompatible
 " Plugins                                                                      "
 " ---------------------------------------------------------------------------- "
 
+let g:polyglot_disabled = ['autoindent']
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'lifepillar/vim-solarized8'
