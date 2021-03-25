@@ -26,6 +26,7 @@ Plug 'tpope/vim-surround'
 
 if has('nvim')
     Plug 'neovim/nvim-lspconfig'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 else
     Plug 'prabirshrestha/async.vim'
     Plug 'prabirshrestha/vim-lsp'
