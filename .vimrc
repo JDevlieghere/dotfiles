@@ -26,7 +26,6 @@ Plug 'tpope/vim-surround'
 
 if has('nvim')
     Plug 'neovim/nvim-lspconfig'
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 else
     Plug 'prabirshrestha/async.vim'
     Plug 'prabirshrestha/vim-lsp'
@@ -358,11 +357,6 @@ let g:formatter_yapf_style='pep8'
 
 " doxygentoolkit.vim
 let g:DoxygenToolkit_commentType="C++"
-
-" treesitter
-if has('nvim')
-    luafile ~/.vim/treesitter.lua
-endif
 
 " LSP
 if has('nvim')
