@@ -356,19 +356,23 @@ let g:formatter_yapf_style='pep8'
 " doxygentoolkit.vim
 let g:DoxygenToolkit_commentType="C++"
 
+" treesitter
+if has('nvim')
+    luafile ~/.vim/treesitter.lua
+endif
+
 " LSP
 if has('nvim')
-    luafile ~/.vim/.lsp.lua
-
-    nnoremap <leader>ld <cmd>lua vim.lsp.buf.definition()<CR>
-    nnoremap <leader>lh <cmd>lua vim.lsp.buf.hover()<CR>
-    nnoremap <leader>lr <cmd>lua vim.lsp.buf.references()<CR>
-
-    autocmd FileType c setlocal omnifunc=v:lua.vim.lsp.omnifunc
-    autocmd FileType cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
-    autocmd FileType objc setlocal omnifunc=v:lua.vim.lsp.omnifunc
-    autocmd FileType objcpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
-    autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
+    luafile ~/.vim/lsp.lua
+    augroup lsp_all
+        autocmd!
+        autocmd FileType c setlocal omnifunc=v:lua.vim.lsp.omnifunc
+        autocmd FileType cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
+        autocmd FileType objc setlocal omnifunc=v:lua.vim.lsp.omnifunc
+        autocmd FileType objcpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
+        autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
+        autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+    augroup end
 else
     let g:lsp_signs_enabled=1
     nnoremap <leader>ld :LspDefinition<CR>
