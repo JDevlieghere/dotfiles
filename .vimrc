@@ -4,7 +4,7 @@ set nocompatible
 " Plugins                                                                      "
 " ---------------------------------------------------------------------------- "
 
-let g:polyglot_disabled = ['autoindent']
+let g:polyglot_disabled = ['autoindent', 'sensible']
 
 call plug#begin('~/.vim/plugged')
 
