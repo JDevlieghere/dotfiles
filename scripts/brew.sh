@@ -24,7 +24,17 @@ update() {
 installEssentials() {
 	info "Installing essentials"
 
-	brew install ag
+	brew install fd
+	brew install fish
+	brew install git
+	brew install neovim
+	brew install ripgrep
+	brew install vim
+}
+
+installBasics() {
+	info "Installing basics"
+
 	brew install bat
 	brew install boost
 	brew install cloc
@@ -33,10 +43,7 @@ installEssentials() {
 	brew install ctags
 	brew install doxygen
 	brew install dtrx
-	brew install fd
 	brew install ffmpeg
-	brew install fish
-	brew install git
 	brew install git-lfs
 	brew install github/gh/gh
 	brew install gnupg
@@ -52,7 +59,6 @@ installEssentials() {
 	brew install lua
 	brew install ncdu
 	brew install neofetch
-	brew install neovim
 	brew install ninja
 	brew install node
 	brew install pandoc
@@ -60,7 +66,6 @@ installEssentials() {
 	brew install python
 	brew install re2c
 	brew install redis
-	brew install ripgrep
 	brew install rsync
 	brew install sccache
 	brew install the_silver_searcher
@@ -70,7 +75,6 @@ installEssentials() {
 	brew install unrar
 	brew install valgrind
 	brew install vbindiff
-	brew install vim
 	brew install xz
 	brew install zsh
 }
@@ -145,9 +149,17 @@ else
 	for i in "$@"
 	do
 		case $i in
+			-m|--minimal)
+				update
+				installEssentials
+				cleanup
+				list
+				shift
+				;;
 			-i|--install)
 				update
 				installEssentials
+				installBasics
 				cleanup
 				list
 				shift
