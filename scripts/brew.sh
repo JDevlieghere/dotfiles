@@ -27,7 +27,10 @@ installEssentials() {
 	brew install fd
 	brew install fish
 	brew install git
+	brew install gnupg
+	brew install gpg-agent
 	brew install neovim
+	brew install pinentry-mac
 	brew install ripgrep
 	brew install vim
 }
@@ -46,8 +49,6 @@ installBasics() {
 	brew install ffmpeg
 	brew install git-lfs
 	brew install github/gh/gh
-	brew install gnupg
-	brew install gpg-agent
 	brew install graphviz
 	brew install gts
 	brew install highlight
