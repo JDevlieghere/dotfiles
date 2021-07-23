@@ -8,6 +8,7 @@ if status --is-interactive
   source ~/.exports
 
   # Source fish files.
+  source ~/.config/fish/brew.fish
   source ~/.config/fish/gpg.fish
   source ~/.config/fish/fzf.fish
   source ~/.config/fish/ssh.fish
