@@ -1,5 +1,5 @@
 require'lspconfig'.vimls.setup{}
-require'lspconfig'.pyls.setup{}
+require'lspconfig'.pylsp.setup{}
 require'lspconfig'.clangd.setup{}
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
