@@ -8,7 +8,7 @@ info() {
 
 doUpdate() {
     info "Updating"
-    git pull origin master;
+    git pull origin main
 }
 
 doGitConfig() {
