@@ -19,7 +19,7 @@ if status --is-interactive
   source ~/.config/fish/ssh.fish
 
   # Source .localrc last which is not sync'd.
-  if test -f ~/.shellenv
+  if test -f ~/.localrc
     source ~/.localrc
   end
 end
