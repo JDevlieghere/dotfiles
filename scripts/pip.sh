@@ -12,11 +12,9 @@ sudo pip3 install --upgrade mkdocs
 sudo pip3 install --upgrade mkdocs-material
 sudo pip3 install --upgrade neovim
 sudo pip3 install --upgrade numpy
-sudo pip3 install --upgrade pandas
 sudo pip3 install --upgrade pyflakes
 sudo pip3 install --upgrade pylint
 sudo pip3 install --upgrade python-language-server
-sudo pip3 install --upgrade rtv
 sudo pip3 install --upgrade scipy
 sudo pip3 install --upgrade sphinx
 sudo pip3 install --upgrade yapf
