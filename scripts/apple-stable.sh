@@ -4,8 +4,8 @@ set -euo pipefail
 
 # This changes only a few times a year.
 readonly stable_repo="apple/llvm-project"
-readonly stable_branch="apple/stable/20210107"
-readonly stable_mnemonic="ganymede"
+readonly stable_branch="stable/20210726"
+readonly stable_mnemonic="FBI"
 
 # Make sure we have GitHub CLI installed.
 if ! hash gh 2>/dev/null
