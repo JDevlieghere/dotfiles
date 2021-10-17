@@ -14,7 +14,6 @@ update() {
 		info "Updating"
 		brew update
 		brew upgrade
-		brew cask upgrade
 	fi
 
 	# Disable analytics.
@@ -103,15 +102,6 @@ installExtras() {
 	brew install wireshark --with-qt5
 }
 
-installCasks() {
-	info "Installing casks"
-
-	brew cask install alacritty
-	brew cask install iina
-	brew cask install tunnelblick
-	brew cask install vlc
-}
-
 linkApps() {
 	info "Linking apps"
 
@@ -128,7 +118,6 @@ list() {
 	info "List"
 
 	brew list
-	brew cask list
 }
 
 
@@ -139,7 +128,6 @@ help() {
 	echo "   -e, --extras           Install extras"
 	echo "   -u, --update           Update brew and formulae"
 	echo "   -l, --list             List installed formulae"
-	echo "   -c, --cask             Install casks"
 	echo
 	exit 1
 }
