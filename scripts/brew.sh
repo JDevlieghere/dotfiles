@@ -25,9 +25,9 @@ installEssentials() {
 
 	brew install fd
 	brew install fish
+	brew install fzf
 	brew install git
 	brew install gnupg
-	brew install gpg-agent
 	brew install neovim
 	brew install pinentry-mac
 	brew install ripgrep
@@ -124,10 +124,11 @@ list() {
 help() {
 	echo "Usage: $(basename "$0") [options]" >&2
 	echo
-	echo "   -i, --install          Install essentials"
+	echo "   -i, --install          Install"
 	echo "   -e, --extras           Install extras"
 	echo "   -u, --update           Update brew and formulae"
 	echo "   -l, --list             List installed formulae"
+	echo "   -m, --minimal          Install just the essentials"
 	echo
 	exit 1
 }
