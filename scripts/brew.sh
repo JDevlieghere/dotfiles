@@ -44,7 +44,6 @@ installBasics() {
 	brew install creduce
 	brew install ctags
 	brew install doxygen
-	brew install dtrx
 	brew install ffmpeg
 	brew install git-lfs
 	brew install github/gh/gh
