@@ -146,7 +146,6 @@ if args.projects:
 
 if 'lldb' in args.projects:
     cmake_cmd.append("-DLLDB_ENABLE_PYTHON=ON")
-    cmake_cmd.append("-DLLDB_ENABLE_LUA=ON")
 
 if args.runtimes:
     runtimes = ';'.join(args.runtimes)
