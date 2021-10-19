@@ -39,6 +39,7 @@ installBasics() {
 
 	brew install bat
 	brew install boost
+	brew install clang-format
 	brew install cloc
 	brew install cmake
 	brew install creduce
