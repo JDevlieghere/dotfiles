@@ -76,6 +76,10 @@ doInstall() {
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     vim +PlugInstall +PlugUpdate +qa!
 
+    if command -v nvim &> /dev/null; then
+        nvim +PlugInstall +PlugUpdate +qa!
+    fi
+
     # tmux
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
