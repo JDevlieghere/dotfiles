@@ -31,6 +31,7 @@ installEssentials() {
 	brew install neovim
 	brew install pinentry-mac
 	brew install ripgrep
+	brew install swig
 	brew install vim
 }
 
