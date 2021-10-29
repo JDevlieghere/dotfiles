@@ -19,9 +19,7 @@ do
 
     for d in $(find . -type d -name ".git"); do
         cd $(dirname "$d")
-        git fetch --all --tags
-        git pull --rebase origin main
-        git rebase main || git rebase --abort
+        git pull --rebase --autostash
         cd "$ROOT"
     done
 

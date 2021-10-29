@@ -17,13 +17,6 @@ export PATH=/usr/local/bin:$PATH
 
 cd "$root" || exit
 
-./swift/utils/update-checkout \
-    --scheme "$scheme"
+./swift/utils/update-checkout --scheme "$scheme"
 
-./swift/utils/build-script \
-    --lldb \
-    --release-debuginfo \
-    --no-swift-stdlib-assertions \
-    --skip-build-benchmarks \
-    --skip-test-swift \
-    --skip-test-cmark
+$(dirname $BASH_SOURCE)/swift-lldb.sh
