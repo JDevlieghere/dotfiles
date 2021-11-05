@@ -144,12 +144,12 @@ if args.projects:
     projects = ';'.join(args.projects)
     cmake_cmd.append("-DLLVM_ENABLE_PROJECTS='{}'".format(projects))
 
-if 'lldb' in args.projects:
-    cmake_cmd.append("-DLLDB_ENABLE_PYTHON=ON")
-
 if args.runtimes:
     runtimes = ';'.join(args.runtimes)
     cmake_cmd.append("-DLLVM_ENABLE_RUNTIMES='{}'".format(runtimes))
+
+if 'lldb' in args.projects:
+    cmake_cmd.append("-DLLDB_ENABLE_PYTHON=ON")
 
 try:
     print(' \\\n    '.join(cmake_cmd))
