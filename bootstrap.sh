@@ -45,6 +45,7 @@ doSync() {
         --exclude "installers/" \
         --exclude "os/" \
         --exclude "scripts/" \
+        --exclude "sublime/" \
         --exclude "tmux.terminfo" \
         --filter=':- .gitignore' \
         -avh --no-perms . ~;
