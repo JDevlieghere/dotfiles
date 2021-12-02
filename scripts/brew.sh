@@ -57,7 +57,7 @@ installBasics() {
 	brew install imagemagick
 	brew install lcov
 	brew install libxml2
-	brew install lua
+	brew install lua@5.3
 	brew install ncdu
 	brew install neofetch
 	brew install ninja
