@@ -18,7 +18,7 @@ do
             ;;
         ganymede)
             stable_branch="apple/stable/20210107"
-            stable_mnemonic="FBI"
+            stable_mnemonic="ganymede"
             shift
             ;;
         fbi)
@@ -28,7 +28,7 @@ do
             ;;
         austria)
             stable_branch="stable/20211026"
-            stable_mnemonic="Austria"
+            stable_mnemonic="austria"
             shift
             ;;
         *)
