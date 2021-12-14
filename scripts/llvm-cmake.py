@@ -1,8 +1,16 @@
 #!/usr/bin/env python
 
 import argparse
+import os
 import six
 import subprocess
+
+# Assumes that the build directory lives next to llvm-project.
+ROOT = os.path.dirname(os.getcwd())
+INSTALL_DIR = os.path.join(ROOT, 'install')
+LLVM_PROJECT_DIR = os.path.join(ROOT, 'llvm-project')
+CMARK_DIR = os.path.join(ROOT, 'cmark')
+SWIFT_DIR = os.path.join(ROOT, 'swift')
 
 
 def parallel_link_jobs():
@@ -20,8 +28,6 @@ parser = argparse.ArgumentParser(
     "ones you don't use that often can be a real pain. This scripts attempts "
     "to reduce some of the most commonly used options to a few easy to "
     "remember mnemonic arguments.")
-
-parser.add_argument("source", help="LLVM source path", type=str)
 
 parser.add_argument('-s',
                     '--shared',
@@ -84,8 +90,8 @@ parser.add_argument('--runtimes',
 args = parser.parse_args()
 
 cmake_cmd = [
-    "cmake {}".format(args.source), "-G Ninja",
-    "-DCMAKE_INSTALL_PREFIX='../install'"
+    "cmake {}".format(LLVM_PROJECT_DIR), "-G Ninja",
+    "-DCMAKE_INSTALL_PREFIX='{}'".format(INSTALL_DIR)
 ]
 
 cmake_cmd.append("-DLLVM_PARALLEL_LINK_JOBS:INT={}".format(
@@ -147,6 +153,12 @@ if args.projects:
 if args.runtimes:
     runtimes = ';'.join(args.runtimes)
     cmake_cmd.append("-DLLVM_ENABLE_RUNTIMES='{}'".format(runtimes))
+
+if os.path.isdir(SWIFT_DIR):
+    cmake_cmd.append("-DLLVM_EXTERNAL_SWIFT_SOURCE_DIR='{}'".format(SWIFT_DIR))
+
+if os.path.isdir(CMARK_DIR):
+    cmake_cmd.append("-DLLVM_EXTERNAL_CMARK_SOURCE_DIR='{}'".format(CMARK_DIR))
 
 if 'lldb' in args.projects:
     cmake_cmd.append("-DLLDB_ENABLE_PYTHON=ON")
