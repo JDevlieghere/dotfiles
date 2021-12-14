@@ -2,10 +2,47 @@
 
 set -euo pipefail
 
-# This changes only a few times a year.
 readonly stable_repo="apple/llvm-project"
-readonly stable_branch="stable/20210726"
-readonly stable_mnemonic="FBI"
+
+stable_branch=""
+stable_mnemonic=""
+commits=()
+
+for i in "$@"
+do
+    case $i in
+        bastille)
+            stable_branch="apple/stable/20200714"
+            stable_mnemonic="bastille"
+            shift
+            ;;
+        ganymede)
+            stable_branch="apple/stable/20210107"
+            stable_mnemonic="FBI"
+            shift
+            ;;
+        fbi)
+            stable_branch="stable/20210726"
+            stable_mnemonic="FBI"
+            shift
+            ;;
+        austria)
+            stable_branch="stable/20211026"
+            stable_mnemonic="Austria"
+            shift
+            ;;
+        *)
+            commits+=("$1")
+            shift
+            ;;
+    esac
+done
+
+if [ -z "$stable_branch" ]
+then
+    echo "Unknown branch/mnemonic"
+    exit 1
+fi
 
 # Make sure we have GitHub CLI installed.
 if ! hash gh 2>/dev/null
@@ -23,15 +60,15 @@ fi
 git fetch -q --multiple origin llvm
 git checkout -q origin/$stable_branch
 
-for commit in "$@"
+for commit in "$commits"
 do
     git cherry-pick -x $commit
 done
 
 function join { local IFS='+'; echo "$*"; }
 
-target_branch="🍒/$stable_mnemonic/$(join "$@")"
+target_branch="🍒/$stable_mnemonic/$(join "$commits")"
 git checkout -b "$target_branch"
 
 # Use GitHub CLI to create a PR against the correct repository.
-gh pr create --fill  --repo "apple/llvm-project" --base "$stable_branch" --web
+gh pr create --fill --repo "apple/llvm-project" --base "$stable_branch" --web
