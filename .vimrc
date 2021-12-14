@@ -368,6 +368,7 @@ if has('nvim')
         autocmd FileType objc setlocal omnifunc=v:lua.vim.lsp.omnifunc
         autocmd FileType objcpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
         autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
+        autocmd Filetype swift setlocal omnifunc=v:lua.vim.lsp.omnifunc
         autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
     augroup end
 else
@@ -400,6 +401,17 @@ else
                         \ 'whitelist': ['python'],
                         \ })
             autocmd FileType python setlocal omnifunc=lsp#complete
+        augroup end
+    endif
+    if executable('sourcekit-lsp')
+        augroup lsp_swift
+            autocmd!
+            autocmd User lsp_setup call lsp#register_server({
+                        \ 'name': 'sourcekit-lsp',
+                        \ 'cmd': {server_info->['sourcekit-lsp']},
+                        \ 'whitelist': ['swift'],
+                        \ })
+            autocmd FileType swift setlocal omnifunc=lsp#complete
         augroup end
     endif
 endif
