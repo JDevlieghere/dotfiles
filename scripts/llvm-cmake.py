@@ -90,7 +90,7 @@ parser.add_argument('--runtimes',
 args = parser.parse_args()
 
 cmake_cmd = [
-    "cmake {}".format(LLVM_PROJECT_DIR), "-G Ninja",
+    "cmake {}".format(os.path.join(LLVM_PROJECT_DIR, 'llvm')), "-G Ninja",
     "-DCMAKE_INSTALL_PREFIX='{}'".format(INSTALL_DIR)
 ]
 
@@ -154,11 +154,10 @@ if args.runtimes:
     runtimes = ';'.join(args.runtimes)
     cmake_cmd.append("-DLLVM_ENABLE_RUNTIMES='{}'".format(runtimes))
 
-if os.path.isdir(SWIFT_DIR):
+if os.path.isdir(SWIFT_DIR) and os.path.isdir(CMARK_DIR):
     cmake_cmd.append("-DLLVM_EXTERNAL_SWIFT_SOURCE_DIR='{}'".format(SWIFT_DIR))
-
-if os.path.isdir(CMARK_DIR):
     cmake_cmd.append("-DLLVM_EXTERNAL_CMARK_SOURCE_DIR='{}'".format(CMARK_DIR))
+    cmake_cmd.append("-DLLVM_EXTERNAL_PROJECTS='cmark;swift'")
 
 if 'lldb' in args.projects:
     cmake_cmd.append("-DLLDB_ENABLE_PYTHON=ON")
