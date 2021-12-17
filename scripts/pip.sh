@@ -10,5 +10,6 @@ pip3 install --upgrade neovim
 pip3 install --upgrade pyflakes
 pip3 install --upgrade pylint
 pip3 install --upgrade python-language-server
+pip3 install --upgrade rich
 pip3 install --upgrade sphinx
 pip3 install --upgrade yapf
