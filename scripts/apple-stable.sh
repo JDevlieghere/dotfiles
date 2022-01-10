@@ -32,7 +32,7 @@ do
             shift
             ;;
         *)
-            commits+=("$1")
+            commits+=("$i")
             shift
             ;;
     esac
@@ -60,14 +60,14 @@ fi
 git fetch -q --multiple origin llvm
 git checkout -q origin/$stable_branch
 
-for commit in "$commits"
+for commit in "${commits[@]}"
 do
     git cherry-pick -x $commit
 done
 
 function join { local IFS='+'; echo "$*"; }
 
-target_branch="🍒/$stable_mnemonic/$(join "$commits")"
+target_branch="🍒/$stable_mnemonic/$(join "${commits[@]}")"
 git checkout -b "$target_branch"
 
 # Use GitHub CLI to create a PR against the correct repository.
