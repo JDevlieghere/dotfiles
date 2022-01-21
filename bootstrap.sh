@@ -33,6 +33,18 @@ doGitConfig() {
         git config --global mergetool.smerge.trustExitCode true
         git config --global merge.tool smerge
     fi
+
+    diff_so_fancy=$(type -P "diff-so-fancy")
+    if [ -x "$diff_so_fancy" ]; then
+        echo "Configuring diff-so-fancy"
+        git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+        git config --global interactive.diffFilter "diff-so-fancy --patch"
+        git config --global --bool diff-so-fancy.markEmptyLines false
+        git config --global color.diff-highlight.oldNormal    "red bold"
+        git config --global color.diff-highlight.oldHighlight "red bold 52"
+        git config --global color.diff-highlight.newNormal    "green bold"
+        git config --global color.diff-highlight.newHighlight "green bold 22"
+    fi
 }
 
 doSync() {

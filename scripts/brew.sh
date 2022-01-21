@@ -45,6 +45,7 @@ installBasics() {
 	brew install cmake
 	brew install creduce
 	brew install ctags
+	brew install diff-so-fancy
 	brew install doxygen
 	brew install ffmpeg
 	brew install git-lfs
