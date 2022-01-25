@@ -174,13 +174,6 @@ else
 				list
 				shift
 				;;
-			-c|--cask)
-				installCasks
-				linkApps
-				cleanup
-				list
-				shift
-				;;
 			*)
 				help
 				shift
