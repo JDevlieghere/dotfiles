@@ -18,7 +18,7 @@
 	status = auto
 	ui = true
 [commit]
-	gpgsign = false
+	gpgsign = true
 	verbose = false
 [diff]
 	tool = vimdiff
