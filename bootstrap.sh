@@ -176,6 +176,7 @@ else
                 ;;
             -i|--install)
                 doInstall
+                doFonts
                 shift
                 ;;
             -f|--fonts)
