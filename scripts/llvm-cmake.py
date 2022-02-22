@@ -34,9 +34,13 @@ parser.add_argument('-s',
                     action='store_true',
                     help="Build shared libraries")
 
-parser.add_argument('--diet-clang',
+parser.add_argument('--clang-light',
                     action='store_true',
                     help="No ARC, Static Anaylzer or plugins")
+
+parser.add_argument('--swift',
+                    action='store_true',
+                    help="Include Swift and cmark as external projects")
 
 parser.add_argument('-r',
                     '--ra',
@@ -130,6 +134,9 @@ if args.sanitizers:
 if args.system_debugserver:
     cmake_cmd.append("-DLLDB_USE_SYSTEM_DEBUGSERVER:BOOL=ON")
 
+if 'lldb' in args.projects:
+    cmake_cmd.append("-DLLDB_ENABLE_PYTHON=ON")
+
 if args.docs:
     cmake_cmd.append("-DLLVM_ENABLE_SPHINX:BOOL=ON")
 
@@ -154,13 +161,10 @@ if args.runtimes:
     runtimes = ';'.join(args.runtimes)
     cmake_cmd.append("-DLLVM_ENABLE_RUNTIMES='{}'".format(runtimes))
 
-if os.path.isdir(SWIFT_DIR) and os.path.isdir(CMARK_DIR):
+if args.swift:
     cmake_cmd.append("-DLLVM_EXTERNAL_SWIFT_SOURCE_DIR='{}'".format(SWIFT_DIR))
     cmake_cmd.append("-DLLVM_EXTERNAL_CMARK_SOURCE_DIR='{}'".format(CMARK_DIR))
     cmake_cmd.append("-DLLVM_EXTERNAL_PROJECTS='cmark;swift'")
-
-if 'lldb' in args.projects:
-    cmake_cmd.append("-DLLDB_ENABLE_PYTHON=ON")
 
 try:
     print(' \\\n    '.join(cmake_cmd))
