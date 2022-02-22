@@ -80,6 +80,8 @@ doSymLink() {
 
 doDirectories() {
     mkdir -p ~/.vim/undo
+    mkdir -p ~/.ssh
+    mkdir -p ~/.gnupg
 }
 
 doInstall() {
@@ -122,6 +124,19 @@ doFonts() {
     done
 }
 
+doPermissions() {
+    info "Fixing Permissions "
+
+    chown -R $(whoami) $HOME/.ssh/
+    find $HOME/.ssh -type d -exec chmod 700 {} \;
+    find $HOME/.ssh -type f -name 'id_rsa*' -exec chmod 600 {} \;
+    find $HOME/.ssh -type f -name '*.pub' -exec chmod 644 {} \;
+
+    chown -R $(whoami) $HOME/.gnupg/
+    find $HOME/.gnupg -type f -exec chmod 600 {} \;
+    find $HOME/.gnupg -type d -exec chmod 700 {} \;
+}
+
 doConfig() {
     info "Configuring"
 
@@ -139,6 +154,7 @@ doAll() {
     doSync
     doGitConfig
     doDirectories
+    doPermissions
     doSymLink
     doInstall
     doFonts
@@ -168,6 +184,7 @@ else
                 doSync
                 doGitConfig
                 doDirectories
+                doPermissions
                 shift
                 ;;
             -l|--link)
