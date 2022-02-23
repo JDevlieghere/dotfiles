@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-DOTFILES=$(pwd -P)
+DOTFILES=$(dirname "$0")
+echo $DOTFILES
+
 
 info() {
     printf "\033[00;34m$@\033[0m\n"
@@ -49,7 +51,8 @@ doGitConfig() {
 
 doSync() {
     info "Syncing"
-    rsync --exclude ".git/" \
+    rsync \
+        --exclude ".git/" \
         --exclude ".gitignore" \
         --exclude "Preferences.sublime-settings" \
         --exclude "README.md" \
@@ -60,7 +63,10 @@ doSync() {
         --exclude "sublime/" \
         --exclude "tmux.terminfo" \
         --filter=':- .gitignore' \
-        -avh --no-perms . ~;
+        --no-perms \
+        -avh \
+        $DOTFILES/ \
+        $HOME
 
     # Touch .localrc so fish can source it.
     touch ~/.localrc
@@ -142,10 +148,10 @@ doConfig() {
 
     if [ "$(uname)" == "Darwin" ]; then
         echo "Configuring macOS"
-        ./os/macos.sh
+        $DOTFILES/os/macos.sh
     elif [ "$(uname)" == "Linux" ]; then
         echo "Configuring Linux"
-        ./os/linux.sh
+        $DOTFILES/os/linux.sh
     fi
 }
 
