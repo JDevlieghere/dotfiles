@@ -104,7 +104,7 @@ cmake_cmd.append("-DLLVM_PARALLEL_LINK_JOBS:INT={}".format(
 if args.shared:
     cmake_cmd.append("-DBUILD_SHARED_LIBS:BOOL=ON")
 
-if args.diet_clang:
+if args.clang_light:
     cmake_cmd.append("-DCLANG_ENABLE_ARCMT:BOOL=OFF")
     cmake_cmd.append("-DCLANG_ENABLE_STATIC_ANALYZER:BOOL=OFF")
     cmake_cmd.append("-DCLANG_PLUGIN_SUPPORT:BOOL=OFF")
