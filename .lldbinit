@@ -13,6 +13,9 @@
 # Debug utility functions
 # settings set target.debug-utility-expression true
 
+# Silently import the lldb.macosx scripts
+command script import -s lldb.macosx
+
 # Enable logging
 # log enable lldb types -f /tmp/types.log
 # log enable lldb dyld -f /tmp/dyld.log
