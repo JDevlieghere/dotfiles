@@ -153,6 +153,9 @@ set showbreak=↳\ \ \ "
 " Make completion menu behave like an IDE
 set completeopt=longest,menuone,preview
 
+" Don't give ins-completion-menu messages
+set shortmess+=c
+
 " Disable modelines as a security precaution
 set modelines=0
 set nomodeline
