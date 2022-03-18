@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 DOTFILES=$(dirname "$0")
-echo $DOTFILES
-
 
 info() {
     printf "\033[00;34m$@\033[0m\n"
