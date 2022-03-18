@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=SC2016
+
 DOTFILES=$(dirname "$0")
 
 info() {
-    printf "\033[00;34m$@\033[0m\n"
+    printf "\033[00;34m%s\033[0m\n" "$@"
 }
 
 doUpdate() {
@@ -29,6 +31,7 @@ doGitConfig() {
     # Use Sublime Merge as diff and merge tool when available.
     if [ -d "/Applications/Sublime Merge.app/Contents/SharedSupport/bin/" ]; then
         echo "Configuring Sublime Merge"
+
         git config --global mergetool.smerge.cmd 'smerge mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"'
         git config --global mergetool.smerge.trustExitCode true
         git config --global merge.tool smerge
@@ -63,8 +66,8 @@ doSync() {
         --filter=':- .gitignore' \
         --no-perms \
         -avh \
-        $DOTFILES/ \
-        $HOME
+        "$DOTFILES/" \
+        "$HOME"
 
     # Touch .localrc so fish can source it.
     touch ~/.localrc
@@ -77,9 +80,9 @@ doSync() {
 }
 
 doSymLink() {
-    mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
-    ln -s ~/.vim/* $XDG_CONFIG_HOME/nvim
-    ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+    mkdir -p "${XDG_CONFIG_HOME:=$HOME/.config}"
+    ln -s ~/.vim/* "$XDG_CONFIG_HOME/nvim"
+    ln -s ~/.vimrc "$XDG_CONFIG_HOME/nvim/init.vim"
 }
 
 doDirectories() {
@@ -131,14 +134,14 @@ doFonts() {
 doPermissions() {
     info "Fixing Permissions "
 
-    chown -R $(whoami) $HOME/.ssh/
-    find $HOME/.ssh -type d -exec chmod 700 {} \;
-    find $HOME/.ssh -type f -name 'id_rsa*' -exec chmod 600 {} \;
-    find $HOME/.ssh -type f -name '*.pub' -exec chmod 644 {} \;
+    chown -R "$(whoami)" "$HOME/.ssh/"
+    find "$HOME/.ssh" -type d -exec chmod 700 {} \;
+    find "$HOME/.ssh" -type f -name 'id_rsa*' -exec chmod 600 {} \;
+    find "$HOME/.ssh" -type f -name '*.pub' -exec chmod 644 {} \;
 
-    chown -R $(whoami) $HOME/.gnupg/
-    find $HOME/.gnupg -type f -exec chmod 600 {} \;
-    find $HOME/.gnupg -type d -exec chmod 700 {} \;
+    chown -R "$(whoami)" "$HOME/.gnupg/"
+    find "$HOME/.gnupg" -type f -exec chmod 600 {} \;
+    find "$HOME/.gnupg" -type d -exec chmod 700 {} \;
 }
 
 doConfig() {
@@ -146,10 +149,10 @@ doConfig() {
 
     if [ "$(uname)" == "Darwin" ]; then
         echo "Configuring macOS"
-        $DOTFILES/os/macos.sh
+        "$DOTFILES/os/macos.sh"
     elif [ "$(uname)" == "Linux" ]; then
         echo "Configuring Linux"
-        $DOTFILES/os/linux.sh
+        "$DOTFILES/os/linux.sh"
     fi
 }
 
