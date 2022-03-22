@@ -1,5 +1,5 @@
 [core]
-	editor = vim
+	editor = nvim
 [user]
 	email = jonas@devlieghere.com
 	name = Jonas Devlieghere

@@ -1,6 +1,6 @@
 # Set default editor to Vim.
-set -x EDITOR vim
-set -x VISUAL vim
+set -x EDITOR nvim
+set -x VISUAL nvim
 
 # US English (UTF-8)
 set -x LC_COLLATE en_US.UTF-8
