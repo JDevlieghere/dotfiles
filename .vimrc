@@ -372,7 +372,7 @@ if has('nvim')
         autocmd FileType objcpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
         autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
         autocmd Filetype swift setlocal omnifunc=v:lua.vim.lsp.omnifunc
-        autocmd CursorHold * lua vim.diagnostic.get()
+        autocmd CursorHold * lua vim.diagnostic.open_float()
     augroup end
 else
     let g:lsp_signs_enabled=1
