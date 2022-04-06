@@ -36,6 +36,11 @@ do
             stable_mnemonic="5.6"
             shift
             ;;
+        5.7)
+            stable_branch="swift/release/5.7"
+            stable_mnemonic="5.7"
+            shift
+            ;;
         *)
             commits+=("$i")
             shift
