@@ -27,6 +27,7 @@ installEssentials() {
 	brew install fish
 	brew install fzf
 	brew install git
+	brew install git-delta
 	brew install gnupg
 	brew install neovim
 	brew install pinentry-mac

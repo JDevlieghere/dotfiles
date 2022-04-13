@@ -22,6 +22,7 @@
 	verbose = false
 [diff]
 	tool = vimdiff
+	colorMoved = default
 [diff "bin"]
 	textconv = hexdump -v -C
 [merge]
@@ -59,3 +60,8 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[delta]
+	line-numbers = true
+	side-by-side = true
+	syntax-theme = "Solarized (dark)"
+	navigate = true
