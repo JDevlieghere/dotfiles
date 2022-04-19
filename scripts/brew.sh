@@ -27,12 +27,12 @@ installEssentials() {
 	brew install fish
 	brew install fzf
 	brew install git
-	brew install git-delta
 	brew install gnupg
 	brew install neovim
 	brew install pinentry-mac
 	brew install ripgrep
 	brew install swig
+	brew install tmux
 	brew install vim
 }
 
@@ -46,13 +46,11 @@ installBasics() {
 	brew install cmake
 	brew install creduce
 	brew install ctags
-	brew install diff-so-fancy
 	brew install doxygen
-	brew install ffmpeg
+	brew install git-delta
 	brew install git-lfs
 	brew install github/gh/gh
 	brew install graphviz
-	brew install gts
 	brew install highlight
 	brew install htop
 	brew install hyperfine
@@ -73,9 +71,7 @@ installBasics() {
 	brew install sccache
 	brew install the_silver_searcher
 	brew install tig
-	brew install tmux
 	brew install tree
-	brew install valgrind
 	brew install vbindiff
 	brew install xz
 	brew install zsh
@@ -90,16 +86,18 @@ installExtras() {
 	brew install coreutils
 	brew install cppcheck
 	brew install distcc
+	brew install ffmpeg
 	brew install findutils
 	brew install gdb
 	brew install gnu-sed
 	brew install gnutls
+	brew install gts
 	brew install libiconv
 	brew install mosh
-	brew install neovim
 	brew install radare2
 	brew install ranger
 	brew install shellcheck
+	brew install valgrind
 	brew install wget --with-iri
 	brew install wireshark --with-qt5
 }
