@@ -41,7 +41,7 @@ doGitConfig() {
     if [ -x "$delta" ]; then
         echo "Configuring delta"
         git config --global core.pager "delta"
-        git config --global interactive.diffFilter "diffFilter = delta --color-only"
+        git config --global interactive."delta --color-only"
     fi
 }
 
