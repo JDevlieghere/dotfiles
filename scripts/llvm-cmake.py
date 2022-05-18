@@ -17,7 +17,7 @@ def parallel_link_jobs():
     try:
         import multiprocessing
         cpus = multiprocessing.cpu_count()
-        return max(cpus / 4, 2)
+        return max(int(cpus / 4), 2)
     except:
         return 2
 
