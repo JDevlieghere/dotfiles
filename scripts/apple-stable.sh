@@ -31,6 +31,11 @@ do
             stable_mnemonic="austria"
             shift
             ;;
+        rebranch)
+            stable_branch="stable/20220421"
+            stable_mnemonic="rebranch"
+            shift
+            ;;
         5.6)
             stable_branch="swift/release/5.6"
             stable_mnemonic="5.6"
