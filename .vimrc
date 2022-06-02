@@ -26,6 +26,7 @@ Plug 'tpope/vim-surround'
 
 if has('nvim')
     Plug 'neovim/nvim-lspconfig'
+    Plug 'mfussenegger/nvim-dap'
 else
     Plug 'prabirshrestha/async.vim'
     Plug 'prabirshrestha/vim-lsp'
@@ -417,4 +418,14 @@ else
             autocmd FileType swift setlocal omnifunc=lsp#complete
         augroup end
     endif
+endif
+
+" DAP
+if has('nvim')
+    luafile ~/.vim/dap.lua
+    nnoremap <leader>db :lua require'dap'.toggle_breakpoint()<CR>
+    nnoremap <leader>dc :lua require'dap'.continue()<CR>
+    nnoremap <leader>dn :lua require'dap'.step_over()<CR>
+    nnoremap <leader>ds :lua require'dap'.step_into()<CR>
+    nnoremap <leader>dr :lua require'dap'.repl.open()<CR>
 endif
