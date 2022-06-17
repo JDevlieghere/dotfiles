@@ -26,6 +26,7 @@ Plug 'tpope/vim-surround'
 
 if has('nvim')
     Plug 'neovim/nvim-lspconfig'
+    Plug 'folke/trouble.nvim'
     Plug 'mfussenegger/nvim-dap'
 else
     Plug 'prabirshrestha/async.vim'
@@ -428,4 +429,9 @@ if has('nvim')
     nnoremap <leader>dn :lua require'dap'.step_over()<CR>
     nnoremap <leader>ds :lua require'dap'.step_into()<CR>
     nnoremap <leader>dr :lua require'dap'.repl.open()<CR>
+endif
+
+" Trouble
+if has('nvim')
+    luafile ~/.vim/trouble.lua
 endif
