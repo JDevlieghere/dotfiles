@@ -29,7 +29,6 @@ if has('nvim')
     Plug 'folke/trouble.nvim'
     Plug 'mfussenegger/nvim-dap'
 else
-    Plug 'prabirshrestha/async.vim'
     Plug 'prabirshrestha/vim-lsp'
 endif
 
@@ -364,6 +363,14 @@ let g:formatter_yapf_style='pep8'
 let g:DoxygenToolkit_commentType="C++"
 
 " LSP
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    nnoremap <leader>ld :LspDefinition<CR>
+    nnoremap <leader>lf :LspDocumentFormat<CR>
+    nnoremap <leader>lh :LspHover<CR>
+    nnoremap <leader>lr :LspReferences<CR>
+endfunction
+
 if has('nvim')
     luafile ~/.vim/lsp.lua
     augroup lsp_all
@@ -377,12 +384,10 @@ if has('nvim')
         autocmd CursorHold * lua vim.diagnostic.open_float()
     augroup end
 else
-    let g:lsp_signs_enabled=1
-    nnoremap <leader>ld :LspDefinition<CR>
-    nnoremap <leader>lf :LspDocumentFormat<CR>
-    nnoremap <leader>lh :LspHover<CR>
-    nnoremap <leader>lr :LspReferences<CR>
-
+    augroup lsp_install
+        autocmd!
+        autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+    augroup END
     if executable('clangd')
         augroup lsp_clangd
             autocmd!
