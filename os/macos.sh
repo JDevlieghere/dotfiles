@@ -2,79 +2,129 @@
 
 # Inspired by https://mths.be/macos
 
-# Increase window resize speed for Cocoa applications
-defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+# --------------------------------------------------------------------------- #
+# Power Management Settings                                                   #
+# --------------------------------------------------------------------------- #
 
-# Disable automatic termination of inactive apps
-defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
+# Automatic restart on power loss
+sudo pmset -a autorestart 1
 
-# Expand save and print panel by default
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+# Set the display sleep to 15 minutes
+sudo pmset -a displaysleep 15
 
-# Disable the “Are you sure you want to open this application?” dialog
-defaults write com.apple.LaunchServices LSQuarantine -bool false
+# Disable machine sleep while charging
+sudo pmset -c sleep 0
 
-# Restart automatically if the computer freezes
-sudo systemsetup -setrestartfreeze on
+# Set machine sleep to 5 minutes on battery
+sudo pmset -b sleep 5
+
+# --------------------------------------------------------------------------- #
+# System Settings                                                             #
+# --------------------------------------------------------------------------- #
+
+# Automatically restart after the system freezes
+sudo systemsetup -setrestartfreeze on > /dev/null
+
+# Automatically restart after a power failure
+sudo systemsetup -setrestartpowerfailure on > /dev/null
+
+# --------------------------------------------------------------------------- #
+# Dock                                                                        #
+# --------------------------------------------------------------------------- #
+
+# Set the icon size of Dock items to 32 pixels
+defaults write com.apple.dock tilesize -int 32
+
+# Enable magnification
+defaults write com.apple.dock magnification -int 1;
+
+# Set the icon size of Dock items when magnified to 96 pixels
+defaults write com.apple.dock largesize -int 96
+
+# --------------------------------------------------------------------------- #
+# Activity Monitor                                                            #
+# --------------------------------------------------------------------------- #
+
+# Visualize CPU usage in the Activity Monitor Dock icon
+defaults write com.apple.ActivityMonitor IconType -int 5
+
+# Show all processes in Activity Monitor
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
+
+# --------------------------------------------------------------------------- #
+# Finder                                                                      #
+# --------------------------------------------------------------------------- #
+
+# Disable animations
+defaults write com.apple.finder DisableAllAnimations -bool true
+
+# Show status bar
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Disable the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Use list view in all Finder windows by default
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
+# Expand the following "General" and "Open With" File Info panes
+defaults write com.apple.finder FXInfoPanesExpanded -dict \
+	General -bool true \
+	OpenWith -bool true
+
+# Avoid creating .DS_Store files on network or USB volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# --------------------------------------------------------------------------- #
+# Screensaver                                                                 #
+# --------------------------------------------------------------------------- #
+
+# Immediately require password after screen saver or sleep
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# --------------------------------------------------------------------------- #
+# Keyboard and Mouse                                                          #
+# --------------------------------------------------------------------------- #
 
 # Disable smart quotes and dashes
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
+# Disable auto-correct
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
-# Set a blazingly fast keyboard repeat rate.
+# Increase keyboard repeat rate
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 
-# Disable mouse accelerator.
+# Disable mouse acceleration
 defaults write .GlobalPreferences com.apple.mouse.scaling -1
 
-# Set language and text formats
-defaults write NSGlobalDomain AppleLanguages -array "en" "nl"
-defaults write NSGlobalDomain AppleLocale -string "en_US@currency=EUR"
-defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
-defaults write NSGlobalDomain AppleMetricUnits -bool true
+# --------------------------------------------------------------------------- #
+# Various UI/UX                                                               #
+# --------------------------------------------------------------------------- #
 
-# Require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
-
-# Finder tweaks
-defaults write com.apple.finder DisableAllAnimations -bool true
-defaults write com.apple.finder ShowStatusBar -bool true
-defaults write com.apple.finder ShowPathbar -bool true
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+# Increase window resize speed for Cocoa applications
+defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
 # Enable spring loading for directories but remove the delay
 defaults write NSGlobalDomain com.apple.springing.enabled -bool true
 defaults write NSGlobalDomain com.apple.springing.delay -float 0
 
-# Avoid creating .DS_Store files on network volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+# Expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
-# Show the ~/Library and /Volumes folder
-chflags nohidden ~/Library
-sudo chflags nohidden /Volumes
+# Turn off the “Application Downloaded from Internet” quarantine warning.
+defaults write com.apple.LaunchServices LSQuarantine -bool false
 
-# Expand the following File Info panes
-defaults write com.apple.finder FXInfoPanesExpanded -dict \
-	General -bool true \
-	OpenWith -bool true \
-	Privileges -bool true
+# Disable automatic termination of inactive apps
+defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
-# Visualize CPU usage in the Activity Monitor Dock icon
-defaults write com.apple.ActivityMonitor IconType -int 5
-
-# Set tile and large size
-defaults write com.apple.dock tilesize -int 32
-defaults write com.apple.dock largesize -int 128
-
-# Show all processes in Activity Monitor
-defaults write com.apple.ActivityMonitor ShowCategory -int 0
+# Disable Resume system-wide
+defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
