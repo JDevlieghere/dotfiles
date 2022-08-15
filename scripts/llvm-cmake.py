@@ -79,6 +79,10 @@ parser.add_argument('--expensive',
                     action='store_true',
                     help="Enable expensive checks")
 
+parser.add_argument('--fuzz',
+                    action='store_true',
+                    help="Enable fuzzers")
+
 parser.add_argument('--launcher', help="Specify launcher", type=str)
 
 parser.add_argument('--extra', help="Specify extra C/CXX flags", type=str)
@@ -160,6 +164,11 @@ if args.projects:
 if args.runtimes:
     runtimes = ';'.join(args.runtimes)
     cmake_cmd.append("-DLLVM_ENABLE_RUNTIMES='{}'".format(runtimes))
+
+if args.fuzz:
+    cmake_cmd.append("-DLLVM_USE_SANITIZER='Address'")
+    cmake_cmd.append("-DLLVM_USE_SANITIZE_COVERAGE:BOOL=ON")
+    cmake_cmd.append("-DLLVM_BUILD_RUNTIME:BOOL=OFF")
 
 if args.swift:
     cmake_cmd.append("-DLLVM_EXTERNAL_SWIFT_SOURCE_DIR='{}'".format(SWIFT_DIR))
