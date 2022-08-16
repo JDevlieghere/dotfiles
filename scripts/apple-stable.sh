@@ -75,15 +75,15 @@ fi
 git fetch -q --multiple origin llvm
 git checkout -q origin/$stable_branch
 
-for commit in "${commits[@]}"
-do
-    git cherry-pick -x $commit
-done
-
 function join { local IFS='+'; echo "$*"; }
 
 target_branch="🍒/$stable_mnemonic/$(join "${commits[@]}")"
 git checkout -b "$target_branch"
+
+for commit in "${commits[@]}"
+do
+    git cherry-pick -x $commit
+done
 
 # Use GitHub CLI to create a PR against the correct repository.
 gh pr create --fill --repo "apple/llvm-project" --base "$stable_branch" --web
