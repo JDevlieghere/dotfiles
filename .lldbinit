@@ -1,6 +1,19 @@
 # Silently import the lldb.macosx scripts
 command script import -s lldb.macosx
 
+# Load scripts from dSYM bundles
+settings set target.load-script-from-symbol-file true
+
+# Autosuggestions
+settings set show-autosuggestion true
+settings set show-autosuggestion-ansi-prefix "${ansi.fg.bright.yellow}"
+
+# Progress
+settings set show-progress-ansi-prefix "${ansi.fg.yellow}"
+
+# Background symbol lookup
+settings set symbols.experimental.enable-background-lookup true
+
 # Always look in all compile units
 # settings set target.inline-breakpoint-strategy always
 
@@ -15,13 +28,6 @@ command script import -s lldb.macosx
 
 # Debug utility functions
 # settings set target.debug-utility-expression true
-
-# Autosuggestions
-# settings set show-autosuggestion true
-# settings set show-autosuggestion-ansi-prefix "${ansi.fg.bright.yellow}"
-
-# Progress
-# settings set show-progress-ansi-prefix "${ansi.fg.yellow}"
 
 # Logging
 # log enable lldb types -f /tmp/types.log
