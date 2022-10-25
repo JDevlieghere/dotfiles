@@ -31,8 +31,13 @@ do
             stable_mnemonic="austria"
             shift
             ;;
-        rebranch)
+        rome)
             stable_branch="stable/20220421"
+            stable_mnemonic="rome"
+            shift
+            ;;
+        rebranch)
+            stable_branch="stable/20221013"
             stable_mnemonic="rebranch"
             shift
             ;;
