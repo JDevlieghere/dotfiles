@@ -3,6 +3,7 @@
 export SKIP_XCODE_VERSION_CHECK=1
 ./swift/utils/build-script \
   --lldb \
+  --lldb-extra-cmake-args="-DLLDB_USE_STATIC_BINDINGS:BOOL=OFF" \
   --release-debuginfo \
   --no-swift-stdlib-assertions \
   --skip-build-benchmarks \
