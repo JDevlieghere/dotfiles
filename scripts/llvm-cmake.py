@@ -42,6 +42,10 @@ parser.add_argument('--swift',
                     action='store_true',
                     help="Include Swift and cmark as external projects")
 
+parser.add_argument('--no-swift',
+                    action='store_true',
+                    help="Disable Swift support in the downstream fork of LLDB")
+
 parser.add_argument('-r',
                     '--ra',
                     action='store_true',
@@ -174,6 +178,9 @@ if args.swift:
     cmake_cmd.append("-DLLVM_EXTERNAL_SWIFT_SOURCE_DIR='{}'".format(SWIFT_DIR))
     cmake_cmd.append("-DLLVM_EXTERNAL_CMARK_SOURCE_DIR='{}'".format(CMARK_DIR))
     cmake_cmd.append("-DLLVM_EXTERNAL_PROJECTS='cmark;swift'")
+
+if args.no_swift:
+    cmake_cmd.append("-DLLDB_ENABLE_SWIFT_SUPPORT=OFF")
 
 try:
     print(' \\\n    '.join(cmake_cmd))
