@@ -11,6 +11,11 @@ commits=()
 for i in "$@"
 do
     case $i in
+        next)
+            stable_branch="next"
+            stable_mnemonic="next"
+            shift
+            ;;
         bastille)
             stable_branch="apple/stable/20200714"
             stable_mnemonic="bastille"
