@@ -393,7 +393,7 @@ shell:
   args:
     - --login
     - -c
-    - "tmux attach ;or tmux new -s 'Alacitty'"
+    - "/usr/local/bin/tmux attach || /usr/local/bin/tmux new -s 'Alacritty'"
 
 # Startup directory
 #
