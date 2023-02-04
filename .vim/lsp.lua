@@ -1,5 +1,5 @@
 require'lspconfig'.vimls.setup{}
-require'lspconfig'.pylsp.setup{}
+require'lspconfig'.pyright.setup{}
 require'lspconfig'.clangd.setup{}
 require'lspconfig'.sourcekit.setup{}
 

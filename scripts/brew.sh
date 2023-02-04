@@ -66,7 +66,7 @@ installBasics() {
     node \
     pandoc \
     patchutils \
-    python \
+    pylsp \
     re2c \
     redis \
     rsync \
