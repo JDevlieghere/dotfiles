@@ -41,9 +41,9 @@ do
             stable_mnemonic="rome"
             shift
             ;;
-        rebranch)
+        navy)
             stable_branch="stable/20221013"
-            stable_mnemonic="rebranch"
+            stable_mnemonic="navy"
             shift
             ;;
         5.6)
