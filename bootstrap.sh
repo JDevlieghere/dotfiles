@@ -100,10 +100,6 @@ doInstall() {
     # tmux
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-    # fzf
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install --all
-
     # rust
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup-init.sh
     chmod +x /tmp/rustup-init.sh

@@ -35,6 +35,8 @@ installEssentials() {
     swig \
     tmux \
     vim
+
+  $(brew --prefix)/opt/fzf/install --all
 }
 
 installBasics() {
