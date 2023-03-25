@@ -59,6 +59,7 @@ installBasics() {
     htop \
     hyperfine \
     imagemagick \
+    jq \
     lcov \
     libxml2 \
     lua@5.3 \
