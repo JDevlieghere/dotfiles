@@ -356,7 +356,7 @@ let g:tagbar_width=35
 nnoremap <leader>tt :TagbarToggle<CR>
 
 " vim-autoformat
-let g:formatters_python=['yapf', 'autopep8']
+let g:formatters_python=['black', 'yapf', 'autopep8']
 let g:formatter_yapf_style='pep8'
 
 " doxygentoolkit.vim
