@@ -10,7 +10,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'lifepillar/vim-solarized8'
 
-Plug 'ajh17/vimcompletesme'
+Plug 'ervandew/supertab'
 Plug 'ap/vim-buftabline'
 Plug 'ciaranm/detectindent'
 Plug 'itchyny/lightline.vim'
@@ -28,8 +28,8 @@ if has('nvim')
     Plug 'neovim/nvim-lspconfig'
     Plug 'folke/trouble.nvim'
     Plug 'mfussenegger/nvim-dap'
-else
-    Plug 'prabirshrestha/vim-lsp'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/nvim-cmp'
 endif
 
 
@@ -373,57 +373,6 @@ endfunction
 
 if has('nvim')
     luafile ~/.vim/lsp.lua
-    augroup lsp_all
-        autocmd!
-        autocmd FileType c setlocal omnifunc=v:lua.vim.lsp.omnifunc
-        autocmd FileType cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
-        autocmd FileType objc setlocal omnifunc=v:lua.vim.lsp.omnifunc
-        autocmd FileType objcpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
-        autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
-        autocmd Filetype swift setlocal omnifunc=v:lua.vim.lsp.omnifunc
-        autocmd CursorHold * lua vim.diagnostic.open_float()
-    augroup end
-else
-    augroup lsp_install
-        autocmd!
-        autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-    augroup END
-    if executable('clangd')
-        augroup lsp_clangd
-            autocmd!
-            autocmd User lsp_setup call lsp#register_server({
-                        \ 'name': 'clangd',
-                        \ 'cmd': {server_info->['clangd']},
-                        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-                        \ })
-            autocmd FileType c setlocal omnifunc=lsp#complete
-            autocmd FileType cpp setlocal omnifunc=lsp#complete
-            autocmd FileType objc setlocal omnifunc=lsp#complete
-            autocmd FileType objcpp setlocal omnifunc=lsp#complete
-        augroup end
-    endif
-    if executable('pyls')
-        augroup lsp_pyls
-            autocmd!
-            autocmd User lsp_setup call lsp#register_server({
-                        \ 'name': 'pyls',
-                        \ 'cmd': {server_info->['pyls']},
-                        \ 'whitelist': ['python'],
-                        \ })
-            autocmd FileType python setlocal omnifunc=lsp#complete
-        augroup end
-    endif
-    if executable('sourcekit-lsp')
-        augroup lsp_swift
-            autocmd!
-            autocmd User lsp_setup call lsp#register_server({
-                        \ 'name': 'sourcekit-lsp',
-                        \ 'cmd': {server_info->['sourcekit-lsp']},
-                        \ 'whitelist': ['swift'],
-                        \ })
-            autocmd FileType swift setlocal omnifunc=lsp#complete
-        augroup end
-    endif
 endif
 
 " DAP
