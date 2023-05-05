@@ -26,8 +26,6 @@ Plug 'tpope/vim-surround'
 
 if has('nvim')
     Plug 'neovim/nvim-lspconfig'
-    Plug 'folke/trouble.nvim'
-    Plug 'mfussenegger/nvim-dap'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/nvim-cmp'
 endif
@@ -373,19 +371,4 @@ endfunction
 
 if has('nvim')
     luafile ~/.vim/lsp.lua
-endif
-
-" DAP
-if has('nvim')
-    luafile ~/.vim/dap.lua
-    nnoremap <leader>db :lua require'dap'.toggle_breakpoint()<CR>
-    nnoremap <leader>dc :lua require'dap'.continue()<CR>
-    nnoremap <leader>dn :lua require'dap'.step_over()<CR>
-    nnoremap <leader>ds :lua require'dap'.step_into()<CR>
-    nnoremap <leader>dr :lua require'dap'.repl.open()<CR>
-endif
-
-" Trouble
-if has('nvim')
-    luafile ~/.vim/trouble.lua
 endif
