@@ -67,7 +67,7 @@ do
             shift
             ;;
         *)
-            commits+=("$i")
+            commits+=("$(git rev-parse --short $i)")
             shift
             ;;
     esac
