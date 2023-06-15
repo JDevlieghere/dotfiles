@@ -14,25 +14,27 @@ log = logging.getLogger(__name__)
 
 
 def run(command):
-    res = subprocess.run(command,
-                         stdout=subprocess.PIPE,
-                         stderr=subprocess.STDOUT,
-                         check=False,
-                         shell=True)
+    res = subprocess.run(
+        command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+        shell=True,
+    )
     return res
 
 
 def main():
     # Set up logging.
-    logging.basicConfig(level="NOTSET",
-                        format="%(message)s",
-                        datefmt="[%X]",
-                        handlers=[RichHandler()])
+    logging.basicConfig(
+        level="NOTSET", format="%(message)s", datefmt="[%X]", handlers=[RichHandler()]
+    )
 
     # Parse arguments.
     parser = argparse.ArgumentParser(
-        description="Run multiple commands in parallel and show progress")
-    parser.add_argument('commands', type=str, nargs='+', help='command to run')
+        description="Run multiple commands in parallel and show progress"
+    )
+    parser.add_argument("commands", type=str, nargs="+", help="command to run")
     args = parser.parse_args()
 
     commands = args.commands
@@ -43,12 +45,11 @@ def main():
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         with Progress() as progress:
             tasks = []
-            main_task = progress.add_task(
-                f'Executing {len(commands)} commands')
+            main_task = progress.add_task(f"Executing {len(commands)} commands")
 
             # Create a task and future for each job.
             for command in commands:
-                tasks.append(progress.add_task(f'Executing \'{command}\''))
+                tasks.append(progress.add_task(f"Executing '{command}'"))
                 futures.append(executor.submit(run, command))
 
             # Update progress
@@ -56,9 +57,7 @@ def main():
                 finished = sum([future.done() for future in futures])
 
                 # Update the main tasks
-                progress.update(main_task,
-                                completed=finished,
-                                total=len(futures))
+                progress.update(main_task, completed=finished, total=len(futures))
 
                 # Update the subtasks
                 for i in range(len(futures)):
@@ -77,12 +76,12 @@ def main():
         result = futures[i].result()
         if result.returncode != 0:
             num_errors += 1
-            stdout = result.stdout.decode('utf-8').strip()
-            log.error(f'Failed to clone {command}:\n{stdout}')
+            stdout = result.stdout.decode("utf-8").strip()
+            log.error(f"Failed to clone {command}:\n{stdout}")
 
     # The exit code indicates the number of errors.
     return num_errors
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())

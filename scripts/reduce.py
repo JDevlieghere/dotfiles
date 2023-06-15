@@ -19,7 +19,7 @@ class FixpointCheck:
 class Fixpoint:
     def __init__(self, file):
         self.file = file
-        self.baseline = '{}.baseline'.format(file)
+        self.baseline = "{}.baseline".format(file)
 
     def __enter__(self):
         shutil.copy2(self.file, self.baseline)
@@ -32,66 +32,63 @@ class Fixpoint:
 def test_file(test, file):
     invocation = [test, file]
     return subprocess.call(
-        invocation, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        invocation, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+    )
 
 
 def sanity_check(test, file):
     exit_code = test_file(test, file)
     if exit_code != 0:
-        logging.error('Sanity check failed (exit code {})'.format(exit_code))
+        logging.error("Sanity check failed (exit code {})".format(exit_code))
         return False
     else:
-        logging.info('Sanity check passed')
+        logging.info("Sanity check passed")
         return True
 
 
 def log_delta_output(output):
     for line in output.splitlines():
-        if 'SUCCESS' in line:
+        if "SUCCESS" in line:
             logging.info(line)
 
 
 def multi_delta(test, file, levels):
     for i in range(levels):
-        logging.info('Running multi-delta level {}'.format(i))
-        invocation = ['multidelta', '-level={}'.format(i), test, file]
+        logging.info("Running multi-delta level {}".format(i))
+        invocation = ["multidelta", "-level={}".format(i), test, file]
         output = subprocess.check_output(invocation, stderr=subprocess.STDOUT)
-        log_delta_output(output.decode('utf-8'))
+        log_delta_output(output.decode("utf-8"))
 
 
 def delta(test, file):
-    invocation = ['delta', '-test={}'.format(test), '-in_place', file]
+    invocation = ["delta", "-test={}".format(test), "-in_place", file]
     i = 0
     fixpoint_reached = False
     while not fixpoint_reached:
         i += 1
-        logging.info('Running delta iteration {}'.format(i))
+        logging.info("Running delta iteration {}".format(i))
         with Fixpoint(file) as fixpoint:
-            output = subprocess.check_output(
-                invocation, stderr=subprocess.STDOUT)
-            log_delta_output(output.decode('utf-8'))
+            output = subprocess.check_output(invocation, stderr=subprocess.STDOUT)
+            log_delta_output(output.decode("utf-8"))
             fixpoint_reached = fixpoint.reached()
-    logging.info('Delta fixpoint reached')
+    logging.info("Delta fixpoint reached")
 
 
 def clang_format(file):
-    invocation = ['clang-format', '-i', '-style=WebKit', file]
-    logging.info('Running clang-format')
-    subprocess.call(
-        invocation, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    invocation = ["clang-format", "-i", "-style=WebKit", file]
+    logging.info("Running clang-format")
+    subprocess.call(invocation, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 def creduce(test, file):
-    invocation = ['creduce', test, file]
-    logging.info('Running creduce')
+    invocation = ["creduce", test, file]
+    logging.info("Running creduce")
     output = subprocess.check_output(invocation, stderr=subprocess.STDOUT)
 
 
-def reduce(test,
-           file,
-           with_multidelta=False,
-           with_clang_format=False,
-           with_creduce=False):
+def reduce(
+    test, file, with_multidelta=False, with_clang_format=False, with_creduce=False
+):
     if with_multidelta:
         multi_delta(test, file, 5)
 
@@ -108,23 +105,20 @@ def reduce(test,
 
 def main():
     logging.basicConfig(
-        format='%(asctime)s | %(message)s',
-        datefmt='%H:%M:%S',
-        level=logging.DEBUG)
+        format="%(asctime)s | %(message)s", datefmt="%H:%M:%S", level=logging.DEBUG
+    )
 
     parser = argparse.ArgumentParser(
-        description=
-        "This script wraps several tool to automatically reducing files.")
+        description="This script wraps several tool to automatically reducing files."
+    )
 
     parser.add_argument(
-        '-s', '--sanity', action='store_true', help="Do sanity check and stop")
+        "-s", "--sanity", action="store_true", help="Do sanity check and stop"
+    )
 
-    parser.add_argument(
-        '-m', '--multi', action='store_true', help="Use multidelta")
-    parser.add_argument(
-        '-c', '--creduce', action='store_true', help="Use creduce")
-    parser.add_argument(
-        '-f', '--format', action='store_true', help="Use clang-format")
+    parser.add_argument("-m", "--multi", action="store_true", help="Use multidelta")
+    parser.add_argument("-c", "--creduce", action="store_true", help="Use creduce")
+    parser.add_argument("-f", "--format", action="store_true", help="Use clang-format")
 
     parser.add_argument("test", help="the test script", type=str)
     parser.add_argument("file", help="the file to reduce", type=str)
