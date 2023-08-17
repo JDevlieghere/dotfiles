@@ -12,7 +12,6 @@ Plug 'lifepillar/vim-solarized8'
 
 Plug 'ervandew/supertab'
 Plug 'ap/vim-buftabline'
-Plug 'ciaranm/detectindent'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf',                        { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
@@ -23,6 +22,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sleuth'
+
 
 if has('nvim')
     Plug 'neovim/nvim-lspconfig'
@@ -65,7 +66,6 @@ endif
 
 set autoread                    " Auto reload file after external command
 set backspace=indent,eol,start  " Delete over line breaks
-set binary                      " Enable binary support
 set colorcolumn=80,120          " Show ruler columns
 set encoding=utf-8              " Use UTF-8 encoding
 set hidden                      " Hide buffers instead of closing them
@@ -298,6 +298,7 @@ augroup filtypes
     autocmd FileType c,cpp setlocal commentstring=///\ %s
     autocmd FileType crontab setlocal nobackup nowritebackup
     autocmd FileType make setlocal noexpandtab
+    autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4
 augroup end
 
 " Remove trailing whitespace
@@ -336,15 +337,6 @@ nnoremap <silent> <C-b> :Buffers<CR>
 let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ }
-
-" detectindent
-let g:detectindent_preferred_expandtab=1
-let g:detectindent_preferred_indent=2
-
-augroup detect_indent
-    autocmd!
-    autocmd BufReadPost * :DetectIndent
-augroup end
 
 " tagbar
 let g:tagbar_autofocus=0
