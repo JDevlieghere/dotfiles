@@ -18,7 +18,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
-Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -29,6 +28,9 @@ if has('nvim')
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/nvim-cmp'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+else
+    Plug 'sheerun/vim-polyglot'
 endif
 
 
@@ -363,4 +365,5 @@ endfunction
 
 if has('nvim')
     luafile ~/.vim/lsp.lua
+    luafile ~/.vim/treesitter.lua
 endif
