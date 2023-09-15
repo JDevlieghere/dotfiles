@@ -46,6 +46,11 @@ do
             stable_mnemonic="navy"
             shift
             ;;
+        rebranch)
+            stable_branch="stable/20230725"
+            stable_mnemonic="rebranch"
+            shift
+            ;;
         5.6)
             stable_branch="swift/release/5.6"
             stable_mnemonic="5.6"
