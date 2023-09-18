@@ -76,5 +76,4 @@ chsh -s $(which fish)
 
 ## Acknowledgements
 
- - My xmonad configuration is based on [Vic Fryzel's configuration](https://github.com/vicfryzel/xmonad-config).
  - The `os/macos.sh` script with sensible macOS defaults is forked from [Mathias Bynens' dotfiles](https://github.com/mathiasbynens/dotfiles/blob/master/.macos).
