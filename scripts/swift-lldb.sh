@@ -11,4 +11,6 @@ export SKIP_XCODE_VERSION_CHECK=1
   --skip-test-swift \
   --skip-test-cmark \
   --skip-early-swift-driver \
+  --skip-early-swiftsyntax \
+  --bootstrapping=off \
   $@
