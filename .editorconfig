@@ -1,4 +1,4 @@
-# EditorConfig: http://EditorConfig.org
+# EditorConfig: https://EditorConfig.org
 
 # Top-most config file
 root = true
@@ -7,7 +7,16 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
-indent_size = 2
 indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
+
+[*.py]
+indent_style = space
+indent_size = 4
+
+[Makefile]
+indent_style = tab
+
+[*.cpp]
+indent_size = 2
