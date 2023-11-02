@@ -51,9 +51,9 @@ installBasics() {
     creduce \
     ctags \
     doxygen \
+    gh \
     git-delta \
     git-lfs \
-    github/gh/gh \
     graphviz \
     highlight \
     htop \
