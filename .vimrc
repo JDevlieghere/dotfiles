@@ -26,6 +26,7 @@ Plug 'tpope/vim-sleuth'
 
 if has('nvim')
     Plug 'neovim/nvim-lspconfig'
+    Plug 'mfussenegger/nvim-dap'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/nvim-cmp'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -366,4 +367,11 @@ endfunction
 if has('nvim')
     luafile ~/.vim/lsp.lua
     luafile ~/.vim/treesitter.lua
+    luafile ~/.vim/dap.lua
+
+    nnoremap <leader>db :lua require'dap'.toggle_breakpoint()<CR>
+    nnoremap <leader>dc :lua require'dap'.continue()<CR>
+    nnoremap <leader>dn :lua require'dap'.step_over()<CR>
+    nnoremap <leader>ds :lua require'dap'.step_into()<CR>
+    nnoremap <leader>dr :lua require'dap'.repl.open()<CR>
 endif
