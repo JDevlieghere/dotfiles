@@ -94,7 +94,7 @@ doInstall() {
     vim +PlugInstall +PlugUpdate +qa!
 
     if command -v nvim &> /dev/null; then
-        nvim +PlugInstall +PlugUpdate +qa!
+        nvim +PlugInstall +PlugUpdate +TSUpdate +qa!
     fi
 
     # tmux
