@@ -24,6 +24,7 @@ installEssentials() {
   info "Installing essentials"
 
   brew install \
+    black \
     fd \
     fish \
     fzf \
