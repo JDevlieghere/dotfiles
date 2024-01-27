@@ -4,6 +4,8 @@ import argparse
 import os
 import six
 import subprocess
+import sys
+import platform
 
 # Assumes that the build directory lives next to llvm-project.
 ROOT = os.path.dirname(os.getcwd())
@@ -11,6 +13,7 @@ INSTALL_DIR = os.path.join(ROOT, "install")
 LLVM_PROJECT_DIR = os.path.join(ROOT, "llvm-project")
 CMARK_DIR = os.path.join(ROOT, "cmark")
 SWIFT_DIR = os.path.join(ROOT, "swift")
+PYTHON_PREFIX = sys.prefix
 
 
 parser = argparse.ArgumentParser(
@@ -117,6 +120,15 @@ if args.system_debugserver:
 
 if "lldb" in args.projects:
     cmake_cmd.append("-DLLDB_ENABLE_PYTHON=ON")
+    if platform.system() == "Darwin":
+        cmake_cmd.append(
+            "-DPython3_EXECUTABLE={}".format(
+                os.path.join(PYTHON_PREFIX, "bin", "python3")
+            )
+        )
+        cmake_cmd.append(
+            "-DPython3_INCLUDE_DIR={}".format(os.path.join(PYTHON_PREFIX, "Headers"))
+        )
 
 if args.docs:
     cmake_cmd.append("-DLLVM_ENABLE_SPHINX:BOOL=ON")
