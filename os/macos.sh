@@ -135,3 +135,9 @@ defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
 # Disable Resume system-wide
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
+
+# --------------------------------------------------------------------------- #
+# Gatekeeper                                                                  #
+# --------------------------------------------------------------------------- #
+
+xattr -rd com.apple.quarantine /Applications/Alacritty.app
