@@ -186,11 +186,6 @@ endif
 " Colors & User Interface                                                      "
 " ---------------------------------------------------------------------------- "
 
-if has("gui_running")
-    set guifont=Source\ Code\ Pro\ Medium:h13
-    set antialias
-end
-
 " Same color for sign column and line numbers
 highlight clear SignColumn
 
@@ -204,6 +199,9 @@ highlight SpellLocal   cterm=underline  term=underline  gui=underline
 highlight TabLine      cterm=NONE  ctermfg=33   ctermbg=235  guifg=#268bd2  guibg=#073642
 highlight TabLineFill  cterm=NONE  ctermfg=33   ctermbg=235  guifg=#268bd2  guibg=#073642
 highlight TabLineSel   cterm=NONE  ctermfg=235  ctermbg=33   guifg=#073642  guibg=#268bd2
+
+" Italics for comments
+highlight Comment cterm=italic
 
 " ---------------------------------------------------------------------------- "
 " Key Mappings                                                                 "

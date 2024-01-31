@@ -26,7 +26,7 @@ foreground = "0x839496"
 size = 13.0
 
 [font.normal]
-family = "Source Code Pro for Powerline"
+family = "MonoLisa"
 
 [shell]
 args = ["--login", "-c", "/usr/local/bin/tmux attach || /usr/local/bin/tmux new -s 'Alacritty'"]

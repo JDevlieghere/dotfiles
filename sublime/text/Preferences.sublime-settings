@@ -1,7 +1,7 @@
 {
 	"color_scheme": "Packages/Color Scheme - Default/Mariana.sublime-color-scheme",
 	"ensure_newline_at_eof_on_save": true,
-	"font_face": "Source Code Pro for Powerline",
+	"font_face": "MonoLisa",
 	"font_size": 12,
 	"ignored_packages":
 	[
