@@ -10,7 +10,7 @@ suggestion, improvement or question, please open an issue or PR!
 
 ## Screenshot
 
-![macOS](https://jonasdevlieghere.com/static/dotfiles.png)
+![macOS](https://jonasdevlieghere.com/static/dotfiles.png?v=2)
 
 ## Installation
 
