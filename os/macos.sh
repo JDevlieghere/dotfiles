@@ -106,11 +106,11 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Increase keyboard repeat rate
-defaults write -g InitialKeyRepeat -int 10
-defaults write -g KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+defaults write NSGlobalDomain KeyRepeat -int 1
 
 # Disable mouse acceleration
-defaults write .GlobalPreferences com.apple.mouse.scaling -1
+defaults write NSGlobalDomain com.apple.mouse.scaling -1
 
 # --------------------------------------------------------------------------- #
 # Various UI/UX                                                               #
