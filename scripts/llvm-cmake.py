@@ -16,6 +16,18 @@ SWIFT_DIR = os.path.join(ROOT, "swift")
 PYTHON_PREFIX = sys.prefix
 
 
+def get_sdk_path(sdk):
+    return (
+        subprocess.check_output(["xcrun", "--show-sdk-path", "--sdk", sdk])
+        .decode()
+        .strip()
+    )
+
+
+def get_tool(sdk, tool):
+    return subprocess.check_output(["xcrun", "-f", "--sdk", sdk, tool]).decode().strip()
+
+
 parser = argparse.ArgumentParser(
     description="CMake configuration options are relatively verbose and remembering the "
     "ones you don't use that often can be a real pain. This scripts attempts "
@@ -25,10 +37,6 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument(
     "-s", "--shared", action="store_true", help="Build shared libraries"
-)
-
-parser.add_argument(
-    "--clang-light", action="store_true", help="No ARC, Static Anaylzer or plugins"
 )
 
 parser.add_argument(
@@ -49,7 +57,7 @@ parser.add_argument("-d", "--debug", action="store_true", help="Debug build")
 
 parser.add_argument("-m", "--modules", action="store_true", help="Enable modules")
 
-parser.add_argument("-x", "--x86", action="store_true", help="Only build x86 target")
+parser.add_argument("--host", action="store_true", help="Only build host architecutre")
 
 parser.add_argument("--lto", nargs="?", const="", default=None, help="Enable LTO")
 
@@ -66,6 +74,8 @@ parser.add_argument("--expensive", action="store_true", help="Enable expensive c
 parser.add_argument("--fuzz", action="store_true", help="Enable fuzzers")
 
 parser.add_argument("--launcher", help="Specify launcher", type=str)
+
+parser.add_argument("--sdk", help="Specify an Xcode SDK", type=str)
 
 parser.add_argument("--extra", help="Specify extra C/CXX flags", type=str)
 
@@ -85,13 +95,17 @@ cmake_cmd = [
     "-DCMAKE_INSTALL_PREFIX='{}'".format(INSTALL_DIR),
 ]
 
+if args.sdk:
+    cmake_cmd.append("-DCMAKE_OSX_SYSROOT:PATH={}".format(get_sdk_path(args.sdk)))
+    cmake_cmd.append(
+        "-DCMAKE_C_COMPILER:FILEPATH={}".format(get_tool(args.sdk, "clang"))
+    )
+    cmake_cmd.append(
+        "-DCMAKE_CXX_COMPILER:FILEPATH={}".format(get_tool(args.sdk, "clang++"))
+    )
+
 if args.shared:
     cmake_cmd.append("-DBUILD_SHARED_LIBS:BOOL=ON")
-
-if args.clang_light:
-    cmake_cmd.append("-DCLANG_ENABLE_ARCMT:BOOL=OFF")
-    cmake_cmd.append("-DCLANG_ENABLE_STATIC_ANALYZER:BOOL=OFF")
-    cmake_cmd.append("-DCLANG_PLUGIN_SUPPORT:BOOL=OFF")
 
 if args.ra:
     cmake_cmd.append("-DCMAKE_BUILD_TYPE='RelWithDebInfo'")
@@ -108,8 +122,12 @@ if args.lto is not None:
 if args.modules:
     cmake_cmd.append("-DLLVM_ENABLE_MODULES:BOOL=ON")
 
-if args.x86:
-    cmake_cmd.append("-DLLVM_TARGETS_TO_BUILD='X86'")
+if args.host:
+    machine = platform.machine()
+    if machine == "arm64":
+        cmake_cmd.append("-DLLVM_TARGETS_TO_BUILD='AArch64'")
+    elif machine == "x86_64":
+        cmake_cmd.append("-DLLVM_TARGETS_TO_BUILD='X86'")
 
 if args.sanitizers:
     sanitizers = ";".join(args.sanitizers)
