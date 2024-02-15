@@ -5,17 +5,19 @@
 	"font_size": 12,
 	"ignored_packages":
 	[
-		"Vintage"
+		"Vintage",
 	],
 	"rulers":
 	[
 		80,
 		120
 	],
+	"ruler_style": "stippled",
 	"spell_check": true,
 	"tab_size": 4,
 	"theme": "Adaptive.sublime-theme",
 	"trim_trailing_white_space_on_save": true,
 	"word_wrap": false,
 	"wrap_width": 120,
+	"index_files": true,
 }

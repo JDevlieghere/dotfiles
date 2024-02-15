@@ -1,4 +1,6 @@
 {
 	"theme": "Merge Dark.sublime-theme",
-	"time_format": "24h"
+	"time_format": "24h",
+	"font_face": "MonoLisa",
+	"font_size": 12,
 }
