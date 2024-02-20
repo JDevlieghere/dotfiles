@@ -12,7 +12,8 @@ settings set show-autosuggestion-ansi-prefix "${ansi.fg.bright.yellow}"
 settings set show-progress-ansi-prefix "${ansi.fg.yellow}"
 
 # Background symbol lookup
-settings set symbols.experimental.enable-background-lookup true
+settings set -e symbols.experimental.enable-background-lookup true
+settings set -e symbols.auto-download background
 
 # Always look in all compile units
 # settings set target.inline-breakpoint-strategy always
