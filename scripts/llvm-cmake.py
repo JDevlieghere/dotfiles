@@ -11,6 +11,7 @@ import platform
 ROOT = os.path.dirname(os.getcwd())
 INSTALL_DIR = os.path.join(ROOT, "install")
 LLVM_PROJECT_DIR = os.path.join(ROOT, "llvm-project")
+LLVM_SOURCE_DIR = os.path.join(LLVM_PROJECT_DIR, "llvm")
 CMARK_DIR = os.path.join(ROOT, "cmark")
 SWIFT_DIR = os.path.join(ROOT, "swift")
 PYTHON_PREFIX = sys.prefix
@@ -23,9 +24,13 @@ def get_sdk_path(sdk):
         .strip()
     )
 
+def get_cmake():
+    return (
+        subprocess.check_output(["which", "cmake"])
+        .decode()
+        .strip()
+    )
 
-def get_tool(sdk, tool):
-    return subprocess.check_output(["xcrun", "-f", "--sdk", sdk, tool]).decode().strip()
 
 
 parser = argparse.ArgumentParser(
@@ -89,20 +94,17 @@ parser.add_argument(
 
 args = parser.parse_args()
 
+xcrun_invocation = "xcrun -sdk {}".format(args.sdk) if args.sdk else ""
+cmake = get_cmake()
+
 cmake_cmd = [
-    "cmake {}".format(os.path.join(LLVM_PROJECT_DIR, "llvm")),
+    "{} {} {}".format(xcrun_invocation, cmake, LLVM_SOURCE_DIR),
     "-G Ninja",
     "-DCMAKE_INSTALL_PREFIX='{}'".format(INSTALL_DIR),
 ]
 
 if args.sdk:
     cmake_cmd.append("-DCMAKE_OSX_SYSROOT:PATH={}".format(get_sdk_path(args.sdk)))
-    cmake_cmd.append(
-        "-DCMAKE_C_COMPILER:FILEPATH={}".format(get_tool(args.sdk, "clang"))
-    )
-    cmake_cmd.append(
-        "-DCMAKE_CXX_COMPILER:FILEPATH={}".format(get_tool(args.sdk, "clang++"))
-    )
 
 if args.shared:
     cmake_cmd.append("-DBUILD_SHARED_LIBS:BOOL=ON")
