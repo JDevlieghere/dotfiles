@@ -38,3 +38,6 @@ alias fdiff='diff --speed-large-files'
 
 # Current time in ISO 8601 format
 alias now='date +"%Y-%m-%dT%H:%M:%S%z"'
+
+# Neovim
+alias vim=nvim
