@@ -24,13 +24,9 @@ def get_sdk_path(sdk):
         .strip()
     )
 
-def get_cmake():
-    return (
-        subprocess.check_output(["which", "cmake"])
-        .decode()
-        .strip()
-    )
 
+def get_cmake():
+    return subprocess.check_output(["which", "cmake"]).decode().strip()
 
 
 parser = argparse.ArgumentParser(
@@ -82,8 +78,6 @@ parser.add_argument("--launcher", help="Specify launcher", type=str)
 
 parser.add_argument("--sdk", help="Specify an Xcode SDK", type=str)
 
-parser.add_argument("--extra", help="Specify extra C/CXX flags", type=str)
-
 parser.add_argument(
     "--projects", nargs="*", help="Project to enable when using the monorepo"
 )
@@ -92,13 +86,13 @@ parser.add_argument(
     "--runtimes", nargs="*", help="Runtimes to enable when using the monorepo"
 )
 
-args = parser.parse_args()
+args, extra_args = parser.parse_known_args()
 
-xcrun_invocation = "xcrun -sdk {}".format(args.sdk) if args.sdk else ""
+xcrun_invocation = "xcrun -sdk {} ".format(args.sdk) if args.sdk else ""
 cmake = get_cmake()
 
 cmake_cmd = [
-    "{} {} {}".format(xcrun_invocation, cmake, LLVM_SOURCE_DIR),
+    "{}{} {}".format(xcrun_invocation, cmake, LLVM_SOURCE_DIR),
     "-G Ninja",
     "-DCMAKE_INSTALL_PREFIX='{}'".format(INSTALL_DIR),
 ]
@@ -138,7 +132,7 @@ if args.sanitizers:
 if args.system_debugserver:
     cmake_cmd.append("-DLLDB_USE_SYSTEM_DEBUGSERVER:BOOL=ON")
 
-if "lldb" in args.projects:
+if args.projects and "lldb" in args.projects:
     cmake_cmd.append("-DLLDB_ENABLE_PYTHON=ON")
     if platform.system() == "Darwin":
         cmake_cmd.append(
@@ -161,10 +155,6 @@ if args.launcher:
     cmake_cmd.append("-DCMAKE_C_COMPILER_LAUNCHER='{}'".format(args.launcher))
     cmake_cmd.append("-DCMAKE_CXX_COMPILER_LAUNCHER='{}'".format(args.launcher))
 
-if args.extra:
-    cmake_cmd.append("-DCMAKE_C_FLAGS='{}'".format(args.extra))
-    cmake_cmd.append("-DCMAKE_CXX_FLAGS='{}'".format(args.extra))
-
 if args.projects:
     projects = ";".join(args.projects)
     cmake_cmd.append("-DLLVM_ENABLE_PROJECTS='{}'".format(projects))
@@ -185,6 +175,10 @@ if args.swift:
 
 if args.no_swift:
     cmake_cmd.append("-DLLDB_ENABLE_SWIFT_SUPPORT=OFF")
+
+
+if extra_args:
+    cmake_cmd.extend(extra_args)
 
 try:
     print(" \\\n    ".join(cmake_cmd))
