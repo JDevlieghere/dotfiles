@@ -308,12 +308,6 @@ augroup remove_trailing_whitespace
     autocmd BufWritePre * :call RemoveTrailingWhitespace()
 augroup end
 
-augroup toggle_relative_number
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set relativenumber | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave * if &nu | set norelativenumber | endif
-augroup end
-
 " Watch my .vimrc
 augroup reload_vimrc
     autocmd!
