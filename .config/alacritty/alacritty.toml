@@ -31,3 +31,58 @@ family = "MonoLisa"
 [shell]
 args = ["--login", "-c", "/usr/local/bin/tmux attach || /usr/local/bin/tmux new -s 'Alacritty'"]
 program = "/usr/local/bin/fish"
+
+[[keyboard.bindings]]
+key = "t"
+mods = "Command"
+chars = "\u0001\u0063"
+
+[[keyboard.bindings]]
+key = "w"
+mods = "Command"
+chars = "\u0001\u0078"
+
+[[keyboard.bindings]]
+key = "Key1"
+mods = "Command"
+chars = "\u0001\u0031"
+
+[[keyboard.bindings]]
+key = "Key2"
+mods = "Command"
+chars = "\u0001\u0032"
+
+[[keyboard.bindings]]
+key = "Key3"
+mods = "Command"
+chars = "\u0001\u0033"
+
+[[keyboard.bindings]]
+key = "Key4"
+mods = "Command"
+chars = "\u0001\u0034"
+
+[[keyboard.bindings]]
+key = "Key5"
+mods = "Command"
+chars = "\u0001\u0035"
+
+[[keyboard.bindings]]
+key = "Key6"
+mods = "Command"
+chars = "\u0001\u0036"
+
+[[keyboard.bindings]]
+key = "Key7"
+mods = "Command"
+chars = "\u0001\u0037"
+
+[[keyboard.bindings]]
+key = "Key8"
+mods = "Command"
+chars = "\u0001\u0038"
+
+[[keyboard.bindings]]
+key = "Key9"
+mods = "Command"
+chars = "\u0001\u0039"
