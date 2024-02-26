@@ -18,26 +18,8 @@ alias mktags="ctags --extra=+f -R ."
 # Reload shell.
 alias reload="exec $SHELL -l"
 
-# View dirty memory.
-alias dirty='watch grep -e Dirty: -e Writeback: /proc/meminfo'
-
-# Show CPU temperature with sensors.
-alias cputemp='watch -n 0 "sensors | grep Core"'
-
-# Show GPU temperature with NVIDIA System Management Interface.
-alias gputemp='watch -n 0 "nvidia-smi -q -d temperature"'
-
-# Show CPU Clock Speed.
-alias clockspeed='watch -n 0 "lscpu | grep \'MHz\'"'
-
-# Get first column and ignore binary matches.
-alias fstnl='cut -d":" -f1 | uniq | grep -v "Binary "'
-
 # Fast diff for large files.
 alias fdiff='diff --speed-large-files'
-
-# Current time in ISO 8601 format
-alias now='date +"%Y-%m-%dT%H:%M:%S%z"'
 
 # Neovim
 alias vim=nvim
