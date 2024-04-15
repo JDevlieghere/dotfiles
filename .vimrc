@@ -59,11 +59,14 @@ if has("termguicolors")
     set termguicolors
 endif
 
-if has('nvim')
-    colorscheme solarized
-else
-    colorscheme solarized8
-endif
+try
+    if has('nvim')
+        colorscheme solarized
+    else
+        colorscheme solarized8
+    endif
+catch
+endtry
 
 if !exists("g:syntax_on")
     syntax enable
