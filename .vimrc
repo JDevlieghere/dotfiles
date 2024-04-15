@@ -8,7 +8,6 @@ let g:polyglot_disabled = ['autoindent', 'sensible']
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'lifepillar/vim-solarized8'
 
 Plug 'ervandew/supertab'
 Plug 'ap/vim-buftabline'
@@ -25,12 +24,14 @@ Plug 'tpope/vim-sleuth'
 
 
 if has('nvim')
+    Plug 'ishan9299/nvim-solarized-lua'
     Plug 'neovim/nvim-lspconfig'
     Plug 'mfussenegger/nvim-dap'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/nvim-cmp'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 else
+    Plug 'lifepillar/vim-solarized8'
     Plug 'sheerun/vim-polyglot'
 endif
 
@@ -58,10 +59,11 @@ if has("termguicolors")
     set termguicolors
 endif
 
-try
+if has('nvim')
+    colorscheme solarized
+else
     colorscheme solarized8
-catch
-endtry
+endif
 
 if !exists("g:syntax_on")
     syntax enable
