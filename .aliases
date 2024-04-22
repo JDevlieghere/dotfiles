@@ -23,3 +23,6 @@ alias fdiff='diff --speed-large-files'
 
 # Neovim
 alias vim=nvim
+
+# Reboot and bypass FileVault password
+alias restart='fdesetup authrestart'
