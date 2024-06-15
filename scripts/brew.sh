@@ -65,7 +65,6 @@ installBasics() {
     libxml2 \
     lua@5.3 \
     ncdu \
-    neofetch \
     ninja \
     node \
     pandoc \
@@ -76,10 +75,7 @@ installBasics() {
     redis \
     rsync \
     sccache \
-    the_silver_searcher \
-    tig \
     tree \
-    vbindiff \
     xz \
     zsh
 }
@@ -89,7 +85,6 @@ installExtras() {
 
   brew install \
     afl-fuzz \
-    archey \
     binutils \
     coreutils \
     cppcheck \
@@ -97,17 +92,14 @@ installExtras() {
     ffmpeg \
     findutils \
     gdb \
-    gnu-sed \
     gnutls \
-    gts \
     libiconv \
     mosh \
     radare2 \
     ranger \
     shellcheck \
-    valgrind \
-    wget --with-iri \
-    wireshark --with-qt5
+    tig \
+    valgrind
 }
 
 linkApps() {
