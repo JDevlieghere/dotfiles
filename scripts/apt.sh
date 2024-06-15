@@ -10,6 +10,7 @@ sudo apt install -y \
     cmake \
     curl \
     fd-find \
+    ffmpeg \
     fish \
     fzf \
     git \
