@@ -15,7 +15,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf',                        { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
-Plug 'mhinz/vim-signify'
 Plug 'moll/vim-bbye'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -33,6 +32,7 @@ if has('nvim')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 else
     Plug 'lifepillar/vim-solarized8'
+    Plug 'mhinz/vim-signify'
     Plug 'sheerun/vim-polyglot'
 endif
 
