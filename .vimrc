@@ -24,12 +24,12 @@ Plug 'tpope/vim-sleuth'
 
 
 if has('nvim')
-    Plug 'ishan9299/nvim-solarized-lua'
-    Plug 'lewis6991/gitsigns.nvim'
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'mfussenegger/nvim-dap'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/nvim-cmp'
+    Plug 'ishan9299/nvim-solarized-lua'
+    Plug 'lewis6991/gitsigns.nvim'
+    Plug 'mfussenegger/nvim-dap'
+    Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 else
     Plug 'lifepillar/vim-solarized8'
