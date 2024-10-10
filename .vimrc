@@ -25,6 +25,7 @@ Plug 'tpope/vim-sleuth'
 
 if has('nvim')
     Plug 'ishan9299/nvim-solarized-lua'
+    Plug 'lewis6991/gitsigns.nvim'
     Plug 'neovim/nvim-lspconfig'
     Plug 'mfussenegger/nvim-dap'
     Plug 'hrsh7th/cmp-nvim-lsp'
@@ -371,6 +372,7 @@ if has('nvim')
     luafile ~/.vim/lsp.lua
     luafile ~/.vim/treesitter.lua
     luafile ~/.vim/dap.lua
+    luafile ~/.vim/git.lua
 
     nnoremap <leader>db :lua require'dap'.toggle_breakpoint()<CR>
     nnoremap <leader>dc :lua require'dap'.continue()<CR>
