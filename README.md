@@ -21,8 +21,8 @@ $ git clone https://github.com/JDevlieghere/dotfiles.git ~/dotfiles
 $ cd ~/dotfiles
 ```
 
-Use the bootstrap script to do everything from synchronizing the files to
-installing additional fonts.
+Use the bootstrap script to create symbolic links and configure the tools and
+operating system.
 
 ```
 $ ./bootstrap.sh
@@ -31,7 +31,6 @@ Usage: bootstrap.sh [options]
    -s, --sync             Synchronizes dotfiles to home directory
    -l, --link             Create symbolic links
    -i, --install          Install (extra) software
-   -f, --fonts            Copies font files
    -c, --config           Configures your system
    -a, --all              Does all of the above
 
@@ -62,10 +61,9 @@ chsh -s $(which fish)
 ## Other Useful Stuff
 
  - [Scripts](https://github.com/JDevlieghere/dotfiles/tree/main/scripts)
- - [Fonts](https://github.com/JDevlieghere/dotfiles/tree/main/fonts)
  - [System Configurators](https://github.com/JDevlieghere/dotfiles/tree/main/os)
 
 ## Acknowledgements
 
  - The `os/macos.sh` script with sensible macOS defaults is forked from [Mathias Bynens' dotfiles](https://github.com/mathiasbynens/dotfiles/blob/main/.macos).
- - My favorite fonts are [Source Code Pro](https://github.com/adobe-fonts/source-code-pro) and [MonoLisa](https://www.monolisa.dev).
+ - I use [MonoLisa](https://www.monolisa.dev) as my font.

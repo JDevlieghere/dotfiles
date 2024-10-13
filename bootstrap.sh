@@ -106,22 +106,6 @@ doInstall() {
     /tmp/rustup-init.sh -y
 }
 
-doFonts() {
-    info "Installing Fonts"
-
-    if [ "$(uname)" == "Darwin" ]; then
-        fonts=~/Library/Fonts
-    elif [ "$(uname)" == "Linux" ]; then
-        fonts=~/.fonts
-        mkdir -p "$fonts"
-    fi
-
-    find "$DOTFILES/fonts/" -name "*.[o,t]tf" -type f | while read -r file
-    do
-        cp -v "$file" "$fonts"
-    done
-}
-
 doPermissions() {
     info "Fixing Permissions "
 
@@ -155,7 +139,6 @@ doAll() {
     doPermissions
     doSymLink
     doInstall
-    doFonts
     doConfig
 }
 
@@ -165,7 +148,6 @@ doHelp() {
     echo "   -s, --sync             Synchronizes dotfiles to home directory"
     echo "   -l, --link             Create symbolic links"
     echo "   -i, --install          Install (extra) software"
-    echo "   -f, --fonts            Copies font files"
     echo "   -c, --config           Configures your system"
     echo "   -a, --all              Does all of the above"
     echo
@@ -191,11 +173,6 @@ else
                 ;;
             -i|--install)
                 doInstall
-                doFonts
-                shift
-                ;;
-            -f|--fonts)
-                doFonts
                 shift
                 ;;
             -c|--config)
