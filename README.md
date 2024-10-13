@@ -61,11 +61,11 @@ chsh -s $(which fish)
 
 ## Other Useful Stuff
 
- - [Scripts](https://github.com/JDevlieghere/dotfiles/tree/master/scripts)
- - [Fonts](https://github.com/JDevlieghere/dotfiles/tree/master/fonts)
- - [System Configurators](https://github.com/JDevlieghere/dotfiles/tree/master/os)
+ - [Scripts](https://github.com/JDevlieghere/dotfiles/tree/main/scripts)
+ - [Fonts](https://github.com/JDevlieghere/dotfiles/tree/main/fonts)
+ - [System Configurators](https://github.com/JDevlieghere/dotfiles/tree/main/os)
 
 ## Acknowledgements
 
- - The `os/macos.sh` script with sensible macOS defaults is forked from [Mathias Bynens' dotfiles](https://github.com/mathiasbynens/dotfiles/blob/master/.macos).
+ - The `os/macos.sh` script with sensible macOS defaults is forked from [Mathias Bynens' dotfiles](https://github.com/mathiasbynens/dotfiles/blob/main/.macos).
  - My favorite fonts are [Source Code Pro](https://github.com/adobe-fonts/source-code-pro) and [MonoLisa](https://www.monolisa.dev).
