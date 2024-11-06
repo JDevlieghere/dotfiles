@@ -28,7 +28,7 @@ size = 13.0
 [font.normal]
 family = "MonoLisa"
 
-[shell]
+[terminal.shell]
 args = ["--login", "-c", "/usr/local/bin/tmux attach || /usr/local/bin/tmux new -s 'Alacritty'"]
 program = "/usr/local/bin/fish"
 
@@ -86,3 +86,5 @@ chars = "\u0001\u0038"
 key = "Key9"
 mods = "Command"
 chars = "\u0001\u0039"
+
+[terminal]
