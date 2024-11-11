@@ -59,7 +59,6 @@ installBasics() {
     highlight \
     htop \
     hyperfine \
-    imagemagick \
     jq \
     lcov \
     libxml2 \
