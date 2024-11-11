@@ -63,7 +63,7 @@ installBasics() {
     jq \
     lcov \
     libxml2 \
-    lua@5.3 \
+    lua \
     ncdu \
     ninja \
     node \
