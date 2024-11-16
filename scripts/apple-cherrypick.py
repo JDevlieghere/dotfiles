@@ -18,8 +18,9 @@ mnemonics = {
     "austria": "stable/20211026",
     "rome": "stable/20220421",
     "navy": "stable/20221013",
-    "rebranch": "stable/20230725",
-    "main": "stable/20230725",
+    "unnamed": "stable/20230725",
+    "rebranch": "stable/20240723",
+    "main": "stable/20240723",
 }
 
 
