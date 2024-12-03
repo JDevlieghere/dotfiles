@@ -41,7 +41,7 @@ Plug 'chiel92/vim-autoformat',              { 'on': 'Autoformat' }
 Plug 'majutsushi/tagbar',                   { 'on': 'TagbarToggle' }
 
 Plug 'vim-scripts/doxygentoolkit.vim',      { 'for': 'cpp' }
-Plug 'jdevlieghere/llvm.vim',               { 'for': 'llvm' }
+Plug 'llvm/llvm.vim',                       { 'for': 'llvm' }
 Plug 'racer-rust/vim-racer',                { 'for': 'rust' }
 Plug 'lervag/vimtex',                       { 'for': 'tex' }
 
