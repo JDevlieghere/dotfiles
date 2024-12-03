@@ -120,11 +120,11 @@ def main():
     if not args.pr_only:
         run(["git", "fetch", "-q", "--multiple", "origin", "llvm"])
 
-    base_branch = get_branch(args.branch)
+    base_branch = get_branch(args.branch.lower())
 
     short_commits = [get_short_hash(c) for c in args.commits]
     dashed_commits = "-".join(short_commits)
-    target_branch = f"cherrypick-{dashed_commits}"
+    target_branch = f"cherrypick-{base_branch}-{dashed_commits}"
 
     last_commit_title = get_commit(args.commits[-1], "%s")
     title = f"[🍒 {base_branch}] {last_commit_title}"
@@ -135,7 +135,7 @@ def main():
 
     if not args.pr_only:
         # Check out the branch we want to cherry pick to.
-        run(["git", "checkout", base_branch])
+        run(["git", "checkout", f"origin/{base_branch}"])
 
         # Create a new named branch that contains the names of the commits.
         try:
