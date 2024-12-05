@@ -31,7 +31,6 @@ if has('nvim')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 else
     Plug 'lifepillar/vim-solarized8'
-    Plug 'mhinz/vim-signify'
     Plug 'sheerun/vim-polyglot'
 endif
 
@@ -322,10 +321,6 @@ augroup end
 " vim-bbye
 nnoremap <silent> <leader>bd :Bdelete!<CR>
 
-" vim-signify
-let g:signify_vcs_list=['git']
-let g:signify_update_on_bufenter=0
-
 " fzf.vim
 let g:fzf_buffers_jump=1
 nnoremap \ :Rg<SPACE>
@@ -340,28 +335,15 @@ let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ }
 
-" tagbar
-let g:tagbar_autofocus=0
-let g:tagbar_compact=1
-let g:tagbar_right=1
-let g:tagbar_width=35
-nnoremap <leader>tt :TagbarToggle<CR>
-
 " vim-autoformat
 let g:formatters_python=['black', 'yapf', 'autopep8']
-let g:formatter_yapf_style='pep8'
 
 " doxygentoolkit.vim
 let g:DoxygenToolkit_commentType="C++"
 
-" LSP
-function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    nnoremap <leader>ld :LspDefinition<CR>
-    nnoremap <leader>lf :LspDocumentFormat<CR>
-    nnoremap <leader>lh :LspHover<CR>
-    nnoremap <leader>lr :LspReferences<CR>
-endfunction
+" ---------------------------------------------------------------------------- "
+" Neovim Plugin Configuration                                                  "
+" ---------------------------------------------------------------------------- "
 
 if has('nvim')
     luafile ~/.vim/lsp.lua
