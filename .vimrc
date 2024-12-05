@@ -8,9 +8,8 @@ let g:polyglot_disabled = ['autoindent', 'sensible']
 
 call plug#begin('~/.vim/plugged')
 
-
-Plug 'ervandew/supertab'
 Plug 'ap/vim-buftabline'
+Plug 'ervandew/supertab'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf',                        { 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
@@ -18,9 +17,9 @@ Plug 'mbbill/undotree'
 Plug 'moll/vim-bbye'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sleuth'
-
+Plug 'tpope/vim-surround'
+Plug 'vim-autoformat/vim-autoformat'
 
 if has('nvim')
     Plug 'hrsh7th/cmp-nvim-lsp'
@@ -36,14 +35,10 @@ else
     Plug 'sheerun/vim-polyglot'
 endif
 
-
-Plug 'chiel92/vim-autoformat',              { 'on': 'Autoformat' }
-Plug 'majutsushi/tagbar',                   { 'on': 'TagbarToggle' }
-
-Plug 'vim-scripts/doxygentoolkit.vim',      { 'for': 'cpp' }
+Plug 'lervag/vimtex',                       { 'for': 'tex' }
 Plug 'llvm/llvm.vim',                       { 'for': 'llvm' }
 Plug 'racer-rust/vim-racer',                { 'for': 'rust' }
-Plug 'lervag/vimtex',                       { 'for': 'tex' }
+Plug 'vim-scripts/doxygentoolkit.vim',      { 'for': 'cpp' }
 
 call plug#end()
 
