@@ -27,7 +27,9 @@ local lspconfig = require'lspconfig'
 
 lspconfig.cmake.setup{}
 lspconfig.pyright.setup{}
-lspconfig.sourcekit.setup{}
+lspconfig.sourcekit.setup{
+  filetypes = { "swift" }
+}
 lspconfig.clangd.setup{
   cmd = { "clangd", "--background-index" },
 }
