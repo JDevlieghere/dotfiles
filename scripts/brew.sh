@@ -50,6 +50,7 @@ installBasics() {
     clang-format \
     cloc \
     cmake \
+    cmake-language-server \
     creduce \
     ctags \
     doxygen \

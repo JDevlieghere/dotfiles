@@ -25,13 +25,12 @@ cmp.setup {
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require'lspconfig'
 
-lspconfig.pyright.setup {
-  capabilities = capabilities,
+lspconfig.pyright.setup{}
+lspconfig.cmake.setup{}
+lspconfig.clangd.setup{
+  cmd = { "clangd", "--background-index" },
 }
 
-lspconfig.clangd.setup {
-  capabilities = capabilities,
-}
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
