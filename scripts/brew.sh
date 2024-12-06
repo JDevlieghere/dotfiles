@@ -24,6 +24,7 @@ installEssentials() {
   info "Installing essentials"
 
   brew install \
+    autossh \
     black \
     fd \
     fish \
