@@ -23,6 +23,7 @@ doGitConfig() {
     # Use Araxis Merge as diff and merge tool when available.
     if [ -d "/Applications/Araxis Merge.app/Contents/Utilities/" ]; then
         echo "Configuring Araxis Merge"
+
         git config --global diff.guitool araxis
         git config --global merge.guitool araxis
         git config --global mergetool.araxis.path /Applications/Araxis\ Merge.app/Contents/Utilities/compare
@@ -32,7 +33,7 @@ doGitConfig() {
     if [ -d "/Applications/Sublime Merge.app/Contents/SharedSupport/bin/" ]; then
         echo "Configuring Sublime Merge"
 
-        git config --global mergetool.smerge.cmd 'smerge mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"'
+        git config --global mergetool.smerge.cmd '/Applications/Sublime\ Merge.app/Contents/SharedSupport/bin/smerge mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"'
         git config --global mergetool.smerge.trustExitCode true
         git config --global merge.tool smerge
     fi
@@ -40,6 +41,7 @@ doGitConfig() {
     delta=$(type -P "delta")
     if [ -x "$delta" ]; then
         echo "Configuring delta"
+
         git config --global core.pager "delta"
         git config --global interactive.diffFilter "delta --color-only"
     fi
