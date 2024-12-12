@@ -182,8 +182,11 @@ if extra_args:
 try:
     print(" \\\n    ".join(cmake_cmd))
     input("Press Enter to run CMake or ^C to abort...")
-except KeyboardInterrupt:
-    exit(1)
 
-subprocess.call(" ".join(cmake_cmd), shell=True)
-subprocess.call("ninja", shell=True)
+    subprocess.call(" ".join(cmake_cmd), shell=True)
+    subprocess.call("ninja", shell=True)
+except KeyboardInterrupt:
+    try:
+        sys.exit(130)
+    except SystemExit:
+        os._exit(130)
