@@ -192,7 +192,6 @@ else
                 ;;
             *)
                 doHelp
-                shift
                 ;;
         esac
     done
