@@ -68,6 +68,17 @@ doSync() {
 
     # Touch .localrc so fish can source it.
     touch ~/.localrc
+
+    # Copy Sublime configurations.
+    if [ -d "$HOME/Library/Application Support/Sublime Merge/" ]; then
+        cp -f "$DOTFILES/sublime/merge/Preferences.sublime-settings" \
+              "$HOME/Library/Application Support/Sublime Merge/Packages/User/Preferences.sublime-settings"
+    fi
+
+    if [ -d "$HOME/Library/Application Support/Sublime Text/" ]; then
+        cp -f "$DOTFILES/sublime/text/Preferences.sublime-settings" \
+              "$HOME/Library/Application Support/Sublime Text/Packages/User/Preferences.sublime-settings"
+    fi
 }
 
 doSymLink() {
