@@ -68,12 +68,6 @@ doSync() {
 
     # Touch .localrc so fish can source it.
     touch ~/.localrc
-
-    # Copy files that have different locations on macOS and Linux.
-    if [ -d "$HOME/Library/Application Support/Code/User/" ]; then
-        cp -f "$HOME/.config/Code/User/settings.json" \
-            "$HOME/Library/Application Support/Code/User/settings.json"
-    fi
 }
 
 doSymLink() {
