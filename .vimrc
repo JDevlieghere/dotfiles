@@ -11,8 +11,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'ap/vim-buftabline'
 Plug 'ervandew/supertab'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf',                        { 'do': 'yes \| ./install' }
-Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
 Plug 'moll/vim-bbye'
 Plug 'tpope/vim-commentary'
@@ -28,10 +26,13 @@ if has('nvim')
     Plug 'lewis6991/gitsigns.nvim'
     Plug 'mfussenegger/nvim-dap'
     Plug 'neovim/nvim-lspconfig'
+    Plug 'ibhagwan/fzf-lua',                {'branch': 'main'}
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 else
     Plug 'lifepillar/vim-solarized8'
     Plug 'sheerun/vim-polyglot'
+    Plug 'junegunn/fzf',                    { 'do': 'yes \| ./install' }
+    Plug 'junegunn/fzf.vim'
 endif
 
 Plug 'lervag/vimtex',                       { 'for': 'tex' }
@@ -346,10 +347,11 @@ let g:DoxygenToolkit_commentType="C++"
 " ---------------------------------------------------------------------------- "
 
 if has('nvim')
+    luafile ~/.vim/dap.lua
+    luafile ~/.vim/fzf.lua
+    luafile ~/.vim/git.lua
     luafile ~/.vim/lsp.lua
     luafile ~/.vim/treesitter.lua
-    luafile ~/.vim/dap.lua
-    luafile ~/.vim/git.lua
 
     nnoremap <leader>db :lua require'dap'.toggle_breakpoint()<CR>
     nnoremap <leader>dc :lua require'dap'.continue()<CR>
