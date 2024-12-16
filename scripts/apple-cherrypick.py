@@ -87,6 +87,12 @@ def main():
         "-v", "--verbose", action="store_true", help="Print logging output."
     )
     parser.add_argument(
+        "-f", "--force", action="store_true", help="Force push to branch."
+    )
+    parser.add_argument(
+        "-d", "--delete", action="store_true", help="Delete the local branch."
+    )
+    parser.add_argument(
         "-n",
         "--dry-run",
         action="store_true",
@@ -137,6 +143,9 @@ def main():
         # Check out the branch we want to cherry pick to.
         run(["git", "checkout", f"origin/{base_branch}"])
 
+        if args.delete:
+            run(["git", "branch", "-D", target_branch])
+
         # Create a new named branch that contains the names of the commits.
         try:
             run(["git", "checkout", "-b", target_branch])
@@ -154,7 +163,10 @@ def main():
     # Don't push or create the PR if this is a dry-run.
     if not args.dry_run:
         # Push the changes to the swift remote.
-        run(["git", "push", "--set-upstream", "swift", target_branch])
+        push_cmd = ["git", "push", "--set-upstream", "swift", target_branch]
+        if args.force:
+            push_cmd.append("--force")
+        run(push_cmd)
 
         # Use the GitHub command line tool to open the browser.
         run(
