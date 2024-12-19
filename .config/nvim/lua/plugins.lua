@@ -22,6 +22,10 @@ return {
             "hrsh7th/cmp-buffer",
         },
     },
+    {
+        "nvim-tree/nvim-web-devicons",
+        lazy = true,
+    },
     "ap/vim-buftabline",
     "ervandew/supertab",
     "ibhagwan/fzf-lua",
