@@ -310,9 +310,11 @@ nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
 
 " vim-lightline
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ }
+if !has('nvim')
+    let g:lightline = {
+        \ 'colorscheme': 'solarized',
+        \ }
+endif
 
 " doxygentoolkit.vim
 let g:DoxygenToolkit_commentType="C++"

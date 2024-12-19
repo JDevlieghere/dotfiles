@@ -23,13 +23,25 @@ return {
         },
     },
     {
+        "romgrk/barbar.nvim",
+        dependencies = {
+            "lewis6991/gitsigns.nvim",
+            "nvim-tree/nvim-web-devicons",
+        },
+        init = function()
+            vim.g.barbar_auto_setup = false
+        end,
+    },
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+    {
         "nvim-tree/nvim-web-devicons",
         lazy = true,
     },
-    "ap/vim-buftabline",
     "ervandew/supertab",
     "ibhagwan/fzf-lua",
-    "itchyny/lightline.vim",
     "lewis6991/gitsigns.nvim",
     "llvm/llvm.vim",
     "mbbill/undotree",
