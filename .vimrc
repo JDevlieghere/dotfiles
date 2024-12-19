@@ -4,43 +4,29 @@ set nocompatible
 " Plugins                                                                      "
 " ---------------------------------------------------------------------------- "
 
-let g:polyglot_disabled = ['autoindent', 'sensible']
+if !has('nvim')
+    let g:polyglot_disabled = ['autoindent', 'sensible']
 
-call plug#begin('~/.vim/plugged')
-
-Plug 'ap/vim-buftabline'
-Plug 'ervandew/supertab'
-Plug 'itchyny/lightline.vim'
-Plug 'mbbill/undotree'
-Plug 'moll/vim-bbye'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-surround'
-Plug 'vim-autoformat/vim-autoformat'
-
-if has('nvim')
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'hrsh7th/nvim-cmp'
-    Plug 'ishan9299/nvim-solarized-lua'
-    Plug 'lewis6991/gitsigns.nvim'
-    Plug 'mfussenegger/nvim-dap'
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'ibhagwan/fzf-lua',                {'branch': 'main'}
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-else
+    call plug#begin('~/.vim/plugged')
+    Plug 'ap/vim-buftabline'
+    Plug 'ervandew/supertab'
+    Plug 'itchyny/lightline.vim'
+    Plug 'mbbill/undotree'
+    Plug 'moll/vim-bbye'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-sleuth'
+    Plug 'tpope/vim-surround'
     Plug 'lifepillar/vim-solarized8'
     Plug 'sheerun/vim-polyglot'
     Plug 'junegunn/fzf',                    { 'do': 'yes \| ./install' }
     Plug 'junegunn/fzf.vim'
+    Plug 'lervag/vimtex',                       { 'for': 'tex' }
+    Plug 'llvm/llvm.vim',                       { 'for': 'llvm' }
+    Plug 'racer-rust/vim-racer',                { 'for': 'rust' }
+    Plug 'vim-scripts/doxygentoolkit.vim',      { 'for': 'cpp' }
+    call plug#end()
 endif
-
-Plug 'lervag/vimtex',                       { 'for': 'tex' }
-Plug 'llvm/llvm.vim',                       { 'for': 'llvm' }
-Plug 'racer-rust/vim-racer',                { 'for': 'rust' }
-Plug 'vim-scripts/doxygentoolkit.vim',      { 'for': 'cpp' }
-
-call plug#end()
 
 " ---------------------------------------------------------------------------- "
 " General Settings                                                             "
@@ -55,14 +41,12 @@ if has("termguicolors")
     set termguicolors
 endif
 
-try
-    if has('nvim')
-        colorscheme solarized
-    else
+if !has('nvim')
+    try
         colorscheme solarized8
-    endif
-catch
-endtry
+    catch
+    endtry
+endif
 
 if !exists("g:syntax_on")
     syntax enable
@@ -175,12 +159,6 @@ if has("persistent_undo")
     set undodir=~/.vim/undo     " Location to store undo history
     set undolevels=1000         " Max number of changes
     set undoreload=10000        " Max lines to save for undo on a buffer reload
-endif
-
-" Neovim
-if has("nvim")
-  set wildoptions+=pum,tagfile
-  set inccommand=split
 endif
 
 " ---------------------------------------------------------------------------- "
@@ -336,26 +314,5 @@ let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ }
 
-" vim-autoformat
-let g:formatters_python=['black', 'yapf', 'autopep8']
-
 " doxygentoolkit.vim
 let g:DoxygenToolkit_commentType="C++"
-
-" ---------------------------------------------------------------------------- "
-" Neovim Plugin Configuration                                                  "
-" ---------------------------------------------------------------------------- "
-
-if has('nvim')
-    luafile ~/.vim/dap.lua
-    luafile ~/.vim/fzf.lua
-    luafile ~/.vim/git.lua
-    luafile ~/.vim/lsp.lua
-    luafile ~/.vim/treesitter.lua
-
-    nnoremap <leader>db :lua require'dap'.toggle_breakpoint()<CR>
-    nnoremap <leader>dc :lua require'dap'.continue()<CR>
-    nnoremap <leader>dn :lua require'dap'.step_over()<CR>
-    nnoremap <leader>ds :lua require'dap'.step_into()<CR>
-    nnoremap <leader>dr :lua require'dap'.repl.open()<CR>
-endif

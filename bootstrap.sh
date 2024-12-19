@@ -81,12 +81,6 @@ doSync() {
     fi
 }
 
-doSymLink() {
-    mkdir -p "${XDG_CONFIG_HOME:=$HOME/.config}"
-    ln -s ~/.vim/* "$XDG_CONFIG_HOME/nvim"
-    ln -s ~/.vimrc "$XDG_CONFIG_HOME/nvim/init.vim"
-}
-
 doDirectories() {
     mkdir -p ~/.vim/undo
     mkdir -p ~/.ssh
@@ -144,7 +138,6 @@ doAll() {
     doGitConfig
     doDirectories
     doPermissions
-    doSymLink
     doInstall
     doConfig
 }
@@ -172,10 +165,6 @@ else
                 doGitConfig
                 doDirectories
                 doPermissions
-                shift
-                ;;
-            -l|--link)
-                doSymLink
                 shift
                 ;;
             -i|--install)
