@@ -26,6 +26,7 @@ installEssentials() {
   brew install \
     autossh \
     black \
+    clang-format \
     fd \
     fish \
     fzf \
@@ -34,6 +35,7 @@ installEssentials() {
     neovim \
     pinentry-mac \
     ripgrep \
+    stylua \
     swig \
     tmux \
     vim
@@ -47,7 +49,6 @@ installBasics() {
   brew install \
     bat \
     boost \
-    clang-format \
     cloc \
     cmake \
     cmake-language-server \
