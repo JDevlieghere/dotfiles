@@ -3,6 +3,7 @@ require("config.lazy")
 
 vim.cmd("source ~/.vimrc")
 
+require("config.cmp")
 require("config.conform")
 require("config.dap")
 require("config.fzf")
