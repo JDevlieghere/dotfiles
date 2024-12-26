@@ -90,9 +90,13 @@ doDirectories() {
 doInstall() {
     info "Installing Extras"
 
-    # vim
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    vim +PlugInstall +PlugUpdate +qa!
+    # (Neo)vim
+    if command -v nvim &> /dev/null; then
+        nvim --headless "+Lazy! sync" +qa
+    else
+        curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        vim +PlugInstall +PlugUpdate +qa!
+    fi
 
     # tmux
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
