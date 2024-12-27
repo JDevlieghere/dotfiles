@@ -141,3 +141,8 @@ defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 # --------------------------------------------------------------------------- #
 
 xattr -rd com.apple.quarantine /Applications/Alacritty.app
+
+# --------------------------------------------------------------------------- #
+# Pinentry                                                                    #
+# --------------------------------------------------------------------------- #
+defaults write org.gpgtools.common UseKeychain -bool true

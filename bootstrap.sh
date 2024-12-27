@@ -47,6 +47,16 @@ doGitConfig() {
     fi
 }
 
+doGPGConfig() {
+    info "Configuring GPG"
+
+    pinentry=$(which pinentry-mac)
+    if [ -x "$pinentry" ]; then
+        echo "Using pinentry-mac"
+        echo "pinentry-program $pinentry" >> "$HOME/.gnupg/gpg-agent.conf"
+    fi
+}
+
 doSync() {
     info "Syncing"
     rsync \
@@ -163,6 +173,7 @@ else
             -s|--sync)
                 doSync
                 doGitConfig
+                doGPGConfig
                 doDirectories
                 doPermissions
                 shift
