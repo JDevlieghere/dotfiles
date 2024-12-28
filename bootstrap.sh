@@ -18,7 +18,7 @@ doGitConfig() {
 
     # The .gitconfig will be overwritten; reconfigure it.
     echo "Configuring global .gitignore"
-    git config --global core.excludesfile ~/.gitignore_global
+    git config --global core.excludesfile "$HOME/.gitignore_global"
 
     # Use Araxis Merge as diff and merge tool when available.
     if [ -d "/Applications/Araxis Merge.app/Contents/Utilities/" ]; then
@@ -77,7 +77,7 @@ doSync() {
         "$HOME"
 
     # Touch .localrc so fish can source it.
-    touch ~/.localrc
+    touch "$HOME/.localrc"
 
     # Copy Sublime configurations.
     if [ -d "$HOME/Library/Application Support/Sublime Merge/" ]; then
@@ -92,9 +92,9 @@ doSync() {
 }
 
 doDirectories() {
-    mkdir -p ~/.vim/undo
-    mkdir -p ~/.ssh
-    mkdir -p ~/.gnupg
+    mkdir -p "$HOME/vim/undo"
+    mkdir -p "$HOME/.ssh"
+    mkdir -p "$HOME/.gnupg"
 }
 
 doInstall() {
@@ -104,7 +104,7 @@ doInstall() {
     if command -v nvim &> /dev/null; then
         nvim --headless "+Lazy! sync" +qa
     else
-        curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         vim +PlugInstall +PlugUpdate +qa!
     fi
 
