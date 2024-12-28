@@ -109,12 +109,16 @@ doInstall() {
     fi
 
     # tmux
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+        git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+    fi
 
     # rust
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup-init.sh
-    chmod +x /tmp/rustup-init.sh
-    /tmp/rustup-init.sh -y
+    if [ ! -d "$HOME/.cargo" ]; then
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup-init.sh
+        chmod +x /tmp/rustup-init.sh
+        /tmp/rustup-init.sh -y
+    fi
 }
 
 doPermissions() {
