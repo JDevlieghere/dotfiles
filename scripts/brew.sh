@@ -77,6 +77,7 @@ installBasics() {
     redis \
     rsync \
     sccache \
+    shellharden \
     tree \
     xz \
     zsh
