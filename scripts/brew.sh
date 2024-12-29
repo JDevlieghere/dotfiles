@@ -32,6 +32,8 @@ installEssentials() {
     fzf \
     git \
     gnupg \
+    lua \
+    luarocks \
     neovim \
     pinentry-mac \
     ripgrep \
@@ -65,7 +67,6 @@ installBasics() {
     jq \
     lcov \
     libxml2 \
-    lua \
     ncdu \
     ninja \
     node \
