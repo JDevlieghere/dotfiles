@@ -106,18 +106,20 @@ doInstall() {
         vim +PlugInstall +PlugUpdate +qa!
     fi
 
-    info "Installing tmux plugins"
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+        info "Installing tmux plugins"
         git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
     else
+        info "Updating tmux plugins"
         "$HOME/.tmux/plugins/tpm/bin/install_plugins"
         "$HOME/.tmux/plugins/tpm/bin/update_plugins" all
     fi
 
-    info "Installing rust"
     if command -v rustup &> /dev/null; then
+        info "Updating Rust"
         rustup update
     else
+        info "Installing Rust"
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup-init.sh
         chmod +x /tmp/rustup-init.sh
         /tmp/rustup-init.sh -y
