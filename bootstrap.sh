@@ -124,6 +124,12 @@ doInstall() {
         chmod +x /tmp/rustup-init.sh
         /tmp/rustup-init.sh -y
     fi
+
+    if command -v brew &> /dev/null; then
+        info "Updating Homebrew"
+        brew update
+        brew upgrade
+    fi
 }
 
 doPermissions() {
