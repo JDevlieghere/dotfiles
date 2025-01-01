@@ -37,26 +37,35 @@ Usage: bootstrap.sh [options]
 $ ./bootstrap.sh -a
 ```
 
-If you decide to use this configuration as is, don't forget to change your name
-and e-mail address in the `.gitconfig` and `.hgrc` files.
+> [!WARNING]
+>
+> If you decide to use this configuration as is, don't forget to change your
+> name and e-mail address in `.gitconfig`.
 
 ## Application Configurations
 
-### (n)vim
+### neovim
 
-After having used [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
-for a long time I switched to LSP and [clangd](https://clangd.llvm.org). I
-wrote a [blog post](https://jonasdevlieghere.com/vim-lsp-clangd/) on how to set
-it up. More recently I've been using the built-in LSP client in neovim.
+I started out using vim with
+[YouCompleteMe](https://github.com/Valloric/YouCompleteMe) before moving over
+to neovim for its built-in LSP support. For a long time I kept my configuration
+compatible with both vim and neovim. I've given up on that and have now fully
+committed to neovim with [lazy.nvim](https://github.com/folke/lazy.nvim) as my
+plugin manager.
 
 ### fish
 
-I use [fish shell](https://fishshell.com). On macOS you'll have to add fish's
-path to `/etc/shells`.
+I use [fish](https://fishshell.com) as my shell.
 
 ```
 chsh -s $(which fish)
 ```
+
+> [!NOTE]
+>
+> On macOS, you'll have to append `/etc/shells` with the absolute path to
+> `fish`.
+
 
 ## Other Useful Stuff
 
