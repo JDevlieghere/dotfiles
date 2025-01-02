@@ -57,6 +57,7 @@ installBasics() {
     creduce \
     ctags \
     doxygen \
+    fastfetch \
     gh \
     git-delta \
     git-lfs \
