@@ -87,4 +87,12 @@ key = "Key9"
 mods = "Command"
 chars = "\u0001\u0039"
 
-[terminal]
+[[keyboard.bindings]]
+key = "D"
+mods = "Command"
+chars = "\u0001\u0025"
+
+[[keyboard.bindings]]
+key = "D"
+mods = "Command|Shift"
+chars = "\u0001\u0022"
