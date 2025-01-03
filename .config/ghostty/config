@@ -2,6 +2,7 @@ font-family = "MonoLisa Nerd Font"
 theme = "iTerm2 Solarized Dark"
 macos-titlebar-style = tabs
 shell-integration = fish
+copy-on-select = true
 
 keybind = ctrl+a>c=new_tab
 keybind = ctrl+a>x=close_surface
