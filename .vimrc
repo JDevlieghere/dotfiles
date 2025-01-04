@@ -165,22 +165,14 @@ endif
 " Colors & User Interface                                                      "
 " ---------------------------------------------------------------------------- "
 
-" Same color for sign column and line numbers
-highlight clear SignColumn
-
 " Custom spell-checking highlighting
 highlight SpellBad     cterm=underline  term=underline  gui=underline
 highlight SpellCap     cterm=underline  term=underline  gui=underline
 highlight SpellRare    cterm=underline  term=underline  gui=underline
 highlight SpellLocal   cterm=underline  term=underline  gui=underline
 
-" Tab line
-highlight TabLine      cterm=NONE  ctermfg=33   ctermbg=235  guifg=#268bd2  guibg=#073642
-highlight TabLineFill  cterm=NONE  ctermfg=33   ctermbg=235  guifg=#268bd2  guibg=#073642
-highlight TabLineSel   cterm=NONE  ctermfg=235  ctermbg=33   guifg=#073642  guibg=#268bd2
-
 " Italics for comments
-highlight Comment cterm=italic
+highlight Comment      cterm=italic     term=italic     gui=italic
 
 " ---------------------------------------------------------------------------- "
 " Key Mappings                                                                 "
@@ -285,6 +277,15 @@ augroup end
 augroup remove_trailing_whitespace
     autocmd!
     autocmd BufWritePre * :call RemoveTrailingWhitespace()
+augroup end
+
+" Make the sign column transparent
+augroup transparent_signs
+    autocmd!
+    autocmd ColorScheme * highlight SignColumn     guibg=NONE
+    autocmd ColorScheme * highlight GitSignsAdd    guibg=NONE
+    autocmd ColorScheme * highlight GitSignsChange guibg=NONE
+    autocmd ColorScheme * highlight GitSignsDelete guibg=NONE
 augroup end
 
 " Watch my .vimrc
