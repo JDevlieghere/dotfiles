@@ -3,10 +3,3 @@ theme = "iTerm2 Solarized Dark"
 macos-titlebar-style = tabs
 shell-integration = fish
 copy-on-select = true
-
-keybind = ctrl+a>c=new_tab
-keybind = ctrl+a>x=close_surface
-keybind = ctrl+a>j=goto_split:bottom
-keybind = ctrl+a>k=goto_split:top
-keybind = ctrl+a>h=goto_split:left
-keybind = ctrl+a>l=goto_split:right
