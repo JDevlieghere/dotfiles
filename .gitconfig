@@ -1,5 +1,7 @@
 [core]
 	editor = nvim
+	fsmonitor = true
+	untrackedCache = true
 [user]
 	email = jonas@devlieghere.com
 	name = Jonas Devlieghere
