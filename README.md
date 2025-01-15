@@ -45,19 +45,16 @@ $ ./bootstrap.sh -a
 
 ## My Setup
 
- - **Terminal Emulator**: [Ghostty](https://ghostty.org) ([config](https://github.com/JDevlieghere/dotfiles/tree/main/.config/ghostty)) and [Alacratty](https://alacritty.org) ([config](https://github.com/JDevlieghere/dotfiles/tree/main/.config/alacritty))
-    - **Theme**: [Solarized Dark](https://ethanschoonover.com/solarized/)
-    - **Font**: [MonoLisa](https://www.monolisa.dev)
- - **Shell**: [Fish Shell](https://fishshell.com) ([config](https://github.com/JDevlieghere/dotfiles/tree/main/.config/fish))
-    - **Prompt**: [Starship](https://starship.rs) ([config](https://github.com/JDevlieghere/dotfiles/blob/main/.config/starship.toml))
- - **Editor**: [Neovim](https://neovim.io) ([config](https://github.com/JDevlieghere/dotfiles/tree/main/.config/nvim))
-    - **Plugin Manager**: [Lazy.nvim](https://lazy.folke.io)
-    - **Configuration**: [.vimrc](https://github.com/JDevlieghere/dotfiles/blob/main/.vimrc)
-
-> [!NOTE]
->
-> On macOS, you'll have to append `/etc/shells` with the absolute path to
-> `fish`.
+ - **Terminal Emulator**: [Ghostty](https://ghostty.org) & [Alacratty](https://alacritty.org)
+    - Theme: [Solarized Dark](https://ethanschoonover.com/solarized/)
+    - Font: [MonoLisa](https://www.monolisa.dev)
+    - Configuration: [ghostty/config](https://github.com/JDevlieghere/dotfiles/blob/main/.config/ghostty/config) and [alacritty.toml](https://github.com/JDevlieghere/dotfiles/blob/main/.config/alacritty/alacritty.toml)
+ - **Shell**: [Fish Shell](https://fishshell.com)
+    - Prompt: [Starship](https://starship.rs)
+    - Configuration: [.config/fish](https://github.com/JDevlieghere/dotfiles/tree/main/.config/fish) and [starship.toml](https://github.com/JDevlieghere/dotfiles/blob/main/.config/starship.toml)
+ - **Editor**: [Neovim](https://neovim.io)
+    - Plugin Manager: [Lazy.nvim](https://lazy.folke.io)
+    - Configuration: [.vimrc](https://github.com/JDevlieghere/dotfiles/blob/main/.vimrc) and [.config/nvim](https://github.com/JDevlieghere/dotfiles/tree/main/.config/nvim)
 
 ## Useful Stuff
 
