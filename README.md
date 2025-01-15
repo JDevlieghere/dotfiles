@@ -49,7 +49,7 @@ $ ./bootstrap.sh -a
 
 ## My Setup
 
- - **Terminal Emulator**: [Ghostty](https://ghostty.org) & [Alacratty](https://alacritty.org)
+ - **Terminal Emulator**: [Ghostty](https://ghostty.org) & [Alacritty](https://alacritty.org)
     - Theme: [Solarized Dark](https://ethanschoonover.com/solarized/)
     - Font: [MonoLisa](https://www.monolisa.dev)
     - Configuration: [ghostty/config](https://github.com/JDevlieghere/dotfiles/blob/main/.config/ghostty/config) and [alacritty.toml](https://github.com/JDevlieghere/dotfiles/blob/main/.config/alacritty/alacritty.toml)
