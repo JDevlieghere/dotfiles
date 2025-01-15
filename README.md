@@ -42,37 +42,28 @@ $ ./bootstrap.sh -a
 > If you decide to use this configuration as is, don't forget to change your
 > name and e-mail address in `.gitconfig`.
 
-## Application Configurations
 
-### neovim
+## My Setup
 
-I started out using vim with
-[YouCompleteMe](https://github.com/Valloric/YouCompleteMe) before moving over
-to neovim for its built-in LSP support. For a long time I kept my configuration
-compatible with both vim and neovim. I've given up on that and have now fully
-committed to neovim with [lazy.nvim](https://github.com/folke/lazy.nvim) as my
-plugin manager.
-
-### fish
-
-I use [fish](https://fishshell.com) as my shell.
-
-```
-chsh -s $(which fish)
-```
+ - **Terminal Emulator**: [Ghostty](https://ghostty.org) ([config](https://github.com/JDevlieghere/dotfiles/tree/main/.config/ghostty)) and [Alacratty](https://alacritty.org) ([config](https://github.com/JDevlieghere/dotfiles/tree/main/.config/alacritty))
+    - **Theme**: [Solarized Dark](https://ethanschoonover.com/solarized/)
+    - **Font**: [MonoLisa](https://www.monolisa.dev)
+ - **Shell**: [Fish Shell](https://fishshell.com) ([config](https://github.com/JDevlieghere/dotfiles/tree/main/.config/fish))
+    - **Prompt**: [Starship](https://starship.rs) ([config](https://github.com/JDevlieghere/dotfiles/blob/main/.config/starship.toml))
+ - **Editor**: [Neovim](https://neovim.io) ([config](https://github.com/JDevlieghere/dotfiles/tree/main/.config/nvim))
+    - **Plugin Manager**: [Lazy.nvim](https://lazy.folke.io)
+    - **Configuration**: [.vimrc](https://github.com/JDevlieghere/dotfiles/blob/main/.vimrc)
 
 > [!NOTE]
 >
 > On macOS, you'll have to append `/etc/shells` with the absolute path to
 > `fish`.
 
-
-## Other Useful Stuff
+## Useful Stuff
 
  - [Scripts](https://github.com/JDevlieghere/dotfiles/tree/main/scripts)
- - [System Configurators](https://github.com/JDevlieghere/dotfiles/tree/main/os)
+ - [OS Configurations](https://github.com/JDevlieghere/dotfiles/tree/main/os)
 
-## Acknowledgements
+## Acknowledgments
 
  - The `os/macos.sh` script with sensible macOS defaults is forked from [Mathias Bynens' dotfiles](https://github.com/mathiasbynens/dotfiles/blob/main/.macos).
- - I use [MonoLisa](https://www.monolisa.dev) as my font.
