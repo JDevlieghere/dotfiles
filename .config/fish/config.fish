@@ -18,6 +18,11 @@ if status --is-interactive
   source ~/.config/fish/fzf.fish
   source ~/.config/fish/ssh.fish
 
+  # Configure starship.
+  if type -q starship
+    starship init fish | source
+  end
+
   # Source .localrc last which is not sync'd.
   if test -f ~/.localrc
     source ~/.localrc
