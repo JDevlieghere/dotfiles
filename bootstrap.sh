@@ -58,6 +58,14 @@ doGPGConfig() {
     fi
 }
 
+doShellConfig() {
+    fish=$(type -P "fish")
+    if [ -x "$fish" ]; then
+        info "Configuring fish"
+        "$fish" "$DOTFILES/.config/fish/solarized.fish"
+    fi
+}
+
 doSync() {
     info "Syncing"
     rsync \
@@ -190,6 +198,7 @@ else
                 doSync
                 doGitConfig
                 doGPGConfig
+                doShellConfig
                 doDirectories
                 doPermissions
                 shift
