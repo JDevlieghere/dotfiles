@@ -54,7 +54,7 @@ doGPGConfig() {
     if [ -x "$pinentry" ]; then
         echo "Using pinentry-mac"
         echo "pinentry-program $pinentry" >> "$HOME/.gnupg/gpg-agent.conf"
-        killall gpg-agent
+        killall gpg-agent 2> /dev/null
     fi
 }
 
