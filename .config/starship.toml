@@ -9,4 +9,8 @@ command_timeout = 1000
 
 [hostname]
 ssh_only = false
-disabled = false
+ssh_symbol = ''
+
+[username]
+show_always = true
+format = '[$user]($style)@'
