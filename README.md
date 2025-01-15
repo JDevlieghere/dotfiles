@@ -42,6 +42,10 @@ $ ./bootstrap.sh -a
 > If you decide to use this configuration as is, don't forget to change your
 > name and e-mail address in `.gitconfig`.
 
+> [!NOTE]
+>
+> On macOS, you'll have to append the absolute path to `fish` to `/etc/shells`
+> before you can change your shell with `chsh -s $(which fish)`.
 
 ## My Setup
 
