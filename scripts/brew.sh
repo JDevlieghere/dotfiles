@@ -37,6 +37,7 @@ installEssentials() {
     neovim \
     pinentry-mac \
     ripgrep \
+    starship \
     stylua \
     swig \
     tmux \
