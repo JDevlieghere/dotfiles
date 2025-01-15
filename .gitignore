@@ -1,12 +1,3 @@
-# Vim
-.vim/bundle/
-.vim/undo/
-.vim/autoload/
-.vim/plugged/
-.vim/init.vim
-.vim/.netrwhist
-.vim/files/info/.gitkeep
-
 # Python
 *.pyc
 
@@ -20,14 +11,5 @@ Thumbs.db
 .Trashes
 .DS_Store
 
-# Untracked
+# Purposely untracked
 .localrc
-
-# bin
-/bin/*/
-
-# weechat
-.weechat/logs/
-.weechat/sec.conf
-.weechat/script/
-.weechat/certs/
