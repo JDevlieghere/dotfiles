@@ -23,6 +23,11 @@ if status --is-interactive
     starship init fish | source
   end
 
+  # Append ~/.bin to PATH.
+  if test -d ~/bin
+      fish_add_path -a ~/bin
+  end
+
   # Source .localrc last which is not sync'd.
   if test -f ~/.localrc
     source ~/.localrc
