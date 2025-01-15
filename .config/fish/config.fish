@@ -21,6 +21,7 @@ if status --is-interactive
   # Configure starship.
   if type -q starship
     starship init fish | source
+    set -gx STARSHIP_LOG error
   end
 
   # Append ~/.bin to PATH.

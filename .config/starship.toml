@@ -4,8 +4,11 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
-# Timeout for commands executed by starship (ms)
-command_timeout = 1000
+# Timeout for starship to scan files (in milliseconds).
+scan_timeout = 30
+
+# Timeout for commands executed by starship (in milliseconds).
+command_timeout = 200
 
 [hostname]
 ssh_only = false
