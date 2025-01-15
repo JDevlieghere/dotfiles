@@ -47,22 +47,20 @@ doGitConfig() {
     fi
 }
 
-doGPGConfig() {
-    info "Configuring GPG"
+doToolConfig() {
+    info "Configuring Tools"
+
+    fish=$(type -P "fish")
+    if [ -x "$fish" ]; then
+        echo "Configuring fish theme"
+        "$fish" "$DOTFILES/.config/fish/solarized.fish"
+    fi
 
     pinentry=$(which pinentry-mac)
     if [ -x "$pinentry" ]; then
-        echo "Using pinentry-mac"
+        echo "Configuring pinentry-mac"
         echo "pinentry-program $pinentry" >> "$HOME/.gnupg/gpg-agent.conf"
         killall gpg-agent 2> /dev/null
-    fi
-}
-
-doShellConfig() {
-    fish=$(type -P "fish")
-    if [ -x "$fish" ]; then
-        info "Configuring fish"
-        "$fish" "$DOTFILES/.config/fish/solarized.fish"
     fi
 }
 
@@ -154,8 +152,8 @@ doPermissions() {
     find "$HOME/.gnupg" -type d -exec chmod 700 {} \;
 }
 
-doConfig() {
-    info "Configuring"
+doOSConfig() {
+    info "Configuring OS"
 
     if [ "$(uname)" == "Darwin" ]; then
         echo "Configuring macOS"
@@ -173,7 +171,7 @@ doAll() {
     doDirectories
     doPermissions
     doInstall
-    doConfig
+    doOSConfig
 }
 
 doHelp() {
@@ -197,8 +195,7 @@ else
             -s|--sync)
                 doSync
                 doGitConfig
-                doGPGConfig
-                doShellConfig
+                doToolConfig
                 doDirectories
                 doPermissions
                 shift
@@ -208,7 +205,7 @@ else
                 shift
                 ;;
             -c|--config)
-                doConfig
+                doOSConfig
                 shift
                 ;;
             -a|--all)
