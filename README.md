@@ -59,6 +59,12 @@ $ ./bootstrap.sh -a
  - **Editor**: [Neovim](https://neovim.io)
     - Plugin Manager: [Lazy.nvim](https://lazy.folke.io)
     - Configuration: [.vimrc](https://github.com/JDevlieghere/dotfiles/blob/main/.vimrc) and [.config/nvim](https://github.com/JDevlieghere/dotfiles/tree/main/.config/nvim)
+ - **Command Line Tools**
+    - [delta](https://github.com/dandavison/delta) A syntax-highlighting pager for git, diff, grep, and blame output.
+    - [fd](https://github.com/sharkdp/fd): Simple, fast and user-friendly alternative to find.
+    - [fzf](https://github.com/junegunn/fzf): Command-line fuzzy finder.
+    - [ripgrep](https://github.com/BurntSushi/ripgrep): Search tool like grep and The Silver Searcher.
+    - [tmux](https://github.com/tmux/tmux/wiki): Terminal multiplexer.
 
 ## Useful Stuff
 
