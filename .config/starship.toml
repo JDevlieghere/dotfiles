@@ -12,8 +12,8 @@ command_timeout = 200
 
 [hostname]
 ssh_only = false
-format = "[$hostname]($style) $ssh_symbol in "
-ssh_symbol = ""
+format = "[$hostname]($style)$ssh_symbol in "
+ssh_symbol = " "
 
 [username]
 show_always = true
