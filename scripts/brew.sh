@@ -27,10 +27,12 @@ installEssentials() {
     autossh \
     black \
     clang-format \
+    cmake \
     fd \
     fish \
     fzf \
     git \
+    git-delta \
     gnupg \
     lua \
     luarocks \
@@ -41,6 +43,7 @@ installEssentials() {
     stylua \
     swig \
     tmux \
+    tree \
     vim
 
   $(brew --prefix)/opt/fzf/install --all
@@ -53,14 +56,12 @@ installBasics() {
     bat \
     boost \
     cloc \
-    cmake \
     cmake-language-server \
     creduce \
     ctags \
     doxygen \
     fastfetch \
     gh \
-    git-delta \
     git-lfs \
     graphviz \
     highlight \
@@ -81,7 +82,6 @@ installBasics() {
     rsync \
     sccache \
     shellharden \
-    tree \
     xz \
     zsh
 }
