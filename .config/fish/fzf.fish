@@ -1,4 +1,4 @@
-function __gen_fzf_default_opts -d "Generate FZF default options"
+function fzf_default_opts -d "Generate FZF default options"
   # Solarized Dark color scheme
   set -f base03 "#002b36"
   set -f base02 "#073642"
@@ -21,4 +21,11 @@ function __gen_fzf_default_opts -d "Generate FZF default options"
                            --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow"
 end
 
-__gen_fzf_default_opts
+function fzf_user_key_bindings -d "Configure user key bindings"
+  fzf --fish | source
+end
+
+if type -q fzf
+  fzf_default_opts
+  fzf_user_key_bindings
+end
