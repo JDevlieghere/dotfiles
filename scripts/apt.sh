@@ -19,6 +19,7 @@ sudo apt install -y \
     htop \
     hyperfine \
     neovim \
+    ninja-build \
     pandoc \
     re2c \
     ripgrep \
