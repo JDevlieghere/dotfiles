@@ -62,7 +62,6 @@ set nofoldenable                " Disable folding
 set lazyredraw                  " Use lazy redrawing
 set noshowmode                  " Don't show mode
 set number                      " Show line numbers
-set pastetoggle=<F2>            " Toggle paste mode with F2
 set ruler                       " Show ruler
 set showcmd                     " Show current command
 set showmatch                   " Show matching bracket/parenthesis/etc
@@ -150,6 +149,10 @@ set nomodeline
 " Encryption
 if has("crypt-blowfish2")
     set cm=blowfish2
+endif
+
+if !has('nvim')
+    set pastetoggle=<F2>        " Toggle paste mode with F2
 endif
 
 " History
