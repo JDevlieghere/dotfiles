@@ -1,4 +1,5 @@
 font-family = "MonoLisa Nerd Font"
+font-feature = "ss02"
 theme = "iTerm2 Solarized Dark"
 macos-titlebar-style = tabs
 shell-integration = fish
