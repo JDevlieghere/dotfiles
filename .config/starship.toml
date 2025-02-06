@@ -19,6 +19,10 @@ ssh_symbol = " "
 show_always = true
 format = '[$user]($style)@'
 
+[git_branch]
+symbol = " "
+tag_disabled = false
+
 # Nerd font symbols
 # Generated with `starship preset nerd-font-symbols`
 [aws]
@@ -58,9 +62,6 @@ symbol = " "
 symbol = " "
 
 [fossil_branch]
-symbol = " "
-
-[git_branch]
 symbol = " "
 
 [git_commit]
