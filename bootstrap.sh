@@ -111,9 +111,6 @@ doInstall() {
         if command -v pip3 &> /dev/null; then
             pip3 install neovim
         fi
-        if command -v npm &> /dev/null; then
-            npm install neovim
-        fi
     else
         curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         vim +PlugInstall +PlugUpdate +qa!
