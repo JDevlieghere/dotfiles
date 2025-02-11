@@ -1,6 +1,9 @@
 return {
     {
         "saghen/blink.cmp",
+        -- Use a release tag to download pre-built binaries.
+        version = "*",
+        ---@type blink.cmp.Config
         opts = {
             keymap = { preset = "super-tab" },
             sources = {
