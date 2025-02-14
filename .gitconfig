@@ -23,12 +23,11 @@
 	gpgsign = true
 	verbose = false
 [diff]
-	tool = vimdiff
-	colorMoved = default
+        tool = nvimdiff
 [diff "bin"]
 	textconv = hexdump -v -C
 [merge]
-	tool = vimdiff
+	tool = nvimdiff
 [help]
 	autocorrect = 1
 [status]
@@ -67,3 +66,5 @@
 	side-by-side = true
 	syntax-theme = "Solarized (dark)"
 	navigate = true
+[difftool "nvimdiff"]
+        cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
