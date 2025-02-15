@@ -28,6 +28,7 @@
 	textconv = hexdump -v -C
 [merge]
 	tool = nvimdiff
+        conflictstyle = zdiff3
 [help]
 	autocorrect = 1
 [status]
@@ -66,5 +67,6 @@
 	side-by-side = true
 	syntax-theme = "Solarized (dark)"
 	navigate = true
+        dark = true
 [difftool "nvimdiff"]
         cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
