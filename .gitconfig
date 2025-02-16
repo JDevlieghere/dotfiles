@@ -34,6 +34,7 @@
 [status]
 	showuntrackedfiles = all
 [alias]
+        dt = difftool --no-prompt
 	aa = add --all
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	amend = commit --amend
