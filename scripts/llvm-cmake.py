@@ -175,6 +175,8 @@ if args.swift:
 if args.no_swift:
     cmake_cmd.append("-DLLDB_ENABLE_SWIFT_SUPPORT=OFF")
 
+if "linux" in sys.platform:
+    cmake_cmd.append("-DLLVM_USE_SPLIT_DWARF:BOOL=ON")
 
 if extra_args:
     cmake_cmd.extend(extra_args)
