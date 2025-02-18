@@ -22,6 +22,7 @@ alias reload="exec $SHELL -l"
 alias fdiff='diff --speed-large-files'
 
 # Neovim
+alias vi=nvim
 alias vim=nvim
 alias vimdiff="nvim -d"
 

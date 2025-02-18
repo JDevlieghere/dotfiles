@@ -1,34 +1,6 @@
 set nocompatible
 
 " ---------------------------------------------------------------------------- "
-" Plugins                                                                      "
-" ---------------------------------------------------------------------------- "
-
-if !has('nvim')
-    let g:polyglot_disabled = ['autoindent', 'sensible']
-
-    call plug#begin('~/.vim/plugged')
-    Plug 'ap/vim-buftabline'
-    Plug 'ervandew/supertab'
-    Plug 'itchyny/lightline.vim'
-    Plug 'mbbill/undotree'
-    Plug 'moll/vim-bbye'
-    Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-sleuth'
-    Plug 'tpope/vim-surround'
-    Plug 'lifepillar/vim-solarized8'
-    Plug 'sheerun/vim-polyglot'
-    Plug 'junegunn/fzf',                    { 'do': 'yes \| ./install' }
-    Plug 'junegunn/fzf.vim'
-    Plug 'lervag/vimtex',                       { 'for': 'tex' }
-    Plug 'llvm/llvm.vim',                       { 'for': 'llvm' }
-    Plug 'racer-rust/vim-racer',                { 'for': 'rust' }
-    Plug 'vim-scripts/doxygentoolkit.vim',      { 'for': 'cpp' }
-    call plug#end()
-endif
-
-" ---------------------------------------------------------------------------- "
 " General Settings                                                             "
 " ---------------------------------------------------------------------------- "
 
@@ -39,13 +11,6 @@ if has("termguicolors")
     let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
-endif
-
-if !has('nvim')
-    try
-        colorscheme solarized8
-    catch
-    endtry
 endif
 
 if !exists("g:syntax_on")
@@ -312,13 +277,6 @@ vnoremap _ y :Rg <C-R>"<CR>
 nnoremap _ yaw :Rg <C-R>"<CR>
 nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
-
-" vim-lightline
-if !has('nvim')
-    let g:lightline = {
-        \ 'colorscheme': 'solarized',
-        \ }
-endif
 
 " doxygentoolkit.vim
 let g:DoxygenToolkit_commentType="C++"
