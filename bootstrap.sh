@@ -35,7 +35,7 @@ doGitConfig() {
 
         git config --global mergetool.smerge.cmd '/Applications/Sublime\ Merge.app/Contents/SharedSupport/bin/smerge mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"'
         git config --global mergetool.smerge.trustExitCode true
-        git config --global merge.tool smerge
+        git config --global merge.guitool smerge
     fi
 
     delta=$(type -P "delta")
