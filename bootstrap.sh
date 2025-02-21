@@ -105,15 +105,12 @@ doDirectories() {
 }
 
 doInstall() {
-    info "Installing (neo)vim plugins"
     if command -v nvim &> /dev/null; then
+        info "Installing neovim plugins"
         nvim --headless "+Lazy! sync" +qa
         if command -v pip3 &> /dev/null; then
             pip3 install neovim
         fi
-    else
-        curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        vim +PlugInstall +PlugUpdate +qa!
     fi
 
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
