@@ -116,9 +116,9 @@ doInstall() {
     if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
         info "Installing tmux plugins"
         git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+        "$HOME/.tmux/plugins/tpm/bin/install_plugins"
     else
         info "Updating tmux plugins"
-        "$HOME/.tmux/plugins/tpm/bin/install_plugins"
         "$HOME/.tmux/plugins/tpm/bin/update_plugins" all
     fi
 
