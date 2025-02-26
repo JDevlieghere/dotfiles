@@ -24,7 +24,6 @@ installEssentials() {
   info "Installing essentials"
 
   brew install \
-    autossh \
     black \
     clang-format \
     cmake \
