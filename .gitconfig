@@ -1,16 +1,27 @@
+[user]
+	email = jonas@devlieghere.com
+	name = Jonas Devlieghere
 [core]
 	editor = nvim
 	fsmonitor = true
 	untrackedCache = true
-[user]
-	email = jonas@devlieghere.com
-	name = Jonas Devlieghere
-[push]
-	default = simple
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
 [pull]
 	rebase = true
+[push]
+	default = simple
+	autoSetupRemote = true
+	followTags = true
 [rebase]
+	autoSquash = true
 	autoStash = true
+	updateRefs = true
+[rerere]
+	enabled = true
+	autoupdate = true
 [grep]
 	extendRegexp = true
 	lineNumber = true
@@ -23,42 +34,44 @@
 	gpgsign = true
 	verbose = false
 [diff]
-        tool = nvimdiff
+	tool = nvimdiff
 [diff "bin"]
 	textconv = hexdump -v -C
 [merge]
 	tool = nvimdiff
-        conflictstyle = zdiff3
+	conflictstyle = zdiff3
 [help]
 	autocorrect = 1
 [status]
 	showuntrackedfiles = all
+[init]
+	defaultBranch = main
+[credential]
+	helper = cache --timeout=3600
+[column]
+	ui = auto
 [alias]
-        dt = difftool --no-prompt
-        mt = mergetool --no-prompt
 	aa = add --all
-	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
 	amend = commit --amend
 	anw = !sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
 	ca = diff --cached
 	co = checkout
 	cp = cherry-pick
+	dt = difftool --no-prompt
 	fall = log --all --grep
 	find = log --grep
 	fmt = clang-format
 	git = "!exec git"
 	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+	mt = mergetool --no-prompt
 	nopush = !sh -c 'git remote set-url --push $1 /dev/null' -
 	ours = checkout --ours
 	patch =  show HEAD -U999999
-	review = !git diff --name-only --cached | xargs -n 1 git blame --porcelain | grep  \"^author \" | sort | uniq -c | sort -nr | head -10
 	sha = rev-parse HEAD
 	st = status
 	theirs = checkout --theirs
 	uncommit = reset HEAD~
 	unstage = reset HEAD --
-[credential]
-	helper = cache --timeout=3600
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
@@ -69,6 +82,6 @@
 	side-by-side = true
 	syntax-theme = "Solarized (dark)"
 	navigate = true
-        dark = true
+	dark = true
 [difftool "nvimdiff"]
-        cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+	cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
