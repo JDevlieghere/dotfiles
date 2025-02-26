@@ -13,3 +13,4 @@ Thumbs.db
 
 # Purposely untracked
 .localrc
+.ssh/local_config
