@@ -19,6 +19,8 @@
 	autoSquash = true
 	autoStash = true
 	updateRefs = true
+[branch]
+	sort = -committerdate
 [rerere]
 	enabled = true
 	autoupdate = true
