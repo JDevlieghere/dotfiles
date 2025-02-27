@@ -21,6 +21,8 @@
 	updateRefs = true
 [branch]
 	sort = -committerdate
+[checkout]
+	defaultRemote = origin
 [rerere]
 	enabled = true
 	autoupdate = true
