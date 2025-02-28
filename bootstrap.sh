@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#in event handler: handler for generic event 'fish_job_summary'!/usr/bin/env bash
 
 # shellcheck disable=SC2016
 
@@ -54,13 +54,6 @@ doToolConfig() {
     if [ -x "$fish" ]; then
         echo "Configuring fish theme"
         "$fish" "$DOTFILES/.config/fish/solarized.fish"
-    fi
-
-    pinentry=$(which pinentry-mac)
-    if [ -x "$pinentry" ]; then
-        echo "Configuring pinentry-mac"
-        echo "pinentry-program $pinentry" >> "$HOME/.gnupg/gpg-agent.conf"
-        killall gpg-agent 2> /dev/null
     fi
 }
 
