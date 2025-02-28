@@ -28,6 +28,17 @@ def get_cmake():
     return subprocess.check_output(["which", "cmake"]).decode().strip()
 
 
+def get_clang_cache():
+    if platform.system() == "Darwin":
+        cmd = ["xcrun", "-f", "clang-cache"]
+    else:
+        cmd = ["which", "clang-cache"]
+    try:
+        return subprocess.check_output(cmd).decode().strip()
+    except subprocess.CalledProcessError:
+        return None
+
+
 parser = argparse.ArgumentParser(
     description="CMake configuration options are relatively verbose and remembering the "
     "ones you don't use that often can be a real pain. This scripts attempts "
@@ -149,6 +160,12 @@ if args.docs:
 if args.expensive:
     cmake_cmd.append("-DLLVM_ENABLE_EXPENSIVE_CHECKS:BOOL=ON")
     cmake_cmd.append("-DLLVM_ENABLE_REVERSE_ITERATION:BOOL=ON")
+
+if not args.launcher:
+    if os.environ.get("LLVM_CACHE_CAS_PATH") is not None:
+        clang_cache = get_clang_cache()
+        if clang_cache:
+            args.launcher = clang_cache
 
 if args.launcher:
     cmake_cmd.append("-DCMAKE_C_COMPILER_LAUNCHER='{}'".format(args.launcher))
