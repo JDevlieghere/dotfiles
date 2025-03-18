@@ -81,6 +81,7 @@ installBasics() {
     rsync \
     sccache \
     shellharden \
+    tig \
     xz \
     zsh
 }
@@ -103,7 +104,6 @@ installExtras() {
     radare2 \
     ranger \
     shellcheck \
-    tig \
     valgrind
 }
 
