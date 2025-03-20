@@ -12,6 +12,7 @@ sudo apt install -y \
     libedit-dev \
     liblzma-dev \
     libncurses5-dev \
+    libpcre3-dev \
     libsqlite3-dev \
     libxml2-dev \
     libxpm-dev \
