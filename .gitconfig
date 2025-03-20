@@ -3,7 +3,6 @@
 	name = Jonas Devlieghere
 [core]
 	editor = nvim
-	fsmonitor = true
 	untrackedCache = true
 [fetch]
 	prune = true
@@ -45,8 +44,6 @@
 	conflictstyle = zdiff3
 [help]
 	autocorrect = 1
-[status]
-	showuntrackedfiles = all
 [init]
 	defaultBranch = main
 [credential]
