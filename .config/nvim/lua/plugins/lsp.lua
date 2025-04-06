@@ -11,7 +11,7 @@ return {
                     filetypes = { "swift" },
                 },
                 clangd = {
-                    cmd = { "clangd", "--background-index" },
+                    cmd = { "clangd", "--background-index", "--header-insertion=never" },
                 },
             },
         },
