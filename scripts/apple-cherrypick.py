@@ -7,6 +7,9 @@ import subprocess
 import sys
 
 from rich.logging import RichHandler
+from rich.progress import Progress
+from rich.progress import track
+
 
 log = logging.getLogger(__name__)
 
@@ -124,6 +127,7 @@ def main():
 
     # Fetch upstream LLVM.
     if not args.pr_only:
+        log.info("Fetching remotes")
         run(["git", "fetch", "-q", "--multiple", "origin", "llvm"])
 
     base_branch = get_branch(args.branch.lower())
@@ -154,7 +158,7 @@ def main():
             return 1
 
         # Cherry pick commits one-by-one.
-        for commit in args.commits:
+        for commit in track(args.commits, description="Cherry-picking commits"):
             try:
                 run(["git", "cherry-pick", "-x", commit])
             except subprocess.CalledProcessError:
