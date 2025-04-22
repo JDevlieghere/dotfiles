@@ -21,6 +21,9 @@ format = '[$user]($style)@'
 
 [git_branch]
 symbol = " "
+
+[git_commit]
+tag_symbol = '  '
 tag_disabled = false
 
 # Nerd font symbols
@@ -63,9 +66,6 @@ symbol = " "
 
 [fossil_branch]
 symbol = " "
-
-[git_commit]
-tag_symbol = '  '
 
 [golang]
 symbol = " "
