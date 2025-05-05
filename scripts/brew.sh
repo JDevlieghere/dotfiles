@@ -77,7 +77,6 @@ installBasics() {
     pyright \
     python \
     re2c \
-    redis \
     rsync \
     sccache \
     shellharden \
@@ -94,7 +93,6 @@ installExtras() {
     binutils \
     coreutils \
     cppcheck \
-    distcc \
     ffmpeg \
     findutils \
     gdb \
