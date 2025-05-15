@@ -140,7 +140,11 @@ defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 # Gatekeeper                                                                  #
 # --------------------------------------------------------------------------- #
 
-xattr -rd com.apple.quarantine /Applications/Alacritty.app
+ALACRITTY=/Applications/Alacritty.app
+if [[ -f "$ALACRITTY" ]]
+then
+  xattr -rd com.apple.quarantine "$ALACRITTY"
+fi
 
 # --------------------------------------------------------------------------- #
 # Pinentry                                                                    #
