@@ -24,9 +24,9 @@ if status --is-interactive
     set -gx STARSHIP_LOG error
   end
 
-  # Append ~/.bin to PATH.
-  if test -d ~/bin
-      fish_add_path -a ~/bin
+  # Append ~/.local/bin to PATH.
+  if test -d ~/.local/bin
+      fish_add_path -a ~/.local/bin
   end
 
   # Source .localrc last which is not sync'd.
