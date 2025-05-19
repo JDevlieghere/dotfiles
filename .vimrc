@@ -264,6 +264,13 @@ augroup transparent_signs
     autocmd ColorScheme * highlight GitSignsDelete guibg=NONE
 augroup end
 
+" Automatic toggling between line number modes
+augroup toggle_relative_number
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set relativenumber | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave * if &nu | set norelativenumber | endif
+augroup end
+
 " Watch my .vimrc
 augroup reload_vimrc
     autocmd!
