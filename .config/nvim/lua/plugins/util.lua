@@ -13,17 +13,4 @@ return {
             },
         },
     },
-    {
-        "m4xshen/hardtime.nvim",
-        lazy = false,
-        dependencies = { "MunifTanjim/nui.nvim" },
-        opts = {
-            disabled_keys = {
-                ["<Up>"] = {},
-                ["<Down>"] = {},
-            },
-            disable_mouse = false,
-            restriction_mode = "hint",
-        },
-    },
 }
