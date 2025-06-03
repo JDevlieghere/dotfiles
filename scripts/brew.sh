@@ -78,7 +78,6 @@ installBasics() {
     python \
     re2c \
     rsync \
-    sccache \
     shellharden \
     tig \
     xz \
