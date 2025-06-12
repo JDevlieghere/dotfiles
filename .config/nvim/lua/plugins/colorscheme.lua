@@ -9,6 +9,9 @@ return {
             styles = {
                 comments = { italic = true, bold = false },
             },
+            transparent = {
+                enabled = true,
+            },
             on_highlights = function(colors, color)
                 ---@type solarized.highlights
                 local groups = {
