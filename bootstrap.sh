@@ -81,13 +81,13 @@ doSync() {
 
     # Copy Sublime configurations.
     if [ -d "$HOME/Library/Application Support/Sublime Merge/" ]; then
-        cp -f "$DOTFILES/sublime/merge/Preferences.sublime-settings" \
-              "$HOME/Library/Application Support/Sublime Merge/Packages/User/Preferences.sublime-settings"
+        rsync -a "$DOTFILES/sublime/merge/" \
+                 "$HOME/Library/Application Support/Sublime Merge/Packages/User/"
     fi
 
     if [ -d "$HOME/Library/Application Support/Sublime Text/" ]; then
-        cp -f "$DOTFILES/sublime/text/Preferences.sublime-settings" \
-              "$HOME/Library/Application Support/Sublime Text/Packages/User/Preferences.sublime-settings"
+        rsync -a "$DOTFILES/sublime/text/" \
+                 "$HOME/Library/Application Support/Sublime Text/Packages/User/"
     fi
 }
 
