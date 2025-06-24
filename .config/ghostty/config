@@ -5,5 +5,4 @@ macos-titlebar-style = tabs
 shell-integration = fish
 copy-on-select = true
 confirm-close-surface = false
-background-opacity = 0.95
-background-blur = true
+term = xterm-256color
