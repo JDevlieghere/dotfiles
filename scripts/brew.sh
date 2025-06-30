@@ -33,6 +33,7 @@ installEssentials() {
     git \
     git-delta \
     gnupg \
+    hexyl \
     lua \
     luarocks \
     neovim \
