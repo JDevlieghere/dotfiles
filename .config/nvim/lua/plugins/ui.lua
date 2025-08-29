@@ -12,6 +12,7 @@ return {
             -- Disable animations
             animation = false,
         },
+        version = '^1.0.0',
     },
     {
         "nvim-lualine/lualine.nvim",
