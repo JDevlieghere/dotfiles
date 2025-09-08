@@ -9,6 +9,7 @@ return {
             cpp = { "clang-format" },
             objc = { "clang-format" },
             objcpp = { "clang-format" },
+            tablegen = { "clang-format" },
         },
         default_format_opts = {
             lsp_format = "fallback",
