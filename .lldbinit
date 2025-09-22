@@ -11,9 +11,6 @@ settings set show-autosuggestion-ansi-prefix "${ansi.fg.bright.yellow}"
 # Progress
 settings set show-progress-ansi-prefix "${ansi.fg.yellow}"
 
-# Statusline
-settings set -e statusline-format "${ansi.bg.black}${ansi.fg.white}{${target.file.basename}}{ | ${line.file.basename}:${line.number}:${line.column}}{ | ${thread.stop-reason}}{ | {${progress.count} }${progress.message}}"
-
 # Background symbol lookup
 settings set -e symbols.experimental.enable-background-lookup true
 settings set -e symbols.auto-download background
