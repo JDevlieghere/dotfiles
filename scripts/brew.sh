@@ -59,6 +59,7 @@ installBasics() {
     cmake-language-server \
     creduce \
     ctags \
+    d2 \
     doxygen \
     fastfetch \
     gh \
