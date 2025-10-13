@@ -9,7 +9,7 @@ settings set show-autosuggestion true
 settings set show-autosuggestion-ansi-prefix "${ansi.fg.bright.yellow}"
 
 # Progress
-settings set show-progress-ansi-prefix "${ansi.fg.yellow}"
+settings set show-progress true
 
 # Background symbol lookup
 settings set -e symbols.experimental.enable-background-lookup true
