@@ -69,6 +69,7 @@ installBasics() {
     htop \
     hyperfine \
     jq \
+    lazygit \
     lcov \
     libxml2 \
     ncdu \
