@@ -44,6 +44,7 @@ installEssentials() {
     swig \
     tmux \
     tree \
+    tree-sitter-cli \
     vim
 
   $(brew --prefix)/opt/fzf/install --all
