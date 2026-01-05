@@ -28,3 +28,6 @@ alias vimdiff="nvim -d"
 
 # Reboot and bypass FileVault password
 alias restart='fdesetup authrestart'
+
+# Find Bundle Identifier (e.g. for tccutil)
+alias bundle_id='mdls -raw -name kMDItemCFBundleIdentifier'
