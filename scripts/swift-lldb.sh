@@ -10,5 +10,4 @@ export SKIP_XCODE_VERSION_CHECK=1
   --skip-build-benchmarks \
   --skip-test-swift \
   --skip-test-cmark \
-  --skip-early-swift-driver \
   $@
