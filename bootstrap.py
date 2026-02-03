@@ -12,13 +12,19 @@ import sys
 from pathlib import Path
 from typing import Optional
 
+FORMAT = "%(message)s"
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='\033[00;34m%(message)s\033[0m',
-    stream=sys.stdout
-)
+try:
+    from rich.logging import RichHandler
+
+    logging.basicConfig(
+        level=logging.INFO, format=FORMAT, datefmt="[%X]", handlers=[RichHandler()]
+    )
+except ImportError:
+    logging.basicConfig(
+        level=logging.INFO, format=FORMAT, datefmt="[%X]", stream=sys.stdout
+    )
+
 logger = logging.getLogger(__name__)
 
 
@@ -33,9 +39,7 @@ class DotfilesBootstrap:
         """Update the dotfiles repository from origin."""
         logger.info("Updating")
         subprocess.run(
-            ["git", "pull", "origin", "main"],
-            cwd=self.dotfiles_dir,
-            check=True
+            ["git", "pull", "origin", "main"], cwd=self.dotfiles_dir, check=True
         )
 
     def git_config(self) -> None:
@@ -47,50 +51,68 @@ class DotfilesBootstrap:
         gitignore_global = self.home_dir / ".gitignore_global"
         subprocess.run(
             ["git", "config", "--global", "core.excludesfile", str(gitignore_global)],
-            check=True
+            check=True,
         )
 
         # Configure Araxis Merge if available
         araxis_path = Path("/Applications/Araxis Merge.app/Contents/Utilities/")
         if araxis_path.exists():
             logger.info("Configuring Araxis Merge")
-            subprocess.run(["git", "config", "--global", "diff.guitool", "araxis"], check=True)
-            subprocess.run(["git", "config", "--global", "merge.guitool", "araxis"], check=True)
             subprocess.run(
-                ["git", "config", "--global", "mergetool.araxis.path",
-                 "/Applications/Araxis Merge.app/Contents/Utilities/compare"],
-                check=True
+                ["git", "config", "--global", "diff.guitool", "araxis"], check=True
+            )
+            subprocess.run(
+                ["git", "config", "--global", "merge.guitool", "araxis"], check=True
+            )
+            subprocess.run(
+                [
+                    "git",
+                    "config",
+                    "--global",
+                    "mergetool.araxis.path",
+                    "/Applications/Araxis Merge.app/Contents/Utilities/compare",
+                ],
+                check=True,
             )
 
         # Configure Sublime Merge if available
-        smerge_path = Path("/Applications/Sublime Merge.app/Contents/SharedSupport/bin/")
+        smerge_path = Path(
+            "/Applications/Sublime Merge.app/Contents/SharedSupport/bin/"
+        )
         if smerge_path.exists():
             logger.info("Configuring Sublime Merge")
             smerge_cmd = (
-                '/Applications/Sublime\\ Merge.app/Contents/SharedSupport/bin/smerge '
+                "/Applications/Sublime\\ Merge.app/Contents/SharedSupport/bin/smerge "
                 'mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"'
             )
             subprocess.run(
                 ["git", "config", "--global", "mergetool.smerge.cmd", smerge_cmd],
-                check=True
+                check=True,
             )
             subprocess.run(
                 ["git", "config", "--global", "mergetool.smerge.trustExitCode", "true"],
-                check=True
+                check=True,
             )
             subprocess.run(
-                ["git", "config", "--global", "merge.guitool", "smerge"],
-                check=True
+                ["git", "config", "--global", "merge.guitool", "smerge"], check=True
             )
 
         # Configure delta if available
         delta_path = shutil.which("delta")
         if delta_path:
             logger.info("Configuring delta")
-            subprocess.run(["git", "config", "--global", "core.pager", "delta"], check=True)
             subprocess.run(
-                ["git", "config", "--global", "interactive.diffFilter", "delta --color-only"],
-                check=True
+                ["git", "config", "--global", "core.pager", "delta"], check=True
+            )
+            subprocess.run(
+                [
+                    "git",
+                    "config",
+                    "--global",
+                    "interactive.diffFilter",
+                    "delta --color-only",
+                ],
+                check=True,
             )
 
     def tool_config(self) -> None:
@@ -127,13 +149,15 @@ class DotfilesBootstrap:
         for pattern in exclude_patterns:
             rsync_cmd.extend(["--exclude", pattern])
 
-        rsync_cmd.extend([
-            "--filter=:- .gitignore",
-            "--no-perms",
-            "-avh",
-            f"{self.dotfiles_dir}/",
-            str(self.home_dir)
-        ])
+        rsync_cmd.extend(
+            [
+                "--filter=:- .gitignore",
+                "--no-perms",
+                "-avh",
+                f"{self.dotfiles_dir}/",
+                str(self.home_dir),
+            ]
+        )
 
         subprocess.run(rsync_cmd, check=True)
 
@@ -142,24 +166,28 @@ class DotfilesBootstrap:
         localrc.touch(exist_ok=True)
 
         # Copy Sublime configurations
-        sublime_merge_dir = self.home_dir / "Library" / "Application Support" / "Sublime Merge"
+        sublime_merge_dir = (
+            self.home_dir / "Library" / "Application Support" / "Sublime Merge"
+        )
         if sublime_merge_dir.exists():
             sublime_merge_src = self.dotfiles_dir / "sublime" / "merge"
             sublime_merge_dst = sublime_merge_dir / "Packages" / "User"
             if sublime_merge_src.exists():
                 subprocess.run(
                     ["rsync", "-a", f"{sublime_merge_src}/", str(sublime_merge_dst)],
-                    check=True
+                    check=True,
                 )
 
-        sublime_text_dir = self.home_dir / "Library" / "Application Support" / "Sublime Text"
+        sublime_text_dir = (
+            self.home_dir / "Library" / "Application Support" / "Sublime Text"
+        )
         if sublime_text_dir.exists():
             sublime_text_src = self.dotfiles_dir / "sublime" / "text"
             sublime_text_dst = sublime_text_dir / "Packages" / "User"
             if sublime_text_src.exists():
                 subprocess.run(
                     ["rsync", "-a", f"{sublime_text_src}/", str(sublime_text_dst)],
-                    check=True
+                    check=True,
                 )
 
     def directories(self) -> None:
@@ -173,10 +201,7 @@ class DotfilesBootstrap:
         # Install neovim plugins
         if shutil.which("nvim"):
             logger.info("Installing neovim plugins")
-            subprocess.run(
-                ["nvim", "--headless", "+Lazy! sync", "+qa"],
-                check=False
-            )
+            subprocess.run(["nvim", "--headless", "+Lazy! sync", "+qa"], check=False)
             if shutil.which("pip3"):
                 subprocess.run(["pip3", "install", "neovim"], check=False)
 
@@ -186,18 +211,12 @@ class DotfilesBootstrap:
             logger.info("Installing tmux plugins")
             subprocess.run(
                 ["git", "clone", "https://github.com/tmux-plugins/tpm", str(tpm_dir)],
-                check=True
+                check=True,
             )
-            subprocess.run(
-                [str(tpm_dir / "bin" / "install_plugins")],
-                check=True
-            )
+            subprocess.run([str(tpm_dir / "bin" / "install_plugins")], check=True)
         else:
             logger.info("Updating tmux plugins")
-            subprocess.run(
-                [str(tpm_dir / "bin" / "update_plugins"), "all"],
-                check=True
-            )
+            subprocess.run([str(tpm_dir / "bin" / "update_plugins"), "all"], check=True)
 
         # Install/update Rust
         if shutil.which("rustup"):
@@ -207,9 +226,17 @@ class DotfilesBootstrap:
             logger.info("Installing Rust")
             rustup_script = Path("/tmp/rustup-init.sh")
             subprocess.run(
-                ["curl", "--proto", "=https", "--tlsv1.2", "-sSf",
-                 "https://sh.rustup.rs", "-o", str(rustup_script)],
-                check=True
+                [
+                    "curl",
+                    "--proto",
+                    "=https",
+                    "--tlsv1.2",
+                    "-sSf",
+                    "https://sh.rustup.rs",
+                    "-o",
+                    str(rustup_script),
+                ],
+                check=True,
             )
             rustup_script.chmod(0o755)
             subprocess.run([str(rustup_script), "-y"], check=True)
@@ -294,28 +321,23 @@ def main() -> int:
     """Main entry point."""
     parser = argparse.ArgumentParser(
         description="Bootstrap script for dotfiles setup and configuration.",
-        formatter_class=argparse.RawDescriptionHelpFormatter
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
 
     parser.add_argument(
-        "-s", "--sync",
+        "-s",
+        "--sync",
         action="store_true",
-        help="Synchronizes dotfiles to home directory"
+        help="Synchronizes dotfiles to home directory",
     )
     parser.add_argument(
-        "-i", "--install",
-        action="store_true",
-        help="Install (extra) software"
+        "-i", "--install", action="store_true", help="Install (extra) software"
     )
     parser.add_argument(
-        "-c", "--config",
-        action="store_true",
-        help="Configures your system"
+        "-c", "--config", action="store_true", help="Configures your system"
     )
     parser.add_argument(
-        "-a", "--all",
-        action="store_true",
-        help="Does all of the above"
+        "-a", "--all", action="store_true", help="Does all of the above"
     )
 
     args = parser.parse_args()
