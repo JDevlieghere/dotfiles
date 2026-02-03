@@ -25,16 +25,17 @@ Use the bootstrap script to create symbolic links and configure the tools and
 operating system.
 
 ```
-$ ./bootstrap.sh
-Usage: bootstrap.sh [options]
+$ ./bootstrap.py -h
+usage: bootstrap.py [-h] [-s] [-i] [-c] [-a]
 
-   -s, --sync             Synchronizes dotfiles to home directory
-   -l, --link             Create symbolic links
-   -i, --install          Install (extra) software
-   -c, --config           Configures your system
-   -a, --all              Does all of the above
+Bootstrap script for dotfiles setup and configuration.
 
-$ ./bootstrap.sh -a
+optional arguments:
+  -h, --help     show this help message and exit
+  -s, --sync     Synchronizes dotfiles to home directory
+  -i, --install  Install (extra) software
+  -c, --config   Configures your system
+  -a, --all      Does all of the above
 ```
 
 > [!WARNING]
