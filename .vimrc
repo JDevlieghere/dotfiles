@@ -247,6 +247,8 @@ augroup filtypes
     autocmd FileType crontab setlocal nobackup nowritebackup
     autocmd FileType make setlocal noexpandtab
     autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4
+    autocmd FileType markdown setlocal wrap
+    autocmd FileType rst setlocal wrap
 augroup end
 
 " Remove trailing whitespace
