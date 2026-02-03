@@ -54,3 +54,6 @@ compile_commands.json
 # LSP
 cquery_diagnostics.log
 .ropeproject
+
+# Claude
+.claude
