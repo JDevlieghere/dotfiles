@@ -289,7 +289,7 @@ class DotfilesBootstrap:
         system = platform.system()
         if system == "Darwin":
             logger.info("Configuring macOS")
-            macos_script = self.dotfiles_dir / "os" / "macos.sh"
+            macos_script = self.dotfiles_dir / "os" / "macos.py"
             if macos_script.exists():
                 subprocess.run([str(macos_script)], check=True)
         elif system == "Linux":
