@@ -44,6 +44,7 @@ installEssentials() {
     swig \
     tmux \
     tree \
+    tree-sitter \
     tree-sitter-cli \
     vim
 
