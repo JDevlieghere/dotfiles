@@ -29,10 +29,21 @@ def get_cmake():
 
 
 def get_clang_cache():
+    try:
+        clang = subprocess.check_output(["xcrun", "-f", "clang"]).decode().strip()
+        clang_cache = (
+            subprocess.check_output(["xcrun", "-f", "clang-cache"]).decode().strip()
+        )
+        return clang, clang_cache
+    except subprocess.CalledProcessError:
+        return None, None
+
+
+def get_clang():
     if platform.system() == "Darwin":
-        cmd = ["xcrun", "-f", "clang-cache"]
+        cmd = ["xcrun", "-f", "clang"]
     else:
-        cmd = ["which", "clang-cache"]
+        cmd = ["which", "clang"]
     try:
         return subprocess.check_output(cmd).decode().strip()
     except subprocess.CalledProcessError:
@@ -83,8 +94,6 @@ parser.add_argument("--docs", action="store_true", help="Build the documentation
 parser.add_argument("--expensive", action="store_true", help="Enable expensive checks")
 
 parser.add_argument("--fuzz", action="store_true", help="Enable fuzzers")
-
-parser.add_argument("--launcher", help="Specify launcher", type=str)
 
 parser.add_argument("--sdk", help="Specify an Xcode SDK", type=str)
 
@@ -161,16 +170,6 @@ if args.expensive:
     cmake_cmd.append("-DLLVM_ENABLE_EXPENSIVE_CHECKS:BOOL=ON")
     cmake_cmd.append("-DLLVM_ENABLE_REVERSE_ITERATION:BOOL=ON")
 
-if not args.launcher:
-    if os.environ.get("LLVM_CACHE_CAS_PATH") is not None:
-        clang_cache = get_clang_cache()
-        if clang_cache:
-            args.launcher = clang_cache
-
-if args.launcher:
-    cmake_cmd.append("-DCMAKE_C_COMPILER_LAUNCHER='{}'".format(args.launcher))
-    cmake_cmd.append("-DCMAKE_CXX_COMPILER_LAUNCHER='{}'".format(args.launcher))
-
 if args.projects:
     projects = ";".join(args.projects)
     cmake_cmd.append("-DLLVM_ENABLE_PROJECTS='{}'".format(projects))
@@ -191,6 +190,14 @@ if args.swift:
 
 if args.no_swift:
     cmake_cmd.append("-DLLDB_ENABLE_SWIFT_SUPPORT=OFF")
+
+if os.environ.get("LLVM_CACHE_CAS_PATH") is not None:
+    clang, clang_cache = get_clang_cache()
+    if clang and clang_cache:
+        cmake_cmd.append("-DCMAKE_C_COMPILER='{}'".format(clang))
+        cmake_cmd.append("-DCMAKE_C_COMPILER_LAUNCHER='{}'".format(clang_cache))
+        cmake_cmd.append("-DCMAKE_CXX_COMPILER='{}++'".format(clang))
+        cmake_cmd.append("-DCMAKE_CXX_COMPILER_LAUNCHER='{}'".format(clang_cache))
 
 if "linux" in sys.platform:
     cmake_cmd.append("-DLLVM_USE_SPLIT_DWARF:BOOL=ON")
