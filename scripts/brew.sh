@@ -83,6 +83,7 @@ installBasics() {
     python \
     re2c \
     rsync \
+    ruff \
     shellharden \
     tig \
     xz \
