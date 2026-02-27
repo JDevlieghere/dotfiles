@@ -1,6 +1,3 @@
-# Silently import the lldb.macosx.crashlog scripts
-command script import -s lldb.macosx.crashlog
-
 # Load scripts from dSYM bundles
 settings set target.load-script-from-symbol-file true
 
