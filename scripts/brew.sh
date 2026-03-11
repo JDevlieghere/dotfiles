@@ -69,6 +69,7 @@ installBasics() {
     graphviz \
     highlight \
     htop \
+    hugo \
     hyperfine \
     jq \
     lazygit \
