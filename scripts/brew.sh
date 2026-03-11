@@ -172,9 +172,6 @@ else
         list
         shift
         ;;
-      -f|--fix)
-        shift
-        ;;
       -u|--update)
         update
         cleanup
