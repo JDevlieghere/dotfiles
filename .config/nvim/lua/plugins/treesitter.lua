@@ -3,14 +3,15 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         lazy = false,
-        cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-        keys = {
-            { "<c-space>", desc = "Increment Selection" },
-            { "<bs>", desc = "Decrement Selection", mode = "x" },
-        },
-        opts_extend = { "ensure_installed" },
         opts = {
-            ensure_installed = {
+            highlight = { enable = true },
+            indent = { enable = true },
+            install_dir = vim.fn.stdpath("data") .. "/site",
+        },
+        config = function(_, opts)
+            local TS = require("nvim-treesitter")
+
+            TS.install({
                 "bash",
                 "c",
                 "cpp",
@@ -33,15 +34,32 @@ return {
                 "vimdoc",
                 "xml",
                 "yaml",
-            },
-            auto_install = true,
-            sync_install = false,
-            highlight = { enable = true },
-            indent = { enable = true },
-        },
-        ---@param opts TSConfig
-        config = function(_, opts)
-            require("nvim-treesitter").setup(opts)
+            })
+
+            TS.setup(opts)
+
+            vim.api.nvim_create_autocmd("FileType", {
+                group = vim.api.nvim_create_augroup("lazyvim_treesitter", { clear = true }),
+                callback = function(ev)
+                    local lang = vim.treesitter.language.get_lang(ev.match)
+                    if not lang then
+                        return
+                    end
+
+                    if vim.treesitter.query.get(lang, "highlights") then
+                        vim.treesitter.start(ev.buf)
+                    end
+
+                    if vim.treesitter.query.get(lang, "indents") then
+                        vim.opt_local.indentexpr = 'v:lua.require("nvim-treesitter").indentexpr()'
+                    end
+
+                    if vim.treesitter.query.get(lang, "folds") then
+                        vim.opt_local.foldmethod = "expr"
+                        vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+                    end
+                end,
+            })
         end,
     },
 }
