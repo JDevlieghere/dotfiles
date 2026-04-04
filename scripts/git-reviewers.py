@@ -3,8 +3,10 @@
 import argparse
 import collections
 import math
+import os
 import subprocess
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
 
 
@@ -242,13 +244,20 @@ def main():
         print("No changed files found.")
         sys.exit(0)
 
-    # Collect raw per-file data first
+    # Collect raw per-file data in parallel
+    def analyze_file(filepath):
+        blame = get_blame_authors(filepath)
+        log = get_log_authors(filepath, args.since)
+        return filepath, blame, log
+
     raw_blame_per_file = {}
     raw_log_per_file = {}
+    workers = min(len(files), os.cpu_count() or 4)
 
-    for filepath in files:
-        raw_blame_per_file[filepath] = get_blame_authors(filepath)
-        raw_log_per_file[filepath] = get_log_authors(filepath, args.since)
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for filepath, blame, log in pool.map(analyze_file, files):
+            raw_blame_per_file[filepath] = blame
+            raw_log_per_file[filepath] = log
 
     # Gather all unique emails and build mailmap
     all_emails = set()
