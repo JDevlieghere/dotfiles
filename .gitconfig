@@ -67,6 +67,7 @@
 	nopush = !sh -c 'git remote set-url --push $1 /dev/null' -
 	ours = checkout --ours
 	patch =  show HEAD -U999999
+	reviewers = !git-reviewers.py
 	sha = rev-parse HEAD
 	st = status
 	theirs = checkout --theirs
