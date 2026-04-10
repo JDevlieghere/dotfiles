@@ -167,6 +167,27 @@ End with:
 
 ---
 
+## LLDB Coding Standards
+
+LLDB's code style differs from LLVM coding style. For any other contradictions, use the style that is already being used so that the source is uniform and easy to follow.
+
+- Check that all `ConstString`s are compared to an existing `ConstString` object. Otherwise this just leaks memory as their storage is never freed.
+- Prefer `formatv` over `printf` style formatting.
+
+### Variable Naming
+
+- Variables are snake_case.
+- Functions and methods are UpperCamelCase.
+- Static, global and member variables have s_, g_ and m_ prefixes respectively.
+
+### Error Handling
+
+- Prefer `Error` and `Expected` over `Status` for error handling.
+- Assertions should be used liberally to assert internal consistency but never used to detect invalid user input.
+- Aborting using `report_fatal_error` or `abort` should be avoided at all costs.
+
+---
+
 ## Design-Level Review Checklist
 
 1. **API design**: Minimal, well-named? Right parameter types (StringRef, ArrayRef, SmallVectorImpl)?
