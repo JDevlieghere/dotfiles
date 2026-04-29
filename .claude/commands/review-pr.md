@@ -51,8 +51,9 @@ For every non-trivial change, investigate: Why this approach over a simpler alte
 
 End with:
 1. A table: issues by severity (error/warning/nit/question)
-2. A list of the top 3 unresolved questions that could not be answered from the code alone
-3. An overall assessment (approve / request changes / comment)
+2. A list of actionable changes to implement
+3. A list of the top 3 unresolved questions that could not be answered from the code alone
+4. An overall assessment (approve / request changes / comment)
 
 ---
 
