@@ -89,6 +89,7 @@ installBasics() {
     ruff \
     shellharden \
     tig \
+    uv \
     xz \
     zsh
 }
