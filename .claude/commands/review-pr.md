@@ -6,7 +6,7 @@ Orchestrate a multi-agent review of a GitHub pull request against LLVM/LLDB codi
 
 ## Role
 
-You are the **orchestrator**. You do not review the diff yourself. Your job is to fetch the PR, dispatch five specialist reviewers **in parallel** (one message with five `Agent` tool calls), then merge, dedupe, rank, and render their findings. Each specialist owns exactly one review axis. The main conversation never loads the reference material.
+You are the **orchestrator**. You do not review the diff yourself. Your job is to fetch the PR, dispatch six specialist reviewers **in parallel** (one message with six `Agent` tool calls), then merge, dedupe, rank, and render their findings. Each specialist owns exactly one review axis. The main conversation never loads the reference material.
 
 **Do NOT modify any files. Only read, analyze, and delegate.**
 
@@ -62,9 +62,9 @@ OUTPUT
 
 ---
 
-## Step 3: Dispatch the five specialists in parallel
+## Step 3: Dispatch the six specialists in parallel
 
-Send one message with five `Agent` tool calls (subagent_type: `general-purpose`). The diff file path, metadata file path, and output file path go into each prompt.
+Send one message with six `Agent` tool calls (subagent_type: `general-purpose`). The diff file path, metadata file path, and output file path go into each prompt.
 
 ### Agent 1 — Style & formatting
 
@@ -171,11 +171,66 @@ End your output with a `## Unresolved questions (top 3)` section listing the mos
 
 **Categories**: `[test]` `[doc]` `[comment]` `[pr-desc]` `[docs-vs-code]`
 
+### Agent 6 — First-principles alternative
+
+**Owns**: designing a solution to the problem the PR is trying to solve, *before* looking at how the PR solved it, then comparing. The output is not line-level findings — it's a short design document and a recommendation.
+
+**Does NOT own**: nitpicks on the PR's code. Style. Correctness bugs. This agent stays above the diff.
+
+**Method** (paste into prompt):
+
+1. **Understand the problem.** Read the PR body and linked issues/bugs (`gh issue view`, `gh pr view --comments`). Read the most relevant existing code — the files the PR touches, their nearest neighbors, and any existing extension points that the PR is working around or building upon. Write a one-paragraph problem statement in your own words. If the problem isn't clear from the PR body, that itself is a finding.
+2. **Design your own solution** *before* reading the PR diff in detail. Sketch the shape: what class/function/hook would you add? Where would it live? What's the public surface? What's the simplest thing that could work? Would you solve it at all, or push back on the framing? Write this as a "Proposed approach" section with 3–8 bullets.
+3. **Now read the PR's solution.** Compare axis by axis: public API shape, where the hook lives, data flow, extensibility, blast radius, maintenance burden, test surface.
+4. **Render the verdict** as one of:
+   - **Converged** — PR approach matches yours (or is a superset). Say so plainly, note the minor differences, stop.
+   - **Diverged, PR is better** — your alternative had a flaw the PR's design avoids. Explain what you got wrong and why the PR is the right call.
+   - **Diverged, alternative is better** — give a concrete recommendation to redo the PR. Explain what you'd change.
+   - **Diverged, tradeoff** — both are defensible. Produce a pros/cons table and a recommendation (which to take, or "either is fine").
+
+**Budget**: this agent can read more code than the others. Use `Read`, `gh api`, and `gh issue view` liberally — ~5–10 minutes of tool calls for a non-trivial PR. If the PR is trivial (typo, one-line fix, mechanical refactor), return a one-line "Converged — trivial" and stop.
+
+**Output format** — write to the given path:
+
+```
+# First-principles review — PR #<number>
+
+## Problem statement (in my own words)
+<one paragraph>
+
+## Proposed approach (designed before reading the PR)
+- Bullet 1
+- Bullet 2
+...
+
+## PR's approach
+<one paragraph summarizing what the PR actually does>
+
+## Comparison
+| Axis | My design | PR's design | Which is better |
+|------|-----------|-------------|-----------------|
+| Public API shape | ... | ... | ... |
+| Hook location | ... | ... | ... |
+| Extensibility | ... | ... | ... |
+| ... | ... | ... | ... |
+
+## Verdict
+**<Converged | Diverged-PR-better | Diverged-alternative-better | Diverged-tradeoff>**
+
+<2–5 sentences justifying the verdict. If recommending changes, be concrete: "I'd move X from Target.h to Target.cpp and make the registration go through a factory function."
+
+Self-assessment: <one line on how confident you are>
+```
+
+Return to the caller ONLY: the verdict label, a one-line summary, and the output file path.
+
+**Categories (used only if Comparison table rows become explicit findings later)**: `[alt-design]` `[alt-api]` `[alt-scope]`
+
 ---
 
 ## Step 4: Merge, dedupe, rank
 
-Read all five output files. Then:
+Read all six output files. Agent 6's output is **not** folded into the findings list — it's rendered separately in Step 5. The other five specialists produce findings that you dedupe and rank as follows:
 
 1. **Dedupe**. Two findings collide when they share the same `file:line` within ±3 lines OR reference the same symbol name AND describe the same root cause. Keep the highest-severity version, combine the category tags (`[layering][api]`), and note which specialists flagged it.
 2. **Retire noise**. Drop nits that are already covered by a warning/error finding on the same line. Drop pseudo-rule flags (if any specialist manufactured one).
@@ -197,6 +252,9 @@ Read all five output files. Then:
 1. **path:line** [cats] (severity) — one-sentence issue + why it matters.
 2. …
 (3 to 7 items, most blocking first.)
+
+## First-principles alternative
+<Paste Agent 6's report here — the Problem statement, Proposed approach, Comparison table, and Verdict. If the verdict is "Converged — trivial" on a tiny PR, collapse this to a single line.>
 
 ## Findings by file
 <grouped by file, then by line; one line per finding in the canonical format>
@@ -220,7 +278,7 @@ Read all five output files. Then:
 3. …
 
 ## Overall assessment
-`approve` / `request changes` / `comment` — one sentence of reasoning.
+`approve` / `request changes` / `comment` — one sentence of reasoning. If Agent 6's verdict is "Diverged, alternative is better," that should dominate the recommendation (`request changes` with the alternative as the ask).
 ```
 
 If any specialist self-assessment reported low coverage confidence, add a one-line caveat at the very top of the report.
