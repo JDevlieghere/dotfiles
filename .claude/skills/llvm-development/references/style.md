@@ -105,7 +105,7 @@ Use `""` for project headers, `<>` for system headers. Don't include a heavy hea
 ## Comments
 
 - `//` for normal comments. Full sentences, initial capital, trailing period.
-- `/* */` reserved for inline parameter docs: `foo(/*Prefix=*/nullptr, /*Verbose=*/true);`.
+- `/* */` reserved for inline parameter docs. Use the leading `/*Name=*/value` form (`foo(/*Prefix=*/nullptr, /*Verbose=*/true);`), never a trailing `value /* Name */`. The leading form is what `clang-tidy` and `clang-format` understand.
 - Disable code with `#if 0` / `#endif`, not by commenting it out with `//`.
 - Don't restate what the code does — only *why*, when non-obvious.
 - Doxygen on new public APIs: `///`, `\brief`, `\param`, `\returns`.
