@@ -207,7 +207,8 @@ if extra_args:
 
 try:
     print(" \\\n    ".join(cmake_cmd))
-    input("Press Enter to run CMake or ^C to abort...")
+    if sys.stdin.isatty():
+        input("Press Enter to run CMake or ^C to abort...")
 
     subprocess.call(" ".join(cmake_cmd), shell=True)
     subprocess.call("ninja", shell=True)
