@@ -66,28 +66,20 @@ OUTPUT
 
 Send one message with six `Agent` tool calls (subagent_type: `general-purpose`). The diff file path, metadata file path, and output file path go into each prompt.
 
+The LLVM/LLDB coding conventions the first three specialists need are packaged in the `llvm-development` skill at `~/.claude/skills/llvm-development/` (or `~/dotfiles/.claude/skills/llvm-development/` in this repo). Each specialist prompt should tell the sub-agent to **read the relevant reference file(s) from that skill first**, since sub-agents do not inherit the parent's skill context. Pass absolute paths.
+
 ### Agent 1 — Style & formatting
 
 **Owns**: mechanical style rules only. Naming conventions, include order, 80 cols, indentation, brace rules, `auto *`/`auto &`, comment markers, error-message casing.
 
 **Does NOT own**: `formatv` index mismatches (correctness owns those), heavy-include decisions (architecture owns those), missing Doxygen on new public APIs (tests/docs owns that). Don't manufacture pseudo-rules (e.g., `return {}` vs `return T()` is not a rule; `eg` vs `e.g.` is not a rule).
 
-**Reference** (paste into prompt):
+**Reference**: tell the sub-agent to read, before reviewing:
+- `.claude/skills/llvm-development/references/naming.md`
+- `.claude/skills/llvm-development/references/style.md`
+- `.claude/skills/llvm-development/references/lldb.md` (only the "Naming delta" section, if the PR touches LLDB)
 
-- LLVM: types `CamelCase`; variables/params `CamelCase` (upper-first); functions `camelBack`; enumerators `CamelCase` with abbreviated-enum prefix if unscoped. No Hungarian.
-- **LLDB differs**: variables `snake_case`; functions/methods `UpperCamelCase`; prefixes `s_` (static) / `g_` (global) / `m_` (member). Function-local statics use `s_`, not `g_`.
-- Include order: main header → local → LLVM project → system; blank line between groups; sorted lexicographically.
-- Header guards: `LLVM_ANALYSIS_UTILS_LOCAL_H`.
-- 80 cols. 2-space indent. No tabs. No trailing whitespace.
-- No indentation inside `namespace {...}`; out-of-line defs in `.cpp` use qualified names, don't reopen the namespace.
-- `//` normal comments. `/* */` only for inline-param docs like `/*Prefix=*/nullptr`. Comment-out code with `#if 0`/`#endif`.
-- Error/warning messages: lowercase first letter, no trailing period.
-- Control flow: prefer early `return`/`continue`; no `else` after `return`/`break`/`continue`; cache `end()`; preincrement; range-based `for`; no `default:` in fully-covered enum switches.
-- `auto` only when it makes code more readable. Always `auto *` for pointers, `auto &` for references.
-- Braces: omit on simple single-statement bodies; if any branch braces, all do.
-- C++17 only. No `dynamic_cast`. No C++ exceptions. No `<iostream>`. No `std::endl` (use `'\n'`). Prefer C++-style casts. `struct` if all members public else `class`. No braced init lists for constructor calls. No unnecessary `inline`. `llvm::sort`. `[[maybe_unused]]` for assert-only vars. Virtual anchor for classes with vtables in headers.
-- Asserts: `assert(cond && "message")`. `llvm_unreachable("msg")` over `assert(false && "msg")`.
-- Anonymous namespaces: keep small; prefer `static` for file-local; never in headers.
+**Tools**: the sub-agent should prefer running `clang-format --dry-run --Werror` and `clang-tidy -p <build>` on changed files (if a build dir is discoverable) to catch mechanical violations, and only hand-flag what the tools can't see. If no build dir is available, still run `clang-format --dry-run` on the changed files from the diff.
 
 **Categories**: `[naming]` `[include]` `[format]` `[comment]` `[auto]` `[braces]` `[assert]`
 
@@ -97,13 +89,13 @@ Send one message with six `Agent` tool calls (subagent_type: `general-purpose`).
 
 **Does NOT own**: style. Correctness bugs. Missing tests. Claim verification.
 
-**Reference**:
+**Reference**: tell the sub-agent to read, before reviewing:
+- `.claude/skills/llvm-development/references/adt.md`
+- `.claude/skills/llvm-development/references/lldb.md` (the "SB API stability" and "Plugin boundaries" sections, if the PR touches LLDB)
 
-- Strings: `StringRef` (pass by value, preferred param); `Twine` (`const Twine &`, never store); `SmallString<N>` (stack scratch); `std::string` (ownership); avoid `const char *`.
-- Containers: `SmallVector<T,N>` default (pass as `SmallVectorImpl<T>&`); `ArrayRef<T>` read-only param; `DenseMap`/`DenseSet` default (never `std::unordered_*`); `StringMap<V>` for string keys; `SetVector`/`MapVector` when deterministic iteration matters; `SmallPtrSet<T*,N>` for ptr sets; `function_ref<Sig>` for non-owning callbacks.
-- Layering red flags: `#include` of a heavy header into a widely-included public header; an inline non-trivial method in a public header that forces rebuilds; a new friend declaration whose reason isn't present in this PR.
-- SB/public-ABI red flags: new method without Doxygen; leaks `lldb_private` types through public headers; magic integer sentinel returns; non-const-ref params that could be const; names that diverge from the underlying internal API.
-- Extensibility: closed enums without room to grow; hardcoded limits; base-class virtuals that only one subclass ever implements (should live on the subclass).
+Additional design red flags (not in the skill because they're review-specific):
+- Layering: a heavy `#include` added to a widely-used public header; an inline non-trivial method added to a public header that forces rebuilds; a new `friend` declaration whose reason isn't explained in this PR.
+- Extensibility: closed enums without room to grow; hardcoded limits; base-class virtuals implemented by only one subclass (should live on the subclass instead).
 
 **Categories**: `[design]` `[type]` `[container]` `[api]` `[layering]` `[compat]` `[abi]`
 
@@ -113,20 +105,13 @@ Send one message with six `Agent` tool calls (subagent_type: `general-purpose`).
 
 **Does NOT own**: style opinions. Naming. API shape (unless the shape causes a bug).
 
-**Reference**:
+**Reference**: tell the sub-agent to read, before reviewing:
+- `.claude/skills/llvm-development/references/errors.md`
+- `.claude/skills/llvm-development/references/lldb.md` (the "ConstString", "Status vs Error", and "Debug and logging" sections, if the PR touches LLDB)
 
-- LLVM casting: `isa<T>`, `cast<T>`, `dyn_cast<T>` (`if (auto *X = dyn_cast<T>(val))`); `dyn_cast_if_present` accepts null; never `isa` then `cast` (use `dyn_cast`); never `dynamic_cast`.
-- No C++ exceptions: use `Error`/`Expected<T>`. `Error` must be checked (`true`=error); `Expected` `true`=success.
-- `cantFail()` only if provably infallible; undefined in release otherwise — flag unjustified uses.
-- `consumeError()` to explicitly discard. Never leave unchecked.
-- Library code must not `exit` on recoverable errors.
-- LLDB: prefer `Error`/`Expected` over `Status`. Avoid `report_fatal_error`/`abort`.
-- LLDB-specific: `ConstString` comparisons must be against an existing `ConstString`, never a freshly-built temporary (leaks the string pool).
-- Lifetimes: no dangling `StringRef`/`ArrayRef`/`Twine` past source; no returning ref to local; no storing `Twine`.
-- Thread safety: shared mutable state without a mutex; function-local `static` counters without `std::atomic`.
+Additional correctness checks (not in the skill because they're review-specific):
+- **`formatv` / `LLDB_LOG` format indices `{0}`, `{1}`, … MUST match the argument count.** Check every new format string.
 - Determinism: iteration over `DenseMap`/`DenseSet` feeding diagnostics, files, or hashes.
-- Debug macros must have no side effects.
-- **`formatv` / `LLDB_LOG` format indices `{0}`, `{1}`, … MUST match the argument count. Check every new format string.**
 
 **Categories**: `[cast]` `[error]` `[safety]` `[thread]` `[lifetime]` `[determinism]` `[format-arg]` `[null]` `[uninit]` `[logic]`
 
