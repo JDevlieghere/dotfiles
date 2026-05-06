@@ -276,11 +276,10 @@ class DotfilesBootstrap:
         if gnupg_dir.exists():
             subprocess.run(["chown", "-R", os.getlogin(), str(gnupg_dir)], check=True)
 
-            for item in gnupg_dir.rglob("*"):
-                if item.is_file():
-                    item.chmod(0o600)
-                elif item.is_dir():
-                    item.chmod(0o700)
+            for item in gnupg_dir.iterdir():
+                item.chmod(0o600)
+
+            gnupg_dir.chmod(0o700)
 
     def os_config(self) -> None:
         """Configure OS-specific settings."""
