@@ -41,6 +41,16 @@ LLDB inherits LLVM conventions except where noted in `references/lldb.md`. The m
 - Reaching for `Status` in new code when `Error` / `Expected` is preferred.
 - Leaking `lldb_private::` types through public SB headers.
 
+## Configuring the build
+
+Prefer `llvm-cmake.py` (in `~/dotfiles/scripts/`) over invoking `cmake` directly. Run it from the build directory, which is assumed to live inside `llvm-project`.
+
+- Default to `-r` (RelWithDebInfo + assertions) unless the user asks otherwise.
+- Pass `--projects` and/or `--runtimes` for only the components the current work touches. For an LLDB PR, include `lldb`; for a Clang change, include `clang`; etc. Don't enable everything by default — it slows the build.
+- Extra `-D...` flags can be appended; they're forwarded to cmake.
+
+Example for an LLDB change: `llvm-cmake.py -r --projects clang lldb`.
+
 ## Debug and logging idioms
 
 - `LDBG() << "msg"` or `LLVM_DEBUG(dbgs() << "msg\n")`. Define `DEBUG_TYPE` **after** all includes.
