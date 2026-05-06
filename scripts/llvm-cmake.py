@@ -6,10 +6,11 @@ import subprocess
 import sys
 import platform
 
-# Assumes that the build directory lives next to llvm-project.
-ROOT = os.path.dirname(os.getcwd())
+# Assumes that the build directory lives inside llvm-project.
+BUILD_DIR = os.getcwd()
+LLVM_PROJECT_DIR = os.path.dirname(BUILD_DIR)
+ROOT = os.path.dirname(LLVM_PROJECT_DIR)
 INSTALL_DIR = os.path.join(ROOT, "install")
-LLVM_PROJECT_DIR = os.path.join(ROOT, "llvm-project")
 LLVM_SOURCE_DIR = os.path.join(LLVM_PROJECT_DIR, "llvm")
 CMARK_DIR = os.path.join(ROOT, "cmark")
 SWIFT_DIR = os.path.join(ROOT, "swift")
@@ -204,6 +205,10 @@ if "linux" in sys.platform:
 
 if extra_args:
     cmake_cmd.extend(extra_args)
+
+compile_commands_link = os.path.join(LLVM_PROJECT_DIR, "compile_commands.json")
+if not os.path.lexists(compile_commands_link):
+    os.symlink(os.path.join(BUILD_DIR, "compile_commands.json"), compile_commands_link)
 
 try:
     print(" \\\n    ".join(cmake_cmd))
