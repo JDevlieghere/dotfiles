@@ -277,7 +277,8 @@ class DotfilesBootstrap:
             subprocess.run(["chown", "-R", os.getlogin(), str(gnupg_dir)], check=True)
 
             for item in gnupg_dir.iterdir():
-                item.chmod(0o600)
+                if item.is_file():
+                    item.chmod(0o600)
 
             gnupg_dir.chmod(0o700)
 
