@@ -12,22 +12,32 @@ You are the **orchestrator**. You do not review the diff yourself. Your job is t
 
 ---
 
-## Step 1: Fetch PR context
+## Step 1: Fetch PR context and materialize the PR branch
 
-```
-gh pr view $ARGUMENTS --json number,title,body,baseRefName,headRefName,author,files
-gh pr diff $ARGUMENTS
+Line numbers in reviews have historically drifted because specialists read files from the user's current checkout (which is `origin/main`, not the PR). Fix it at the source: check out the PR into a disposable worktree, and require every specialist to read files from there.
+
+```bash
+NUM=$ARGUMENTS   # strip any URL prefix if present
+REPO=$(gh pr view "$NUM" --json headRepository,headRepositoryOwner --jq '.headRepositoryOwner.login + "/" + .headRepository.name' 2>/dev/null)
+WT=/tmp/review-$NUM-worktree
+rm -rf "$WT"
+gh pr checkout "$NUM" --repo "$REPO" --detach 2>/dev/null || true  # ensures the ref is fetched
+HEAD_SHA=$(gh pr view "$NUM" --repo "$REPO" --json headRefOid --jq .headRefOid)
+BASE_SHA=$(gh pr view "$NUM" --repo "$REPO" --json baseRefOid --jq .baseRefOid)
+git worktree add --detach "$WT" "$HEAD_SHA"
+
+gh pr view "$NUM" --repo "$REPO" --json number,title,body,baseRefName,headRefName,author,files > /tmp/review-$NUM.meta.json
+gh pr diff "$NUM" --repo "$REPO" > /tmp/review-$NUM.diff
+gh pr view "$NUM" --json files --jq '.files[] | "\(.additions + .deletions)\t\(.path)"' | sort -rn > /tmp/review-$NUM.sizes
 ```
 
-Save the diff to `/tmp/review-<number>.diff` and the metadata to `/tmp/review-<number>.meta.json` so specialists can read them by path (keeps your context and theirs lean).
+Pass to every specialist: `$WT` (worktree root, for `Read`), `/tmp/review-$NUM.diff` (diff with hunk headers), `/tmp/review-$NUM.meta.json`, `$BASE_SHA` (so they can run `git -C $WT diff $BASE_SHA -- <path>` for per-file diffs).
 
-For a size overview, use:
-```
-gh pr view $ARGUMENTS --json files --jq '.files[] | "\(.additions + .deletions)\t\(.path)"' | sort -rn
-```
-(Do NOT use `gh pr diff --stat` — that flag does not exist.)
+(Do NOT use `gh pr diff --stat` — that flag does not exist. Use the `sizes` file above.)
 
-If the diff is huge (>~2000 changed lines total), also pass per-file diffs for the top ~10 files to each specialist and tell them to focus there.
+Clean up the worktree at the end of the run: `git worktree remove --force "$WT"`.
+
+If the diff is huge (>~2000 changed lines total), tell each specialist to focus on the top ~10 files by size.
 
 ---
 
@@ -41,6 +51,11 @@ HARD RULES
 - Only flag issues in changed/added lines. Do not flag pre-existing style in unchanged context.
 - Golden Rule: match surrounding style. If the diff is consistent with the file around it, do not flag it.
 
+LINE NUMBERS — non-negotiable:
+- The PR branch is checked out at the worktree path you are given. Read files ONLY from under that path; never from the user's main checkout.
+- Every line number you cite MUST be one you have actually `Read` from the worktree. Before you emit a finding, re-read a small window around the line to confirm the content matches your claim. If you did not verify it, do not cite a number — name the function/symbol instead.
+- Do not use `~`, do not approximate, do not cite a line past the end of the file. A wrong line number is worse than no line number.
+
 SEVERITY — use EXACTLY these four labels, nothing else:
   error    Definite bug, broken API, will cause problems in production.
   warning  Real violation or bad pattern that should be fixed before merge.
@@ -49,9 +64,10 @@ SEVERITY — use EXACTLY these four labels, nothing else:
 (Do NOT use "critical", "blocker", "high", "medium", "low" — they don't exist.)
 
 FORMAT — every finding is a single line:
-  **path/to/file.cpp:LINE** [category] (severity) Description.
-- Use the NEW-file line number from the diff (the `+` side), not an approximation.
-- Never use `~` prefix. If you truly can't pin a line, name the function/symbol instead of guessing.
+  **path/to/file.cpp:LINE** [category] (severity) What's wrong + why it matters + concrete fix, in one sentence.
+- "What's wrong" alone is not enough. A reader looking only at this line must know what action to take.
+- Bad:  **foo.cpp:42** [logic] (error) Missing null check.
+- Good: **foo.cpp:42** [logic] (error) `bar->Frobulate()` is called before the `bar != nullptr` guard on line 38 takes effect for the early-return path; move the guard above line 40 or early-return when null.
 - One finding per line. No multi-paragraph commentary.
 
 OUTPUT
@@ -64,7 +80,12 @@ OUTPUT
 
 ## Step 3: Dispatch the six specialists in parallel
 
-Send one message with six `Agent` tool calls (subagent_type: `general-purpose`). The diff file path, metadata file path, and output file path go into each prompt.
+Send one message with six `Agent` tool calls (subagent_type: `general-purpose`). Each prompt must pass:
+- `$WT` — the worktree path where the PR is checked out. **All file reads go here.** This is the only way line numbers line up with the PR on GitHub.
+- `/tmp/review-$NUM.diff` — the diff (useful for hunk headers and for spotting which lines are `+` vs context).
+- `/tmp/review-$NUM.meta.json` — PR metadata.
+- `$BASE_SHA` — so the specialist can run `git -C $WT diff $BASE_SHA -- <path>` for a per-file diff.
+- Output file path (`/tmp/review-$NUM-<axis>.md`).
 
 The LLVM/LLDB coding conventions the first three specialists need are packaged in the `llvm-development` skill at `~/.claude/skills/llvm-development/` (or `~/dotfiles/.claude/skills/llvm-development/` in this repo). Each specialist prompt should tell the sub-agent to **read the relevant reference file(s) from that skill first**, since sub-agents do not inherit the parent's skill context. Pass absolute paths.
 
@@ -218,52 +239,66 @@ Return to the caller ONLY: the verdict label, a one-line summary, and the output
 Read all six output files. Agent 6's output is **not** folded into the findings list — it's rendered separately in Step 5. The other five specialists produce findings that you dedupe and rank as follows:
 
 1. **Dedupe**. Two findings collide when they share the same `file:line` within ±3 lines OR reference the same symbol name AND describe the same root cause. Keep the highest-severity version, combine the category tags (`[layering][api]`), and note which specialists flagged it.
-2. **Retire noise**. Drop nits that are already covered by a warning/error finding on the same line. Drop pseudo-rule flags (if any specialist manufactured one).
+2. **Retire noise**. Drop nits that are already covered by a warning/error finding on the same line. Drop pseudo-rule flags (if any specialist manufactured one). Drop any finding whose line number you cannot verify by reading the file in the worktree — a wrong line number means the specialist was hallucinating, so distrust the whole item.
 3. **Normalize severity**. If a specialist used `critical`/`blocker`/`high`/`medium`/`low`, re-map: critical/blocker → error; high → error or warning based on description; medium → warning; low → nit.
 4. **Rank**. Compute a "Top issues" list: the 3–7 findings most likely to matter (bugs > broken ABI > missing test for main path > layering > nits). Prefer things that block merge.
+5. **Write the appendix**. Write the full deduped findings to `/tmp/review-<number>-findings.md`, grouped by file then by line, one finding per line in the canonical format. This file is linked from the main report but not pasted into it.
 
 ---
 
 ## Step 5: Render the final report
 
+Keep the main report short. The reader should be able to act on "Actionable changes" alone without scrolling up — every bullet must be self-contained. The full per-file findings already live in the appendix you wrote in Step 4 (`/tmp/review-<number>-findings.md`); do not paste them here.
+
+Print this to the user, and nothing else:
+
 ```
 # Review: <PR title> (#<number>)
 
-**Summary**: <one sentence — what the PR claims to do, grounded in the diff>
-
-**Description honesty**: <one to two sentences — does the PR body match the diff? any unmentioned side-effects, extra friendships, heavy includes, scope expansion?>
+**Summary**: <one sentence — what the PR actually does, grounded in the diff>.
+**Description honesty**: <one sentence — does the body match the diff? If yes, say "matches"; if no, name the biggest omission and stop>.
 
 ## Top issues
-1. **path:line** [cats] (severity) — one-sentence issue + why it matters.
+1. **path:line** [cats] (severity) — <one sentence stating the bug + the concrete fix>.
 2. …
-(3 to 7 items, most blocking first.)
+(3–7 items max. Errors and merge-blocking warnings only. No nits here.)
 
 ## First-principles alternative
-<Paste Agent 6's report here — the Problem statement, Proposed approach, Comparison table, and Verdict. If the verdict is "Converged — trivial" on a tiny PR, collapse this to a single line.>
-
-## Findings by file
-<grouped by file, then by line; one line per finding in the canonical format>
-
-## Severity summary
-| Severity | Count |
-|----------|-------|
-| error    | N     |
-| warning  | N     |
-| nit      | N     |
-| question | N     |
+**Verdict**: <Converged | Diverged-PR-better | Diverged-alternative-better | Diverged-tradeoff> — <one sentence>.
+<If Diverged: 2–4 bullets naming the concrete structural difference and which side wins on each. Skip the full comparison table; it's in the appendix if you wrote one.>
 
 ## Actionable changes
-- Fix A — file:line.
-- Fix B — file:line.
-(Bulleted list. Mechanical fixes together, design/arch changes together.)
 
-## Top 3 unresolved questions
-1. …
-2. …
-3. …
+Each bullet must be self-contained: a reader who has NOT read the Top issues or the appendix must still know what to do and why. Format:
+
+  - **path:line** — <imperative fix in a full sentence>. <Why, in one clause>.
+
+Examples of well-formed bullets:
+  - **src/foo/Bar.cpp:142** — Restore the `if (handle != kInvalidHandle)` guard around the seek/write/restore block so an invalid handle early-returns the "invalid handle" error. Without it the subsequent `::seek(-1, …)` silently clobbers the caller's `offset` with `-1`.
+  - **include/module.modulemap** — Register the newly added public header alongside the existing sibling entry. Modular builds fail with "header not in a module" until it's listed.
+
+Examples of BAD bullets (do not emit these):
+  - "Fix the regression in Bar.cpp:142."        ← requires the reader to go look up what the regression is
+  - "Add the missing module map entry."         ← no path, no reason
+  - "Reconsider the virtual surface."            ← not actionable
+
+Group bullets under these headers (omit any that are empty):
+
+  **Must fix before merge** — errors and merge-blocking warnings.
+  **Design/arch** — changes that reshape the approach, not individual bugs.
+  **Tests & docs** — missing coverage, missing Doxygen, PR body gaps.
+  **Mechanical** — include order, doxygen paths, typedef→using, stray blank lines. One bullet per *category* if there are many (e.g. "Reorder includes in FilePosix.cpp and FileWindows.cpp to main/project/LLVM/system"), not one per file.
 
 ## Overall assessment
-`approve` / `request changes` / `comment` — one sentence of reasoning. If Agent 6's verdict is "Diverged, alternative is better," that should dominate the recommendation (`request changes` with the alternative as the ask).
+
+`approve` / `request changes` / `comment` — one sentence. If Agent 6's verdict was "Diverged, alternative is better," that drives `request changes` with the alternative as the ask.
+
+---
+
+**Counts**: <N errors / N warnings / N nits / N questions>. Full findings: `/tmp/review-<number>-findings.md`.
+
+<If any specialist reported low coverage confidence, add one line here: "Coverage caveat: <what wasn't covered>.">
+<If Agent 4 produced unresolved questions AND any of them could change the verdict, list up to 3. Otherwise omit.>
 ```
 
-If any specialist self-assessment reported low coverage confidence, add a one-line caveat at the very top of the report.
+Hard limits on the main report: no severity table, no per-file findings section, no restating the Top issues under Actionable changes (the bullets should stand alone so repetition adds nothing). Everything that doesn't fit these sections goes to the appendix file.
