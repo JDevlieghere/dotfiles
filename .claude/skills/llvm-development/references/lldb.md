@@ -45,6 +45,19 @@ LLDB's older `lldb_private::Status` predates `llvm::Error`. Current guidance:
 
 Don't introduce new APIs that return `Status` if `Error`/`Expected` would work.
 
+## Assertions
+
+- Default: plain `assert(cond && "message")` (or `llvm_unreachable` for unreachable paths).
+- `lldbassert(cond)` is a *soft* assert: behaves like `assert` when asserts are enabled; when disabled, prints a warning asking the user to file a bug and continues execution. Reserve it for recoverable bugs where the alternative would be aborting on a user. Use sparingly — prefer `Error`/`Expected` whenever real error handling is feasible.
+
+## Fatal errors
+
+Aborting LLDB's process must be avoided at all costs — it kills the user's debug session.
+
+- Do **not** call `llvm::report_fatal_error()` or `abort()` in LLDB.
+- `llvm_unreachable()` is fine only for genuinely unreachable code (e.g. the `default` of an exhaustive `switch`).
+- For any failure that could plausibly happen at runtime, return an `Error` / `Expected<T>` instead.
+
 ## SB API stability
 
 The `SB*` classes (`SBTarget`, `SBProcess`, `SBFrame`, ...) are the public Python-and-C++ API. They're considered ABI-stable.

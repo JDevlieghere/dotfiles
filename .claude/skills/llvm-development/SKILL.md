@@ -39,6 +39,8 @@ LLDB inherits LLVM conventions except where noted in `references/lldb.md`. The m
 - Forgetting the `m_` / `s_` / `g_` prefix on members / file-local statics / globals.
 - Comparing a `ConstString` against a freshly-built temporary `ConstString` (leaks the string pool).
 - Reaching for `Status` in new code when `Error` / `Expected` is preferred.
+- Using `lldbassert` in new code — it's a soft assert reserved for recoverable bugs where error handling isn't feasible; default to plain `assert` / `llvm_unreachable`, and prefer `Error`/`Expected` when real error handling is possible.
+- Calling `report_fatal_error()` or `abort()` in LLDB — never. Aborts kill the user's debug session. `llvm_unreachable` is only for genuinely unreachable code (e.g. exhaustive `switch` defaults).
 - Leaking `lldb_private::` types through public SB headers.
 
 ## Configuring the build
