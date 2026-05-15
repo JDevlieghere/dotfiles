@@ -10,7 +10,6 @@ import platform
 BUILD_DIR = os.getcwd()
 LLVM_PROJECT_DIR = os.path.dirname(BUILD_DIR)
 ROOT = os.path.dirname(LLVM_PROJECT_DIR)
-INSTALL_DIR = os.path.join(ROOT, "install")
 LLVM_SOURCE_DIR = os.path.join(LLVM_PROJECT_DIR, "llvm")
 CMARK_DIR = os.path.join(ROOT, "cmark")
 SWIFT_DIR = os.path.join(ROOT, "swift")
@@ -114,7 +113,6 @@ cmake = get_cmake()
 cmake_cmd = [
     "{}{} {}".format(xcrun_invocation, cmake, LLVM_SOURCE_DIR),
     "-G Ninja",
-    "-DCMAKE_INSTALL_PREFIX='{}'".format(INSTALL_DIR),
 ]
 
 if args.sdk:
