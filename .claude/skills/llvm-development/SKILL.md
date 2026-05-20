@@ -53,6 +53,24 @@ Prefer `llvm-cmake.py` (in `~/dotfiles/scripts/`) over invoking `cmake` directly
 
 Example for an LLDB change: `llvm-cmake.py -r --projects clang lldb`.
 
+## Running the build
+
+LLVM builds take a long time. Kick off the build **eagerly and in the background** as soon as you know what target you'll need — don't wait until you're done editing. Use `Bash` with `run_in_background: true` so you can keep editing while it compiles. If the build fails partway through because files are still being edited, that's fine — re-run it once the edits settle. The harness notifies you when a backgrounded build finishes, so don't poll or sleep.
+
+- Start the background build the moment you have a target in mind (e.g. `ninja -C build lldb` or `ninja -C build clang`). Build only the specific target you need, not `all`.
+- Keep editing while it runs. Re-trigger after the last edit to get a clean signal.
+- Only block on the build when you actually need its result (e.g. to run tests or hand off to the user).
+
+## Running LLDB tests
+
+Run LLDB test suites in this order — cheapest and most isolated first, so failures surface early:
+
+1. `ninja -C build check-lldb-unit` — gtest unit tests.
+2. `ninja -C build check-lldb-shell` — lit-based shell tests.
+3. `ninja -C build check-lldb-api` — Python SB-API tests (slowest).
+
+Stop and investigate at the first failing stage rather than running everything and sorting through the output.
+
 ## Debug and logging idioms
 
 - `LDBG() << "msg"` or `LLVM_DEBUG(dbgs() << "msg\n")`. Define `DEBUG_TYPE` **after** all includes.
