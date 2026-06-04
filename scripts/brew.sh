@@ -82,8 +82,6 @@ installBasics() {
     patchutils \
     pyright \
     python \
-    python-packaging \
-    python-pexpect \
     re2c \
     rsync \
     ruff \
