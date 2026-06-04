@@ -292,6 +292,10 @@ class DotfilesBootstrap:
             macos_script = self.dotfiles_dir / "os" / "macos.py"
             if macos_script.exists():
                 subprocess.run([str(macos_script)], check=True)
+
+            ramdisk_script = self.dotfiles_dir / "scripts" / "cas-ramdisk.sh"
+            if ramdisk_script.exists():
+                subprocess.run([str(ramdisk_script), "--install"], check=True)
         elif system == "Linux":
             logger.info("Configuring Linux")
             linux_script = self.dotfiles_dir / "os" / "linux.sh"
