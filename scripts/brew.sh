@@ -63,6 +63,7 @@ installBasics() {
     ctags \
     d2 \
     doxygen \
+    duti \
     fastfetch \
     gh \
     git-lfs \

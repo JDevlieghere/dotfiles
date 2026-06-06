@@ -7,6 +7,7 @@ Inspired by https://mths.be/macos
 
 import logging
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -257,6 +258,31 @@ class MacOSConfigurator:
 
         self.defaults_write("org.gpgtools.common", "UseKeychain", "-bool", "true")
 
+    def configure_default_apps(self) -> None:
+        """Configure default applications for file extensions."""
+
+        if not shutil.which("duti"):
+            logger.warning("duti not found, skipping default app configuration")
+            return
+
+        # (app path, bundle ID, extensions to claim)
+        defaults = [
+            (
+                Path("/Applications/Sublime Text.app"),
+                "com.sublimetext.4",
+                ["txt", "log", "md"],
+            ),
+        ]
+
+        for app_path, bundle_id, extensions in defaults:
+            if not app_path.exists():
+                continue
+            for ext in extensions:
+                subprocess.run(
+                    ["duti", "-s", bundle_id, ext, "all"],
+                    check=True,
+                )
+
     def get_configurators(self) -> Dict:
         """Return all configurators."""
 
@@ -272,6 +298,7 @@ class MacOSConfigurator:
             "UI/UX": self.configure_ui_ux,
             "Gatekeeper": self.configure_gatekeeper,
             "Pin Entry": self.configure_pinentry,
+            "Default Apps": self.configure_default_apps,
         }
 
 
