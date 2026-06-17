@@ -72,7 +72,13 @@ Four groups, in order, separated by one blank line, each group sorted lexicograp
 3. LLVM-project headers (`llvm/...`, `clang/...`, `lldb/...`).
 4. System headers (`<string>`, `<cstdio>`, platform headers).
 
-Use `""` for project headers, `<>` for system headers. Don't include a heavy header into a widely-used public header if a forward declaration would do.
+Use `""` for project headers, `<>` for system headers.
+
+Header layering drives build times and coupling. Watch for:
+
+- A heavy `#include` pulled into a widely-used public header where a forward declaration would do — it cascades a rebuild across every translation unit that includes the header.
+- A non-trivial method defined inline in a widely-used public header — same rebuild blast radius. Move the body to the `.cpp` unless it is genuinely a small inline worth keeping.
+- A new `friend` declaration whose reason isn't explained — friendship punches through encapsulation; if it's necessary, the why belongs in a comment or the commit message.
 
 ## Namespaces
 

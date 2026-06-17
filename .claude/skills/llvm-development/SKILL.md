@@ -80,4 +80,4 @@ Stop and investigate at the first failing stage rather than running everything a
 
 ## When reviewing vs writing
 
-This skill describes the rules. Applying them to a diff (severity labels, one-line finding format, dedupe, ranking) is the job of the `/review-pr` command, which references this skill.
+This skill describes the rules. Applying them to a diff — selecting reviewers, severity labels, the one-line finding format, dedupe, validation, ranking — is the job of the `pr-review` skill, which delegates here for LLVM/LLDB conventions. Its reviewer sub-agents read this skill's `references/*.md` files directly (sub-agents don't inherit the parent's loaded skills), so keep these references self-contained.

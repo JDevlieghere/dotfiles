@@ -101,6 +101,14 @@ Many LLDB subsystems (ABI, ObjectFile, SymbolFile, Process, ExpressionParser) ar
 - Think about out-of-tree plugins. They implement the same interface and can break if you change a base class's virtual table or add a new pure virtual.
 - Prefer adding a non-pure virtual with a sensible default over a pure virtual.
 
+## Extensibility red flags
+
+When a change adds or reshapes an extension point, watch for design choices that box in future code:
+
+- A closed `enum` with no room to grow, where a new case forces every `switch` to be revisited. Fine when the set is genuinely fixed; suspect when it models an open-ended domain.
+- A hardcoded limit (buffer size, max count, timeout) where a named constant or configurable value belongs.
+- A virtual added to a base class but implemented by only one subclass — it usually belongs on that subclass, not the base. (The plugin-boundary note above is the out-of-tree angle on widening a base class's vtable.)
+
 ## Testing
 
 - C++ unit tests live in `lldb/unittests/`. Use `gtest`.
