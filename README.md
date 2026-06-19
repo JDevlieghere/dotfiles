@@ -45,8 +45,9 @@ optional arguments:
 
 > [!NOTE]
 >
-> On macOS, you'll have to append the absolute path to `fish` to `/etc/shells`
-> before you can change your shell with `chsh -s $(which fish)`.
+> On macOS, the configuration step symlinks Homebrew's `fish` into
+> `/usr/local/bin`, registers it in `/etc/shells`, and sets it as the login
+> shell with `chsh`. Make sure `fish` is installed (`-i`) beforehand.
 
 ## My Setup
 

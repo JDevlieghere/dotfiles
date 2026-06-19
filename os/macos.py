@@ -7,6 +7,7 @@ Inspired by https://mths.be/macos
 
 import logging
 import os
+import pwd
 import shutil
 import subprocess
 import sys
@@ -79,6 +80,58 @@ class MacOSConfigurator:
             check=True,
             stdout=subprocess.DEVNULL,
         )
+
+    def configure_shell(self) -> None:
+        """Make Homebrew's fish the default login shell.
+
+        Homebrew installs fish under its own prefix (/opt/homebrew on Apple
+        Silicon), which isn't a conventional location for a login shell.
+        Symlink it into /usr/local/bin, register that path in /etc/shells, and
+        point the login shell at it.
+        """
+
+        brew = shutil.which("brew")
+        if not brew:
+            logger.warning("brew not found, skipping shell configuration")
+            return
+
+        prefix = subprocess.run(
+            [brew, "--prefix"], check=True, capture_output=True, text=True
+        ).stdout.strip()
+        source = Path(prefix) / "bin" / "fish"
+        if not source.exists():
+            logger.warning("fish not installed, skipping shell configuration")
+            return
+
+        fish = Path("/usr/local/bin/fish")
+
+        # Symlink fish into /usr/local/bin (root-owned, hence sudo). Skip when
+        # Homebrew already installs there directly (e.g. Intel).
+        if source != fish and not (
+            fish.is_symlink() and Path(os.readlink(fish)) == source
+        ):
+            if not fish.parent.exists():
+                subprocess.run(["sudo", "mkdir", "-p", str(fish.parent)], check=True)
+            logger.info(f"Symlinking {fish} -> {source}")
+            subprocess.run(["sudo", "ln", "-sf", str(source), str(fish)], check=True)
+
+        # Register fish in /etc/shells so chsh will accept it.
+        shells = Path("/etc/shells")
+        listed = shells.read_text().splitlines() if shells.exists() else []
+        if str(fish) not in listed:
+            logger.info(f"Adding {fish} to {shells}")
+            subprocess.run(
+                ["sudo", "tee", "-a", str(shells)],
+                input=f"{fish}\n",
+                text=True,
+                stdout=subprocess.DEVNULL,
+                check=True,
+            )
+
+        # Change the login shell (prompts for the user's password).
+        if pwd.getpwuid(os.getuid()).pw_shell != str(fish):
+            logger.info(f"Changing login shell to {fish}")
+            subprocess.run(["chsh", "-s", str(fish)], check=True)
 
     def configure_power_management(self) -> None:
         """Configure power management settings."""
@@ -288,6 +341,7 @@ class MacOSConfigurator:
 
         return {
             "Developer Mode": self.configure_developer_mode,
+            "Shell": self.configure_shell,
             "Power Manangement": self.configure_power_management,
             "System Settings": self.configure_system_settings,
             "Dock": self.configure_dock,
