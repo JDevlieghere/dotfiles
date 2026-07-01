@@ -75,6 +75,7 @@ installBasics() {
     jq \
     lazygit \
     lcov \
+    libheif \
     libxml2 \
     ncdu \
     ninja \
