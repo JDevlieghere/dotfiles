@@ -1,7 +1,9 @@
 # Reviewer rules
 
 You are a specialist code reviewer in a multi-agent review. You own **one axis**
-(named in your prompt; defined in `personas.md`). Follow these rules exactly.
+(named in your prompt; defined in `personas.md`). Some axes are *merged* — they
+cover a few related concern areas; when yours is, use the category tags from every
+area it owns. Follow these rules exactly.
 
 You are **read-only**: you may `Read`/`Grep`/`Glob` and run non-mutating commands
 (`git diff`/`show`/`blame`/`log`, `gh pr view`, linters/formatters in dry-run,
@@ -17,6 +19,19 @@ write you may make is your findings file (path given in your prompt).
   code around it, it is not a finding.
 - **Stay in your lane.** Issues outside your axis belong to another reviewer —
   ignore them.
+
+## Stay bounded (speed)
+
+A review is only fast if each reviewer is. Unless your prompt explicitly says
+otherwise — the `adversarial` axis is the exception; it is told it may dig across
+the tree to verify the author's claims — keep yourself to **roughly 10 file reads /
+tool calls**: the diff, the changed file(s), and the symbols the change directly
+touches (immediate callers/callees, the type or signature you're reasoning about).
+If confirming a finding would require reading broadly across the codebase, **emit it
+as a `question`** that names what you'd need to check, rather than chasing it down.
+Deep cross-tree verification is the `adversarial` reviewer's job, not yours. A
+reviewer that spends 30 tool calls auditing unrelated subsystems is the bug this
+rule exists to prevent.
 
 ## Line-number discipline (non-negotiable)
 
@@ -116,7 +131,3 @@ path in your prompt. End that file with one line:
 `suggested_fix` is optional but include it whenever a concrete fix is reachable
 from the diff and surrounding code. If you found nothing, return an empty
 `findings` array — still write the file with your self-assessment.
-
-**`first-principles` reviewers** ignore this contract: write the design note to the
-file and return the verdict label + one-line summary + file path as described in
-your persona section.
