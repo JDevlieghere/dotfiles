@@ -247,6 +247,14 @@ class MacOSConfigurator:
             "NSGlobalDomain", "NSAutomaticSpellingCorrectionEnabled", "-bool", "false"
         )
 
+        # Disable Safari's automatic spelling correction (keep spell checking)
+        self.defaults_write(
+            "com.apple.Safari",
+            "WebAutomaticSpellingCorrectionEnabled",
+            "-bool",
+            "false",
+        )
+
         # Disable press-and-hold for keys in favor of key repeat
         self.defaults_write(
             "NSGlobalDomain", "ApplePressAndHoldEnabled", "-bool", "false"
