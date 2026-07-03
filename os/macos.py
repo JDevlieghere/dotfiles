@@ -12,7 +12,7 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
-from typing import Dict, Union
+from typing import Dict, Optional, Union
 
 FORMAT = "%(message)s"
 
@@ -37,17 +37,20 @@ class MacOSConfigurator:
         self.username = os.getlogin()
 
     def defaults_write(
-        self, domain: str, key: str, value_type: str, value: Union[str, dict]
+        self, domain: str, key: str, value_type: Optional[str], value: Union[str, dict]
     ) -> None:
         """Helper to write macOS defaults.
 
         Args:
             domain: The preference domain (e.g., 'com.apple.dock', 'NSGlobalDomain')
             key: The preference key
-            value_type: The value type ('-bool', '-int', '-float', '-string', '-dict')
+            value_type: The value type ('-bool', '-int', '-float', '-string', '-dict'),
+                or None to let `defaults` infer the type
             value: The value to set (or dict for -dict type)
         """
-        cmd = ["defaults", "write", domain, key, value_type]
+        cmd = ["defaults", "write", domain, key]
+        if value_type is not None:
+            cmd.append(value_type)
 
         if value_type == "-dict":
             # For dict type, value should be a dict like {'General': ('bool', 'true')}
@@ -254,10 +257,7 @@ class MacOSConfigurator:
         self.defaults_write("NSGlobalDomain", "KeyRepeat", "-int", "1")
 
         # Disable mouse acceleration
-        subprocess.run(
-            ["defaults", "write", "NSGlobalDomain", "com.apple.mouse.scaling", "-1"],
-            check=True,
-        )
+        self.defaults_write("NSGlobalDomain", "com.apple.mouse.scaling", None, "-1")
 
     def configure_ui_ux(self) -> None:
         """Configure various UI/UX preferences."""
