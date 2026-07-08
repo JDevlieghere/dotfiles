@@ -87,6 +87,7 @@ installBasics() {
     re2c \
     rsync \
     ruff \
+    scc \
     shellharden \
     tig \
     uv \
