@@ -1,7 +1,6 @@
 font-family = "MonoLisaCode"
 font-feature = "ss02"
 theme = "iTerm2 Solarized Dark"
-macos-titlebar-style = tabs
 shell-integration = fish
 copy-on-select = true
 confirm-close-surface = false
