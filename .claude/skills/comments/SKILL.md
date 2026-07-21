@@ -1,6 +1,6 @@
 ---
 name: comments
-description: Conventions for writing source code comments. Load when adding or editing comments in code, reviewing a diff for comment quality, or deciding whether a comment belongs at all. Covers when a comment earns its place, the WHY-not-WHAT rule, lifting rationale to general principles rather than concrete examples, banning prompt/task references, and the tone and length to aim for.
+description: Conventions for writing source code comments. Load when adding or editing comments in code, reviewing a diff for comment quality, or deciding whether a comment belongs at all. Covers when a comment earns its place, the WHY-not-WHAT rule, lifting rationale to general principles rather than concrete examples (never reciting the reproduction of a fixed bug), banning prompt/task references, and the tone and length to aim for.
 ---
 
 # Comments
@@ -45,6 +45,8 @@ If the "why" is obvious from the surrounding code, no comment is needed.
 
 A comment that justifies code by pointing to a specific caller, input, platform version, or incident reads as narration of how the code was discovered. Rewrite it as the underlying rule the code enforces — the principle outlives the example.
 
+**Never illustrate a comment with a concrete example of the issue the code fixes.** Do not spell out the specific input, sequence of calls, value, or scenario that triggered the bug ("crashes when the list has exactly one element", "returns garbage if the path ends in a slash"). The reproduction is an artifact of how the defect was found, not a durable reason the code must stay this way, and it goes stale the moment the trigger changes. State the invariant or contract the code guarantees instead; a reader who understands the rule needs no worked example to believe it.
+
 The test: if the cited example were removed, replaced, or fixed upstream, would the comment still describe why the code must stay this way? If not, raise the altitude until it does.
 
 Bad (anchored to a concrete instance):
@@ -55,6 +57,10 @@ if (items.empty()) return;
 
 // On iOS 13 the keyboard notification fires twice in a row.
 if (Now() - last_event < kDebounce) return;
+
+// Crashes when the input is exactly "a/b/" because the trailing
+// slash makes the split produce an empty final segment.
+if (segment.empty()) continue;
 ```
 
 Good (general principle):
@@ -66,12 +72,17 @@ if (items.empty()) return;
 // Coalesce duplicate notifications: the platform may deliver the
 // same event more than once within a short window.
 if (Now() - last_event < kDebounce) return;
+
+// A trailing separator yields an empty trailing segment, which is
+// not a path component.
+if (segment.empty()) continue;
 ```
 
 The good versions still hold if FooBar's API changes or iOS 13 disappears. The bad versions become misleading the moment the example moves on.
 
 This applies to every layer:
 - **Don't name the bug, name the invariant** the bug exposed.
+- **Don't recite the reproduction** (the input, count, or sequence that triggered the failure), state the property the code now guarantees for *all* inputs.
 - **Don't name the caller**, describe the contract the function offers any caller.
 - **Don't name the platform version**, describe the class of platforms or behaviors that need the workaround.
 - **Don't name the test that caught it**, describe the property under test.
@@ -120,5 +131,5 @@ Ask, in order:
 1. Does the code already say this? → delete.
 2. Would a better name remove the need? → rename instead.
 3. Does it reference the current task/prompt/PR rather than a durable reason? → rewrite around the durable reason, or delete.
-4. Does it cite a concrete example (caller, bug, platform version) instead of the underlying principle? → raise the altitude.
+4. Does it cite a concrete example (caller, bug, platform version) or recite the reproduction of the issue it fixes instead of the underlying principle? → raise the altitude.
 5. Is the "why" still non-obvious to a reader who doesn't know the history? → keep, as tight as possible.
