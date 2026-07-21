@@ -171,6 +171,9 @@ Each prompt must include:
     and the output contract every reviewer follows.
   - `~/.claude/skills/pr-review/references/personas.md` — "read your axis's
     section: `<axis>`."
+  - For `tests-docs-conventions` when the diff adds or reworks source comments:
+    `~/.claude/skills/comments/SKILL.md` — the comment-quality conventions it
+    applies (repetitive, over-specific, and verbose comments).
   - When the LLVM layer is active and the axis has an LLVM mapping: the specific
     `~/.claude/skills/llvm-development/references/*.md` files listed for that axis.
 - The reviewer's **axis name** and the **output file path** for its full findings:

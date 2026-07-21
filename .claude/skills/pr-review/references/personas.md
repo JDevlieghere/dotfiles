@@ -105,9 +105,10 @@ real code or docs surface.
 
 **Owns:** test coverage for new code paths, test quality (exercises behavior, not
 just links the symbol), a regression test that fails without the fix, doc/comment
-accuracy for changed behavior, and API documentation on new public surface. **And**
-mechanical conventions: naming, formatting, include order, line length,
-indentation, brace rules, comment markers, and other tool-checkable mechanics.
+accuracy for changed behavior, **comment quality** (does each added comment earn its
+place — see below), and API documentation on new public surface. **And** mechanical
+conventions: naming, formatting, include order, line length, indentation, brace
+rules, comment markers, and other tool-checkable mechanics.
 
 **Does NOT own:** code correctness, API/design shape, adversarial claim checking.
 
@@ -118,6 +119,27 @@ what they cannot see; don't invent pseudo-rules.
 - *Other languages:* run whatever linter the repo ships; flag a convention only when
   it is written down (root/nested `CLAUDE.md`/`AGENTS.md`, `.editorconfig`, linter
   configs) or the tool reports it.
+
+**Method (comment quality):** judge every added or rewritten comment against the
+comment conventions in `~/.claude/skills/comments/SKILL.md` (read it when the diff
+adds or reworks more than a couple of comments). The bar: a comment earns its place
+only by capturing something the code cannot — the durable *why*. Flag these
+anti-patterns on changed/added comment lines, each a `nit` unless the comment is
+actively misleading or stale (then `warning`):
+- **Repetitive / restates the code** — narrates *what* the next line does
+  (`// increment the counter` over `++count;`), echoes the symbol name, or repeats an
+  adjacent comment. A comment must say *why*, not *what*.
+- **Over-specific / anchored to a passing example** — pinned to a concrete caller,
+  bug, platform version, test, or the current task/PR/ticket ("added for the X flow",
+  "fixes issue 1234", "on iOS 13 …") instead of the underlying principle the code
+  enforces. A citation of an *external* tracker for a genuine foreign-bug workaround
+  is fine — that reference is the principle.
+- **Verbose** — multi-line where one line suffices, marketing language ("cleanly
+  handles", "robust", "elegant"), narration or apology ("note that…", "we have to do
+  this ugly thing…"), or decoration (banners, ASCII art, `// ==== SECTION ====`
+  separators).
+Golden rule still applies: don't flag a comment merely for matching a file's
+established convention — flag the anti-patterns above, not house style.
 
 **Categories:** `[test]` `[doc]` `[comment]` `[naming]` `[format]` `[include]`
 `[lint]`
