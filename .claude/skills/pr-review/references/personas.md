@@ -1,12 +1,15 @@
 # Reviewer personas
 
-The roster the orchestrator selects from, organized into two **waves**. Wave 1 is
-the fast, high-signal pass whose merged output drives the *interim* report; Wave 2
-adds completeness. Each reviewer owns one axis (some own a **merged** axis covering
-a few related concerns — use the category tags from every area they own); issues
-outside it belong to another reviewer. Every reviewer also follows
-`reviewer-rules.md` (shared rules + output contract) — this file only describes
-*what each axis owns*.
+The roster the orchestrator selects from. Each reviewer owns one axis (some own a
+**merged** axis covering a few related concerns — use the category tags from every
+area they own); issues outside it belong to another reviewer. Every reviewer also
+follows `reviewer-rules.md` (shared rules + output contract) — this file only
+describes *what each axis owns*.
+
+`adversarial` runs in the **background**, launched before all the others and joined
+last; it is the slow, unbounded axis. Everything else runs in one **foreground**
+batch and is bounded for speed. That split is the orchestrator's concern — as a
+reviewer, just work your axis.
 
 When the **LLVM C++ layer** is active (the orchestrator says so in your prompt),
 read the listed `llvm-development` reference files **before** reviewing, and apply
@@ -15,12 +18,38 @@ LLVM notes entirely — they do not apply to other languages.
 
 ---
 
-## Wave 1 — fast, high-signal (always spawned)
+## Background axis — launched first, joined last
 
-The three reviewers below run first, in parallel (**never more than 3 agents at
-once**). They target the issues that decide whether the PR is worth more
-investment: real bugs, false claims, and structural problems. Their findings drive
-the interim report, so look hard and look fast.
+### adversarial
+
+The reviewer that stress-tests the change. Always runs — this is the highest-value
+axis for deciding whether a PR is sound, and the reason it goes to the background is
+that it is allowed to be slow.
+
+**Owns:** stress-testing the author's claims and the unstated. Read the PR/intent
+first and extract every claim ("fixes X", "NFC", "safe because Y"). For each, find
+code that supports or contradicts it; unverifiable → `question`. Probe edges the
+author didn't mention: empty/null/max input, unicode, concurrent access, error
+paths, mid-iteration mutation, recursion into the same path, save/restore, and (for
+LLVM/LLDB) out-of-tree plugins implementing the same interface. Check scope: does
+the diff do more or less than the intent says? Verify every "NFC" by looking hard
+for behavioral differences. Use `Read`/`gh`/`git` aggressively to verify.
+
+**Exploration budget:** unbounded. You are the one axis exempt from the ~10-read cap
+in `reviewer-rules.md` — dig as far across the tree as a claim requires. Nothing is
+waiting on you.
+
+End your output with a `## Unresolved questions (top 3)` section.
+**Categories:** `[claim]` `[edge-case]` `[scope]` `[assumption]` `[recursion]`
+
+---
+
+## Foreground axes — one parallel batch, bounded for speed
+
+The reviewers below run together while `adversarial` works in the background. They
+are bounded (~10 reads each, per `reviewer-rules.md`): find what is visible from the
+diff and its immediate neighborhood, and leave the deep cross-tree verification to
+`adversarial`.
 
 ### correctness
 
@@ -41,23 +70,6 @@ errors, logging). **Extra LLVM red flags:** `formatv`/`LLDB_LOG`/`LLVM_DEBUG` fo
 indices (`{0}`,`{1}`,…) must match the argument count — check every new format
 string; iteration over `DenseMap`/`DenseSet` that feeds diagnostics, file output,
 or hashes is non-deterministic (wants `MapVector`/`SetVector`/a sort).
-
-### adversarial
-
-The reviewer that stress-tests the change. Always runs — this is the highest-value
-axis for deciding whether a PR is sound.
-
-**Owns:** stress-testing the author's claims and the unstated. Read the PR/intent
-first and extract every claim ("fixes X", "NFC", "safe because Y"). For each, find
-code that supports or contradicts it; unverifiable → `question`. Probe edges the
-author didn't mention: empty/null/max input, unicode, concurrent access, error
-paths, mid-iteration mutation, recursion into the same path, save/restore, and (for
-LLVM/LLDB) out-of-tree plugins implementing the same interface. Check scope: does
-the diff do more or less than the intent says? Verify every "NFC" by looking hard
-for behavioral differences. Use `Read`/`gh`/`git` aggressively to verify.
-
-End your output with a `## Unresolved questions (top 3)` section.
-**Categories:** `[claim]` `[edge-case]` `[scope]` `[assumption]` `[recursion]`
 
 ### design
 
@@ -89,14 +101,6 @@ type at an API boundary (`const char *` where `StringRef` fits, `std::vector` wh
 class (vtable/ABI break); a magic sentinel return (`return UINT32_MAX;`) where
 `Expected<T>` or an out-param is clearer; an SB name that diverges from the internal
 API for no reason.
-
----
-
-## Wave 2 — completeness (spawned after the interim report)
-
-These reviewers add coverage the fast pass intentionally skipped. **Never more than
-3 agents at once** across the whole run, and Wave 2 starts only once the interim
-report is rendered.
 
 ### tests-docs-conventions
 
@@ -179,14 +183,18 @@ applicable sub-axes** in your prompt; review only those.
 
 ## Selection rules
 
-1. Always spawn the Wave-1 trio: `correctness`, `adversarial`, `design`.
-2. Wave 2: spawn `tests-docs-conventions` for any diff with a real code or docs
-   surface (skip only a trivial mechanical-only diff). Spawn `runtime-risks` only
-   when its domain is genuinely present — judgment, not extension matching — and
-   name the applicable sub-axes in its prompt.
-3. Count only executable code lines toward size thresholds; pure prose/config diffs
+1. Launch `adversarial` in the background **first**, before selecting the rest of
+   the team. It always runs, and nothing waits on it.
+2. Always spawn `correctness` and `design` in the foreground batch, plus
+   `tests-docs-conventions` for any diff with a real code or docs surface (skip that
+   one only for a trivial mechanical-only diff).
+3. Spawn `runtime-risks` only when its domain is genuinely present — judgment, not
+   extension matching — and name the applicable sub-axes in its prompt.
+4. Count only executable code lines toward size thresholds; pure prose/config diffs
    skip `runtime-risks` unless they describe security or data behavior.
-4. **Never more than 3 reviewer/validator agents in flight at once.** The waves are
-   sequential: do not start Wave 2 until Wave 1's interim report is rendered.
-5. Announce the team before spawning, with a one-line justification per conditional
+5. **At most 4 foreground reviewers, spawned in a single message**, alongside the one
+   background `adversarial` agent. Do not stagger the foreground batch.
+6. Announce the team before spawning, with a one-line justification per conditional
    reviewer.
+7. A reviewer that dies gets one background retry, then its axis is dropped and named
+   in the report's Coverage line. Never wait on a retry.
