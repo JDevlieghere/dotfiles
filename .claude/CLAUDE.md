@@ -1,7 +1,7 @@
-# Git commits
+# CLAUDE.md
 
-- Do not run `git commit` unless I have explicitly asked you to commit. By default, draft the commit message and let me run the commit myself.
-- Commit signing is enabled, which triggers a GPG pinentry prompt. Pinentry cannot be answered from within Claude Code, so any commit you run will hang. This is another reason to defer commits to me.
+- VERY IMPORTANT: Never commit to git without permission. Never sign commit messages. Otherwise you will get stuck on a GPG pinentry prompt that cannot be answered.
+- VERY IMPORTANT: When writing something intended for human consumption, (comment, commit message, reply to prompt) use as few words as possible. Pick every word meticulously to reduce the volume to a strict minimum. Be down to the point. Less is more.
 
 ## Whoami
 
