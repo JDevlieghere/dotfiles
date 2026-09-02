@@ -78,6 +78,11 @@ Launch all of them in **one message** so they run concurrently. `review-adversar
 is the slow one; start it in that same message and let it run while you read the
 others.
 
+Prefer `model: "sonnet"` for `review-conventions` and `review-docs` — they run tools
+and match the diff against a rule rather than reason about behavior. The rest
+inherit the session model. This is a default, not a constraint: put a fast reviewer
+back on the session model when the diff is large or the call needs judgment.
+
 ## 3. Brief them
 
 Sub-agents inherit nothing from your context. Every prompt states:
