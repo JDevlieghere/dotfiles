@@ -27,6 +27,41 @@ except ImportError:
 
 logger = logging.getLogger(__name__)
 
+# Claude Code tool names and their Gemini CLI equivalents.
+GEMINI_TOOLS = {
+    "Bash": "run_shell_command",
+    "Edit": "replace",
+    "Glob": "glob",
+    "Grep": "grep_search",
+    "Read": "read_file",
+    "WebFetch": "web_fetch",
+    "WebSearch": "google_web_search",
+    "Write": "write_file",
+}
+
+# Frontmatter keys Gemini's strict agent schema rejects.
+GEMINI_DROPPED_KEYS = {"model"}
+
+
+def translate_agent(content: str) -> str:
+    """Rewrite a Claude agent to satisfy Gemini's strict frontmatter schema."""
+    lines = content.split("\n")
+    if not lines or lines[0].strip() != "---" or "---" not in lines[1:]:
+        return content
+
+    end = lines.index("---", 1)
+    frontmatter = []
+    for line in lines[1:end]:
+        key, _, value = line.partition(":")
+        if key == "tools":
+            frontmatter.append("tools:")
+            for tool in (t.strip() for t in value.split(",")):
+                frontmatter.append(f"  - {GEMINI_TOOLS.get(tool, tool)}")
+        elif key not in GEMINI_DROPPED_KEYS:
+            frontmatter.append(line)
+
+    return "\n".join(["---", *frontmatter, *lines[end:]])
+
 
 class DotfilesBootstrap:
     """Handles dotfiles synchronization and system configuration."""
@@ -190,6 +225,26 @@ class DotfilesBootstrap:
                     check=True,
                 )
 
+    def gemini_agents(self) -> None:
+        """Generate Gemini agents from their Claude counterparts."""
+        src_dir = self.dotfiles_dir / ".claude" / "agents"
+        if not src_dir.exists():
+            return
+
+        logger.info("Generating Gemini agents")
+        dst_dir = self.home_dir / ".gemini" / "agents"
+        dst_dir.mkdir(parents=True, exist_ok=True)
+
+        generated = set()
+        for src in sorted(src_dir.glob("*.md")):
+            (dst_dir / src.name).write_text(translate_agent(src.read_text()))
+            generated.add(src.name)
+
+        # Drop agents whose Claude counterpart is gone.
+        for stale in dst_dir.glob("*.md"):
+            if stale.name not in generated:
+                stale.unlink()
+
     def directories(self) -> None:
         """Create necessary directories."""
         (self.home_dir / "vim" / "undo").mkdir(parents=True, exist_ok=True)
@@ -307,6 +362,7 @@ class DotfilesBootstrap:
         self.sync()
         self.git_config()
         self.tool_config()
+        self.gemini_agents()
         self.directories()
         self.permissions()
 
@@ -315,6 +371,7 @@ class DotfilesBootstrap:
         self.update()
         self.sync()
         self.git_config()
+        self.gemini_agents()
         self.directories()
         self.permissions()
         self.install()
