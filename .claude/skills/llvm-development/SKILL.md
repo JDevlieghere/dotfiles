@@ -80,4 +80,4 @@ Stop and investigate at the first failing stage rather than running everything a
 
 ## When reviewing vs writing
 
-This skill describes the rules. Applying them to a diff — picking reviewers, merging their findings, writing the report — is the job of the `llvm-review` skill, which delegates here for LLVM/LLDB conventions. Its `review-*` agents read this skill's `references/*.md` files directly (sub-agents don't inherit the parent's loaded skills), so keep these references self-contained.
+This skill describes the rules. The `review-*` agents read this skill's `references/*.md` files directly (sub-agents don't inherit the parent's loaded skills), so keep these references self-contained.
