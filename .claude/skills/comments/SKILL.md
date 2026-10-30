@@ -137,3 +137,4 @@ Inline comments are rarer still. Before writing one, ask whether a better name, 
 4. Does it cite a concrete example or repro instead of the principle? → raise the altitude.
 5. Still non-obvious to a reader who doesn't know the history? → keep, as tight as possible.
 6. Can any word be cut? → cut it, and repeat.
+7. Run new or edited comments through the `humanizer:humanizer` skill, if available.

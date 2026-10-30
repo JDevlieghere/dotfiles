@@ -142,6 +142,7 @@ Body explaining why, wrapped at ~72 columns.
 - The trailing file list names each touched file, with changed function names
   in parentheses beneath it. `git-webkit` generates it; keep it accurate if you
   edit by hand.
+- Run the body through the `humanizer:humanizer` skill, if available.
 
 ## References
 

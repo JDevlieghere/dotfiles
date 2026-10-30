@@ -12,7 +12,8 @@ Draft commit messages in this format. Do not run `git commit` — output the mes
 1. Run `git status` and `git diff --staged` (or `git diff` if nothing is staged) to see the actual change.
 2. Run `git log -n 10 --oneline` in the same repo to match the local prefix conventions (component tags differ between repos — `[lldb]`, `[clang]`, `[DWARFLinker]`, etc.).
 3. Draft subject + body following the rules below.
-4. Present the message to the user. Do not commit.
+4. Run the draft through the `humanizer:humanizer` skill, if available.
+5. Present the message to the user. Do not commit.
 
 If the staged diff spans multiple unrelated logical changes, say so and suggest splitting before drafting — one logical change per commit.
 
