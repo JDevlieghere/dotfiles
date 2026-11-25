@@ -9,7 +9,7 @@ Default to no comment. Use clear names, explicit control flow, and enforceable i
 
 ## Inline comments
 
-Explain the intent and rationale. Skip mechanics the reader can infer from the code. Useful comments explain required ordering, a lock the caller must hold, an ABI constraint, or the reason for a surprising branch or value.
+Explain the intent and rationale. Skip mechanics the reader can infer from the code, including lists the code already holds. Useful comments explain required ordering, a lock the caller must hold, an ABI constraint, or the reason for a surprising branch or value.
 
 State the rule the code enforces. Check that the rationale applies wherever the code acts and is supported by the code, contract, or a reliable reference.
 
@@ -23,7 +23,7 @@ if (segment.empty())
 
 ## Durable rationale
 
-Omit references to prompts and conversations. Record change history in the commit message or PR description. A specific caller, input, or version earns a place when it defines the constraint or helps maintainers verify when it stops applying. Keep full reproductions in tests or issue trackers.
+Omit references to prompts, conversations, and future or unlanded work. Record change history in the commit message or PR description. A specific caller, input, or version earns a place when it defines the constraint or helps maintainers verify when it stops applying. Keep full reproductions in tests or issue trackers.
 
 For a workaround, name the affected system and the failure the code prevents. Include a version boundary or an issue reference when it helps verify or retire the workaround. Cite a spec section, RFC, or paper when it saves the reader from reconstructing the rationale.
 
@@ -33,6 +33,6 @@ Follow the project's requirements for API docs and file headers. Where docs are 
 
 ## Tone and maintenance
 
-Use the shortest comment that states the constraint accurately. Write in plain, declarative prose with proper capitalization and punctuation. Cut filler, vague hedging, and narration. Follow project conventions for forms such as argument labels and file headers.
+Use the shortest comment that states the constraint accurately. Write in plain, declarative prose with proper capitalization and punctuation. Cut filler, vague hedging, and narration. Use the surrounding code's vocabulary instead of coining terms or abbreviations. Follow project conventions for forms such as argument labels and file headers.
 
 Place comments next to the code or declaration they govern. When behavior changes, update or remove affected comments in the same edit, including API docs on a separate declaration. A stale comment is worse than none.
